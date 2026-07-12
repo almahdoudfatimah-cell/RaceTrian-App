@@ -14,27 +14,58 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set Default Scheme
         run: |
+          # Safely fetch the JSON list, extract the first target, and write it out
           scheme_list=$(xcodebuild -list -json | tr -d "\n")
-          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
-          echo $default | cat >default
-          echo Using default scheme: $default
+          default=$(echo "$scheme_list" | ruby -e "require 'json'; data = JSON.parse(STDIN.gets); puts data['project']['schemes'] ? data['project']['schemes'][0] : data['project']['targets'][0]")
+          echo "$default" > default_scheme.txt
+          echo "Detected default scheme: $default"
+
+      # We supply a full destination string to prevent xcodebuild from hanging on generic 'iOS Simulator'
       - name: Build
         env:
           scheme: ${{ 'default' }}
-          platform: ${{ 'iOS Simulator' }}
+          destination: 'platform=iOS Simulator,name=iPhone 15'
         run: |
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
-          file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild build-for-testing -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform"
+          if [ "$scheme" = "default" ]; then scheme=$(cat default_scheme.txt); fi
+          
+          # Detect workspace or project safely
+          if ls -A | grep -i "\.xcworkspace$" > /dev/null; then
+            filetype_parameter="workspace"
+            file_to_build=$(ls -A | grep -i "\.xcworkspace$" | head -n 1)
+          else
+            filetype_parameter="project"
+            file_to_build=$(ls -A | grep -i "\.xcodeproj$" | head -n 1)
+          fi
+          
+          # Strip accidental whitespace margins
+          file_to_build=$(echo "$file_to_build" | xargs)
+          
+          xcodebuild build-for-testing \
+            -scheme "$scheme" \
+            -"$filetype_parameter" "$file_to_build" \
+            -destination "$destination"
+
       - name: Test
         env:
           scheme: ${{ 'default' }}
-          platform: ${{ 'iOS Simulator' }}
+          destination: 'platform=iOS Simulator,name=iPhone 15'
         run: |
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
-          file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform"
+          if [ "$scheme" = "default" ]; then scheme=$(cat default_scheme.txt); fi
+          
+          if ls -A | grep -i "\.xcworkspace$" > /dev/null; then
+            filetype_parameter="workspace"
+            file_to_build=$(ls -A | grep -i "\.xcworkspace$" | head -n 1)
+          else
+            filetype_parameter="project"
+            file_to_build=$(ls -A | grep -i "\.xcodeproj$" | head -n 1)
+          fi
+          
+          file_to_build=$(echo "$file_to_build" | xargs)
+          
+          xcodebuild test-without-building \
+            -scheme "$scheme" \
+            -"$filetype_parameter" "$file_to_build" \
+            -destination "$destination"
