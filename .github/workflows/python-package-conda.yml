@@ -2,6 +2,7 @@ name: Python Package using Conda
 
 on:
   push:
+  pull_request:
 
 jobs:
   build-linux:
@@ -28,21 +29,22 @@ jobs:
 
       - name: Lint with flake8
         run: |
-          # Stop on syntax errors or undefined names
+          # Stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 
-          # Report remaining issues as warnings
+          # Report style issues without failing the build
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
       - name: Run tests
         run: |
+          set +e
           pytest
           status=$?
+          set -e
 
-          # Ignore exit code 5 (no tests collected)
-          if [ $status -eq 5 ]; then
+          if [ "$status" -eq 5 ]; then
             echo "No tests were found. Skipping."
             exit 0
           fi
 
-          exit $status
+          exit "$status"
