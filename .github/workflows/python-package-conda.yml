@@ -7,7 +7,6 @@ jobs:
     strategy:
       max-parallel: 5
 
-    # This forces every step in this job to run inside the activated Conda environment
     defaults:
       run:
         shell: bash -el {0}
@@ -15,17 +14,21 @@ jobs:
     steps:
     - uses: actions/checkout@v4.2.2
 
-    - name: Set up Miniconda & Environment
+    - name: Set up Miniconda
       uses: conda-incubator/setup-miniconda@v3.1.1
       with:
         python-version: '3.10'
-        environment-file: environment.yml
-        activate-environment: my-env # Change this to the 'name:' defined in your environment.yml
+        activate-environment: test-env
         auto-activate-base: false
+
+    - name: Install dependencies
+      run: |
+        conda install -y pytest flake8
+        # Add any other core dependencies you need here, for example:
+        # conda install -y numpy pandas
 
     - name: Lint with flake8
       run: |
-        conda install -y flake8
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
@@ -33,5 +36,4 @@ jobs:
 
     - name: Test with pytest
       run: |
-        conda install -y pytest
         pytest
