@@ -1,0 +1,8 @@
+# Open project
+open fm.xcodeproj
+
+# Build for simulator
+xcodebuild -scheme fm -destination 'generic/platform=iOS Simulator' build
+
+# Run tests
+xcodebuild -scheme fm -destination 'platform=iOS Simulator,name=iPhone 16' test

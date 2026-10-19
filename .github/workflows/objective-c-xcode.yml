@@ -1,0 +1,63 @@
+name: iOS Build and Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    name: Build and Test App
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      # 1. Cache Swift Package Manager Dependencies (Speeds up builds)
+      - name: Cache Swift PM Packages
+        uses: actions/cache@v4
+        with:
+          path: SourcePackages
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      - name: Resolve Swift Packages
+        run: |
+          xcodebuild -resolvePackageDependencies \
+            -clonedSourcePackagesDirPath SourcePackages
+
+      # 2. Run Tests and output a clean log
+      - name: Run Unit & UI Tests
+        run: |
+          xcodebuild test \
+            -scheme "fm" \
+            -destination "generic/platform=iOS Simulator" \
+            -clonedSourcePackagesDirPath SourcePackages \
+            -derivedDataPath Build/DerivedData \
+            -resultBundlePath Build/TestResults.xcresult
+
+      # 3. Build Archive (CI validation check)
+      - name: Build Archive (Skip Signing)
+        run: |
+          xcodebuild archive \
+            -scheme "fm" \
+            -sdk iphoneos \
+            -archivePath $GITHUB_WORKSPACE/build/fm.xcarchive \
+            -clonedSourcePackagesDirPath SourcePackages \
+            CODE_SIGNING_ALLOWED=NO
+
+      # 4. Upload Test Bundles if a test fails (Crucial for debugging)
+      - name: Upload Test Results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcode-test-results
+          path: Build/TestResults.xcresult
+
+xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=iOS Simulator,name=iPad Air,OS=latest" | xcpretty && exit ${PIPESTATUS[0]}
