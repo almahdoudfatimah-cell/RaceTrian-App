@@ -9,11 +9,10 @@ jobs:
   upload:
     name: Build and Upload Book33
     runs-on: macos-15
-
     env:
       PROJECT: fm.xcodeproj
       SCHEME: fm
-BUNDLE_ID: app.fm
+      BUNDLE_ID: app.fm
 
     steps:
       - name: Checkout repository
