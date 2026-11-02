@@ -1,26 +1,53 @@
-name: Swift
+```yaml
+name: iOS Build
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
   pull_request:
-    branches:
-      - main
+    branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: macos-latest
+    name: Build Book33 iOS App
+    runs-on: macos-15
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
-      - name: Select latest stable Swift
-        run: swift --version
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
 
-      - name: Build
-        run: swift build --verbose
+      - name: List Xcode projects
+        run: find . -maxdepth 3 -name "*.xcodeproj" -print
 
-      - name: Run tests
-        run: swift test --verbose
+      - name: Build iOS app
+        run: |
+          xcodebuild \
+            -project fm.xcodeproj \
+            -scheme fm \
+            -sdk iphonesimulator \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+### Step 3 — Save and push
+
+Save the file using **Command + S**.
+
+Then run these commands:
+
+```bash
+cd ~/Desktop/RaceTrian
+git add .github/workflows/swift.yml
+git commit -m "Fix Swift workflow to build with Xcode"
+git push origin main
+```
+
+### Important
+This fixes the **Swift build workflow**, not the App Store upload workflow. Your latest push went to `RaceTrian-App`, while you said you want to use `book33`.
+
+After saving, tell me whether the push succeeded. We'll then ensure the corrected workflow is in the right repository and address any remaining App Store upload errors.
