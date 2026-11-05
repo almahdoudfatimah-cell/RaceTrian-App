@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "2700"
-   version = "2.2">
+   LastUpgradeVersion = "2710"
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES"
@@ -17,18 +17,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4C705EFF2FAA819E006071CB"
                BuildableName = "RaceTrian.app"
-               BlueprintName = "RaceTrian"
                ReferencedContainer = "container:RaceTrian.xcodeproj">
             </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "NO">
-            <AutocreatedTestPlanReference>
-            </AutocreatedTestPlanReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
@@ -46,7 +36,6 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4C705F0C2FAA819F006071CB"
                BuildableName = "RaceTrianTests.xctest"
-               BlueprintName = "RaceTrianTests"
                ReferencedContainer = "container:RaceTrian.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -57,7 +46,6 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4C705F162FAA819F006071CB"
                BuildableName = "RaceTrianUITests.xctest"
-               BlueprintName = "RaceTrianUITests"
                ReferencedContainer = "container:RaceTrian.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -73,14 +61,13 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
-      queueDebuggingEnableBacktraceRecording = "Yes">
+      queueDebuggingEnabled = "No">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C705EFF2FAA819E006071CB"
             BuildableName = "RaceTrian.app"
-            BlueprintName = "RaceTrian"
             ReferencedContainer = "container:RaceTrian.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -97,18 +84,15 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C705EFF2FAA819E006071CB"
             BuildableName = "RaceTrian.app"
-            BlueprintName = "RaceTrian"
             ReferencedContainer = "container:RaceTrian.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Release">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
-      customArchiveName = "RaceTrian"
-      revealArchiveInOrganizer = "YES"
-      allowsArchivingForSimulator = "YES">
+      revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
