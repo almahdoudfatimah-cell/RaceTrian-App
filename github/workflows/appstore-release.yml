@@ -1,0 +1,56 @@
+
+name: RaceTrian App Store Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    name: Submit RaceTrian for App Store Review
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - name: Install Fastlane
+        run: gem install fastlane --no-document
+
+      - name: Prepare App Store Connect API Key
+        env:
+          API_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+          API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/appstore"
+
+          printf '%s' "$API_KEY_BASE64" | base64 -D \
+            > "$RUNNER_TEMP/appstore/AuthKey.p8"
+
+          jq -n \
+            --arg key_id "$API_KEY_ID" \
+            --arg issuer_id "$ISSUER_ID" \
+            --arg key "$(cat "$RUNNER_TEMP/appstore/AuthKey.p8")" \
+            '{key_id:$key_id, issuer_id:$issuer_id, key:$key, in_house:false}' \
+            > "$RUNNER_TEMP/appstore/api_key.json"
+
+      - name: Submit existing build for review
+        run: |
+          fastlane deliver \
+            --api_key_path "$RUNNER_TEMP/appstore/api_key.json" \
+            --app_identifier "com.RaceTrian.RaceTrian" \
+            --app_version "1.0.1" \
+            --platform ios \
+            --skip_binary_upload true \
+            --skip_metadata true \
+            --skip_screenshots true \
+            --submit_for_review true \
+            --force true
