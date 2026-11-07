@@ -48,6 +48,7 @@ jobs:
             --api_key_path "$RUNNER_TEMP/appstore/api_key.json" \
             --app_identifier "com.RaceTrian.RaceTrian" \
             --app_version "1.0.1" \
+            --build_number "22" \
             --platform ios \
             --skip_binary_upload true \
             --skip_metadata true \
