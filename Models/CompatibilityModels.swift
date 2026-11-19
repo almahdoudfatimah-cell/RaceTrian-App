@@ -98,6 +98,20 @@ final class WeekTaskStore: ObservableObject {
         tasksByDay[key] = tasks
     }
 
+    subscript(day date: Date) -> [PlanTask] {
+        get {
+            tasks(for: date)
+        }
+        set {
+            saveTasks(newValue, for: date)
+        }
+    }
+
+    func saveTasks(_ tasks: [PlanTask], for date: Date) {
+        let key = calendar.startOfDay(for: date)
+        tasksByDay[key] = tasks
+    }
+
     func addTask(title: String, on date: Date) {
         let key = calendar.startOfDay(for: date)
         var tasks = self.tasks(for: date)

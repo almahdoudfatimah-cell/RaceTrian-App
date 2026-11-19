@@ -11,7 +11,7 @@ import SwiftUI
 struct AppwatchApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: WatchAppStore(), access: WatchAccessStore())
         }
     }
 }

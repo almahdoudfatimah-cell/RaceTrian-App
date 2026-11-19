@@ -2,7 +2,7 @@ import SwiftUI
 
 public struct PlanView: View {
     @State private var selectedDate = Date()
-    @State private var store = WeekTaskStore.shared
+    @ObservedObject private var store = WeekTaskStore.shared
     @State private var showAddTask = false
     @State private var mode: Mode = .week
 
@@ -20,50 +20,20 @@ public struct PlanView: View {
     }
 
     public var body: some View {
-        @Bindable var store = store
         NavigationStack {
             VStack(spacing: 0) {
                 VStack(spacing: 12) {
                     Picker("Plan view", selection: $mode) {
-                        ForEach(Mode.allCases) { option in
-                            Text(option.rawValue).tag(option)
-                        }
+                        Text("Week").tag(Mode.week)
+                        Text("Day").tag(Mode.day)
                     }
                     .pickerStyle(.segmented)
-                    HStack {
-                        Button { move(-1) } label: {
-                            Image(systemName: "chevron.left").frame(width: 44, height: 44)
-                        }
-                        .accessibilityLabel(mode == .week ? "Previous week" : "Previous day")
-                        DatePicker("Plan date", selection: $selectedDate, displayedComponents: .date)
-                            .labelsHidden()
-                            .frame(maxWidth: .infinity)
-                            .accessibilityLabel("Plan date")
-                        Button { move(1) } label: {
-                            Image(systemName: "chevron.right").frame(width: 44, height: 44)
-                        }
-                        .accessibilityLabel(mode == .week ? "Next week" : "Next day")
-                    }
+                    dateNavigation
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)
 
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
-                        if mode == .week {
-                            PlannerWeekOverview(days: weekDays, store: store) { day in
-                                selectedDate = day
-                                mode = .day
-                            }
-                        } else {
-                            PlannerDayHeading(date: selectedDate, tasks: store.tasks(for: selectedDate))
-                            TimelineView(tasks: $store[day: selectedDate], selectedDate: $selectedDate)
-                        }
-                        HabitsTrackerSticker(days: weekDays)
-                        PlannerNotesSection()
-                    }
-                    .padding()
-                }
+                planContent
             }
             .background { PaperBackground() }
             .navigationTitle("Plan")
@@ -86,19 +56,58 @@ public struct PlanView: View {
                 .background(.regularMaterial)
             }
             .sheet(isPresented: $showAddTask) {
-                AddTaskSheet(tasks: $store[day: selectedDate], date: selectedDate)
+                AddTaskSheet(tasks: taskBinding, date: selectedDate)
                     .presentationDetents([.large])
             }
-            .alert("Task storage", isPresented: Binding(
-                get: { store.storageError != nil },
-                set: { if !$0 { store.storageError = nil } }
-            )) {
-                Button("OK") { store.storageError = nil }
-            } message: {
-                Text(store.storageError ?? "")
-            }
+
         }
         .appPageTheme()
+    }
+
+
+    private var taskBinding: Binding<[PlanTask]> {
+        Binding(
+            get: { store.tasks(for: selectedDate) },
+            set: { updatedTasks in
+                store.saveTasks(updatedTasks, for: selectedDate)
+            }
+        )
+    }
+
+    private var planContent: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                if mode == .week {
+                    PlannerWeekOverview(days: weekDays, store: store) { day in
+                        selectedDate = day
+                        mode = .day
+                    }
+                } else {
+                    PlannerDayHeading(date: selectedDate, tasks: store.tasks(for: selectedDate))
+                    TimelineView(tasks: taskBinding, selectedDate: $selectedDate)
+                }
+                HabitsTrackerSticker(days: weekDays)
+                PlannerNotesSection()
+            }
+            .padding()
+        }
+    }
+
+    private var dateNavigation: some View {
+        HStack {
+                        Button { move(-1) } label: {
+                            Image(systemName: "chevron.left").frame(width: 44, height: 44)
+                        }
+                        .accessibilityLabel(mode == .week ? "Previous week" : "Previous day")
+                        DatePicker("Plan date", selection: $selectedDate, displayedComponents: .date)
+                            .labelsHidden()
+                            .frame(maxWidth: .infinity)
+                            .accessibilityLabel("Plan date")
+                        Button { move(1) } label: {
+                            Image(systemName: "chevron.right").frame(width: 44, height: 44)
+                        }
+                        .accessibilityLabel(mode == .week ? "Next week" : "Next day")
+                    }
     }
 
     private func move(_ direction: Int) {

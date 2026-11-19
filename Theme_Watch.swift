@@ -57,6 +57,7 @@ enum WatchTheme {
     
     // Surface Colors - watchOS compatible
     static let surface = Color(red: 0.11, green: 0.11, blue: 0.12)
+    static let cardSurface = surface
     static let background = Color.black
     
     // Additional Colors
@@ -69,6 +70,15 @@ enum WatchTheme {
     static let textSecondary = Color.secondary
     static let textTertiary  = Color.gray
     
+    static let ink = Color.primary
+    static let muted = Color.secondary
+
+    // Watch app fonts
+    static let titleFont = Font.system(.title3)
+    static let headlineFont = Font.system(.headline)
+    static let bodyFont = Font.system(.body)
+    static let captionFont = Font.system(.caption)
+
     // Page background
     static let pageBackground = Color.black
 }

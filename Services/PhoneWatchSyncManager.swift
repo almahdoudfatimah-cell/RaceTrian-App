@@ -109,7 +109,7 @@ final class PhoneWatchSyncManager: NSObject {
                     date: scheduledDate
                 )
             )
-            WeekTaskStore.shared[day: scheduledDate] = tasks
+            WeekTaskStore.shared.saveTasks(tasks, for: scheduledDate)
         case .setMood:
             guard let moodValue = command.moodRawValue,
                   let mood = MoodLevel(rawValue: moodValue) else { return }

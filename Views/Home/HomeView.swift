@@ -3,7 +3,7 @@ import SwiftUI
 struct HomeView: View {
     @Environment(\.colorScheme) private var scheme
     @StateObject private var moodStore = MoodStore.shared
-    @State private var taskStore = WeekTaskStore.shared
+    @ObservedObject private var taskStore = WeekTaskStore.shared
     private var tasks: [PlanTask] { taskStore.tasks(for: Date()) }
     @State private var showingAIPlanner = false
     @State private var showingNotifications = false
@@ -19,7 +19,6 @@ struct HomeView: View {
     }
 
     var body: some View {
-        @Bindable var taskStore = taskStore
         NavigationStack {
             ZStack(alignment: .topLeading) {
                 PaperBackground()

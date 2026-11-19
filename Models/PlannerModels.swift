@@ -54,8 +54,61 @@ enum TaskCategory: String, CaseIterable {
     }
 }
 
-struct LifeGoal: Identifiable {
-    let id = UUID()
+struct LifeGoal: Identifiable, Codable {
+
+    init(title: String, emoji: String, progress: Double, streak: Int, color: Color) {
+        self.id = UUID()
+        self.title = title
+        self.emoji = emoji
+        self.progress = progress
+        self.streak = streak
+        self.color = color
+    }
+
+
+
+    enum CodingKeys: String, CodingKey {
+        case id, title, emoji, progress, streak, red, green, blue, opacity
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(UUID.self, forKey: .id)
+        title = try values.decode(String.self, forKey: .title)
+        emoji = try values.decode(String.self, forKey: .emoji)
+        progress = try values.decode(Double.self, forKey: .progress)
+        streak = try values.decode(Int.self, forKey: .streak)
+
+        color = Color(
+            .sRGB,
+            red: try values.decode(Double.self, forKey: .red),
+            green: try values.decode(Double.self, forKey: .green),
+            blue: try values.decode(Double.self, forKey: .blue),
+            opacity: try values.decode(Double.self, forKey: .opacity)
+        )
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var values = encoder.container(keyedBy: CodingKeys.self)
+        try values.encode(id, forKey: .id)
+        try values.encode(title, forKey: .title)
+        try values.encode(emoji, forKey: .emoji)
+        try values.encode(progress, forKey: .progress)
+        try values.encode(streak, forKey: .streak)
+
+        let components = UIColor(color).cgColor.components ?? [0, 0, 0, 1]
+        let red = Double(components[0])
+        let green = Double(components.count > 1 ? components[1] : components[0])
+        let blue = Double(components.count > 2 ? components[2] : components[0])
+        let opacity = Double(UIColor(color).cgColor.alpha)
+
+        try values.encode(red, forKey: .red)
+        try values.encode(green, forKey: .green)
+        try values.encode(blue, forKey: .blue)
+        try values.encode(opacity, forKey: .opacity)
+    }
+
+    let id: UUID
     var title: String
     var emoji: String
     var progress: Double
