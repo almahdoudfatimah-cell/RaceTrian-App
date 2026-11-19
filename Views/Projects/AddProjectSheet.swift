@@ -32,8 +32,7 @@ struct AddProjectSheet: View {
     }
 
     private var canSave: Bool {
-        !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-        !projectDescription.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
     var body: some View {
@@ -73,18 +72,18 @@ struct AddProjectSheet: View {
         VStack(alignment: .leading, spacing: 14) {
             Text("Project")
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
 
             TextField("Project title", text: $title)
                 .textFieldStyle(.roundedBorder)
 
-            TextField("Describe the result you want to achieve", text: $projectDescription, axis: .vertical)
+            TextField("Description (optional)", text: $projectDescription, axis: .vertical)
                 .lineLimit(3...6)
                 .textFieldStyle(.roundedBorder)
 
             Text("Choose an icon")
                 .font(.subheadline.bold())
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
 
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 10) {
                 ForEach(emojis, id: \.self) { item in
@@ -109,33 +108,74 @@ struct AddProjectSheet: View {
         VStack(alignment: .leading, spacing: 14) {
             Text("Organization")
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
 
-            Picker("Category", selection: $category) {
-                ForEach(ProjectCategory.allCases, id: \.self) { item in
-                    Label(item.rawValue, systemImage: item.icon).tag(item)
+            Menu {
+                Picker("Category", selection: $category) {
+                    ForEach(ProjectCategory.allCases, id: \.self) { item in
+                        Label(item.rawValue, systemImage: item.icon).tag(item)
+                    }
                 }
+            } label: {
+                organizationRow("Category", value: category.rawValue, icon: category.icon, tint: category.tint)
             }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Category")
+            .accessibilityValue(category.rawValue)
 
-            Picker("Status", selection: $status) {
-                ForEach(ProjectStatus.allCases, id: \.self) { item in
-                    Label(item.rawValue, systemImage: item.icon).tag(item)
+            Menu {
+                Picker("Status", selection: $status) {
+                    ForEach(ProjectStatus.allCases, id: \.self) { item in
+                        Label(item.rawValue, systemImage: item.icon).tag(item)
+                    }
                 }
+            } label: {
+                organizationRow("Status", value: status.rawValue, icon: status.icon, tint: status.tint)
             }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Status")
+            .accessibilityValue(status.rawValue)
         }
         .padding(16)
         .glassCard()
+    }
+
+    private func organizationRow(_ title: LocalizedStringKey, value: String, icon: String, tint: Color) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.title3)
+                .foregroundStyle(tint)
+                .frame(width: 36, height: 36)
+                .background(tint.opacity(0.12), in: RoundedRectangle(cornerRadius: 10))
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Text(value)
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(.primary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 8)
+            Image(systemName: "chevron.up.chevron.down")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.secondary)
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, minHeight: 60, alignment: .leading)
+        .background(Theme.primary.opacity(0.05), in: RoundedRectangle(cornerRadius: 14))
+        .contentShape(Rectangle())
     }
 
     private var timeline: some View {
         VStack(alignment: .leading, spacing: 14) {
             Toggle("Set a target date", isOn: $hasTargetDate)
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
 
             if hasTargetDate {
-                DatePicker("Target", selection: $targetDate, in: Date()..., displayedComponents: .date)
-                    .foregroundStyle(.black)
+                DatePicker("Target", selection: $targetDate, displayedComponents: .date)
+                    .foregroundStyle(.primary)
             }
         }
         .padding(16)
@@ -146,10 +186,10 @@ struct AddProjectSheet: View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Milestones")
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             Text("Add one step per line. AI Projects will turn them into a progress checklist.")
                 .font(.caption)
-                .foregroundStyle(.black.opacity(0.62))
+                .foregroundStyle(.secondary)
             TextField("Research ideas\nCreate the first draft\nReview and publish", text: $milestoneText, axis: .vertical)
                 .lineLimit(5...10)
                 .textFieldStyle(.roundedBorder)
@@ -159,15 +199,19 @@ struct AddProjectSheet: View {
     }
 
     private func saveProject() {
+        guard canSave else { return }
         let milestoneTitles = milestoneText
             .components(separatedBy: .newlines)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }
 
-        let previousMilestones = editing?.milestones ?? []
+        // Consume each existing step once so duplicate titles keep distinct identities.
+        var remainingMilestones = editing?.milestones ?? []
         let updatedMilestones = milestoneTitles.map { milestoneTitle in
-            previousMilestones.first(where: { $0.title == milestoneTitle }) ??
-            Milestone(title: milestoneTitle)
+            if let index = remainingMilestones.firstIndex(where: { $0.title == milestoneTitle }) {
+                return remainingMilestones.remove(at: index)
+            }
+            return Milestone(title: milestoneTitle)
         }
 
         let project = AIProject(

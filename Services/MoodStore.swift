@@ -95,6 +95,7 @@ final class MoodStore: ObservableObject {
         logs.removeAll { Calendar.current.isDateInToday($0.date) }
         logs.insert(MoodLog(mood: mood, note: note), at: 0)
         save()
+        NotificationCenter.default.post(name: .watchSyncSourceDidChange, object: nil)
     }
 
     func delete(_ log: MoodLog) {

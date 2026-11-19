@@ -21,7 +21,7 @@ struct MessageBubble: View {
     }
 
     private var bubble: some View {
-        Text(message.content)
+        ChatMessageContent(content: message.content, rendersTables: message.role == .assistant)
             .font(.system(size: 15, design: .rounded))
             .foregroundStyle(message.role == .user ? .white : .primary)
             .padding(.horizontal, 14)
@@ -68,6 +68,63 @@ struct MessageBubble: View {
                 .font(.system(size: 13, weight: .bold))
                 .foregroundStyle(.white)
         }
+    }
+}
+
+// Message text is immutable once delivered, so source line IDs remain stable.
+private struct ChatContentLine: Identifiable {
+    let id: Int
+    let text: String
+    let cells: [String]?
+
+    var isSeparator: Bool {
+        guard let cells else { return false }
+        return cells.allSatisfy { cell in
+            cell.contains("-") && cell.allSatisfy { "-: ".contains($0) }
+        }
+    }
+}
+
+private struct ChatMessageContent: View {
+    let lines: [ChatContentLine]
+
+    init(content: String, rendersTables: Bool) {
+        lines = content.components(separatedBy: .newlines).enumerated().map { index, line in
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            let cells = trimmed.split(separator: "|", omittingEmptySubsequences: false)
+                .dropFirst().dropLast()
+                .map { $0.trimmingCharacters(in: .whitespaces) }
+            return ChatContentLine(
+                id: index,
+                text: line,
+                cells: rendersTables && trimmed.hasPrefix("|") && trimmed.hasSuffix("|") && cells.count == 2
+                    ? cells : nil
+            )
+        }.filter { !$0.isSeparator }
+    }
+
+    var body: some View {
+        Grid(alignment: .topLeading, horizontalSpacing: 12, verticalSpacing: 8) {
+            ForEach(lines) { line in
+                if let cells = line.cells {
+                    GridRow(alignment: .top) {
+                        Text(cells[0])
+                            .monospacedDigit()
+                        Text(cells[1])
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .fontWeight(cells[0].lowercased() == "time" ? .bold : .regular)
+                    .padding(.vertical, 6)
+                    .background(Theme.primary.opacity(0.05))
+                } else if !line.text.isEmpty {
+                    Text(line.text)
+                        .gridCellColumns(2)
+                }
+            }
+        }
+        .font(.subheadline)
+        .fixedSize(horizontal: false, vertical: true)
+        .textSelection(.enabled)
     }
 }
 

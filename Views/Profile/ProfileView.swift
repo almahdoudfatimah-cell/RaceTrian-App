@@ -493,7 +493,7 @@ struct ProfileView: View {
                         NavigationMenuRow(
                             icon: "fork.knife",
                             title: "Nutrition",
-                            subtitle: "Meals and macro tracking",
+                            subtitle: "Meal schedule and notes",
                             color: .green,
                             destination: AnyView(NutritionView())
                         )
@@ -792,11 +792,19 @@ struct ProfileView: View {
                     }
                     
                     // Community & Social Section
-                    CategorySection(title: "Community & Social") {
+                    CategorySection(title: "Community Groups") {
+                        NavigationMenuRow(
+                            icon: "person.3.fill",
+                            title: "Community",
+                            subtitle: "Shared notes, friends, groups and challenges",
+                            color: Theme.primary,
+                            destination: AnyView(CommunityPageView())
+                        )
+
                         NavigationMenuRow(
                             icon: "person.2.fill",
-                            title: "Friends & Following",
-                            subtitle: "Connect with athletes",
+                            title: "Friends, Followers & Following",
+                            subtitle: "Connect with athletes and manage your network",
                             color: Color(red: 0.3, green: 0.6, blue: 0.9),
                             destination: AnyView(FriendsView())
                         )

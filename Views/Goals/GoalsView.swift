@@ -5,7 +5,7 @@ struct GoalsView: View {
     @Environment(\.colorScheme) private var scheme
     @State private var selectedPeriod: Period = .week
 
-    enum Period: String, CaseIterable { case week = "Week"; case month = "Month" }
+    enum Period: String, CaseIterable { case week = "Week"; case year = "Year" }
 
     var body: some View {
         NavigationStack {
@@ -17,8 +17,9 @@ struct GoalsView: View {
                         if selectedPeriod == .week {
                             weekContent
                         } else {
-                            MonthTrackingView()
+                            YearTrackingView()
                         }
+                        LifeGoalsSection()
                         Color.clear.frame(height: 24)
                     }
                     .padding(.horizontal, 18)
@@ -34,9 +35,7 @@ struct GoalsView: View {
         Group {
             SummaryStatsRow()
             
-            // Quick Action Cards
-            QuickActionsGrid()
-            
+
             ActivityBarChart()
             CategoryDonutChart()
             
@@ -73,7 +72,6 @@ struct GoalsView: View {
             // Recovery Score
             RecoveryScoreCard()
             
-            LifeGoalsSection()
         }
     }
 
@@ -169,7 +167,7 @@ struct QuickActionsGrid: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Quick Actions")
                 .font(.system(size: 17, weight: .bold, design: .rounded))
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
 
             LazyVGrid(columns: columns, spacing: 12) {
                 ForEach(TrackingQuickAction.allCases, id: \.self) { action in
@@ -196,7 +194,7 @@ struct QuickActionCard: View {
                 .foregroundStyle(action.color)
             Text(action.rawValue)
                 .font(.system(size: 13, weight: .semibold, design: .rounded))
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 16)
@@ -233,23 +231,23 @@ struct TrackingQuickActionDetailView: View {
 
                     Text("Add your latest activity details below.")
                         .font(.system(size: 15, design: .rounded))
-                        .foregroundStyle(.black.opacity(0.65))
+                        .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
 
                     VStack(alignment: .leading, spacing: 14) {
                         Text(action.valuePrompt)
                             .font(.system(size: 14, weight: .bold, design: .rounded))
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.primary)
 
                         TextField(action.valuePrompt, text: $value)
                             .textFieldStyle(.roundedBorder)
 
                         DatePicker("Date and time", selection: $date)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.primary)
 
                         Text("Notes")
                             .font(.system(size: 14, weight: .bold, design: .rounded))
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.primary)
 
                         TextField("How did it feel?", text: $notes, axis: .vertical)
                             .lineLimit(3...6)

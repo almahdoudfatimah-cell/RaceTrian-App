@@ -9,7 +9,6 @@ final class NotesStore: ObservableObject {
 
     private init() {
         load()
-        if notes.isEmpty { notes = SampleNotes.all }
     }
 
     // MARK: - CRUD

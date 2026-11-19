@@ -64,6 +64,14 @@ private enum HomePlanDestination: String, CaseIterable, Identifiable {
         }
     }
     
+    var chartPeriod: ScheduleTrackingPeriod {
+        switch self {
+        case .monthly: .month
+        case .raceVision: .year
+        default: .week
+        }
+    }
+
     var chatbotPrompt: String {
         switch self {
         case .weekly:
@@ -97,12 +105,12 @@ struct HomePlanBoard: View {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("AI Plan Board")
+                    Text("AI Board")
                         .font(.title3.bold())
-                        .foregroundStyle(.black)
-                    Text("Choose a plan and build it with your chatbot")
+                        .foregroundStyle(.primary)
+                    Text("Add activities with start and finish times")
                         .font(.subheadline)
-                        .foregroundStyle(.black.opacity(0.68))
+                        .foregroundStyle(.secondary)
                 }
                 
                 Spacer()
@@ -126,6 +134,8 @@ struct HomePlanBoard: View {
                     }
                     .buttonStyle(PressScaleButtonStyle())
                 }
+
+
             }
         }
         .padding(16)
@@ -134,16 +144,190 @@ struct HomePlanBoard: View {
     
     @ViewBuilder
     private func planDestination(_ destination: HomePlanDestination) -> some View {
-        if destination == .raceVision {
-            RaceVisionYearView()
-        } else {
-            PlanChatbotView(
-                title: destination.title,
-                starterPrompt: destination.chatbotPrompt,
-                icon: destination.icon,
+        LocalScheduleView(
+            title: destination.title,
+            storageKey: "localSchedule.\(destination.rawValue)",
+            category: destination.rawValue,
+            color: destination.color
+        )
+    }
+}
+
+struct BoardScheduleTools: View {
+    enum Mode {
+        case charts, tracking, voice
+
+        var title: LocalizedStringResource {
+            switch self {
+            case .charts: "Charts"
+            case .tracking: "Tracking"
+            case .voice: "Voice Schedule"
+            }
+        }
+    }
+
+    let mode: Mode
+
+    var body: some View {
+        List(HomePlanDestination.allCases) { destination in
+            NavigationLink {
+                if mode == .charts {
+                    BoardScheduleChart(destination: destination)
+                } else {
+                    LocalScheduleView(
+                        title: destination.title,
+                        storageKey: "localSchedule.\(destination.rawValue)",
+                        category: destination.rawValue,
+                        color: destination.color,
+                        opensActivityEditor: mode == .voice
+                    )
+                }
+            } label: {
+                Label {
+                    Text(destination.title)
+                } icon: {
+                    Image(systemName: destination.icon)
+                        .foregroundStyle(destination.color)
+                }
+                .padding(.vertical, 6)
+            }
+            .listRowBackground(Theme.surface)
+        }
+        .navigationTitle(mode.title)
+        .appPageTheme()
+    }
+}
+
+private struct BoardScheduleChart: View {
+    let destination: HomePlanDestination
+    @AppStorage private var savedSchedule: Data
+
+    init(destination: HomePlanDestination) {
+        self.destination = destination
+        _savedSchedule = AppStorage(wrappedValue: Data(), "localSchedule.\(destination.rawValue)")
+    }
+
+    var body: some View {
+        ScrollView {
+            ScheduleTrackingView(
+                activities: (try? JSONDecoder().decode([LocalScheduleActivity].self, from: savedSchedule)) ?? [],
                 color: destination.color,
-                showsTimer: destination == .achievement
+                initialPeriod: destination.chartPeriod
             )
+            .padding()
+        }
+        .navigationTitle(destination.title)
+        .appPageTheme()
+    }
+}
+
+struct HomeScheduleSection: View {
+    @AppStorage("homeScheduleCategory") private var category = ""
+
+    var body: some View {
+        if let destination = HomePlanDestination(rawValue: category) {
+            HomeGeneratedSchedule(destination: destination)
+                .id(destination.id)
+        }
+    }
+}
+
+private struct HomeGeneratedSchedule: View {
+    let destination: HomePlanDestination
+    @AppStorage private var savedSchedule: Data
+
+    init(destination: HomePlanDestination) {
+        self.destination = destination
+        _savedSchedule = AppStorage(wrappedValue: Data(), "localSchedule.\(destination.rawValue)")
+    }
+
+    private var activities: [LocalScheduleActivity] {
+        (try? JSONDecoder().decode([LocalScheduleActivity].self, from: savedSchedule)) ?? []
+    }
+
+    var body: some View {
+        if !activities.isEmpty {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack {
+                    Label {
+                        Text(destination.title)
+                    } icon: {
+                        Image(systemName: destination.icon)
+                            .foregroundStyle(destination.color)
+                    }
+                    .font(.headline)
+                    Spacer()
+                    NavigationLink {
+                        LocalScheduleView(
+                            title: destination.title,
+                            storageKey: "localSchedule.\(destination.rawValue)",
+                            category: destination.rawValue,
+                            color: destination.color
+                        )
+                    } label: {
+                        Text("Edit")
+                    }
+                }
+
+                ScheduleTrackingView(activities: activities, color: destination.color)
+
+                Grid(alignment: .topLeading, horizontalSpacing: 16, verticalSpacing: 12) {
+                    GridRow {
+                        Text("Time")
+                        Text("Activity")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .font(.headline)
+                    Divider().gridCellUnsizedAxes(.horizontal)
+
+                    ForEach(activities) { item in
+                        GridRow(alignment: .top) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(item.start, format: .dateTime.month(.abbreviated).day())
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                Text(item.start, style: .time)
+                                Text("to")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                if !Calendar.current.isDate(item.start, inSameDayAs: item.finish) {
+                                    Text(item.finish, format: .dateTime.month(.abbreviated).day())
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                                Text(item.finish, style: .time)
+                            }
+                            .monospacedDigit()
+                            .accessibilityElement(children: .combine)
+
+                            VStack(alignment: .leading, spacing: 8) {
+                                Button {
+                                    var updated = activities
+                                    if let index = updated.firstIndex(where: { $0.id == item.id }) {
+                                        updated[index].completedAt = item.completedAt == nil ? Date() : nil
+                                        if let data = try? JSONEncoder().encode(updated) {
+                                            savedSchedule = data
+                                        }
+                                    }
+                                } label: {
+                                    Label(item.completedAt == nil ? "Mark complete" : "Completed",
+                                          systemImage: item.completedAt == nil ? "circle" : "checkmark.circle.fill")
+                                }
+                                .font(.caption.weight(.semibold))
+                                .buttonStyle(.borderless)
+                                .accessibilityLabel("\(item.completedAt == nil ? "Mark complete" : "Mark incomplete"): \(item.activity)")
+                                Text(item.activity)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
+                        Divider().gridCellUnsizedAxes(.horizontal)
+                    }
+                }
+                .font(.body)
+            }
+            .padding(16)
+            .glassCard(cornerRadius: 22, tint: destination.color)
         }
     }
 }
@@ -164,11 +348,11 @@ private struct HomePlanButton: View {
             
             Text(title)
                 .font(.subheadline.weight(.bold))
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             
             Text(subtitle)
                 .font(.caption)
-                .foregroundStyle(.black.opacity(0.68))
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.leading)
                 .lineLimit(2)
         }
@@ -192,7 +376,8 @@ private struct PlanChatbotView: View {
     @StateObject private var viewModel = CoachViewModel()
     @ObservedObject private var premium = PremiumStore.shared
     @State private var inputText = ""
-    @State private var didStartConversation = false
+    @State private var scheduleStart = Calendar.current.startOfDay(for: Date()).addingTimeInterval(9 * 3600)
+    @State private var scheduleFinish = Calendar.current.startOfDay(for: Date()).addingTimeInterval(17 * 3600)
     @State private var showingScheduleSheet = false
     @FocusState private var inputFocused: Bool
     
@@ -211,6 +396,7 @@ private struct PlanChatbotView: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         LazyVStack(spacing: 12) {
+                            scheduleTimeControls
                             ForEach(viewModel.messages) { message in
                                 MessageBubble(message: message)
                                     .id(message.id)
@@ -222,7 +408,7 @@ private struct PlanChatbotView: View {
                                         .tint(color)
                                     Text("Building your plan…")
                                         .font(.subheadline)
-                                        .foregroundStyle(.black.opacity(0.68))
+                                        .foregroundStyle(.secondary)
                                     Spacer()
                                 }
                                 .padding(14)
@@ -238,6 +424,14 @@ private struct PlanChatbotView: View {
                     .onChange(of: viewModel.isThinking) { _, _ in
                         scrollToBottom(proxy)
                     }
+                }
+
+                if let error = viewModel.errorBanner {
+                    ErrorBanner(message: error) { viewModel.errorBanner = nil }
+                    Button("Retry message") {
+                        Task { await viewModel.retry() }
+                    }
+                    .disabled(viewModel.isThinking)
                 }
 
                 if latestAssistantPlan != nil && !viewModel.isThinking {
@@ -263,7 +457,7 @@ private struct PlanChatbotView: View {
                         .padding(.horizontal, 14)
                         .padding(.vertical, 11)
                         .background(Theme.surface, in: RoundedRectangle(cornerRadius: 20))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.primary)
                     
                     Button {
                         Task { await sendInput() }
@@ -274,7 +468,7 @@ private struct PlanChatbotView: View {
                             .frame(width: 44, height: 44)
                             .background(color.gradient, in: Circle())
                     }
-                    .disabled(inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || viewModel.isThinking)
+                    .disabled(inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || viewModel.isThinking || scheduleFinish <= scheduleStart)
                     .accessibilityLabel("Send message")
                 }
                 .padding()
@@ -293,17 +487,51 @@ private struct PlanChatbotView: View {
                 .presentationDragIndicator(.visible)
             }
         }
-        .task {
-            guard !didStartConversation else { return }
-            didStartConversation = true
-            premium.consumeCoachMessage()
-            await viewModel.send(text: starterPrompt)
-        }
         .appPageTheme()
     }
     
+    private var scheduleTimeControls: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Schedule times")
+                .font(.headline)
+            DatePicker("Start time", selection: $scheduleStart, displayedComponents: [.date, .hourAndMinute])
+            DatePicker("Finish time", selection: $scheduleFinish, displayedComponents: [.date, .hourAndMinute])
+            if scheduleFinish <= scheduleStart {
+                Text("Choose a finish time after the start time.")
+                    .font(.caption)
+                    .foregroundStyle(.red)
+            }
+            Button(viewModel.messages.isEmpty ? "Create schedule" : "Update schedule") {
+                Task { await sendPlanMessage("Create the complete schedule for my selected time range.") }
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(color)
+            .disabled(viewModel.isThinking || scheduleFinish <= scheduleStart)
+        }
+        .disabled(viewModel.isThinking)
+        .padding()
+        .background(Theme.surface, in: RoundedRectangle(cornerRadius: 16))
+    }
+
     private var latestAssistantPlan: String? {
-        viewModel.messages.last(where: { $0.role == .assistant && !$0.content.isEmpty })?.content
+        viewModel.messages.last(where: {
+            $0.role == .assistant && $0.content.contains("|") && $0.content.contains(":")
+        })?.content
+    }
+
+    private func sendPlanMessage(_ message: String) async {
+        guard scheduleFinish > scheduleStart, !viewModel.isThinking else { return }
+        let context = viewModel.messages.isEmpty ? starterPrompt + "\n" : ""
+        let request = """
+        \(context)\(message)
+        Schedule start: \(scheduleStart.formatted(.iso8601)).
+        Schedule finish: \(scheduleFinish.formatted(.iso8601)).
+        Time zone: \(TimeZone.current.identifier).
+        Fit the entire schedule within these boundaries, with no overlapping activities.
+        Return only a Time | Activity table. Give full activity descriptions, no short summary or introduction.
+        """
+        premium.consumeCoachMessage()
+        await viewModel.send(text: request)
     }
 
     private func sendInput() async {
@@ -311,8 +539,7 @@ private struct PlanChatbotView: View {
         guard !message.isEmpty else { return }
         inputText = ""
         inputFocused = false
-        premium.consumeCoachMessage()
-        await viewModel.send(text: message)
+        await sendPlanMessage(message)
     }
     
     private func scrollToBottom(_ proxy: ScrollViewProxy) {
@@ -382,11 +609,11 @@ private struct AIPlanScheduleSheet: View {
                                     VStack(alignment: .leading, spacing: 3) {
                                         Text(item.title)
                                             .font(.system(size: 15, weight: .semibold, design: .rounded))
-                                            .foregroundStyle(.black)
+                                            .foregroundStyle(.primary)
                                         if let index = items.firstIndex(where: { $0.id == item.id }) {
                                             Text(scheduledDate(for: index), format: .dateTime.weekday(.abbreviated).month(.abbreviated).day())
                                                 .font(.caption)
-                                                .foregroundStyle(.black.opacity(0.58))
+                                                .foregroundStyle(.secondary)
                                         }
                                     }
                                 }
@@ -449,6 +676,16 @@ private struct AIPlanScheduleSheet: View {
     }
 
     private static func extractScheduleItems(from text: String) -> [AIPlanScheduleItem] {
+        // Only activity rows belong in the schedule, not table headings or demo notices.
+        let tableItems = text.components(separatedBy: .newlines).compactMap { line -> AIPlanScheduleItem? in
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            guard trimmed.hasPrefix("|"), trimmed.hasSuffix("|") else { return nil }
+            let cells = trimmed.split(separator: "|").map { $0.trimmingCharacters(in: .whitespaces) }
+            guard cells.count == 2, cells[0].contains(":") else { return nil }
+            return AIPlanScheduleItem(title: "\(cells[0]) — \(cells[1])")
+        }
+        if !tableItems.isEmpty { return tableItems }
+
         let ignoredPrefixes = ["here", "plan", "summary", "goal", "note", "tips"]
         let cleaned = text
             .components(separatedBy: .newlines)
@@ -493,10 +730,10 @@ private struct PlanChatHeader: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.headline)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
                 Text("AI planning chatbot")
                     .font(.caption)
-                    .foregroundStyle(.black.opacity(0.68))
+                    .foregroundStyle(.secondary)
             }
             
             Spacer()
@@ -505,9 +742,9 @@ private struct PlanChatHeader: View {
                 Circle()
                     .fill(Theme.secondary)
                     .frame(width: 8, height: 8)
-                Text("Online")
+                Text("Chat")
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
             }
         }
         .padding()
@@ -528,7 +765,7 @@ private struct PlanChatTimer: View {
                 Text(duration(at: context.date), format: .time(pattern: .hourMinuteSecond))
                     .font(.system(.headline, design: .rounded, weight: .bold))
                     .monospacedDigit()
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
             }
             
             Spacer()
@@ -743,7 +980,7 @@ private struct RaceVisionYearView: View {
                     
                     Text("MY RACE VISION")
                         .font(.caption.bold())
-                        .foregroundStyle(.black.opacity(0.65))
+                        .foregroundStyle(.secondary)
                     
                     if goals.isEmpty {
                         RaceVisionEmptyBoard()
@@ -818,10 +1055,10 @@ private struct RaceVisionBoardHeader: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("My Race Vision Board")
                     .font(.title2.bold())
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
                 Text("\(goalCount) race goals for this year")
                     .font(.subheadline)
-                    .foregroundStyle(.black.opacity(0.68))
+                    .foregroundStyle(.secondary)
             }
             
             Spacer()
@@ -833,7 +1070,7 @@ private struct RaceVisionBoardHeader: View {
                     Text("New Board")
                         .font(.caption2.bold())
                 }
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
                 .padding(10)
                 .background(Theme.accent.opacity(0.45), in: RoundedRectangle(cornerRadius: 12))
             }
@@ -855,18 +1092,18 @@ private struct RaceVisionAddCard: View {
         VStack(alignment: .leading, spacing: 12) {
             Label("Add a race dream", systemImage: "sparkles")
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             
             TextField("Race name", text: $raceName)
                 .textFieldStyle(.roundedBorder)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             
             TextField("Achievement goal", text: $achievementGoal)
                 .textFieldStyle(.roundedBorder)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             
             DatePicker("Race date", selection: $raceDate, displayedComponents: .date)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             
             Button(action: addGoal) {
                 Label("Pin to Vision Board", systemImage: "pin.fill")
@@ -901,7 +1138,7 @@ private struct RaceVisionGoalCard: View {
                     Button("Delete", role: .destructive, action: deleteGoal)
                 } label: {
                     Image(systemName: "ellipsis.circle.fill")
-                        .foregroundStyle(.black.opacity(0.55))
+                        .foregroundStyle(.secondary)
                 }
             }
             
@@ -911,14 +1148,14 @@ private struct RaceVisionGoalCard: View {
             
             Text(goal.raceName)
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
                 .strikethrough(goal.isComplete)
                 .lineLimit(2)
             
             if !goal.achievementGoal.isEmpty {
                 Text(goal.achievementGoal)
                     .font(.caption)
-                    .foregroundStyle(.black.opacity(0.68))
+                    .foregroundStyle(.secondary)
                     .lineLimit(3)
             }
             
@@ -926,7 +1163,7 @@ private struct RaceVisionGoalCard: View {
             
             Text(goal.raceDate, format: .dateTime.month(.abbreviated).day().year())
                 .font(.caption2.bold())
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             
             Text(goal.isComplete ? "ACHIEVED" : "DREAM RACE")
                 .font(.caption2.bold())
@@ -955,10 +1192,10 @@ private struct RaceVisionEmptyBoard: View {
                 .foregroundStyle(Theme.rose)
             Text("Your vision board is ready")
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             Text("Add your first dream race and pin it here.")
                 .font(.subheadline)
-                .foregroundStyle(.black.opacity(0.68))
+                .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
         .padding(28)

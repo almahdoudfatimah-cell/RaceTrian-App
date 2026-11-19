@@ -423,7 +423,7 @@ final class SportsTrackingStore: ObservableObject {
     }
     
     private init() {
-        loadSampleData()
+        load()
     }
     
     func add(_ activity: SportActivity) {
@@ -432,7 +432,19 @@ final class SportsTrackingStore: ObservableObject {
     }
     
     private func save() {
-        // Save to storage
+        if let data = try? JSONEncoder().encode(activities) {
+            UserDefaults.standard.set(data, forKey: "sports_tracking_activities")
+        }
+    }
+    
+    private func load() {
+        guard let data = UserDefaults.standard.data(forKey: "sports_tracking_activities"),
+              let decoded = try? JSONDecoder().decode([SportActivity].self, from: data) else {
+            // If no saved data, load sample data
+            loadSampleData()
+            return
+        }
+        activities = decoded
     }
     
     private func loadSampleData() {

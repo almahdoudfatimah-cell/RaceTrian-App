@@ -626,7 +626,7 @@ struct RootTabView: View {
             
             GoalsView()
                 .tabItem {
-                    Label("Goals", systemImage: "target")
+                    Label("Goals", systemImage: "flag.checkered")
                 }
                 .tag(2)
             
@@ -635,7 +635,7 @@ struct RootTabView: View {
                     Label("Projects", systemImage: "folder.fill")
                 }
                 .tag(3)
-            
+
             ProfileView()
                 .tabItem {
                     Label("More", systemImage: "ellipsis.circle.fill")
@@ -890,11 +890,11 @@ struct AllFeaturesListView: View {
     
     private var socialFeatures: [FeatureItem] {
         [
-            ("person.2.fill", "Friends", .blue),
-            ("bubble.left.and.bubble.right.fill", "Activity Feed", .green),
-            ("medal.fill", "Challenges", .orange),
+            ("person.2.fill", "Friends & Following", .blue),
+            ("note.text", "Shared Notes", .green),
+            ("medal.fill", "Group Challenges", .orange),
             ("chart.bar.doc.horizontal.fill", "Leaderboards", .purple),
-            ("person.3.fill", "Groups", .cyan),
+            ("person.3.fill", "Training Groups", .cyan),
             ("message.fill", "Messages", .blue),
             ("camera.badge.ellipsis", "Stories", .pink),
             ("hand.thumbsup.fill", "Achievements", .yellow)

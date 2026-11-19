@@ -19,7 +19,7 @@ struct GoalsCarousel: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    ForEach(SampleData.goals) { goal in
+                    ForEach(LifeGoalStore.shared.goals) { goal in
                         Button {
                             NotificationCenter.default.post(name: .switchTab, object: 2)
                         } label: {

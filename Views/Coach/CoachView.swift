@@ -37,6 +37,10 @@ struct CoachView: View {
 
                     if let err = vm.errorBanner {
                         ErrorBanner(message: err) { vm.errorBanner = nil }
+                        Button("Retry message") {
+                            Task { await vm.retry() }
+                        }
+                        .disabled(vm.isThinking)
                     }
 
                     inputBar
@@ -131,7 +135,7 @@ struct CoachView: View {
                     // Online indicator
                     HStack(spacing: 5) {
                         Circle().fill(Theme.mint).frame(width: 8, height: 8)
-                        Text("Online")
+                        Text("Chat")
                             .font(.system(size: 12, weight: .semibold, design: .rounded))
                             .foregroundStyle(.white.opacity(0.9))
                     }

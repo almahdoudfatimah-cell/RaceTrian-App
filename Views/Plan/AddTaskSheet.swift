@@ -12,7 +12,7 @@ struct AddTaskSheet: View {
     @State private var selectedHour: Int = 9
     @State private var durationSlots: Int = 2
 
-    private let hours = Array(6...22)
+    private let hours = Array(0...23)
 
     var body: some View {
         ZStack {

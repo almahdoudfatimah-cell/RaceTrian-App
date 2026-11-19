@@ -1,4 +1,6 @@
 import SwiftUI
+import Observation
+import AVFoundation
 
 struct EmptyStateView: View {
     let icon: String
@@ -40,11 +42,11 @@ struct EmptyStateView: View {
 
             Text(title)
                 .font(.title2.bold())
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
 
             Text(subtitle)
                 .font(.subheadline)
-                .foregroundStyle(.black.opacity(0.68))
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
@@ -61,7 +63,7 @@ struct EmptyStateView: View {
                         .foregroundStyle(color)
                     Text(metric.label)
                         .font(.caption2.weight(.semibold))
-                        .foregroundStyle(.black.opacity(0.65))
+                        .foregroundStyle(.secondary)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
@@ -74,7 +76,7 @@ struct EmptyStateView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Today")
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
 
             ForEach(actionItems, id: \.self) { item in
                 Button {
@@ -107,9 +109,9 @@ struct EmptyStateView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Quick Log")
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
 
-            TextField("Add a (title.lowercased()) note", text: $note, axis: .vertical)
+            TextField("Add a \(title) note", text: $note, axis: .vertical)
                 .lineLimit(2...4)
                 .textFieldStyle(.roundedBorder)
 
@@ -121,7 +123,7 @@ struct EmptyStateView: View {
             } label: {
                 Label("Save Entry", systemImage: "plus.circle.fill")
                     .font(.subheadline.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 13)
                     .background(color.gradient, in: RoundedRectangle(cornerRadius: 14))
@@ -138,17 +140,17 @@ struct EmptyStateView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Recent Activity")
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
 
             if savedNotes.isEmpty {
                 Label("Your new entries will appear here.", systemImage: "clock")
                     .font(.subheadline)
-                    .foregroundStyle(.black.opacity(0.62))
+                    .foregroundStyle(.secondary)
             } else {
                 ForEach(savedNotes, id: \.self) { entry in
                     Label(entry, systemImage: "checkmark.seal.fill")
                         .font(.subheadline)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.primary)
                 }
             }
         }
@@ -197,14 +199,28 @@ struct EmptyStateView: View {
         } else if lowerTitle.contains("route") || lowerTitle.contains("location") || lowerTitle.contains("weather") || lowerTitle.contains("sunrise") {
             return ["Review today's conditions", "Choose a safe training window", "Save the next route"]
         } else {
-            return ["Review the (title.lowercased()) overview", "Add a new entry", "Check weekly progress"]
+            return ["Review the \(title) overview", "Add a new entry", "Check weekly progress"]
         }
     }
 }
 
 struct AIInsightCard: View {
     let action: () -> Void
-    var body: some View { Button("Open AI Planner", systemImage: "sparkles", action: action) }
+    var body: some View {
+        Button(action: action) {
+            Label {
+                Text("Open AI Planner")
+            } icon: {
+                Image("iPhone App")
+                    .renderingMode(.original)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 28, height: 28)
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
+                    .accessibilityHidden(true)
+            }
+        }
+    }
 }
 
 struct AIPlannerSheet: View {
@@ -296,27 +312,11 @@ struct WorkoutPlansView: View {
 }
 
 struct PerformanceTrackingView: View {
-    var body: some View {
-        TrainingFeatureDashboard(
-            title: "Performance Tracking",
-            subtitle: "Monitor consistency, pace, strength, and progress",
-            icon: "chart.line.uptrend.xyaxis",
-            color: .blue,
-            focusItems: ["Add today's result", "Review the weekly trend", "Set the next benchmark"]
-        )
-    }
+    var body: some View { PerformanceGoalsScreen() }
 }
 
 struct WorkoutLoggerView: View {
-    var body: some View {
-        TrainingFeatureDashboard(
-            title: "Workout Logger",
-            subtitle: "Capture the details of every completed session",
-            icon: "square.and.pencil",
-            color: Theme.primary,
-            focusItems: ["Name the workout", "Record duration and effort", "Add notes and results"]
-        )
-    }
+    var body: some View { WorkoutSessionsScreen() }
 }
 
 struct CalorieTrackerView: View {
@@ -324,7 +324,7 @@ struct CalorieTrackerView: View {
 }
 
 struct StepsCounterView: View {
-    var body: some View { PlaceholderView(title: "Steps Counter", subtitle: "Coming soon", icon: "sparkles") }
+    var body: some View { LiveStepsScreen() }
 }
 
 struct HeartRateMonitorView: View {
@@ -332,11 +332,11 @@ struct HeartRateMonitorView: View {
 }
 
 struct StrengthProgressView: View {
-    var body: some View { PlaceholderView(title: "Strength Progress", subtitle: "Coming soon", icon: "sparkles") }
+    var body: some View { StrengthLevelsScreen() }
 }
 
 struct DistanceTrackerView: View {
-    var body: some View { PlaceholderView(title: "Distance Tracker", subtitle: "Coming soon", icon: "sparkles") }
+    var body: some View { DistanceMapScreen() }
 }
 
 struct ProgressChartsView: View {
@@ -372,7 +372,7 @@ struct VO2MaxTrackerView: View {
 }
 
 struct NutritionView: View {
-    var body: some View { PlaceholderView(title: "Nutrition", subtitle: "Coming soon", icon: "sparkles") }
+    var body: some View { MealScheduleView() }
 }
 
 struct SleepTrackerView: View {
@@ -553,7 +553,7 @@ private struct TrainingFocusCard: View {
                             .foregroundStyle(completedItems.contains(index) ? color : .secondary)
                         
                         Text(items[index])
-                            .foregroundStyle(.primary)
+                            .foregroundStyle(.black)
                             .strikethrough(completedItems.contains(index))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -620,6 +620,256 @@ private struct TrainingQuickLog: View {
     }
 }
 
+
+private struct WorkoutVoiceNote: Identifiable {
+    let url: URL
+    let createdAt: Date
+    var id: URL { url }
+}
+
+@MainActor
+@Observable
+private final class WorkoutVoiceNotes {
+    private(set) var notes: [WorkoutVoiceNote] = []
+    private(set) var isRecording = false
+    private(set) var isPreparing = false
+    private(set) var playingURL: URL?
+    private(set) var recordingSeconds = 0
+    var errorMessage: String?
+
+    @ObservationIgnored private var recorder: AVAudioRecorder?
+    @ObservationIgnored private var player: AVAudioPlayer?
+    @ObservationIgnored private var requestID = UUID()
+
+    private var directory: URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("WorkoutVoiceNotes", isDirectory: true)
+    }
+
+    func load() {
+        do {
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+            notes = try FileManager.default.contentsOfDirectory(
+                at: directory, includingPropertiesForKeys: [.creationDateKey]
+            )
+            .filter { $0.pathExtension == "m4a" && $0 != recorder?.url }
+            .map { url in
+                WorkoutVoiceNote(url: url, createdAt: (try? url.resourceValues(forKeys: [.creationDateKey]).creationDate) ?? .distantPast)
+            }
+            .sorted { $0.createdAt > $1.createdAt }
+        } catch {
+            errorMessage = "Could not load your saved voice notes."
+        }
+    }
+
+    func start() async {
+        guard !isPreparing, !isRecording else { return }
+        stopPlayback()
+        errorMessage = nil
+        let identifier = UUID()
+        requestID = identifier
+        isPreparing = true
+        defer { if requestID == identifier { isPreparing = false } }
+        let allowed = await AVAudioApplication.requestRecordPermission()
+        guard requestID == identifier, !Task.isCancelled else { return }
+        guard allowed else {
+            errorMessage = "Allow microphone access in Settings to record a voice note."
+            return
+        }
+        do {
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
+            try session.setActive(true)
+            let audio = try AVAudioRecorder(
+                url: directory.appendingPathComponent(UUID().uuidString).appendingPathExtension("m4a"),
+                settings: [
+                    AVFormatIDKey: kAudioFormatMPEG4AAC,
+                    AVSampleRateKey: 44100,
+                    AVNumberOfChannelsKey: 1,
+                    AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+                ]
+            )
+            recorder = audio
+            guard audio.record() else {
+                audio.deleteRecording()
+                recorder = nil
+                deactivateSession()
+                errorMessage = "Could not start recording. Please try again."
+                return
+            }
+            recordingSeconds = 0
+            isRecording = true
+        } catch {
+            recorder = nil
+            deactivateSession()
+            errorMessage = "Could not access the microphone or save the recording."
+        }
+    }
+
+    func saveRecording() {
+        guard let recorder else { return }
+        recorder.stop()
+        self.recorder = nil
+        isRecording = false
+        deactivateSession()
+        load()
+    }
+
+    func play(_ note: WorkoutVoiceNote) {
+        guard !isRecording, !isPreparing else { return }
+        if playingURL == note.url {
+            stopPlayback()
+            return
+        }
+        stopPlayback()
+        errorMessage = nil
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(.playback, mode: .default)
+            try session.setActive(true)
+            let audio = try AVAudioPlayer(contentsOf: note.url)
+            guard audio.play() else {
+                deactivateSession()
+                errorMessage = "Could not play this voice note."
+                return
+            }
+            player = audio
+            playingURL = note.url
+        } catch {
+            deactivateSession()
+            errorMessage = "Could not play this voice note."
+        }
+    }
+
+    func delete(_ note: WorkoutVoiceNote) {
+        if playingURL == note.url { stopPlayback() }
+        do {
+            try FileManager.default.removeItem(at: note.url)
+            notes.removeAll { $0.id == note.id }
+        } catch {
+            errorMessage = "Could not delete this voice note."
+        }
+    }
+
+    func refresh() {
+        if let recorder {
+            recordingSeconds = Int(recorder.currentTime)
+            // An interruption can stop recording without a button tap.
+            if !recorder.isRecording { saveRecording() }
+        }
+        if let player, !player.isPlaying { stopPlayback() }
+    }
+
+    func stop() {
+        requestID = UUID()
+        isPreparing = false
+        saveRecording()
+        stopPlayback()
+    }
+
+    private func stopPlayback() {
+        guard player != nil else { return }
+        player?.stop()
+        player = nil
+        playingURL = nil
+        deactivateSession()
+    }
+
+    private func deactivateSession() {
+        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+    }
+}
+
+private struct WorkoutVoiceNotesView: View {
+    @State private var audio = WorkoutVoiceNotes()
+    @State private var startTask: Task<Void, Never>?
+    @Environment(\.scenePhase) private var scenePhase
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Label("Voice Notes", systemImage: "waveform")
+                .font(.headline)
+
+            Text("Record a workout reminder or how your session felt. Notes stay on this device.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            Button {
+                if audio.isRecording {
+                    audio.saveRecording()
+                } else {
+                    startTask = Task { await audio.start() }
+                }
+            } label: {
+                Label(audio.isRecording ? "Stop & Save Note" : "Record Voice Note",
+                      systemImage: audio.isRecording ? "stop.circle.fill" : "mic.fill")
+                    .foregroundStyle(.black)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+            }
+            .buttonStyle(.bordered)
+            .disabled(audio.isPreparing)
+
+            if audio.isPreparing {
+                ProgressView("Preparing microphone…")
+            }
+            if audio.isRecording {
+                Text("Recording · \(audio.recordingSeconds) seconds")
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(.secondary)
+            }
+            if let error = audio.errorMessage {
+                Text(error).font(.caption).foregroundStyle(.secondary)
+            }
+
+            ForEach(audio.notes) { note in
+                HStack(spacing: 12) {
+                    Button {
+                        audio.play(note)
+                    } label: {
+                        Image(systemName: audio.playingURL == note.url ? "stop.circle.fill" : "play.circle.fill")
+                            .font(.title2)
+                            .frame(minWidth: 44, minHeight: 44)
+                    }
+                    .accessibilityLabel(audio.playingURL == note.url ? "Stop voice note" : "Play voice note")
+                    .disabled(audio.isRecording || audio.isPreparing)
+
+                    Text(note.createdAt, format: .dateTime.month().day().hour().minute())
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    Button(role: .destructive) {
+                        audio.delete(note)
+                    } label: {
+                        Image(systemName: "trash")
+                            .frame(minWidth: 44, minHeight: 44)
+                    }
+                    .accessibilityLabel("Delete voice note")
+                }
+                .foregroundStyle(.black)
+            }
+        }
+        .task {
+            audio.load()
+            while !Task.isCancelled {
+                do { try await Task.sleep(for: .milliseconds(250)) }
+                catch { break }
+                audio.refresh()
+            }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .background {
+                startTask?.cancel()
+                audio.stop()
+            }
+        }
+        .onDisappear {
+            startTask?.cancel()
+            audio.stop()
+        }
+    }
+}
+
 struct ThemedWorkoutTimerView: View {
     @State private var isRunning = false
     @State private var startedAt = Date()
@@ -629,42 +879,59 @@ struct ThemedWorkoutTimerView: View {
         ZStack {
             PaperBackground()
             
-            VStack(spacing: 24) {
-                Image(systemName: "stopwatch.fill")
-                    .font(.system(size: 42, weight: .bold))
-                    .foregroundStyle(.white)
-                    .frame(width: 88, height: 88)
-                    .background(Theme.primary.gradient, in: Circle())
-                    .shadow(color: Theme.primary.opacity(0.3), radius: 12, y: 6)
-                
-                SwiftUI.TimelineView(.periodic(from: .now, by: 1)) { context in
-                    Text(duration(at: context.date), format: .time(pattern: .hourMinuteSecond))
-                        .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                        .monospacedDigit()
-                        .contentTransition(.numericText())
-                }
-                
-                Text(isRunning ? "Workout in progress" : "Ready for your next workout")
-                    .foregroundStyle(.secondary)
-                
-                HStack(spacing: 14) {
-                    Button(isRunning ? "Pause" : "Start") {
-                        toggleTimer()
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(isRunning ? Theme.rose : Theme.secondary)
+            ScrollView {
+                VStack(spacing: 24) {
+                    Image(systemName: "stopwatch.fill")
+                        .font(.system(size: 42, weight: .bold))
+                        .foregroundStyle(.white)
+                        .frame(width: 88, height: 88)
+                        .background(Theme.primary.gradient, in: Circle())
+                        .shadow(color: Theme.primary.opacity(0.3), radius: 12, y: 6)
                     
-                    Button("Reset", role: .destructive) {
-                        isRunning = false
-                        savedDuration = 0
-                        startedAt = Date()
+                    SwiftUI.TimelineView(.periodic(from: .now, by: 1)) { context in
+                        Text(duration(at: context.date), format: .time(pattern: .hourMinuteSecond))
+                            .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                            .monospacedDigit()
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .frame(maxWidth: .infinity)
+                            .contentTransition(.numericText())
                     }
-                    .buttonStyle(.bordered)
+                    
+                    Text(isRunning ? "Workout in progress" : "Ready for your next workout")
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                    
+                    VStack(spacing: 14) {
+                        Button(action: toggleTimer) {
+                            Label(isRunning ? "Pause" : "Start", systemImage: isRunning ? "pause.fill" : "play.fill")
+                                .frame(maxWidth: .infinity, minHeight: 44)
+                                .foregroundStyle(.black)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(isRunning ? Theme.rose : Theme.secondary)
+                        
+                        Button {
+                            isRunning = false
+                            savedDuration = 0
+                            startedAt = Date()
+                        } label: {
+                            Label("Reset", systemImage: "arrow.counterclockwise")
+                                .frame(maxWidth: .infinity, minHeight: 44)
+                                .foregroundStyle(.black)
+                        }
+                        .buttonStyle(.bordered)
+                    }
+
+                    WorkoutVoiceNotesView()
                 }
+                .padding(24)
+                .frame(maxWidth: .infinity)
+                .glassCard(cornerRadius: 28, tint: Theme.primary)
+                .frame(maxWidth: 520)
+                .frame(maxWidth: .infinity)
+                .padding(16)
             }
-            .padding(28)
-            .glassCard(cornerRadius: 28, tint: Theme.primary)
-            .padding()
         }
         .navigationTitle("Workout Timer")
         .navigationBarTitleDisplayMode(.inline)

@@ -14,7 +14,7 @@ final class ProjectStore: ObservableObject {
 
     private init() {
         load()
-        if projects.isEmpty {
+        if UserDefaults.standard.data(forKey: defaultsKey) == nil {
             projects = SampleProjects.all
             save()
         }
@@ -66,6 +66,8 @@ final class ProjectStore: ObservableObject {
         if let data = try? JSONEncoder().encode(projects) {
             UserDefaults.standard.set(data, forKey: defaultsKey)
         }
+        // Let the watch app pick up project changes.
+        NotificationCenter.default.post(name: .watchSyncSourceDidChange, object: nil)
     }
 
     private func load() {

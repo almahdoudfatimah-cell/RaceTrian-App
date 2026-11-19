@@ -2,9 +2,11 @@ import SwiftUI
 import Charts
 
 struct LifeGoalsSection: View {
-    @State private var goals = SampleData.goals
+    private let store = LifeGoalStore.shared
     @State private var selectedFilter: GoalFilter = .all
-    @State private var showingNewGoal = false
+    @State private var goalDraft: GoalDraft?
+
+    private var goals: [LifeGoal] { store.goals }
 
     private var filteredGoals: [LifeGoal] {
         switch selectedFilter {
@@ -50,8 +52,8 @@ struct LifeGoalsSection: View {
                 }
             }
         }
-        .sheet(isPresented: $showingNewGoal) {
-            NewLifeGoalSheet(goals: $goals)
+        .sheet(item: $goalDraft) { draft in
+            NewLifeGoalSheet(goals: Bindable(store).goals, draft: draft)
                 .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
         }
@@ -62,16 +64,17 @@ struct LifeGoalsSection: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text("Life Goals")
                     .font(.system(size: 20, weight: .bold, design: .rounded))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
                 Text("Build progress in every part of your life")
                     .font(.caption)
-                    .foregroundStyle(.black.opacity(0.62))
+                    .foregroundStyle(.secondary)
             }
 
             Spacer()
 
             Button {
-                showingNewGoal = true
+                selectedFilter = .all
+                goalDraft = GoalDraft(title: "", emoji: "🎯", color: Theme.primary)
             } label: {
                 Label("Add", systemImage: "plus")
                     .font(.system(size: 13, weight: .bold, design: .rounded))
@@ -96,7 +99,7 @@ struct LifeGoalsSection: View {
         VStack(alignment: .leading, spacing: 9) {
             Text("Goal Ideas")
                 .font(.system(size: 14, weight: .bold, design: .rounded))
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
@@ -132,7 +135,7 @@ struct LifeGoalsSection: View {
                 } label: {
                     Text(filter.rawValue)
                         .font(.system(size: 12, weight: .bold, design: .rounded))
-                        .foregroundStyle(selectedFilter == filter ? .white : .black)
+                        .foregroundStyle(selectedFilter == filter ? Color.white : Color.primary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
                         .background(
@@ -146,24 +149,20 @@ struct LifeGoalsSection: View {
     }
 
     private func checkIn(to goal: LifeGoal) {
-        guard let index = goals.firstIndex(where: { $0.id == goal.id }) else { return }
         withAnimation(.easeInOut) {
-            goals[index].progress = min(1, goals[index].progress + 0.05)
-            goals[index].streak += 1
+            store.checkIn(id: goal.id)
         }
     }
 
     private func delete(_ goal: LifeGoal) {
         withAnimation {
-            goals.removeAll { $0.id == goal.id }
+            store.delete(id: goal.id)
         }
     }
 
     private func addIdea(title: String, emoji: String, color: Color) {
-        guard !goals.contains(where: { $0.title == title }) else { return }
-        withAnimation {
-            goals.append(LifeGoal(title: title, emoji: emoji, progress: 0, streak: 0, color: color))
-        }
+        selectedFilter = .all
+        goalDraft = GoalDraft(title: title, emoji: emoji, color: color)
     }
 }
 
@@ -185,10 +184,10 @@ private struct GoalSummaryCard: View {
                 .foregroundStyle(color)
             Text(value)
                 .font(.system(size: 17, weight: .bold, design: .rounded))
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             Text(label)
                 .font(.caption2.weight(.semibold))
-                .foregroundStyle(.black.opacity(0.62))
+                .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
@@ -207,7 +206,7 @@ private struct GoalIdeaButton: View {
                 Text(emoji)
                 Text(title)
                     .font(.caption.bold())
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
             }
             .padding(.horizontal, 11)
             .padding(.vertical, 9)
@@ -233,7 +232,7 @@ private struct GoalDetailRow: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(goal.title)
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.primary)
                     Label("\(goal.streak) day streak", systemImage: "flame.fill")
                         .font(.system(size: 12, design: .rounded))
                         .foregroundStyle(Theme.accent)
@@ -296,6 +295,13 @@ private struct GoalDetailRow: View {
     }
 }
 
+private struct GoalDraft: Identifiable {
+    let id = UUID()
+    let title: String
+    let emoji: String
+    let color: Color
+}
+
 private struct NewLifeGoalSheet: View {
     @Binding var goals: [LifeGoal]
     @Environment(\.dismiss) private var dismiss
@@ -304,7 +310,15 @@ private struct NewLifeGoalSheet: View {
     @State private var emoji = "🎯"
     @State private var selectedColorIndex = 0
 
-    private let colors: [Color] = [Theme.primary, .blue, .green, .purple, .pink, .orange]
+    init(goals: Binding<[LifeGoal]>, draft: GoalDraft) {
+        _goals = goals
+        _title = State(initialValue: draft.title)
+        _emoji = State(initialValue: draft.emoji)
+        _selectedColorIndex = State(initialValue: 0)
+        colors = [draft.color, .blue, .green, .purple, .pink, .orange]
+    }
+
+    private let colors: [Color]
     private let emojis = ["🎯", "🏃", "📚", "💰", "✈️", "🧘", "❤️", "🌱"]
 
     var body: some View {
@@ -316,14 +330,14 @@ private struct NewLifeGoalSheet: View {
                     VStack(alignment: .leading, spacing: 20) {
                         Text("What would you like to achieve?")
                             .font(.title2.bold())
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.primary)
 
                         TextField("Goal title", text: $title)
                             .textFieldStyle(.roundedBorder)
 
                         Text("Choose an icon")
                             .font(.headline)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.primary)
 
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 12) {
                             ForEach(emojis, id: \.self) { item in
@@ -342,7 +356,7 @@ private struct NewLifeGoalSheet: View {
 
                         Text("Choose a color")
                             .font(.headline)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.primary)
 
                         HStack {
                             ForEach(colors.indices, id: \.self) { index in

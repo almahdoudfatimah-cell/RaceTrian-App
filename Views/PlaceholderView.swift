@@ -49,12 +49,12 @@ private struct PlaceholderHero: View {
             
             Text(title)
                 .font(.title.bold())
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
                 .multilineTextAlignment(.center)
             
             Text(subtitle)
                 .font(.body)
-                .foregroundStyle(.black.opacity(0.68))
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
@@ -74,7 +74,7 @@ private struct PlaceholderStarterCard: View {
         VStack(alignment: .leading, spacing: 14) {
             Text("Get started")
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             
             ForEach(actions, id: \.0) { action in
                 HStack(spacing: 12) {
@@ -82,10 +82,10 @@ private struct PlaceholderStarterCard: View {
                         .foregroundStyle(Theme.primary)
                         .frame(width: 28)
                     Text(action.0)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.primary)
                     Spacer()
                     Image(systemName: "checkmark.circle")
-                        .foregroundStyle(.black.opacity(0.35))
+                        .foregroundStyle(.secondary)
                 }
                 .padding(.vertical, 4)
             }
@@ -103,12 +103,12 @@ private struct PlaceholderNotesCard: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Quick notes")
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             
             HStack {
                 TextField("Add a note", text: $note)
                     .textFieldStyle(.roundedBorder)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
                     .submitLabel(.done)
                     .onSubmit(saveNote)
                 
@@ -123,7 +123,7 @@ private struct PlaceholderNotesCard: View {
             
             ForEach(savedNotes) { savedNote in
                 Label(savedNote.text, systemImage: "note.text")
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
                     .padding(.top, 4)
             }
         }

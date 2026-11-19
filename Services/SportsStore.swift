@@ -14,17 +14,20 @@ final class SportsStore: ObservableObject {
     func add(_ activity: SportActivity) {
         activities.insert(activity, at: 0)
         save()
+        NotificationCenter.default.post(name: .watchSyncSourceDidChange, object: nil)
     }
 
     func update(_ activity: SportActivity) {
         guard let idx = activities.firstIndex(where: { $0.id == activity.id }) else { return }
         activities[idx] = activity
         save()
+        NotificationCenter.default.post(name: .watchSyncSourceDidChange, object: nil)
     }
 
     func delete(_ activity: SportActivity) {
         activities.removeAll { $0.id == activity.id }
         save()
+        NotificationCenter.default.post(name: .watchSyncSourceDidChange, object: nil)
     }
 
     // MARK: - Stats

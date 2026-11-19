@@ -72,7 +72,7 @@ struct MoreTabView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 28)
-        .background(Color.white, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .background(Theme.surface, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
         .shadow(color: .black.opacity(0.06), radius: 12, x: 0, y: 4)
     }
     
@@ -86,7 +86,7 @@ struct MoreTabView: View {
             Divider().padding(.leading, 50)
             settingRow(icon: "info.circle.fill", title: "About", color: Theme.accent)
         }
-        .background(Color.white, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .background(Theme.surface, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
         .shadow(color: .black.opacity(0.06), radius: 12, x: 0, y: 4)
     }
     
@@ -107,7 +107,7 @@ struct MoreTabView: View {
                 
                 Text(title)
                     .font(.system(.body, design: .rounded, weight: .medium))
-                    .foregroundStyle(Theme.textPrimary)
+                    .foregroundStyle(.black)
                 
                 Spacer()
                 
@@ -131,7 +131,7 @@ struct MoreTabView: View {
         } label: {
             Text("Sign Out")
                 .font(.system(.body, design: .rounded, weight: .semibold))
-                .foregroundStyle(.white)
+                .foregroundStyle(.black)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
                 .background(Color.red, in: Capsule())

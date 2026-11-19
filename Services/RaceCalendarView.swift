@@ -156,7 +156,7 @@ struct DiscoverableRaceCard: View {
                     }
                     .padding(.horizontal, 10)
                     .padding(.vertical, 6)
-                    .background(.white)
+                    .background(Theme.surface)
                     .foregroundStyle(race.category.color)
                     .clipShape(Capsule())
                     .padding(12)
@@ -169,7 +169,7 @@ struct DiscoverableRaceCard: View {
                     }
                     .padding(.horizontal, 10)
                     .padding(.vertical, 6)
-                    .background(.white)
+                    .background(Theme.surface)
                     .foregroundStyle(.secondary)
                     .clipShape(Capsule())
                     .padding(12)

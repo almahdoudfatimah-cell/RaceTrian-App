@@ -41,10 +41,16 @@ struct ProjectsView: View {
         }
     }
 
-    // Projects the free user can see fully (first N)
-    private var visibleFree: [AIProject] { Array(filtered.prefix(freeLimit)) }
-    // Projects that need premium to see
-    private var lockedProjects: [AIProject] { premium.isActive ? [] : Array(filtered.dropFirst(freeLimit)) }
+    // Access follows stored project identity, not the current search or sort order.
+    private var freeProjectIDs: Set<UUID> {
+        Set(store.projects.prefix(freeLimit).map(\.id))
+    }
+    private var visibleFree: [AIProject] {
+        filtered.filter { freeProjectIDs.contains($0.id) }
+    }
+    private var lockedProjects: [AIProject] {
+        premium.isActive ? [] : filtered.filter { !freeProjectIDs.contains($0.id) }
+    }
 
     var body: some View {
         NavigationStack {
@@ -71,7 +77,10 @@ struct ProjectsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolbarContent }
             .sheet(isPresented: $showAdd) {
-                AddProjectSheet(store: store)
+                AddProjectSheet(store: store) { _ in
+                    resetFilters()
+                    sortOption = .newest
+                }
                     .presentationDetents([.large])
                     .presentationDragIndicator(.visible)
             }
@@ -91,8 +100,12 @@ struct ProjectsView: View {
             Button {
                 showAdd = true
             } label: {
-                Image(systemName: "plus.circle.fill")
-                    .font(.system(size: 22))
+                HStack(spacing: 6) {
+                    Image(systemName: "plus")
+                    Text("Add")
+                }
+                    .font(.headline)
+                    .frame(minHeight: 44)
                     .foregroundStyle(Theme.primary)
             }
         }
@@ -103,7 +116,7 @@ struct ProjectsView: View {
             HStack {
                 Label("AI Project Focus", systemImage: "sparkles")
                     .font(.system(size: 16, weight: .bold, design: .rounded))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
                 Spacer()
                 Text("Today")
                     .font(.caption.bold())
@@ -112,7 +125,7 @@ struct ProjectsView: View {
 
             Text(focusMessage)
                 .font(.system(size: 14, design: .rounded))
-                .foregroundStyle(.black.opacity(0.72))
+                .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
             HStack(spacing: 10) {
@@ -129,15 +142,15 @@ struct ProjectsView: View {
         VStack(spacing: 10) {
             HStack(spacing: 10) {
                 Image(systemName: "magnifyingglass")
-                    .foregroundStyle(.black.opacity(0.55))
+                    .foregroundStyle(.secondary)
                 TextField("Search projects", text: $searchText)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
                 if !searchText.isEmpty {
                     Button {
                         searchText = ""
                     } label: {
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundStyle(.black.opacity(0.45))
+                            .foregroundStyle(.secondary)
                     }
                     .buttonStyle(.plain)
                 }
@@ -149,7 +162,7 @@ struct ProjectsView: View {
             HStack {
                 Label("Sort projects", systemImage: "arrow.up.arrow.down")
                     .font(.caption.bold())
-                    .foregroundStyle(.black.opacity(0.65))
+                    .foregroundStyle(.secondary)
                 Spacer()
                 Picker("Sort projects", selection: $sortOption) {
                     ForEach(ProjectSortOption.allCases, id: \.self) { option in
@@ -185,10 +198,10 @@ struct ProjectsView: View {
                 .foregroundStyle(color)
             Text(value)
                 .font(.system(size: 17, weight: .bold, design: .rounded))
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             Text(label)
                 .font(.caption2.weight(.semibold))
-                .foregroundStyle(.black.opacity(0.6))
+                .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 10)
@@ -217,6 +230,7 @@ struct ProjectsView: View {
     private func projectRow(_ project: AIProject) -> some View {
         Button { selected = project } label: {
             ProjectCard(project: project)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .contextMenu {
@@ -368,19 +382,31 @@ struct ProjectsView: View {
         .animation(.spring(response: 0.3), value: isActive)
     }
 
+    private func resetFilters() {
+        searchText = ""
+        filterCategory = nil
+        filterStatus = nil
+    }
+
     // MARK: - Empty State
     private var emptyState: some View {
         VStack(spacing: 16) {
             Text("🎯")
                 .font(.system(size: 60))
                 .padding(.top, 40)
-            Text("No projects yet")
+            Text(store.projects.isEmpty ? "No projects yet" : "No matching projects")
                 .font(.system(size: 20, weight: .bold, design: .rounded))
-            Text("Create your first AI project to break big goals into clear steps.")
+            Text(store.projects.isEmpty
+                 ? "Create your first AI project to break big goals into clear steps."
+                 : "Try another search or reset your filters to see your projects.")
                 .font(.system(size: 14, design: .rounded))
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 24)
+            if !store.projects.isEmpty {
+                Button("Reset Filters", action: resetFilters)
+                    .buttonStyle(.bordered)
+            }
             Button { showAdd = true } label: {
                 Label("Create Project", systemImage: "plus")
                     .font(.system(size: 15, weight: .bold, design: .rounded))

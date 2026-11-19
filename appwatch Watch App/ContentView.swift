@@ -1,699 +1,1240 @@
-//
-//  ContentView.swift
-//  Appwatch Watch App
-//
-//  Created by Fatimah on 24/08/2026.
-//
-
 import SwiftUI
+import Observation
+import WatchKit
+
+@MainActor
+@Observable
+final class WatchAppStore {
+    var tasks: [WatchTask] {
+        didSet { save() }
+    }
+    var sessions: [WorkoutSession] {
+        didSet { save() }
+    }
+    var waterGlasses: Int {
+        didSet { save() }
+    }
+    var mood: WatchMood? {
+        didSet { save() }
+    }
+    var dailyGoalMinutes: Int {
+        didSet { save() }
+    }
+    /// Projects mirrored from the iPhone. Refreshed on every sync, so they aren't saved locally.
+    var projects: [SyncedWatchProject] = []
+    /// AI Board activities keyed by board (`WatchBoard.rawValue`), mirrored from the iPhone.
+    var boards: [String: [SyncedBoardActivity]] = [:] {
+        didSet { save() }
+    }
+    /// Life goals mirrored from the iPhone, saved so they show before the first sync.
+    var lifeGoals: [SyncedLifeGoal] = [] {
+        didSet { save() }
+    }
+    /// Light tap feedback when completing tasks, activities, and goal check-ins.
+    var hapticsEnabled = true {
+        didSet { save() }
+    }
+    /// When the last snapshot arrived from the iPhone, shown in Settings.
+    var lastSyncedAt: Date? {
+        didSet { save() }
+    }
+
+    private let defaults: UserDefaults
+    private var isRestoring = true
+
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        tasks = []
+        sessions = []
+        waterGlasses = 0
+        mood = nil
+        dailyGoalMinutes = 30
+        restore()
+        isRestoring = false
+    }
+
+    var todayTasks: [WatchTask] {
+        tasks
+            .filter { Calendar.current.isDateInToday($0.scheduledDate) }
+            .sorted { $0.scheduledDate < $1.scheduledDate }
+    }
+
+    var completedTodayCount: Int {
+        todayTasks.filter(\.isCompleted).count
+    }
+
+    var todayMinutes: Int {
+        sessions
+            .filter { Calendar.current.isDateInToday($0.startedAt) }
+            .reduce(0) { $0 + $1.durationMinutes }
+    }
+
+    var weekMinutes: Int {
+        guard let interval = Calendar.current.dateInterval(of: .weekOfYear, for: Date()) else {
+            return todayMinutes
+        }
+        return sessions
+            .filter { interval.contains($0.startedAt) }
+            .reduce(0) { $0 + $1.durationMinutes }
+    }
+
+    var currentStreak: Int {
+        let calendar = Calendar.current
+        let activeDays = Set(sessions.map { calendar.startOfDay(for: $0.startedAt) })
+        var streak = 0
+        var date = calendar.startOfDay(for: Date())
+        while activeDays.contains(date) {
+            streak += 1
+            guard let previous = calendar.date(byAdding: .day, value: -1, to: date) else { break }
+            date = previous
+        }
+        return streak
+    }
+
+    func toggleTask(id: UUID) {
+        guard let index = tasks.firstIndex(where: { $0.id == id }) else { return }
+        tasks[index].isCompleted.toggle()
+        playSuccessHaptic()
+        // Send the task's own day so tasks on other days in the week toggle correctly.
+        WatchPhoneSyncManager.shared.toggleTask(id: id, on: tasks[index].scheduledDate)
+    }
+
+    func toggleMilestone(projectId: UUID, milestoneId: UUID) {
+        guard let projectIndex = projects.firstIndex(where: { $0.id == projectId }),
+              let milestoneIndex = projects[projectIndex].milestones.firstIndex(where: { $0.id == milestoneId })
+        else { return }
+        projects[projectIndex].milestones[milestoneIndex].isDone.toggle()
+        WatchPhoneSyncManager.shared.toggleMilestone(projectId: projectId, milestoneId: milestoneId)
+    }
+
+    func addTask(title: String, hour: Int) {
+        let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        let date = Calendar.current.date(bySettingHour: hour, minute: 0, second: 0, of: Date()) ?? Date()
+        tasks.append(WatchTask(id: UUID(), title: trimmed, scheduledDate: date, isCompleted: false))
+        WatchPhoneSyncManager.shared.addTask(title: trimmed, scheduledDate: date)
+    }
+
+    func addWorkout(kind: WorkoutKind, durationMinutes: Int) {
+        let session = WorkoutSession(
+            id: UUID(),
+            kind: kind,
+            startedAt: Date(),
+            durationMinutes: max(durationMinutes, 1)
+        )
+        sessions.append(session)
+        WatchPhoneSyncManager.shared.addWorkout(
+            id: session.id,
+            kind: kind,
+            durationMinutes: session.durationMinutes,
+            date: session.startedAt
+        )
+    }
+
+    func setMood(_ mood: WatchMood) {
+        self.mood = mood
+        WatchPhoneSyncManager.shared.setMood(mood)
+    }
+
+    // MARK: AI Board
+
+    func activities(on board: WatchBoard) -> [SyncedBoardActivity] {
+        (boards[board.rawValue] ?? []).sorted { $0.start < $1.start }
+    }
+
+    func addBoardActivity(title: String, start: Date, durationMinutes: Int, on board: WatchBoard) {
+        let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        let activity = SyncedBoardActivity(
+            id: UUID(),
+            activity: trimmed,
+            start: start,
+            finish: start.addingTimeInterval(TimeInterval(max(durationMinutes, 1) * 60)),
+            completedAt: nil
+        )
+        boards[board.rawValue, default: []].append(activity)
+        WatchPhoneSyncManager.shared.addBoardActivity(activity, boardKey: board.rawValue)
+    }
+
+    func toggleBoardActivity(id: UUID, on board: WatchBoard) {
+        guard let index = boards[board.rawValue]?.firstIndex(where: { $0.id == id }) else { return }
+        let completedAt: Date? = boards[board.rawValue]?[index].completedAt == nil ? Date() : nil
+        boards[board.rawValue]?[index].completedAt = completedAt
+        if completedAt != nil { playSuccessHaptic() }
+        WatchPhoneSyncManager.shared.setBoardActivityCompleted(id: id, boardKey: board.rawValue, completedAt: completedAt)
+    }
+
+    /// Ends an Achievement Timer session: marks the activity complete and records the actual finish time.
+    func completeTimedActivity(id: UUID, startedAt: Date, on board: WatchBoard) {
+        guard let index = boards[board.rawValue]?.firstIndex(where: { $0.id == id }) else { return }
+        let now = Date()
+        boards[board.rawValue]?[index].start = startedAt
+        boards[board.rawValue]?[index].finish = now
+        boards[board.rawValue]?[index].completedAt = now
+        WatchPhoneSyncManager.shared.setBoardActivityCompleted(id: id, boardKey: board.rawValue, completedAt: now, finishDate: now)
+    }
+
+    /// Records an unplanned Achievement Timer session as a completed activity.
+    func logTimedSession(title: String, startedAt: Date, on board: WatchBoard) {
+        let now = Date()
+        let activity = SyncedBoardActivity(id: UUID(), activity: title, start: startedAt, finish: now, completedAt: now)
+        boards[board.rawValue, default: []].append(activity)
+        WatchPhoneSyncManager.shared.addBoardActivity(activity, boardKey: board.rawValue)
+    }
+
+    func deleteBoardActivity(id: UUID, on board: WatchBoard) {
+        boards[board.rawValue]?.removeAll { $0.id == id }
+        WatchPhoneSyncManager.shared.deleteBoardActivity(id: id, boardKey: board.rawValue)
+    }
+
+    // MARK: Life Goals
+
+    /// Mirrors the iPhone's check-in locally so the ring updates right away, then tells the iPhone.
+    func checkInLifeGoal(id: UUID) {
+        guard let index = lifeGoals.firstIndex(where: { $0.id == id }) else { return }
+        lifeGoals[index].progress = min(1, lifeGoals[index].progress + 0.05)
+        lifeGoals[index].streak += 1
+        playSuccessHaptic()
+        WatchPhoneSyncManager.shared.checkInLifeGoal(id: id)
+    }
+
+    private func playSuccessHaptic() {
+        guard hapticsEnabled else { return }
+        WKInterfaceDevice.current().play(.success)
+    }
+
+    func apply(snapshot: PhoneSnapshot) {
+        tasks = snapshot.tasks.map {
+            WatchTask(
+                id: $0.id,
+                title: $0.title,
+                scheduledDate: $0.scheduledDate,
+                isCompleted: $0.isCompleted
+            )
+        }
+        sessions = snapshot.workouts.compactMap { workout in
+            guard let kind = WorkoutKind(rawValue: workout.kind) else { return nil }
+            return WorkoutSession(
+                id: workout.id,
+                kind: kind,
+                startedAt: workout.startedAt,
+                durationMinutes: workout.durationMinutes
+            )
+        }
+        mood = snapshot.moodRawValue.flatMap(WatchMood.init(phoneRawValue:))
+        projects = snapshot.projects
+        if let syncedBoards = snapshot.boards {
+            boards = Dictionary(syncedBoards.map { ($0.key, $0.activities) }, uniquingKeysWith: { first, _ in first })
+        }
+        if let syncedGoals = snapshot.lifeGoals {
+            lifeGoals = syncedGoals
+        }
+        lastSyncedAt = Date()
+    }
+
+    func resetToday() {
+        tasks.removeAll { Calendar.current.isDateInToday($0.scheduledDate) }
+        sessions.removeAll { Calendar.current.isDateInToday($0.startedAt) }
+        waterGlasses = 0
+        mood = nil
+    }
+
+    private func restore() {
+        let decoder = JSONDecoder()
+        if let data = defaults.data(forKey: "watch.tasks"),
+           let value = try? decoder.decode([WatchTask].self, from: data) {
+            tasks = value
+        }
+        if let data = defaults.data(forKey: "watch.sessions"),
+           let value = try? decoder.decode([WorkoutSession].self, from: data) {
+            sessions = value
+        }
+        waterGlasses = defaults.integer(forKey: "watch.water")
+        dailyGoalMinutes = defaults.object(forKey: "watch.goal") == nil ? 30 : defaults.integer(forKey: "watch.goal")
+        if let moodValue = defaults.string(forKey: "watch.mood") {
+            mood = WatchMood(rawValue: moodValue)
+        }
+        if let data = defaults.data(forKey: "watch.boards"),
+           let value = try? decoder.decode([String: [SyncedBoardActivity]].self, from: data) {
+            boards = value
+        }
+        hapticsEnabled = defaults.object(forKey: "watch.haptics") as? Bool ?? true
+        lastSyncedAt = defaults.object(forKey: "watch.lastSync") as? Date
+        if let data = defaults.data(forKey: "watch.lifeGoals"),
+           let value = try? decoder.decode([SyncedLifeGoal].self, from: data) {
+            lifeGoals = value
+        }
+    }
+
+    private func save() {
+        guard !isRestoring else { return }
+        let encoder = JSONEncoder()
+        defaults.set(try? encoder.encode(tasks), forKey: "watch.tasks")
+        defaults.set(try? encoder.encode(sessions), forKey: "watch.sessions")
+        defaults.set(waterGlasses, forKey: "watch.water")
+        defaults.set(dailyGoalMinutes, forKey: "watch.goal")
+        defaults.set(mood?.rawValue, forKey: "watch.mood")
+        defaults.set(try? encoder.encode(boards), forKey: "watch.boards")
+        defaults.set(try? encoder.encode(lifeGoals), forKey: "watch.lifeGoals")
+        defaults.set(hapticsEnabled, forKey: "watch.haptics")
+        defaults.set(lastSyncedAt, forKey: "watch.lastSync")
+        // Tasks and activities may have changed, so keep reminders in step.
+        WatchNotificationManager.shared.scheduleReschedule()
+    }
+}
+
+struct WatchTask: Identifiable, Codable {
+    let id: UUID
+    var title: String
+    var scheduledDate: Date
+    var isCompleted: Bool
+}
+
+struct WorkoutSession: Identifiable, Codable {
+    let id: UUID
+    let kind: WorkoutKind
+    let startedAt: Date
+    let durationMinutes: Int
+}
+
+enum WorkoutKind: String, CaseIterable, Codable, Identifiable {
+    case run = "Run"
+    case walk = "Walk"
+    case cycling = "Cycling"
+    case strength = "Strength"
+    case mobility = "Mobility"
+    case recovery = "Recovery"
+
+    var id: String { rawValue }
+
+    var icon: String {
+        switch self {
+        case .run: "figure.run"
+        case .walk: "figure.walk"
+        case .cycling: "bicycle"
+        case .strength: "dumbbell.fill"
+        case .mobility: "figure.flexibility"
+        case .recovery: "heart.fill"
+        }
+    }
+
+    var tint: Color {
+        switch self {
+        case .run, .strength: WatchTheme.primary
+        case .walk, .mobility: WatchTheme.secondary
+        case .cycling, .recovery: WatchTheme.rose
+        }
+    }
+}
+
+enum WatchMood: String, CaseIterable, Identifiable {
+    case low = "Low"
+    case okay = "Okay"
+    case good = "Good"
+    case great = "Great"
+
+    var id: String { rawValue }
+
+    var phoneRawValue: Int {
+        switch self {
+        case .low: 2
+        case .okay: 3
+        case .good: 4
+        case .great: 5
+        }
+    }
+
+    init?(phoneRawValue: Int) {
+        switch phoneRawValue {
+        case 1, 2: self = .low
+        case 3: self = .okay
+        case 4: self = .good
+        case 5: self = .great
+        default: return nil
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .low: "cloud.rain.fill"
+        case .okay: "cloud.fill"
+        case .good: "sun.max.fill"
+        case .great: "sparkles"
+        }
+    }
+}
 
 struct ContentView: View {
-    @State private var selectedTab = 0
-    
-    var body: some View {
-        TabView(selection: $selectedTab) {
-            // Home Tab - TESTING VERSION
-            SimpleHomeView()
-                .tag(0)
-            
-            // Today Tab
-            WatchTodayView()
-                .tag(1)
-            
-            // Plan Tab
-            WatchPlanView()
-                .tag(2)
-            
-            // More Tab
-            WatchMoreView()
-                .tag(3)
-        }
-        .tabViewStyle(.page)
-    }
-}
+    let store: WatchAppStore
+    let access: WatchAccessStore
 
-// MARK: - Simple Home View (Testing)
-struct SimpleHomeView: View {
-    @State private var showSheet = false
-    @State private var buttonTapCount = 0
-    
     var body: some View {
         NavigationStack {
-            List {
-                Section("TAP COUNT") {
-                    Text("Button tapped \(buttonTapCount) times")
-                        .font(.headline)
-                }
-                
-                Section("NAVIGATION TEST") {
-                    NavigationLink(destination: Text("Account Works!")) {
-                        Label("Account", systemImage: "person.circle.fill")
-                    }
-                    
-                    NavigationLink(destination: Text("Settings Works!")) {
-                        Label("Settings", systemImage: "gear")
-                    }
-                }
+            // The iPhone's five tab sections plus the Home screen's AI Board.
+            TabView {
+                WatchTodayView(store: store, access: access)
+                WatchPlanView(store: store)
+                WatchAIBoardView(store: store)
+                WatchGoalsView(store: store)
+                WatchProjectsView(store: store)
+                WatchSettingsView(store: store, access: access)
             }
-            .navigationTitle("Home Test")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        buttonTapCount += 1
-                        showSheet = true
-                        print("🟢 TOOLBAR BUTTON TAPPED! Count: \(buttonTapCount)")
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .foregroundColor(.orange)
-                    }
-                }
-            }
-            .sheet(isPresented: $showSheet) {
-                VStack(spacing: 20) {
-                    Text("✅ Sheet Working!")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    
-                    Text("Button has been tapped \(buttonTapCount) times")
-                        .foregroundColor(.secondary)
-                    
-                    Button("Close") {
-                        showSheet = false
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-                .padding()
-            }
+            .tabViewStyle(.verticalPage)
+            .tint(WatchTheme.primary)
         }
     }
 }
 
-// MARK: - Watch Today View
 struct WatchTodayView: View {
-    var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 20) {
-                    Text("Today")
-                        .font(.title)
-                    Text("Coming Soon")
-                        .foregroundColor(.secondary)
-                }
-            }
-            .navigationTitle("Today")
-        }
-    }
-}
+    let store: WatchAppStore
+    let access: WatchAccessStore
+    @State private var showingAddTask = false
 
-// MARK: - Watch Plan View
-struct WatchPlanView: View {
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 20) {
-                    Text("Plan")
-                        .font(.title)
-                    Text("Coming Soon")
-                        .foregroundColor(.secondary)
-                }
-            }
-            .navigationTitle("Plan")
-        }
-    }
-}
+        ScrollView {
+            VStack(alignment: .leading, spacing: 12) {
+                WatchHomeHeroCard(
+                    doneCount: store.completedTodayCount,
+                    totalCount: store.todayTasks.count
+                )
 
-// MARK: - Watch More View
-struct WatchMoreView: View {
-    var body: some View {
-        NavigationStack {
-            List {
-                NavigationLink(destination: Text("Settings")) {
-                    Label("Settings", systemImage: "gear")
-                }
-                NavigationLink(destination: Text("About")) {
-                    Label("About", systemImage: "info.circle")
-                }
-            }
-            .navigationTitle("More")
-        }
-    }
-}
+                WatchMetricsRow(
+                    minutes: store.todayMinutes,
+                    streak: store.currentStreak,
+                    mood: store.mood
+                )
 
-// MARK: - Home Tab View
-struct HomeTabView: View {
-    @State private var showingAddSheet = false
-    
-    var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 16) {
-                    // Header with Add Button
-                    HStack {
-                        Text("Home")
-                            .font(.system(size: 28, weight: .bold, design: .rounded))
-                        
-                        Spacer()
-                        
-                        Button {
-                            print("🔵 Add button tapped!")
-                            showingAddSheet = true
-                        } label: {
-                            Image(systemName: "plus.circle.fill")
-                                .font(.system(size: 28))
-                                .foregroundStyle(Theme.primary)
-                        }
-                    }
-                    .padding(.horizontal)
-                    .padding(.top, 8)
-                    
-                    // Quick Access Section
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("QUICK ACCESS")
-                            .font(.system(size: 11, weight: .bold))
-                            .foregroundStyle(.secondary)
-                            .padding(.horizontal)
-                        
-                        VStack(spacing: 8) {
-                            HomeNavigationRow(
-                                icon: "person.circle.fill",
-                                title: "Account",
-                                subtitle: "Profile & settings",
-                                color: Color(red: 1.00, green: 0.58, blue: 0.05),
-                                destination: AnyView(SettingsView())
-                            )
-                            
-                            HomeNavigationRow(
-                                icon: "calendar.circle.fill",
-                                title: "Today",
-                                subtitle: "Today's activities",
-                                color: .green,
-                                destination: AnyView(TodayView())
-                            )
-                            
-                            HomeNavigationRow(
-                                icon: "calendar.badge.clock",
-                                title: "Plan",
-                                subtitle: "Your training plan",
-                                color: .blue,
-                                destination: AnyView(PlanView())
-                            )
-                            
-                            HomeNavigationRow(
-                                icon: "chart.line.uptrend.xyaxis",
-                                title: "Progress",
-                                subtitle: "Track achievements",
-                                color: .purple,
-                                destination: AnyView(ProgressTrackingView())
-                            )
-                        }
-                    }
-                    
-                    // Training Section
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("TRAINING")
-                            .font(.system(size: 11, weight: .bold))
-                            .foregroundStyle(.secondary)
-                            .padding(.horizontal)
-                        
-                        VStack(spacing: 8) {
-                            HomeNavigationRow(
-                                icon: "figure.run",
-                                title: "Sports Tracking",
-                                subtitle: "Log activities",
-                                color: .orange,
-                                destination: AnyView(ComingSoonView(title: "Sports Tracking"))
-                            )
-                            
-                            HomeNavigationRow(
-                                icon: "dumbbell.fill",
-                                title: "Training Log",
-                                subtitle: "Workout history",
-                                color: .red,
-                                destination: AnyView(ComingSoonView(title: "Training Log"))
-                            )
-                            
-                            HomeNavigationRow(
-                                icon: "message.fill",
-                                title: "AI Coach",
-                                subtitle: "Get advice",
-                                color: Color(red: 0.3, green: 0.7, blue: 0.5),
-                                destination: AnyView(CoachView())
-                            )
-                        }
-                    }
-                    
-                    // Health & Wellness Section
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("HEALTH & WELLNESS")
-                            .font(.system(size: 11, weight: .bold))
-                            .foregroundStyle(.secondary)
-                            .padding(.horizontal)
-                        
-                        VStack(spacing: 8) {
-                            HomeNavigationRow(
-                                icon: "fork.knife",
-                                title: "Nutrition",
-                                subtitle: "Meals & macros",
-                                color: .green,
-                                destination: AnyView(ComingSoonView(title: "Nutrition"))
-                            )
-                            
-                            HomeNavigationRow(
-                                icon: "bed.double.fill",
-                                title: "Sleep Tracker",
-                                subtitle: "Monitor sleep",
-                                color: Color(red: 0.4, green: 0.3, blue: 0.8),
-                                destination: AnyView(ComingSoonView(title: "Sleep Tracker"))
-                            )
-                            
-                            HomeNavigationRow(
-                                icon: "heart.text.square.fill",
-                                title: "Body Metrics",
-                                subtitle: "Weight, HR & more",
-                                color: .pink,
-                                destination: AnyView(ComingSoonView(title: "Body Metrics"))
-                            )
-                        }
-                    }
-                    
-                    // More Features
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("MORE")
-                            .font(.system(size: 11, weight: .bold))
-                            .foregroundStyle(.secondary)
-                            .padding(.horizontal)
-                        
-                        VStack(spacing: 8) {
-                            HomeNavigationRow(
-                                icon: "list.bullet.rectangle.fill",
-                                title: "All Features",
-                                subtitle: "Browse all",
-                                color: .cyan,
-                                destination: AnyView(AllFeaturesView())
-                            )
-                            
-                            HomeNavigationRow(
-                                icon: "gear",
-                                title: "Settings",
-                                subtitle: "Preferences",
-                                color: .gray,
-                                destination: AnyView(SettingsView())
-                            )
-                        }
-                    }
-                }
-                .padding(.bottom, 16)
-            }
-            .sheet(isPresented: $showingAddSheet) {
-                AddItemSheet()
-            }
-        }
-    }
-}
+                WatchMoodCheckinCard(store: store)
 
-// MARK: - Add Item Sheet
-struct AddItemSheet: View {
-    @Environment(\.dismiss) var dismiss
-    
-    var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    Button {
-                        print("Add Workout tapped")
-                        dismiss()
-                    } label: {
-                        Label("Add Workout", systemImage: "figure.run")
-                    }
-                    
-                    Button {
-                        print("Add Meal tapped")
-                        dismiss()
-                    } label: {
-                        Label("Add Meal", systemImage: "fork.knife")
-                    }
-                    
-                    Button {
-                        print("Add Note tapped")
-                        dismiss()
-                    } label: {
-                        Label("Add Note", systemImage: "note.text")
-                    }
-                }
-            }
-            .navigationTitle("Add New")
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
-                        dismiss()
-                    }
-                }
-            }
-        }
-    }
-}
+                WatchQuickActionsGrid(store: store, access: access, onAddTask: { showingAddTask = true })
 
-// MARK: - Home Navigation Row (watchOS compatible)
-struct HomeNavigationRow: View {
-    let icon: String
-    let title: String
-    let subtitle: String
-    let color: Color
-    let destination: AnyView
-    
-    var body: some View {
-        NavigationLink {
-            destination
-        } label: {
-            HStack(spacing: 12) {
-                // Icon with colored background
-                ZStack {
-                    RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .fill(color)
-                        .frame(width: 36, height: 36)
-                    
-                    Image(systemName: icon)
-                        .font(.system(size: 18, weight: .semibold))
+                WatchHomeAIBoardSection(store: store)
+
+                WatchTodayPlanSection(store: store, onAdd: { showingAddTask = true })
+
+                WatchHomeProjectsSection(store: store)
+            }
+            .padding(.horizontal, 4)
+            .padding(.bottom, 8)
+        }
+        .containerBackground(WatchTheme.paper, for: .tabView)
+        .containerBackground(WatchTheme.paper, for: .navigation)
+        .navigationTitle("Today")
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                NavigationLink {
+                    WatchNotificationsView(store: store)
+                } label: {
+                    Image(systemName: "bell.fill")
+                        .font(.system(size: 14, weight: .bold))
                         .foregroundStyle(.white)
                 }
-                
-                // Text content
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(title)
-                        .font(.system(size: 15, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.primary)
-                    
-                    Text(subtitle)
-                        .font(.system(size: 12, design: .rounded))
-                        .foregroundStyle(.secondary)
+                .tint(WatchTheme.primary)
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showingAddTask = true
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundStyle(.white)
                 }
+                .tint(WatchTheme.primary)
             }
+        }
+        .sheet(isPresented: $showingAddTask) {
+            AddWatchTaskView(store: store)
         }
     }
 }
 
-// MARK: - Plan View
-private struct PlanView: View {
+/// Gradient hero with a progress ring, scaled down from the iOS `HomeHeroCard`.
+struct WatchHomeHeroCard: View {
+    let doneCount: Int
+    let totalCount: Int
+
+    private var completion: Double {
+        guard totalCount > 0 else { return 0 }
+        return Double(doneCount) / Double(totalCount)
+    }
+
     var body: some View {
-        List {
-            Section("THIS WEEK") {
-                PlanActivityRow(day: "Today", activity: "Morning Run", duration: "30 min", icon: "figure.run", color: .orange, completed: true)
-                PlanActivityRow(day: "Today", activity: "Strength Training", duration: "45 min", icon: "dumbbell.fill", color: .red, completed: false)
-                PlanActivityRow(day: "Tomorrow", activity: "Cycling", duration: "60 min", icon: "figure.outdoor.cycle", color: .blue, completed: false)
-                PlanActivityRow(day: "Wed", activity: "Yoga", duration: "30 min", icon: "figure.yoga", color: .purple, completed: false)
+        HStack(alignment: .center, spacing: 10) {
+            VStack(alignment: .leading, spacing: 5) {
+                Label("AI Plan ready", systemImage: "sparkles")
+                    .font(.system(size: 9, weight: .semibold, design: .rounded))
+                    .padding(.horizontal, 7)
+                    .padding(.vertical, 3)
+                    .background(Capsule().fill(Color.white.opacity(0.22)))
+                    .foregroundStyle(.white)
+
+                Text("Your day,\noptimized.")
+                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white)
+
+                Text("\(doneCount) of \(totalCount) tasks")
+                    .font(.system(size: 10, weight: .medium, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.85))
             }
-            
-            Section("UPCOMING") {
-                PlanActivityRow(day: "Thu", activity: "Swimming", duration: "45 min", icon: "figure.pool.swim", color: .cyan, completed: false)
-                PlanActivityRow(day: "Fri", activity: "Long Run", duration: "90 min", icon: "figure.run", color: .orange, completed: false)
-                PlanActivityRow(day: "Sat", activity: "Rest Day", duration: "—", icon: "bed.double.fill", color: .green, completed: false)
-            }
+            Spacer(minLength: 0)
+            progressRing
         }
-        .navigationTitle("Plan")
+        .padding(12)
+        .frame(maxWidth: .infinity)
+        .background(
+            ZStack {
+                WatchTheme.heroGradient
+                Circle()
+                    .fill(Color.white.opacity(0.18))
+                    .frame(width: 110, height: 110)
+                    .blur(radius: 12)
+                    .offset(x: 70, y: -40)
+            }
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .strokeBorder(Color.white.opacity(0.25), lineWidth: 1)
+        )
+    }
+
+    private var progressRing: some View {
+        ZStack {
+            Circle()
+                .stroke(Color.white.opacity(0.25), lineWidth: 5)
+            Circle()
+                .trim(from: 0, to: completion)
+                .stroke(Color.white, style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                .rotationEffect(.degrees(-90))
+                .animation(.easeOut(duration: 0.8), value: completion)
+            Text("\(Int(completion * 100))%")
+                .font(.system(size: 11, weight: .bold, design: .rounded))
+                .foregroundStyle(.white)
+        }
+        .frame(width: 46, height: 46)
     }
 }
 
-struct PlanActivityRow: View {
-    let day: String
-    let activity: String
-    let duration: String
+/// Three compact metric cards, matching the iOS `MetricsRow` tints.
+struct WatchMetricsRow: View {
+    let minutes: Int
+    let streak: Int
+    let mood: WatchMood?
+
+    var body: some View {
+        HStack(spacing: 6) {
+            WatchMetricCard(icon: "figure.run", value: "\(minutes)m", label: "Train", tint: WatchTheme.primary)
+            WatchMetricCard(icon: "flame.fill", value: "\(streak)d", label: "Streak", tint: WatchTheme.secondary)
+            WatchMetricCard(icon: "face.smiling.fill", value: mood?.rawValue ?? "—", label: "Mood", tint: WatchTheme.accent)
+        }
+    }
+}
+
+private struct WatchMetricCard: View {
     let icon: String
-    let color: Color
-    let completed: Bool
-    
-    var body: some View {
-        HStack(spacing: 8) {
-            Image(systemName: completed ? "checkmark.circle.fill" : icon)
-                .font(.system(size: 16))
-                .foregroundStyle(completed ? .green : color)
-                .frame(width: 24)
-            
-            VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 4) {
-                    Text(day)
-                        .font(.system(size: 11, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.secondary)
-                    if completed {
-                        Text("✓")
-                            .font(.system(size: 10, weight: .bold))
-                            .foregroundStyle(.green)
-                    }
-                }
-                
-                Text(activity)
-                    .font(.system(size: 14, weight: .medium, design: .rounded))
-                    .strikethrough(completed)
-                    .opacity(completed ? 0.6 : 1.0)
-            }
-            
-            Spacer()
-            
-            Text(duration)
-                .font(.system(size: 12, weight: .semibold, design: .rounded))
-                .foregroundStyle(.secondary)
-        }
-    }
-}
-
-// MARK: - Settings View
-public struct SettingsView: View {
-    public init() {}
-    
-    public var body: some View {
-        List {
-            Section("ACCOUNT") {
-                Label("Profile", systemImage: "person.circle.fill")
-                Label("Preferences", systemImage: "slider.horizontal.3")
-                Label("Notifications", systemImage: "bell.fill")
-            }
-            
-            Section("APP") {
-                Label("About", systemImage: "info.circle")
-                Label("Privacy", systemImage: "lock.shield")
-                Label("Help", systemImage: "questionmark.circle")
-            }
-        }
-        .navigationTitle("Settings")
-    }
-}
-
-// MARK: - All Features View
-public struct AllFeaturesView: View {
-    public init() {}
-    
-    public var body: some View {
-        List {
-            Section("TRAINING") {
-                Label("Sports Tracking", systemImage: "figure.run")
-                Label("Training Log", systemImage: "dumbbell.fill")
-                Label("Workout Plans", systemImage: "list.clipboard.fill")
-                Label("Exercise Library", systemImage: "film.fill")
-            }
-            
-            Section("HEALTH") {
-                Label("Nutrition", systemImage: "fork.knife")
-                Label("Sleep Tracker", systemImage: "bed.double.fill")
-                Label("Body Metrics", systemImage: "heart.text.square.fill")
-                Label("Hydration", systemImage: "drop.fill")
-            }
-            
-            Section("ANALYTICS") {
-                Label("Progress Charts", systemImage: "chart.line.uptrend.xyaxis")
-                Label("Performance", systemImage: "chart.xyaxis.line")
-                Label("Personal Records", systemImage: "trophy.fill")
-                Label("Activity Rings", systemImage: "figure.walk.motion")
-            }
-        }
-        .navigationTitle("All Features")
-    }
-}
-
-// MARK: - Progress Tracking View
-struct ProgressTrackingView: View {
-    var body: some View {
-        List {
-            Section("OVERVIEW") {
-                VStack(spacing: 12) {
-                    ProgressStatRow(icon: "chart.line.uptrend.xyaxis", label: "This Week", value: "+12%", color: .purple)
-                    ProgressStatRow(icon: "flame.fill", label: "Total Workouts", value: "47", color: .orange)
-                    ProgressStatRow(icon: "trophy.fill", label: "Achievements", value: "15", color: .yellow)
-                }
-            }
-            
-            Section("RECENT IMPROVEMENTS") {
-                ProgressItemRow(title: "5K Time", previous: "28:30", current: "26:45", improvement: "-6.1%", color: .green)
-                ProgressItemRow(title: "Max Distance", previous: "15 km", current: "21 km", improvement: "+40%", color: .blue)
-                ProgressItemRow(title: "Avg Pace", previous: "5:42", current: "5:21", improvement: "+6.5%", color: .purple)
-            }
-            
-            Section("GOALS") {
-                ProgressGoalRow(title: "Weekly Distance", current: 28, target: 40, unit: "km", color: .blue)
-                ProgressGoalRow(title: "Workouts/Week", current: 4, target: 5, unit: "times", color: .orange)
-            }
-        }
-        .navigationTitle("Progress")
-    }
-}
-
-struct ProgressStatRow: View {
-    let icon: String
-    let label: String
     let value: String
-    let color: Color
-    
-    var body: some View {
-        HStack {
-            Image(systemName: icon)
-                .font(.system(size: 16))
-                .foregroundStyle(color)
-                .frame(width: 24)
-            
-            Text(label)
-                .font(.system(size: 14, design: .rounded))
-            
-            Spacer()
-            
-            Text(value)
-                .font(.system(size: 16, weight: .bold, design: .rounded))
-                .foregroundStyle(color)
-        }
-    }
-}
+    let label: String
+    let tint: Color
 
-struct ProgressItemRow: View {
-    let title: String
-    let previous: String
-    let current: String
-    let improvement: String
-    let color: Color
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(title)
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
-            
-            HStack {
-                Text(previous)
-                    .font(.system(size: 12, design: .rounded))
-                    .foregroundStyle(.secondary)
-                    .strikethrough()
-                
-                Image(systemName: "arrow.right")
-                    .font(.system(size: 10))
-                    .foregroundStyle(.secondary)
-                
-                Text(current)
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
-                    .foregroundStyle(color)
-                
-                Text(improvement)
-                    .font(.system(size: 11, weight: .bold, design: .rounded))
-                    .foregroundStyle(.green)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(.green.opacity(0.15))
-                    .clipShape(Capsule())
+            Image(systemName: icon)
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundStyle(tint)
+                .frame(width: 20, height: 20)
+                .background(Circle().fill(tint.opacity(0.15)))
+            Text(value)
+                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .foregroundStyle(WatchTheme.ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+            Text(label)
+                .font(.system(size: 9, weight: .medium, design: .rounded))
+                .foregroundStyle(WatchTheme.muted)
+        }
+        .padding(8)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .watchGlassCard(cornerRadius: 12)
+    }
+}
+
+/// Quick mood check-in, mirroring the iOS `MoodCheckinBanner`.
+struct WatchMoodCheckinCard: View {
+    let store: WatchAppStore
+
+    var body: some View {
+        if let mood = store.mood {
+            HStack(spacing: 8) {
+                Image(systemName: mood.symbol)
+                    .font(.system(size: 18))
+                    .foregroundStyle(WatchTheme.primary)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("Mood logged")
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .foregroundStyle(WatchTheme.ink)
+                    Text("Feeling \(mood.rawValue.lowercased())")
+                        .font(.system(size: 9, design: .rounded))
+                        .foregroundStyle(WatchTheme.muted)
+                }
+                Spacer(minLength: 0)
+                NavigationLink {
+                    MoodCheckInView(store: store)
+                } label: {
+                    Text("Edit")
+                        .font(.system(size: 10, weight: .semibold, design: .rounded))
+                        .foregroundStyle(WatchTheme.primary)
+                        .padding(.horizontal, 9)
+                        .padding(.vertical, 4)
+                        .background(WatchTheme.primary.opacity(0.22), in: Capsule())
+                }
+                .buttonStyle(.plain)
             }
+            .padding(10)
+            .watchGlassCard(cornerRadius: 14)
+        } else {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("How are you feeling?")
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .foregroundStyle(WatchTheme.ink)
+                HStack(spacing: 4) {
+                    ForEach(WatchMood.allCases) { mood in
+                        Button {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                store.setMood(mood)
+                            }
+                        } label: {
+                            VStack(spacing: 2) {
+                                Image(systemName: mood.symbol)
+                                    .font(.system(size: 14))
+                                    .foregroundStyle(WatchTheme.primary)
+                                Text(mood.rawValue)
+                                    .font(.system(size: 8, weight: .semibold, design: .rounded))
+                                    .foregroundStyle(WatchTheme.muted)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 6)
+                            .background(WatchTheme.primary.opacity(0.22), in: .rect(cornerRadius: 10))
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+            .padding(10)
+            .watchGlassCard(cornerRadius: 14)
         }
     }
 }
 
-struct ProgressGoalRow: View {
-    let title: String
-    let current: Int
-    let target: Int
-    let unit: String
-    let color: Color
-    
-    var progress: Double {
-        Double(current) / Double(target)
+/// Two-column action buttons styled like the iOS `HomePlanButton` grid.
+struct WatchQuickActionsGrid: View {
+    let store: WatchAppStore
+    let access: WatchAccessStore
+    var onAddTask: () -> Void
+
+    private let columns = [
+        GridItem(.flexible(), spacing: 6),
+        GridItem(.flexible(), spacing: 6)
+    ]
+
+    var body: some View {
+        LazyVGrid(columns: columns, spacing: 6) {
+            NavigationLink {
+                WorkoutLibraryView(store: store)
+            } label: {
+                WatchActionButtonLabel(title: "Workout", icon: "figure.run", color: WatchTheme.primary)
+            }
+            .buttonStyle(.plain)
+
+            Button(action: onAddTask) {
+                WatchActionButtonLabel(title: "Add Task", icon: "plus", color: WatchTheme.primary)
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                    store.waterGlasses += 1
+                }
+            } label: {
+                WatchActionButtonLabel(
+                    title: "Water",
+                    detail: "\(store.waterGlasses)",
+                    icon: "drop.fill",
+                    color: Color(red: 0.20, green: 0.60, blue: 0.95)
+                )
+            }
+            .buttonStyle(.plain)
+
+            NavigationLink {
+                WatchGoalsView(store: store)
+            } label: {
+                WatchActionButtonLabel(title: "Goals", icon: "chart.bar.fill", color: WatchTheme.accent)
+            }
+            .buttonStyle(.plain)
+
+            // Profile and Settings are also the last page, but that's a long scroll on the wrist.
+            NavigationLink {
+                WatchProfileView(store: store, access: access)
+            } label: {
+                WatchActionButtonLabel(title: "Profile", icon: "person.crop.circle.fill", color: WatchTheme.secondary)
+            }
+            .buttonStyle(.plain)
+
+            NavigationLink {
+                WatchSettingsView(store: store, access: access)
+            } label: {
+                WatchActionButtonLabel(title: "Settings", icon: "gearshape.fill", color: WatchTheme.primary)
+            }
+            .buttonStyle(.plain)
+        }
     }
-    
+}
+
+private struct WatchActionButtonLabel: View {
+    let title: String
+    var detail: String? = nil
+    let icon: String
+    let color: Color
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text(title)
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
-                Spacer()
-                Text("\(current)/\(target) \(unit)")
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.secondary)
-            }
-            
-            GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(color.opacity(0.2))
-                        .frame(height: 6)
-                    
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(color)
-                        .frame(width: geometry.size.width * min(progress, 1.0), height: 6)
+                Image(systemName: icon)
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(.white)
+                    .frame(width: 24, height: 24)
+                    .background(color.gradient, in: RoundedRectangle(cornerRadius: 7))
+                Spacer(minLength: 0)
+                if let detail {
+                    Text(detail)
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .foregroundStyle(color)
                 }
             }
-            .frame(height: 6)
-        }
-    }
-}
-
-// MARK: - Coach View (Watch)
-struct CoachView: View {
-    @State private var showAlert = false
-    
-    var body: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "message.fill")
-                .font(.system(size: 48))
-                .foregroundStyle(Color(red: 0.3, green: 0.7, blue: 0.5))
-            
-            Text("AI Coach")
-                .font(.headline)
-            
-            Text("Get personalized advice and guidance for your training")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-            
-            Button {
-                showAlert = true
-            } label: {
-                Label("Start Conversation", systemImage: "sparkles")
-                    .font(.footnote)
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(Color(red: 0.3, green: 0.7, blue: 0.5))
-        }
-        .navigationTitle("AI Coach")
-        .alert("Coming Soon", isPresented: $showAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text("Full AI Coach features are coming to Apple Watch soon!")
-        }
-    }
-}
-
-// MARK: - Coming Soon View
-struct ComingSoonView: View {
-    let title: String
-    
-    var body: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "sparkles")
-                .font(.system(size: 48))
-                .foregroundStyle(Theme.primary)
-            
             Text(title)
-                .font(.headline)
-            
-            Text("Coming Soon")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .font(.system(size: 11, weight: .bold, design: .rounded))
+                .foregroundStyle(WatchTheme.ink)
+                .lineLimit(1)
         }
-        .navigationTitle(title)
+        .padding(8)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .background(color.opacity(0.22), in: .rect(cornerRadius: 12))
+        .overlay {
+            RoundedRectangle(cornerRadius: 12)
+                .strokeBorder(color.opacity(0.45))
+        }
+    }
+}
+
+/// "Today's Plan" header with the orange Add button and task cards, like `TodayPlanSection`.
+struct WatchTodayPlanSection: View {
+    let store: WatchAppStore
+    var onAdd: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text("Today's Plan")
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .foregroundStyle(WatchTheme.ink)
+                Spacer()
+                Button(action: onAdd) {
+                    Label("Add", systemImage: "plus")
+                        .font(.system(size: 10, weight: .semibold, design: .rounded))
+                        .foregroundStyle(WatchTheme.primary)
+                        .padding(.horizontal, 9)
+                        .padding(.vertical, 4)
+                        .background(WatchTheme.primary.opacity(0.22), in: Capsule())
+                }
+                .buttonStyle(.plain)
+            }
+            .padding(.horizontal, 4)
+
+            if store.todayTasks.isEmpty {
+                VStack(spacing: 4) {
+                    Image(systemName: "flag.checkered")
+                        .font(.system(size: 18))
+                        .foregroundStyle(WatchTheme.primary)
+                    Text("No plans yet")
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .foregroundStyle(WatchTheme.ink)
+                    Text("Tap + to add your first task.")
+                        .font(.system(size: 9, design: .rounded))
+                        .foregroundStyle(WatchTheme.muted)
+                        .multilineTextAlignment(.center)
+                }
+                .padding(12)
+                .frame(maxWidth: .infinity)
+                .watchGlassCard(cornerRadius: 14)
+            } else {
+                ForEach(store.todayTasks) { task in
+                    Button {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            store.toggleTask(id: task.id)
+                        }
+                    } label: {
+                        WatchTaskRow(
+                            title: task.title,
+                            time: task.scheduledDate,
+                            isCompleted: task.isCompleted
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+    }
+}
+
+struct WatchTaskRow: View {
+    let title: String
+    let time: Date
+    let isCompleted: Bool
+
+    var body: some View {
+        HStack(spacing: 8) {
+            ZStack {
+                Circle()
+                    .strokeBorder(WatchTheme.primary.opacity(0.5), lineWidth: 2)
+                    .frame(width: 20, height: 20)
+                if isCompleted {
+                    Circle().fill(WatchTheme.primary).frame(width: 20, height: 20)
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 9, weight: .bold))
+                        .foregroundStyle(.white)
+                }
+            }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    .strikethrough(isCompleted)
+                    .foregroundStyle(isCompleted ? WatchTheme.muted : WatchTheme.ink)
+                    .lineLimit(1)
+                Label {
+                    Text(time, format: .dateTime.hour().minute())
+                } icon: {
+                    Image(systemName: "clock")
+                }
+                .font(.system(size: 9, weight: .medium, design: .rounded))
+                .foregroundStyle(WatchTheme.muted)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .watchGlassCard(cornerRadius: 14)
+        .opacity(isCompleted ? 0.65 : 1.0)
+    }
+}
+
+extension View {
+    /// Light card row for List-based pages so they match the cream Today and Plan pages.
+    func watchPaperRow() -> some View {
+        listRowBackground(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(WatchTheme.cardSurface)
+        )
+    }
+
+    /// Light surface card with a faint highlight border, a compact take on the iOS `glassCard`.
+    func watchGlassCard(cornerRadius: CGFloat) -> some View {
+        self
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .fill(WatchTheme.cardSurface)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .strokeBorder(Color.white.opacity(0.6), lineWidth: 0.5)
+            )
+    }
+}
+
+/// New Task sheet styled to match the iOS `AddTaskSheet`: dark header with date, cream cards, gradient button.
+struct AddWatchTaskView: View {
+    let store: WatchAppStore
+    @Environment(\.dismiss) private var dismiss
+    @State private var title = ""
+    @State private var hour = Calendar.current.component(.hour, from: Date())
+
+    private var canSave: Bool {
+        !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 10) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("New Task")
+                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .foregroundStyle(WatchTheme.ink)
+                        Text(Date(), format: .dateTime.weekday(.wide).month().day())
+                            .font(.system(size: 10, design: .rounded))
+                            .foregroundStyle(WatchTheme.muted)
+                    }
+                    .padding(.horizontal, 4)
+
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Task name")
+                            .font(.system(size: 10, weight: .semibold, design: .rounded))
+                            .foregroundStyle(WatchTheme.muted)
+                        TextField(
+                            "Task name",
+                            text: $title,
+                            prompt: Text("e.g. Morning run").foregroundStyle(WatchTheme.muted)
+                        )
+                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .foregroundStyle(WatchTheme.ink)
+                        .tint(WatchTheme.primary)
+                    }
+                    .padding(10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .watchGlassCard(cornerRadius: 14)
+
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Time")
+                            .font(.system(size: 10, weight: .semibold, design: .rounded))
+                            .foregroundStyle(WatchTheme.muted)
+                        // Orange − / + around the hour, instead of the system picker's tan button.
+                        HStack {
+                            Button {
+                                hour = (hour + 23) % 24
+                            } label: {
+                                Image(systemName: "minus")
+                            }
+                            .buttonStyle(WatchRoundIconButtonStyle())
+                            .accessibilityLabel("Earlier")
+
+                            Spacer(minLength: 0)
+                            Text(DateComponents(calendar: .current, hour: hour).date ?? Date(), format: .dateTime.hour())
+                                .font(.system(size: 16, weight: .bold, design: .rounded))
+                                .foregroundStyle(WatchTheme.ink)
+                                .monospacedDigit()
+                            Spacer(minLength: 0)
+
+                            Button {
+                                hour = (hour + 1) % 24
+                            } label: {
+                                Image(systemName: "plus")
+                            }
+                            .buttonStyle(WatchRoundIconButtonStyle())
+                            .accessibilityLabel("Later")
+                        }
+                    }
+                    .padding(10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .watchGlassCard(cornerRadius: 14)
+
+                    Button {
+                        store.addTask(title: title, hour: hour)
+                        dismiss()
+                    } label: {
+                        Text("Add Task")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 4)
+                    }
+                    .buttonStyle(.glassProminent)
+                    .tint(WatchTheme.primary)
+                    .disabled(!canSave)
+                }
+                .padding(.horizontal, 4)
+            }
+            .containerBackground(WatchTheme.paper, for: .navigation)
+            .tint(WatchTheme.primary)
+        }
+    }
+}
+
+/// Solid orange circle with a white symbol, used for the Add Task time stepper.
+private struct WatchRoundIconButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.system(size: 14, weight: .bold))
+            .foregroundStyle(.white)
+            .frame(width: 34, height: 34)
+            .background(WatchTheme.primary.opacity(configuration.isPressed ? 0.8 : 1), in: Circle())
+    }
+}
+
+#Preview("New Task") {
+    AddWatchTaskView(store: WatchAppStore())
+}
+
+struct MoodCheckInView: View {
+    let store: WatchAppStore
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        List(WatchMood.allCases) { mood in
+            Button {
+                store.setMood(mood)
+                dismiss()
+            } label: {
+                Label(mood.rawValue, systemImage: mood.symbol)
+                    .foregroundStyle(store.mood == mood ? WatchTheme.primary : WatchTheme.ink)
+            }
+            .watchPaperRow()
+        }
+        .font(WatchTheme.bodyFont)
+        .containerBackground(WatchTheme.paper, for: .navigation)
+        .navigationTitle("Mood")
+    }
+}
+
+struct WorkoutLibraryView: View {
+    let store: WatchAppStore
+
+    var body: some View {
+        List {
+            Section {
+                ForEach(WorkoutKind.allCases) { kind in
+                    NavigationLink {
+                        WorkoutSetupView(store: store, kind: kind)
+                    } label: {
+                        Label {
+                            Text(kind.rawValue)
+                        } icon: {
+                            Image(systemName: kind.icon)
+                                .foregroundStyle(kind.tint)
+                        }
+                    }
+                    .watchPaperRow()
+                }
+            } header: {
+                Text("Choose a workout")
+                    .foregroundStyle(WatchTheme.muted)
+            }
+        }
+        .font(WatchTheme.bodyFont)
+        .foregroundStyle(WatchTheme.ink)
+        .containerBackground(WatchTheme.paper, for: .navigation)
+        .navigationTitle("Workout")
+    }
+}
+
+struct WorkoutSetupView: View {
+    let store: WatchAppStore
+    let kind: WorkoutKind
+    @State private var targetMinutes = 30
+    @State private var isActive = false
+
+    var body: some View {
+        VStack(spacing: 12) {
+            Image(systemName: kind.icon)
+                .font(.system(size: 40))
+                .foregroundStyle(kind.tint)
+
+            Text(kind.rawValue)
+                .font(WatchTheme.titleFont)
+                .foregroundStyle(WatchTheme.ink)
+
+            Picker("Goal", selection: $targetMinutes) {
+                ForEach([10, 20, 30, 45, 60], id: \.self) { minutes in
+                    Text("\(minutes) min").tag(minutes)
+                }
+            }
+            .pickerStyle(.navigationLink)
+            .font(.system(size: 13, weight: .semibold, design: .rounded))
+            .foregroundStyle(WatchTheme.ink)
+            .tint(WatchTheme.muted)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .watchGlassCard(cornerRadius: 14)
+
+            Button("Start") {
+                isActive = true
+            }
+            .buttonStyle(.glassProminent)
+            .tint(kind.tint)
+        }
+        .navigationDestination(isPresented: $isActive) {
+            ActiveWorkoutView(store: store, kind: kind, targetMinutes: targetMinutes)
+        }
+        .containerBackground(WatchTheme.paper, for: .navigation)
+        .navigationTitle("Set Goal")
+    }
+}
+
+struct ActiveWorkoutView: View {
+    let store: WatchAppStore
+    let kind: WorkoutKind
+    let targetMinutes: Int
+    @Environment(\.dismiss) private var dismiss
+    @State private var startedAt = Date()
+    @State private var showingFinishConfirmation = false
+
+    var body: some View {
+        TimelineView(.periodic(from: .now, by: 1)) { context in
+            let elapsed = max(context.date.timeIntervalSince(startedAt), 0)
+            let elapsedSeconds = Int(elapsed)
+            VStack(spacing: 12) {
+                Image(systemName: kind.icon)
+                    .font(.title2)
+                    .foregroundStyle(kind.tint)
+
+                Text("\(elapsedSeconds / 60):\(elapsedSeconds % 60, format: .number.precision(.integerLength(2)))")
+                    .font(.system(.title, design: .rounded, weight: .bold))
+                    .monospacedDigit()
+                    .foregroundStyle(WatchTheme.ink)
+
+                ProgressView(value: min(elapsed / Double(targetMinutes * 60), 1))
+                    .tint(kind.tint)
+
+                Text("Goal: \(targetMinutes) min")
+                    .font(WatchTheme.captionFont)
+                    .foregroundStyle(WatchTheme.muted)
+
+                Button("Finish") {
+                    showingFinishConfirmation = true
+                }
+                .buttonStyle(.glassProminent)
+                .tint(.red)
+            }
+            .padding(.horizontal)
+        }
+        .containerBackground(WatchTheme.paper, for: .navigation)
+        .navigationBarBackButtonHidden()
+        .confirmationDialog("Finish workout?", isPresented: $showingFinishConfirmation) {
+            Button("Save Workout") {
+                let elapsedMinutes = max(Int(Date().timeIntervalSince(startedAt) / 60), 1)
+                store.addWorkout(kind: kind, durationMinutes: elapsedMinutes)
+                dismiss()
+            }
+            Button("Keep Going", role: .cancel) {}
+        }
+    }
+}
+
+/// Goals tab: mirrors the iPhone's Goals "Week" view (weekly training, streak, mood, recent workouts).
+struct WatchGoalsView: View {
+    let store: WatchAppStore
+
+    var body: some View {
+        List {
+            ProgressHero(minutes: store.weekMinutes, goal: store.dailyGoalMinutes * 7)
+
+            NavigationLink {
+                WatchLifeGoalsView(store: store)
+            } label: {
+                Label("Life Goals", systemImage: "target")
+                    .foregroundStyle(WatchTheme.ink)
+            }
+            .watchPaperRow()
+
+            Section {
+                Group {
+                    LabeledContent("Training", value: "\(store.weekMinutes) min")
+                    LabeledContent("Daily goal", value: "\(store.dailyGoalMinutes) min")
+                    LabeledContent("Streak", value: "\(store.currentStreak) days")
+                    LabeledContent("Workouts", value: store.sessionsThisWeekCount.formatted())
+                    LabeledContent("Mood", value: store.mood?.rawValue ?? "—")
+                    LabeledContent("Water", value: "\(store.waterGlasses) glasses")
+                }
+                .watchPaperRow()
+            } header: {
+                Text("This week")
+                    .foregroundStyle(WatchTheme.muted)
+            }
+
+            Section {
+                if store.sessions.isEmpty {
+                    ContentUnavailableView(
+                        "No workouts yet",
+                        systemImage: "figure.run",
+                        description: Text("Start one from the Workout page.")
+                    )
+                    .watchPaperRow()
+                } else {
+                    ForEach(store.sessions.sorted { $0.startedAt > $1.startedAt }.prefix(5)) { session in
+                        WorkoutHistoryRow(session: session)
+                            .watchPaperRow()
+                    }
+                }
+            } header: {
+                Text("Recent")
+                    .foregroundStyle(WatchTheme.muted)
+            }
+        }
+        .font(WatchTheme.bodyFont)
+        .foregroundStyle(WatchTheme.ink)
+        // Goals is both a page and a pushed screen (Today's quick actions), so cover both containers.
+        .containerBackground(WatchTheme.paper, for: .tabView)
+        .containerBackground(WatchTheme.paper, for: .navigation)
+        .navigationTitle("Goals")
+    }
+}
+
+private extension WatchAppStore {
+    var sessionsThisWeekCount: Int {
+        guard let interval = Calendar.current.dateInterval(of: .weekOfYear, for: Date()) else {
+            return sessions.count
+        }
+        return sessions.filter { interval.contains($0.startedAt) }.count
+    }
+}
+
+struct ProgressHero: View {
+    let minutes: Int
+    let goal: Int
+
+    var body: some View {
+        Gauge(value: Double(minutes), in: 0...Double(max(goal, 1))) {
+            Text("Weekly training")
+        } currentValueLabel: {
+            Text("\(minutes)m")
+                .font(WatchTheme.headlineFont)
+        }
+        .gaugeStyle(.accessoryCircularCapacity)
+        .tint(WatchTheme.primary)
+        .frame(maxWidth: .infinity)
+        .listRowBackground(WatchTheme.primary.opacity(0.12))
+    }
+}
+
+struct WorkoutHistoryRow: View {
+    let session: WorkoutSession
+
+    var body: some View {
+        HStack {
+            Image(systemName: session.kind.icon)
+                .foregroundStyle(session.kind.tint)
+            VStack(alignment: .leading) {
+                Text(session.kind.rawValue)
+                Text(session.startedAt, format: .dateTime.weekday(.abbreviated).hour().minute())
+                    .font(WatchTheme.captionFont)
+                    .foregroundStyle(WatchTheme.muted)
+            }
+            Spacer()
+            Text("\(session.durationMinutes)m")
+                .font(WatchTheme.bodyFont)
+        }
+    }
+}
+
+struct AboutWatchView: View {
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 12) {
+                Image(systemName: "flag.checkered")
+                    .font(.largeTitle)
+                    .foregroundStyle(WatchTheme.primary)
+                Text("RaceTrian")
+                    .font(WatchTheme.titleFont)
+                    .foregroundStyle(WatchTheme.ink)
+                Text("Plan your day, record training, and keep an eye on progress from your wrist.")
+                    .font(WatchTheme.captionFont)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(WatchTheme.muted)
+            }
+            .padding()
+        }
+        .containerBackground(WatchTheme.paper, for: .navigation)
+        .navigationTitle("About")
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(store: WatchAppStore(), access: WatchAccessStore())
 }

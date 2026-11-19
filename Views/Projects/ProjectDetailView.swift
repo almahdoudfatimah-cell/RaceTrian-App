@@ -38,7 +38,11 @@ struct ProjectDetailView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { showEdit = true } label: {
-                        Image(systemName: "pencil.circle.fill")
+                        HStack(spacing: 6) {
+                            Image(systemName: "pencil")
+                            Text("Edit")
+                        }
+                            .frame(minHeight: 44)
                             .foregroundStyle(Theme.primary)
                     }
                 }
@@ -193,12 +197,21 @@ struct ProjectDetailView: View {
                 .font(.system(size: 15, design: .rounded))
                 .focused($milestoneFieldFocused)
                 .onSubmit { commitNewMilestone() }
+                .task { milestoneFieldFocused = true }
             Button { commitNewMilestone() } label: {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundStyle(Theme.primary)
                     .font(.system(size: 20))
             }
             .buttonStyle(.plain)
+            .disabled(newMilestone.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            .accessibilityLabel("Save step")
+            Button("Cancel") {
+                newMilestone = ""
+                isAddingMilestone = false
+                milestoneFieldFocused = false
+            }
+            .font(.caption)
         }
         .padding(12)
         .glassCard(cornerRadius: 14, tint: Theme.primary)
@@ -206,8 +219,10 @@ struct ProjectDetailView: View {
 
     private func commitNewMilestone() {
         let trimmed = newMilestone.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else {
-            withAnimation { isAddingMilestone = false }
+        guard !trimmed.isEmpty else { return }
+        guard premium.isActive || project.milestones.count < freeMilestoneLimit else {
+            isAddingMilestone = false
+            showPaywall = true
             return
         }
         // Enforce free milestone limit

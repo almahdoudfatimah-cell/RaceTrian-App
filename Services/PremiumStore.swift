@@ -20,7 +20,9 @@ final class PremiumStore: ObservableObject {
         return identifier.isEmpty ? nil : identifier
     }
 
-    @AppStorage("premium.isActive")    private(set) var isActiveStorage: Bool = false
+    @AppStorage("premium.isActive")    private(set) var isActiveStorage: Bool = false {
+        didSet { NotificationCenter.default.post(name: .watchSyncSourceDidChange, object: nil) }
+    }
     @AppStorage("premium.plan")        private var planRaw: String = ""
     @AppStorage("coach.dailyCount")    private var dailyCount: Int = 0
     @AppStorage("coach.dailyDate")     private var dailyDateString: String = ""

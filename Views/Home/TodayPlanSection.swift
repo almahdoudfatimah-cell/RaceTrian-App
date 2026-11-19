@@ -107,9 +107,13 @@ private struct EmptyPlanView: View {
     
     var body: some View {
         VStack(spacing: isIPad ? 16 : 12) {
-            Image(systemName: "sparkles")
-                .font(.system(size: isIPad ? 38 : 32))
-                .foregroundStyle(Theme.primary)
+            Image("iPhone App")
+                .renderingMode(.original)
+                .resizable()
+                .scaledToFit()
+                .frame(width: isIPad ? 48 : 40, height: isIPad ? 48 : 40)
+                .clipShape(RoundedRectangle(cornerRadius: 9))
+                .accessibilityHidden(true)
             Text("No plans yet")
                 .font(.system(size: isIPad ? 19 : 15, weight: .bold, design: .rounded))
             Text("Tap + to let AI craft your perfect day.")

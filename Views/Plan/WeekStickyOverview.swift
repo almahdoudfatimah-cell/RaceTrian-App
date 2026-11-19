@@ -1,4 +1,5 @@
 import SwiftUI
+import Observation
 
 // MARK: - Sticky-note color rotation per weekday
 struct StickyDayStyle {
@@ -216,77 +217,165 @@ struct InlineAddTaskSheet: View {
 }
 
 // MARK: - Habits Tracker Sticker
+struct PlannerHabit: Identifiable, Codable {
+    var id = UUID()
+    var name: String
+    var completedDays: Set<String> = []
+}
+
+@MainActor
+@Observable
+final class PlannerHabitStore {
+    static let shared = PlannerHabitStore()
+    private(set) var habits: [PlannerHabit] = []
+    var storageError: String?
+    private let defaults: UserDefaults
+    private let key = "planner.habits.v1"
+
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        if let data = defaults.data(forKey: key) {
+            do {
+                habits = try JSONDecoder().decode([PlannerHabit].self, from: data)
+            } catch {
+                storageError = "Saved habits could not be read."
+            }
+        } else {
+            habits = [
+                PlannerHabit(name: "Move your body"),
+                PlannerHabit(name: "Focused work"),
+                PlannerHabit(name: "Personal time")
+            ]
+        }
+    }
+
+    static func dayKey(_ date: Date, calendar: Calendar = .current) -> String {
+        let parts = calendar.dateComponents([.era, .year, .month, .day], from: date)
+        return "\(parts.era ?? 0)-\(parts.year ?? 0)-\(parts.month ?? 0)-\(parts.day ?? 0)"
+    }
+
+    func isComplete(_ habit: PlannerHabit, on date: Date) -> Bool {
+        habit.completedDays.contains(Self.dayKey(date))
+    }
+
+    func toggle(_ habit: PlannerHabit, on date: Date) {
+        guard Calendar.current.startOfDay(for: date) <= Calendar.current.startOfDay(for: Date()),
+              let index = habits.firstIndex(where: { $0.id == habit.id }) else { return }
+        var updated = habits
+        let key = Self.dayKey(date)
+        if !updated[index].completedDays.insert(key).inserted {
+            updated[index].completedDays.remove(key)
+        }
+        persist(updated)
+    }
+
+    func add(_ name: String) {
+        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !name.isEmpty else { return }
+        persist(habits + [PlannerHabit(name: name)])
+    }
+
+    func delete(_ habit: PlannerHabit) {
+        persist(habits.filter { $0.id != habit.id })
+    }
+
+    private func persist(_ updated: [PlannerHabit]) {
+        do {
+            defaults.set(try JSONEncoder().encode(updated), forKey: key)
+            habits = updated
+            storageError = nil
+        } catch {
+            storageError = "Your habit changes could not be saved."
+        }
+    }
+}
+
 struct HabitsTrackerSticker: View {
-    private let dayLetters = ["S","M","T","W","T","F","S"]
-    private let health: [Int] =    [0,1,0,2,0,0,2]
-    private let work: [Int] =      [0,0,0,0,0,1,2]
-    private let lifestyle: [Int] = [2,0,1,0,1,0,2]
+    let days: [Date]
+    @State private var store = PlannerHabitStore.shared
+    @State private var showingAdd = false
+    @State private var habitName = ""
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("MY HABITS TRACKER")
-                .font(.system(size: 14, weight: .heavy, design: .rounded))
-                .foregroundStyle(.primary)
-                .padding(.bottom, 2)
-
-            HStack(spacing: 6) {
-                tag("MY HABITS", bg: Theme.primary.opacity(0.15))
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Label("Habit Tracker", systemImage: "checkmark.circle").font(.headline)
                 Spacer()
-                ForEach(0..<7, id: \.self) { i in
-                    Text(dayLetters[i])
-                        .font(.system(size: 11, weight: .heavy, design: .rounded))
-                        .foregroundStyle(.white)
-                        .frame(width: 22, height: 22)
-                        .background(Circle().fill(Theme.primary))
+                Button {
+                    habitName = ""
+                    showingAdd = true
+                } label: {
+                    Image(systemName: "plus").frame(width: 44, height: 44)
                 }
+                .accessibilityLabel("Add habit")
             }
-            row(label: "HEALTH",    bg: Theme.stickyYellow, color: Theme.secondary, data: health)
-            row(label: "WORK",      bg: Theme.stickySage,   color: Theme.primary,   data: work)
-            row(label: "LIFESTYLE", bg: Theme.stickyCoral,  color: Theme.accent,    data: lifestyle)
-        }
-        .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(Color.white.opacity(0.6))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .strokeBorder(Color.black.opacity(0.06), lineWidth: 1)
-        )
-    }
-
-    @ViewBuilder
-    private func tag(_ text: String, bg: Color) -> some View {
-        Text(text)
-            .font(.system(size: 10, weight: .heavy, design: .rounded))
-            .foregroundStyle(Theme.primary)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 5)
-            .background(Capsule().fill(bg))
-    }
-
-    @ViewBuilder
-    private func row(label: String, bg: Color, color: Color, data: [Int]) -> some View {
-        HStack(spacing: 6) {
-            tag(label, bg: bg)
-                .frame(minWidth: 90, alignment: .leading)
-            Spacer()
-            ForEach(0..<7, id: \.self) { i in
-                dot(data[i], color: color)
+            Text("Tap a day to mark your habit complete. Future days unlock when they arrive.")
+                .font(.caption).foregroundStyle(.secondary)
+            if store.habits.isEmpty {
+                Text("Add a habit to build your routine.").foregroundStyle(.secondary)
+            }
+            ForEach(store.habits) { habit in
+                PlannerHabitRow(habit: habit, days: days, store: store)
+            }
+            if let error = store.storageError {
+                Text(error).font(.caption).foregroundStyle(.red)
             }
         }
+        .padding()
+        .glassCard(cornerRadius: 16, tint: Theme.primary)
+        .alert("New habit", isPresented: $showingAdd) {
+            TextField("Habit name", text: $habitName)
+            Button("Cancel", role: .cancel) {}
+            Button("Add") { store.add(habitName) }
+                .disabled(habitName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        }
     }
+}
 
-    @ViewBuilder
-    private func dot(_ kind: Int, color: Color) -> some View {
-        ZStack {
-            Circle()
-                .strokeBorder(color.opacity(0.7), lineWidth: 1.4)
-                .frame(width: 22, height: 22)
-            if kind == 1 {
-                Circle().fill(color).frame(width: 16, height: 16)
-            } else if kind == 2 {
-                Circle().fill(Color.gray.opacity(0.55)).frame(width: 16, height: 16)
+private struct PlannerHabitRow: View {
+    let habit: PlannerHabit
+    let days: [Date]
+    let store: PlannerHabitStore
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text(habit.name).font(.subheadline.weight(.semibold))
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+                Text("\(days.filter { store.isComplete(habit, on: $0) }.count)/\(days.count)")
+                    .font(.caption).foregroundStyle(.secondary)
+                Menu {
+                    Button("Delete habit", systemImage: "trash", role: .destructive) { store.delete(habit) }
+                } label: {
+                    Image(systemName: "ellipsis").frame(width: 44, height: 44)
+                }
+                .accessibilityLabel("Options for \(habit.name)")
+            }
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 4) {
+                    ForEach(days, id: \.self) { day in
+                        let completed = store.isComplete(habit, on: day)
+                        let future = Calendar.current.startOfDay(for: day) > Calendar.current.startOfDay(for: Date())
+                        Button { store.toggle(habit, on: day) } label: {
+                            VStack(spacing: 6) {
+                                Text(day, format: .dateTime.weekday(.abbreviated)).font(.caption2)
+                                Text(day, format: .dateTime.day()).font(.caption)
+                                Image(systemName: completed ? "checkmark.circle.fill" : "circle")
+                                    .font(.title3)
+                            }
+                            .frame(minWidth: 44, minHeight: 74)
+                            .foregroundStyle(future ? Color.secondary : Theme.primary)
+                            .background(completed ? Theme.primary.opacity(0.12) : Color.clear,
+                                        in: RoundedRectangle(cornerRadius: 10))
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(future)
+                        .accessibilityLabel("\(habit.name), \(day.formatted(date: .complete, time: .omitted))")
+                        .accessibilityValue(completed ? "Completed" : "Not completed")
+                        .accessibilityHint(future ? "Future day" : "Toggle completion")
+                    }
+                }
             }
         }
     }
@@ -297,7 +386,7 @@ struct WeekStickyOverview: View {
     let days: [Date]
     var onTapDay: (Date) -> Void
 
-    @StateObject private var store = WeekTaskStore.shared
+    @State private var store = WeekTaskStore.shared
     @State private var addingDate: Date?
 
     private var twoColumns: [GridItem] {
@@ -339,7 +428,7 @@ struct WeekStickyOverview: View {
                 }
             }
 
-            HabitsTrackerSticker()
+            HabitsTrackerSticker(days: days)
                 .padding(.top, 4)
 
             HStack(spacing: 10) {
