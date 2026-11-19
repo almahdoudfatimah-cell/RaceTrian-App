@@ -116,6 +116,15 @@
 		4C72F2473080755300834E84 /* AddProjectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C72F2463080755300834E84 /* AddProjectSheet.swift */; };
 		4C72F24930807D7700834E84 /* CompatibilityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C72F24830807D7700834E84 /* CompatibilityModels.swift */; };
 		4C72F24B3081CA8B00834E84 /* HomePlanBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C72F24A3081CA8B00834E84 /* HomePlanBoard.swift */; };
+		4C7653A630A1A2FA00B46130 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7653A530A1A2FA00B46130 /* LaunchScreen.storyboard */; };
+		4C7ACCA730ADA09D00E3015E /* LifeGoalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7ACCA630ADA09D00E3015E /* LifeGoalStore.swift */; };
+		4C830D7330A6B344004D804E /* LocalScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C830D7230A6B344004D804E /* LocalScheduleView.swift */; };
+		4C830D7530A6B49A004D804E /* OfflineScheduleForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C830D7430A6B49A004D804E /* OfflineScheduleForm.swift */; };
+		4C830D7730A6D812004D804E /* ScheduleVoiceInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C830D7630A6D812004D804E /* ScheduleVoiceInput.swift */; };
+		4C830D7930A6D813004D804E /* ScheduleTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C830D7830A6D813004D804E /* ScheduleTrackingView.swift */; };
+		4C830E0830A9B8F7004D804E /* TrainingTrackingFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C830E0730A9B8F7004D804E /* TrainingTrackingFeatures.swift */; };
+		4C830E1A30A9BB64004D804E /* MealScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C830E1930A9BB64004D804E /* MealScheduleView.swift */; };
+		4C8B1D3930A2F7AD00DDEE7D /* watchOS App Icon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C8B1D3830A2F7AD00DDEE7D /* watchOS App Icon.xcassets */; };
 		4C9B135C30723F8400B2E75C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B135B30723EFA00B2E75C /* AuthManager.swift */; };
 		4C9B135D30723F8400B2E75C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B135B30723EFA00B2E75C /* AuthManager.swift */; };
 		4C9B135E30723F8400B2E75C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B135B30723EFA00B2E75C /* AuthManager.swift */; };
@@ -123,10 +132,9 @@
 		4C9B136030723F8400B2E75C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B135B30723EFA00B2E75C /* AuthManager.swift */; };
 		4C9B136130723F8400B2E75C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B135B30723EFA00B2E75C /* AuthManager.swift */; };
 		4CA0D79A3079EFD200E40F2C /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5BF77D3077CEDB005184AF /* TodayView.swift */; };
+		4CA3B68F30A9EA9200704C5F /* PhoneWatchSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA3B68E30A9EA9200704C5F /* PhoneWatchSyncManager.swift */; };
 		4CCF864D308016EA002B4CCC /* Theme_Watch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF864B307F4988002B4CCC /* Theme_Watch.swift */; };
 		4CCF865030801737002B4CCC /* AppwatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF864A307F4983002B4CCC /* AppwatchApp.swift */; };
-		4CCF865430801D57002B4CCC /* Theme_Watch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF864B307F4988002B4CCC /* Theme_Watch.swift */; };
-		4CCF865530801D57002B4CCC /* Theme_Watch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF864B307F4988002B4CCC /* Theme_Watch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -327,14 +335,29 @@
 		4C72F24830807D7700834E84 /* CompatibilityModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibilityModels.swift; sourceTree = "<group>"; };
 		4C72F24A3081CA8B00834E84 /* HomePlanBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePlanBoard.swift; sourceTree = "<group>"; };
 		4C72F24C3081CDC300834E84 /* TrainingFeatureDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingFeatureDashboard.swift; sourceTree = "<group>"; };
+		4C7329BD30A0B26E006AD8E0 /* Info 3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info 3.plist"; sourceTree = "<group>"; };
+		4C7329BE30A0B27A006AD8E0 /* Assets.xcassetsAppIcon.appiconsetContents 4.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Assets.xcassetsAppIcon.appiconsetContents 4.json"; sourceTree = "<group>"; };
+		4C7329CB30A17206006AD8E0 /* RaceTrianInfo 2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RaceTrianInfo 2.plist"; sourceTree = "<group>"; };
+		4C7329CC30A17212006AD8E0 /* RaceTrianAssets.xcassetsAppIcon.appiconsetContents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RaceTrianAssets.xcassetsAppIcon.appiconsetContents.json; sourceTree = "<group>"; };
+		4C76532830A181C400B46130 /* Info 4.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info 4.plist"; sourceTree = "<group>"; };
+		4C7653A530A1A2FA00B46130 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4C7ACCA630ADA09D00E3015E /* LifeGoalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoalStore.swift; sourceTree = "<group>"; };
+		4C830D7230A6B344004D804E /* LocalScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalScheduleView.swift; sourceTree = "<group>"; };
+		4C830D7430A6B49A004D804E /* OfflineScheduleForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineScheduleForm.swift; sourceTree = "<group>"; };
+		4C830D7630A6D812004D804E /* ScheduleVoiceInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleVoiceInput.swift; sourceTree = "<group>"; };
+		4C830D7830A6D813004D804E /* ScheduleTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTrackingView.swift; sourceTree = "<group>"; };
+		4C830E0730A9B8F7004D804E /* TrainingTrackingFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingTrackingFeatures.swift; sourceTree = "<group>"; };
+		4C830E1930A9BB64004D804E /* MealScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealScheduleView.swift; sourceTree = "<group>"; };
 		4C8546C4309F5A0200AA4929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C8546C5309F5A0600AA4929 /* Assets.xcassetsContents 2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Assets.xcassetsContents 2.json"; sourceTree = "<group>"; };
 		4C8546C6309F5A0E00AA4929 /* Assets.xcassetsAppIcon.appiconsetContents 2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Assets.xcassetsAppIcon.appiconsetContents 2.json"; sourceTree = "<group>"; };
 		4C8546CA309F5D9300AA4929 /* RaceTrianInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RaceTrianInfo.plist; sourceTree = "<group>"; };
+		4C8B1D3830A2F7AD00DDEE7D /* watchOS App Icon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "watchOS App Icon.xcassets"; sourceTree = "<group>"; };
 		4C97110E30830DAC00FCDBCD /* StoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKit.storekit; sourceTree = "<group>"; };
 		4C9B135B30723EFA00B2E75C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		4C9B13653072436700B2E75C /* CoachModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachModels.swift; sourceTree = "<group>"; };
 		4C9B137030727BC000B2E75C /* find_duplicates.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = find_duplicates.sh; sourceTree = "<group>"; };
+		4CA3B68E30A9EA9200704C5F /* PhoneWatchSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneWatchSyncManager.swift; sourceTree = "<group>"; };
 		4CCF8602307F23AE002B4CCC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		4CCF8609307F3BE7002B4CCC /* OBSERVEDOBJECT_FIXED.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = OBSERVEDOBJECT_FIXED.md; sourceTree = "<group>"; };
 		4CCF860B307F3D1C002B4CCC /* TrackingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingModels.swift; sourceTree = "<group>"; };
@@ -353,8 +376,6 @@
 		4CCF861A307F3D62002B4CCC /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		4CCF862A307F3EE8002B4CCC /* TrainingTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingTrackingView.swift; sourceTree = "<group>"; };
 		4CCF862C307F4051002B4CCC /* NewProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileView.swift; sourceTree = "<group>"; };
-		4CCF8636307F46A2002B4CCC /* fix_build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = fix_build.sh; sourceTree = "<group>"; };
-		4CCF8637307F46BB002B4CCC /* fix_build.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = fix_build.py; sourceTree = "<group>"; };
 		4CCF864A307F4983002B4CCC /* AppwatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppwatchApp.swift; sourceTree = "<group>"; };
 		4CCF864B307F4988002B4CCC /* Theme_Watch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme_Watch.swift; sourceTree = "<group>"; };
 		4CCF865830801F87002B4CCC /* AdditionalModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalModels.swift; sourceTree = "<group>"; };
@@ -384,27 +405,13 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				Assets.xcassetsAccentColor.colorsetContents.json,
+				Info.plist,
 			);
 			target = 4C705EFF2FAA819E006071CB /* RaceTrian */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		4C2FD47C303C5FA6001D3F34 /* appwatch Watch App */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "appwatch Watch App";
-			sourceTree = "<group>";
-		};
-		4C2FD48A303C5FA8001D3F34 /* appwatch Watch AppTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "appwatch Watch AppTests";
-			sourceTree = "<group>";
-		};
-		4C2FD494303C5FA8001D3F34 /* appwatch Watch AppUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "appwatch Watch AppUITests";
-			sourceTree = "<group>";
-		};
 		4C6C2E00303C4FD500DE3B64 /* appwatch Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "appwatch Watch App";
@@ -428,6 +435,11 @@
 				4C58BC722FE9D8CF0076C8A8 /* Exceptions for "RaceTrian" folder in "RaceTrianUITests" target */,
 			);
 			path = RaceTrian;
+			sourceTree = "<group>";
+		};
+		4CA6372B30A9C36A006650AB /* Community */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Community;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -565,6 +577,8 @@
 				4C133FD7307163FD00F95B94 /* fix_duplicates.sh */,
 				4C72F238308074EE00834E84 /* WeekTaskStore.swift */,
 				4C72F23C308074F200834E84 /* AssessmentStore.swift */,
+				4CA3B68E30A9EA9200704C5F /* PhoneWatchSyncManager.swift */,
+				4C7ACCA630ADA09D00E3015E /* LifeGoalStore.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -629,6 +643,10 @@
 				4C72F234308074EB00834E84 /* AIInsightCard.swift */,
 				4C72F236308074ED00834E84 /* AIPlannerSheet.swift */,
 				4C72F24A3081CA8B00834E84 /* HomePlanBoard.swift */,
+				4C830D7230A6B344004D804E /* LocalScheduleView.swift */,
+				4C830D7430A6B49A004D804E /* OfflineScheduleForm.swift */,
+				4C830D7630A6D812004D804E /* ScheduleVoiceInput.swift */,
+				4C830D7830A6D813004D804E /* ScheduleTrackingView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -736,6 +754,9 @@
 				4C5F27D1306CE88500E2ADBB /* PAYWALL_NOW_LIVE.md */,
 				4C72F242308074F900834E84 /* AssessmentView.swift */,
 				4C72F2443080753700834E84 /* FeaturePlaceholders.swift */,
+				4C830E0730A9B8F7004D804E /* TrainingTrackingFeatures.swift */,
+				4C830E1930A9BB64004D804E /* MealScheduleView.swift */,
+				4CA6372B30A9C36A006650AB /* Community */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -759,6 +780,8 @@
 		4C705EF72FAA819E006071CB = {
 			isa = PBXGroup;
 			children = (
+				4C8B1D3830A2F7AD00DDEE7D /* watchOS App Icon.xcassets */,
+				4C7653A530A1A2FA00B46130 /* LaunchScreen.storyboard */,
 				4C5F28513071049800E2ADBB /* StoreKit.storekit */,
 				4C97110E30830DAC00FCDBCD /* StoreKit.storekit */,
 				4C5F27BF306CE3ED00E2ADBB /* StoreKitTestCertificate.cer */,
@@ -767,9 +790,6 @@
 				4C6C2E00303C4FD500DE3B64 /* appwatch Watch App */,
 				4C6C2E0E303C4FD900DE3B64 /* appwatch Watch AppTests */,
 				4C6C2E18303C4FD900DE3B64 /* appwatch Watch AppUITests */,
-				4C2FD47C303C5FA6001D3F34 /* appwatch Watch App */,
-				4C2FD48A303C5FA8001D3F34 /* appwatch Watch AppTests */,
-				4C2FD494303C5FA8001D3F34 /* appwatch Watch AppUITests */,
 				4C705F012FAA819E006071CB /* Products */,
 				4C58BC752FE9D97E0076C8A8 /* App */,
 				4C58BC7F2FE9D99D0076C8A8 /* Models */,
@@ -807,8 +827,6 @@
 				4CCF861A307F3D62002B4CCC /* AuthView.swift */,
 				4CCF862A307F3EE8002B4CCC /* TrainingTrackingView.swift */,
 				4CCF862C307F4051002B4CCC /* NewProfileView.swift */,
-				4CCF8636307F46A2002B4CCC /* fix_build.sh */,
-				4CCF8637307F46BB002B4CCC /* fix_build.py */,
 				4CCF864A307F4983002B4CCC /* AppwatchApp.swift */,
 				4CCF864B307F4988002B4CCC /* Theme_Watch.swift */,
 				4CCF865830801F87002B4CCC /* AdditionalModels.swift */,
@@ -820,6 +838,11 @@
 				4C8546C5309F5A0600AA4929 /* Assets.xcassetsContents 2.json */,
 				4C8546C6309F5A0E00AA4929 /* Assets.xcassetsAppIcon.appiconsetContents 2.json */,
 				4C8546CA309F5D9300AA4929 /* RaceTrianInfo.plist */,
+				4C7329BD30A0B26E006AD8E0 /* Info 3.plist */,
+				4C7329BE30A0B27A006AD8E0 /* Assets.xcassetsAppIcon.appiconsetContents 4.json */,
+				4C7329CB30A17206006AD8E0 /* RaceTrianInfo 2.plist */,
+				4C7329CC30A17212006AD8E0 /* RaceTrianAssets.xcassetsAppIcon.appiconsetContents.json */,
+				4C76532830A181C400B46130 /* Info 4.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -924,6 +947,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				4C705F022FAA819E006071CB /* RaceTrian */,
+				4CA6372B30A9C36A006650AB /* Community */,
 			);
 			name = RaceTrian;
 			packageProductDependencies = (
@@ -980,7 +1004,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2660;
-				LastUpgradeCheck = 2700;
+				LastUpgradeCheck = 2720;
 				TargetAttributes = {
 					4C6C2DFE303C4FD500DE3B64 = {
 						CreatedOnToolsVersion = 26.6;
@@ -1040,6 +1064,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C8B1D3930A2F7AD00DDEE7D /* watchOS App Icon.xcassets in Resources */,
 				4C5F28553071049800E2ADBB /* StoreKit.storekit in Resources */,
 				4C5F27C3306CE3ED00E2ADBB /* StoreKitTestCertificate.cer in Resources */,
 			);
@@ -1066,6 +1091,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C7653A630A1A2FA00B46130 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1107,7 +1133,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C649A1E30408C8700F2E0E2 /* TestVerificationView.swift in Sources */,
-				4CCF865430801D57002B4CCC /* Theme_Watch.swift in Sources */,
 				4C9B136030723F8400B2E75C /* AuthManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1117,7 +1142,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C649A1F30408C8700F2E0E2 /* TestVerificationView.swift in Sources */,
-				4CCF865530801D57002B4CCC /* Theme_Watch.swift in Sources */,
 				4C9B136130723F8400B2E75C /* AuthManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1130,6 +1154,7 @@
 				4C58BCE12FE9D9CB0076C8A8 /* PremiumCard.swift in Sources */,
 				4C72F24930807D7700834E84 /* CompatibilityModels.swift in Sources */,
 				4C72F235308074EB00834E84 /* AIInsightCard.swift in Sources */,
+				4C830D7930A6D813004D804E /* ScheduleTrackingView.swift in Sources */,
 				4C58BCE22FE9D9CB0076C8A8 /* LifeAreasSection.swift in Sources */,
 				4C33F5D130209F5400053BCA /* SportsModels.swift in Sources */,
 				4C58BCE42FE9D9CB0076C8A8 /* AddTaskSheet.swift in Sources */,
@@ -1145,10 +1170,12 @@
 				4C649A1A30408C8700F2E0E2 /* TestVerificationView.swift in Sources */,
 				4C58BCEC2FE9D9CB0076C8A8 /* ThemesSection.swift in Sources */,
 				4C58BCED2FE9D9CB0076C8A8 /* ActivityBarChart.swift in Sources */,
+				4C830D7330A6B344004D804E /* LocalScheduleView.swift in Sources */,
 				4C58BCEE2FE9D9CB0076C8A8 /* DiaryInsightsView.swift in Sources */,
 				4C489C463084AE9400BF8AA4 /* EntryAuthFlow.swift in Sources */,
 				4C58BCEF2FE9D9CB0076C8A8 /* HomeView.swift in Sources */,
 				4C58BCF02FE9D9CB0076C8A8 /* HabitStreakSection.swift in Sources */,
+				4C830D7530A6B49A004D804E /* OfflineScheduleForm.swift in Sources */,
 				4C5F27CC306CE6DF00E2ADBB /* PAYWALL_GUIDE.swift in Sources */,
 				4C66E452303F005E00C17166 /* Stores.swift in Sources */,
 				4C58BCF12FE9D9CB0076C8A8 /* NoteCard.swift in Sources */,
@@ -1168,6 +1195,7 @@
 				4C33F5D530209FE200053BCA /* SportsStore.swift in Sources */,
 				4C58BCFA2FE9D9CB0076C8A8 /* PaywallView.swift in Sources */,
 				4C72F23F308074F400834E84 /* DiaryView.swift in Sources */,
+				4C830D7730A6D812004D804E /* ScheduleVoiceInput.swift in Sources */,
 				4C58BCFB2FE9D9CB0076C8A8 /* NoteEditorView.swift in Sources */,
 				4C72F237308074ED00834E84 /* AIPlannerSheet.swift in Sources */,
 				4C58BCFC2FE9D9CB0076C8A8 /* PremiumNudgeBanner.swift in Sources */,
@@ -1175,6 +1203,8 @@
 				4C58BCFE2FE9D9CB0076C8A8 /* HomeHeroCard.swift in Sources */,
 				4C58BCFF2FE9D9CB0076C8A8 /* DayScheduleSection.swift in Sources */,
 				4C58BD002FE9D9CB0076C8A8 /* PromptChip.swift in Sources */,
+				4C7ACCA730ADA09D00E3015E /* LifeGoalStore.swift in Sources */,
+				4C830E0830A9B8F7004D804E /* TrainingTrackingFeatures.swift in Sources */,
 				4C72F24B3081CA8B00834E84 /* HomePlanBoard.swift in Sources */,
 				4C58BD012FE9D9CB0076C8A8 /* TodayPlanSection.swift in Sources */,
 				4C58BD022FE9D9CB0076C8A8 /* ProjectDetailView.swift in Sources */,
@@ -1203,6 +1233,7 @@
 				4C5A91AD303B0F57004338B8 /* MoreView.swift in Sources */,
 				4C58BD182FE9D9CB0076C8A8 /* ProfileHeroCard.swift in Sources */,
 				4C58BC922FE9D9B70076C8A8 /* SupabaseManager.swift in Sources */,
+				4CA3B68F30A9EA9200704C5F /* PhoneWatchSyncManager.swift in Sources */,
 				4C58BC942FE9D9B70076C8A8 /* DiaryStore.swift in Sources */,
 				4C58BC952FE9D9B70076C8A8 /* CoachViewModel.swift in Sources */,
 				4C58BC962FE9D9B70076C8A8 /* CoachService.swift in Sources */,
@@ -1217,6 +1248,7 @@
 				4C58BC832FE9D99D0076C8A8 /* DiaryModels.swift in Sources */,
 				4C5F27CA306CE6B300E2ADBB /* PaywallExamples.swift in Sources */,
 				4C58BC842FE9D99D0076C8A8 /* NoteModels.swift in Sources */,
+				4C830E1A30A9BB64004D804E /* MealScheduleView.swift in Sources */,
 				4C5F27C8306CE68A00E2ADBB /* PaywallPresenter.swift in Sources */,
 				4C58BC852FE9D99D0076C8A8 /* ProjectModels.swift in Sources */,
 				4C58BC862FE9D99D0076C8A8 /* PlannerModels.swift in Sources */,
@@ -1275,12 +1307,15 @@
 		4C6C2E21303C4FD900DE3B64 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSET_PACK_MANIFEST_URL_PREFIX = "App Icon";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 38TW2AKHTL;
+				ENABLE_ON_DEMAND_RESOURCES = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Appwatch;
@@ -1292,6 +1327,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "App Icon";
+				ON_DEMAND_RESOURCES_PREFETCH_ORDER = "App Icon";
 				PRODUCT_BUNDLE_IDENTIFIER = com.RaceTrian.RaceTrian.watchkitapp;
 				PRODUCT_NAME = "AppWatch Watch";
 				SDKROOT = watchos;
@@ -1310,12 +1347,15 @@
 		4C6C2E22303C4FD900DE3B64 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSET_PACK_MANIFEST_URL_PREFIX = "App Icon";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 38TW2AKHTL;
+				ENABLE_ON_DEMAND_RESOURCES = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Appwatch;
@@ -1327,6 +1367,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "App Icon";
+				ON_DEMAND_RESOURCES_PREFETCH_ORDER = "App Icon";
 				PRODUCT_BUNDLE_IDENTIFIER = com.RaceTrian.RaceTrian.watchkitapp;
 				PRODUCT_NAME = "AppWatch Watch";
 				SDKROOT = watchos;
@@ -1437,6 +1479,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSET_PACK_MANIFEST_URL_PREFIX = "App Icon";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1468,6 +1511,8 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 38TW2AKHTL;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
+				ENABLE_ON_DEMAND_RESOURCES = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1485,14 +1530,22 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Read health data";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Save workout data";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Track workout routes";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Access motion and fitness activity";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				NEW_SETTING = "";
 				NEW_SETTING1 = "";
+				NEW_SETTING2 = "";
+				NSMotionUsageDescription = "Access motioon and fitness activity";
 				ONLY_ACTIVE_ARCH = YES;
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "App Icon";
+				ON_DEMAND_RESOURCES_PREFETCH_ORDER = "App Icon";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -1505,6 +1558,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSET_PACK_MANIFEST_URL_PREFIX = "App Icon";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1536,7 +1590,9 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 38TW2AKHTL;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_ON_DEMAND_RESOURCES = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1547,13 +1603,21 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Read health data";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Save workout data";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Track workout routes";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Access motion and fitness activity";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				NEW_SETTING = "";
 				NEW_SETTING1 = "";
+				NEW_SETTING2 = "";
+				NSMotionUsageDescription = "Access motioon and fitness activity";
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "App Icon";
+				ON_DEMAND_RESOURCES_PREFETCH_ORDER = "App Icon";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1564,12 +1628,13 @@
 		4C705F222FAA819F006071CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 38TW2AKHTL;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1578,6 +1643,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = RaceTrian;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your workout route on the map and measure distance while you track a route.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Record your voice to enter schedule activities and save workout voice notes.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Count your daily steps using your iPhone motion sensor.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Turn your spoken activities and times into editable schedule text.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1605,12 +1674,13 @@
 		4C705F232FAA819F006071CB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 38TW2AKHTL;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1619,6 +1689,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = RaceTrian;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your workout route on the map and measure distance while you track a route.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Record your voice to enter schedule activities and save workout voice notes.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Count your daily steps using your iPhone motion sensor.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Turn your spoken activities and times into editable schedule text.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
