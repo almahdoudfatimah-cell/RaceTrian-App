@@ -23,6 +23,7 @@ struct OnboardingView: View {
     @State private var showQuotes: Bool = true
     @State private var privacyMode: Bool = false
     @State private var language: String = "English"
+    @AppStorage("appLanguage") private var appLanguage = "en"
     @State private var autoBackup: Bool = true
     @State private var soundEffects: Bool = true
     @State private var darkModePreference: String = "Auto"
@@ -45,8 +46,10 @@ struct OnboardingView: View {
                     .padding(.horizontal, 24)
                     .padding(.top, 24)
                     .frame(height: 52)
+                    .iPadReadableWidth(820)
 
                 currentStepView
+                    .iPadReadableWidth(820)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .clipped()
                     .transition(.asymmetric(
@@ -56,11 +59,19 @@ struct OnboardingView: View {
                     .id(step)
             }
         }
+        .onChange(of: language) { _, selectedLanguage in
+            if selectedLanguage == "Arabic" {
+                appLanguage = "ar"
+            } else if selectedLanguage == "English" {
+                appLanguage = "en"
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             bottomButtons
                 .padding(.horizontal, 24)
+                .iPadReadableWidth(600)
                 .padding(.top, 12)
-                .padding(.bottom, 10)
+                .padding(.bottom, UIDevice.current.userInterfaceIdiom == .pad ? 60 : 10)
                 .background(.clear)
         }
     }
@@ -139,7 +150,7 @@ struct OnboardingView: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.85)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 56)
+                        .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 72 : 56)
                         .background(.ultraThinMaterial, in: Capsule())
                 }
                 .buttonStyle(PressScaleButtonStyle())
@@ -161,7 +172,7 @@ struct OnboardingView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.85)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 56)
+                    .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 72 : 56)
                     .background(primaryButtonBackground)
             }
             .buttonStyle(PressScaleButtonStyle())

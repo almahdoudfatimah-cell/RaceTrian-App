@@ -79,7 +79,7 @@ private struct StatCard: View {
                 .font(.title3)
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 13, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                 .minimumScaleFactor(0.6)
                 .lineLimit(1)
             Text(title)
@@ -119,7 +119,7 @@ private struct WeeklyBarChart: View {
                                 .fill(activity.type.color)
                                 .frame(width: 28, height: barHeight(for: activity))
                             Text(activity.type.rawValue.prefix(3))
-                                .font(.system(size: 9, weight: .medium))
+                                .font(.system(size: Theme.fontSize(9), weight: .medium))
                                 .foregroundStyle(.secondary)
                         }
                     }
@@ -188,13 +188,13 @@ private struct ActivityRow: View {
                     .fill(activity.type.color.opacity(0.15))
                     .frame(width: 44, height: 44)
                 Image(systemName: activity.type.icon)
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(activity.type.color)
             }
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(activity.type.rawValue)
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(15), weight: .semibold))
                 HStack(spacing: 8) {
                     Label(activity.formattedDuration, systemImage: "clock")
                     if !activity.formattedDistance.isEmpty {

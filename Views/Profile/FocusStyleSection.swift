@@ -37,7 +37,7 @@ private struct FocusStyleRow: View {
         Button(action: onTap) {
             HStack(spacing: isIPad ? 16 : 12) {
                 Image(systemName: style.icon)
-                    .font(.system(size: isIPad ? 18 : 15, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(15), weight: .semibold))
                     .foregroundStyle(isSelected ? .white : Theme.primary)
                     .frame(width: isIPad ? 42 : 36, height: isIPad ? 42 : 36)
                     .background(
@@ -46,10 +46,10 @@ private struct FocusStyleRow: View {
 
                 VStack(alignment: .leading, spacing: isIPad ? 4 : 2) {
                     Text(style.rawValue)
-                        .font(.system(size: isIPad ? 18 : 14, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                         .foregroundStyle(.primary)
                     Text(style.description)
-                        .font(.system(size: isIPad ? 14 : 12, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
 
@@ -58,7 +58,7 @@ private struct FocusStyleRow: View {
                 if isSelected {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundStyle(Theme.primary)
-                        .font(.system(size: isIPad ? 20 : 18))
+                        .font(.system(size: Theme.fontSize(18)))
                 }
             }
             .padding(isIPad ? 16 : 12)

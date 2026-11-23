@@ -212,12 +212,12 @@ struct NotificationsSheet: View {
                 if manager.isAuthorized && !manager.delivered.isEmpty {
                     ToolbarItem(placement: .topBarLeading) {
                         Button("Clear") { Task { await manager.clearDelivered() } }
-                            .font(.system(size: 15, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }
-                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                         .foregroundStyle(Theme.primary)
                 }
             }
@@ -232,9 +232,9 @@ struct NotificationsSheet: View {
             switch manager.authorizationStatus {
             case .denied:
                 Label("Notifications are off", systemImage: "bell.slash.fill")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                 Text("Turn on notifications for RaceTrian in Settings to get plan reminders.")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
                 Button("Open Settings") {
                     if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
@@ -244,9 +244,9 @@ struct NotificationsSheet: View {
                 .buttonStyle(.borderedProminent)
             case .notDetermined:
                 Label("Stay on track", systemImage: "bell.fill")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                 Text("Get reminders for your tasks, a morning plan, a mood check-in and an evening review.")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
                 Button("Turn On Notifications") {
                     Task { await manager.requestAuthorization() }
@@ -254,9 +254,9 @@ struct NotificationsSheet: View {
                 .buttonStyle(.borderedProminent)
             default:
                 Label("Notifications are on", systemImage: "bell.badge.fill")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                 Text("Daily reminders at 8:00, 13:00 and 20:00, plus reminders when timed tasks start.")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
                 Button("Send Test Notification") {
                     Task { await manager.sendTestNotification() }
@@ -271,7 +271,7 @@ struct NotificationsSheet: View {
 
     private func sectionTitle(_ title: String) -> some View {
         Text(title)
-            .font(.system(size: 13, weight: .bold, design: .rounded))
+            .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
             .foregroundStyle(.secondary)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 6)
@@ -279,7 +279,7 @@ struct NotificationsSheet: View {
 
     private func emptyRow(_ message: String) -> some View {
         Text(message)
-            .font(.system(size: 13, design: .rounded))
+            .font(.system(size: Theme.fontSize(13), design: .rounded))
             .foregroundStyle(.secondary)
             .padding(14)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -291,19 +291,19 @@ struct NotificationsSheet: View {
             ZStack {
                 Circle().fill(tint.opacity(0.18)).frame(width: 40, height: 40)
                 Image(systemName: icon)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold))
                     .foregroundStyle(tint)
             }
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
                 Text(message)
-                    .font(.system(size: 12, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), design: .rounded))
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
                 if let date {
                     Text(date, format: .dateTime.weekday(.abbreviated).hour().minute())
-                        .font(.system(size: 10, weight: .medium, design: .rounded))
+                        .font(.system(size: Theme.fontSize(10), weight: .medium, design: .rounded))
                         .foregroundStyle(.tertiary)
                 }
             }

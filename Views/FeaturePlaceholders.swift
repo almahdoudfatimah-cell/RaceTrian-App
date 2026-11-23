@@ -35,7 +35,7 @@ struct EmptyStateView: View {
     private var featureHeader: some View {
         VStack(spacing: 12) {
             Image(systemName: icon)
-                .font(.system(size: 32, weight: .bold))
+                .font(.system(size: Theme.fontSize(32), weight: .bold))
                 .foregroundStyle(.white)
                 .frame(width: 72, height: 72)
                 .background(color.gradient, in: RoundedRectangle(cornerRadius: 22))
@@ -59,7 +59,7 @@ struct EmptyStateView: View {
             ForEach(Array(metricItems.enumerated()), id: \.offset) { _, metric in
                 VStack(spacing: 5) {
                     Text(metric.value)
-                        .font(.system(size: 19, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(19), weight: .bold, design: .rounded))
                         .foregroundStyle(color)
                     Text(metric.label)
                         .font(.caption2.weight(.semibold))
@@ -882,7 +882,7 @@ struct ThemedWorkoutTimerView: View {
             ScrollView {
                 VStack(spacing: 24) {
                     Image(systemName: "stopwatch.fill")
-                        .font(.system(size: 42, weight: .bold))
+                        .font(.system(size: Theme.fontSize(42), weight: .bold))
                         .foregroundStyle(.white)
                         .frame(width: 88, height: 88)
                         .background(Theme.primary.gradient, in: Circle())

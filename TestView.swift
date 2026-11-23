@@ -26,7 +26,7 @@ struct SimpleTestView: View {
                 
                 VStack(spacing: 20) {
                     Text("TAB \(selectedTab)")
-                        .font(.system(size: 60, weight: .black))
+                        .font(.system(size: Theme.fontSize(60), weight: .black))
                         .foregroundColor(.white)
                     
                     Text("Scroll down to see toolbar")
@@ -34,14 +34,14 @@ struct SimpleTestView: View {
                         .foregroundColor(.white)
                     
                     Text("⬇️⬇️⬇️")
-                        .font(.system(size: 50))
+                        .font(.system(size: Theme.fontSize(50)))
                 }
             }
             
             // MASSIVE YELLOW TOOLBAR
             VStack(spacing: 12) {
                 Text("🟨 TOOLBAR IS HERE 🟨")
-                    .font(.system(size: 24, weight: .black))
+                    .font(.system(size: Theme.fontSize(24), weight: .black))
                     .padding()
                 
                 HStack(spacing: 0) {
@@ -85,11 +85,11 @@ struct ToolbarButton: View {
         Button(action: action) {
             VStack(spacing: 4) {
                 Text("\(number)")
-                    .font(.system(size: 20, weight: .black))
+                    .font(.system(size: Theme.fontSize(20), weight: .black))
                 Image(systemName: icon)
-                    .font(.system(size: 24, weight: .bold))
+                    .font(.system(size: Theme.fontSize(24), weight: .bold))
                 Text(title)
-                    .font(.system(size: 10, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(10), weight: .semibold))
             }
             .foregroundColor(isSelected ? .blue : .black)
             .frame(maxWidth: .infinity)

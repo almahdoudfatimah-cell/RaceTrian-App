@@ -22,7 +22,7 @@ struct PremiumNudgeBanner: View {
                             .fill(.white.opacity(0.22))
                             .frame(width: 42, height: 42)
                         Image(systemName: "crown.fill")
-                            .font(.system(size: 18, weight: .bold))
+                            .font(.system(size: Theme.fontSize(18), weight: .bold))
                             .foregroundStyle(.white)
                     }
 
@@ -44,7 +44,7 @@ struct PremiumNudgeBanner: View {
                 withAnimation { dismissed = true }
             } label: {
                 Image(systemName: "xmark")
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.system(size: Theme.fontSize(12), weight: .bold))
                     .foregroundStyle(.white.opacity(0.75))
                     .frame(width: 24, height: 24)
                     .background(Color.white.opacity(0.15), in: Circle())

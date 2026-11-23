@@ -158,7 +158,7 @@ private struct YearMonthCard: View {
                 Text("\(calendar.component(.day, from: date))")
                     .font(.caption.weight(isToday ? .bold : .medium))
                 Image(systemName: isTracked ? "checkmark" : "circle")
-                    .font(.system(size: 8, weight: .bold))
+                    .font(.system(size: Theme.fontSize(8), weight: .bold))
                     .opacity(isTracked ? 1 : 0)
             }
             .frame(maxWidth: .infinity, minHeight: 44)

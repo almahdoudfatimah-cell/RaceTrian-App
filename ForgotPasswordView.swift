@@ -16,7 +16,7 @@ struct ForgotPasswordView: View {
                 ScrollView {
                     VStack(spacing: 18) {
                         Image(systemName: "envelope.circle.fill")
-                            .font(.system(size: 64))
+                            .font(.system(size: Theme.fontSize(64)))
                             .foregroundStyle(Theme.primary)
                         Text("Forgot Password")
                             .font(.system(.largeTitle, design: .rounded, weight: .bold))

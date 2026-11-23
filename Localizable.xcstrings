@@ -1,0 +1,6100 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "—" : {
+
+    },
+    "· best %lld" : {
+
+    },
+    "\"The journey of a thousand miles begins with one step\"" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "\"رحلة الألف ميل تبدأ بخطوة واحدة\""
+          }
+        }
+      }
+    },
+    "/ %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "/ %@"
+          }
+        }
+      }
+    },
+    "#%@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "#%@"
+          }
+        }
+      }
+    },
+    "%@ – %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ – %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ – %2$@"
+          }
+        }
+      }
+    },
+    "%@ / %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ / %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ / %2$@"
+          }
+        }
+      }
+    },
+    "%@ %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%@ • Thanks for supporting us 💜" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ • شكرًا لدعمكم 💜"
+          }
+        }
+      }
+    },
+    "%@ cal" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ سعرة حرارية"
+          }
+        }
+      }
+    },
+    "%@ going" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "سيحضر %1$@"
+          }
+        }
+      }
+    },
+    "%@ members" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ أعضاء"
+          }
+        }
+      }
+    },
+    "%@ of %@ planned hours completed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اكتملت %1$@ من أصل %2$@ من الساعات المخطط لها"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ of %2$@ planned hours completed"
+          }
+        }
+      }
+    },
+    "%@, %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@، %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@"
+          }
+        }
+      }
+    },
+    "%@: %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@: %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$@"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "%lld / %lld %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld / %2$lld %3$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld %3$@"
+          }
+        }
+      }
+    },
+    "%lld / 5" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%lld من ٥"
+          }
+        }
+      }
+    },
+    "%lld activities" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عدد الأنشطة: %lld"
+          }
+        }
+      }
+    },
+    "%lld day streak" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "سلسلة الأيام: %lld"
+          }
+        }
+      }
+    },
+    "%lld days left" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الأيام المتبقية: %lld"
+          }
+        }
+      }
+    },
+    "%lld days tracked" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عدد الأيام المسجلة: %lld"
+          }
+        }
+      }
+    },
+    "%lld free messages left today" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الرسائل المجانية المتبقية اليوم: %lld"
+          }
+        }
+      }
+    },
+    "%lld hours" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عدد الساعات: %lld"
+          }
+        }
+      }
+    },
+    "%lld hours of work time" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ساعات العمل: %lld"
+          }
+        }
+      }
+    },
+    "%lld messages remaining today" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الرسائل المتبقية اليوم: %lld"
+          }
+        }
+      }
+    },
+    "%lld min" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%lld د"
+          }
+        }
+      }
+    },
+    "%lld min before" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "قبل الموعد بـ %lld د"
+          }
+        }
+      }
+    },
+    "%lld minutes" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المدة بالدقائق: %lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld من %2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld done" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المكتمل: %1$lld من %2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld done"
+          }
+        }
+      }
+    },
+    "%lld of %lld milestones completed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المراحل المكتملة: %1$lld من %2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld milestones completed"
+          }
+        }
+      }
+    },
+    "%lld of %lld steps" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الخطوات: %1$lld من أصل %2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld steps"
+          }
+        }
+      }
+    },
+    "%lld of %lld tasks" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المهام: %1$lld من أصل %2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld tasks"
+          }
+        }
+      }
+    },
+    "%lld of %lld tasks complete" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المهام المكتملة: %1$lld من أصل %2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld tasks complete"
+          }
+        }
+      }
+    },
+    "%lld of %lld tasks completed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المهام المكتملة: %1$lld من أصل %2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld tasks completed"
+          }
+        }
+      }
+    },
+    "%lld project%@ locked" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld مشروع%2$@ مقفل"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld project%2$@ locked"
+          }
+        }
+      }
+    },
+    "%lld race goals for this year" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عدد أهداف السباق لهذا العام: %lld"
+          }
+        }
+      }
+    },
+    "%lld races / milestones" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عدد السباقات / المحطات: %lld"
+          }
+        }
+      }
+    },
+    "%lld selected" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "العناصر المحددة: %lld"
+          }
+        }
+      }
+    },
+    "%lld sessions · %@ planned hours" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عدد الجلسات: %1$lld · الساعات المخططة: %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld sessions · %2$@ planned hours"
+          }
+        }
+      }
+    },
+    "%lld tracked" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الأيام المتتبعة: %lld"
+          }
+        }
+      }
+    },
+    "%lld words" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عدد الكلمات: %lld"
+          }
+        }
+      }
+    },
+    "%lld:%@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld:%2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld:%2$@"
+          }
+        }
+      }
+    },
+    "%lld:%@:%@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld:%2$@:%3$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld:%2$@:%3$@"
+          }
+        }
+      }
+    },
+    "%lld:00" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%lld:00"
+          }
+        }
+      }
+    },
+    "%lld/%lld" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld/%2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
+    "%lld/%lld complete" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المكتمل: %1$lld/%2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld complete"
+          }
+        }
+      }
+    },
+    "%lld/%lld done" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المكتمل: %1$lld/%2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld done"
+          }
+        }
+      }
+    },
+    "%lld/%lld milestones · %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المراحل: %1$lld/%2$lld · %3$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld milestones · %3$@"
+          }
+        }
+      }
+    },
+    "%lld/%lld steps" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الخطوات: %1$lld/%2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld steps"
+          }
+        }
+      }
+    },
+    "%lld%%" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%lld%%"
+          }
+        }
+      }
+    },
+    "%lld%% · %lldd streak" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld%% · سلسلة لمدة %2$lld يومًا"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld%% · %2$lldd streak"
+          }
+        }
+      }
+    },
+    "%lld%% complete" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مكتمل بنسبة %lld%%"
+          }
+        }
+      }
+    },
+    "%lldm" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%lld د"
+          }
+        }
+      }
+    },
+    "•" : {
+
+    },
+    "• PAYWALL_GUIDE.swift - Complete documentation" : {
+
+    },
+    "• PAYWALL_SUMMARY.swift - Quick reference" : {
+
+    },
+    "• PaywallExamples.swift - 7 working examples" : {
+
+    },
+    "• PaywallPresenter.swift - Helper views" : {
+
+    },
+    "+%lld more" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "+%lld أخرى"
+          }
+        }
+      }
+    },
+    "+%lld more steps" : {
+      "localizations" : {
+        "ar" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "+%lld خطوات إضافية"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "+%lld خطوة إضافية"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "+%lld خطوة إضافية"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "+%lld خطوة إضافية"
+                }
+              },
+              "two" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "+%lld خطوتان إضافيتان"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "+%lld خطوة إضافية"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "+%lld more step"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "+%lld more steps"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "+%lld more steps"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "✓" : {
+
+    },
+    "✓ Logged" : {
+
+    },
+    "✦" : {
+
+    },
+    "🎉" : {
+
+    },
+    "🎉 Premium Content" : {
+
+    },
+    "🎯" : {
+
+    },
+    "📖" : {
+
+    },
+    "🔥🔥🔥 TEST VIEW 🔥🔥🔥" : {
+
+    },
+    "1. Simple Button" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "١. زر بسيط"
+          }
+        }
+      }
+    },
+    "2. Premium Gate Check" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "٢. التحقق من بوابة الاشتراك المميز"
+          }
+        }
+      }
+    },
+    "3. Premium Gate View" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "٣. عرض بوابة الاشتراك المميز"
+          }
+        }
+      }
+    },
+    "4 premium themes unlock with Premium" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك فتح ٤ سمات مميزة بالاشتراك المميز"
+          }
+        }
+      }
+    },
+    "4. Feature Lock Overlay" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "٤. طبقة قفل الميزة"
+          }
+        }
+      }
+    },
+    "5 of 7 days completed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اكتملت ٥ أيام من أصل ٧"
+          }
+        }
+      }
+    },
+    "5 of 7 habits completed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اكتملت ٥ عادات من أصل ٧"
+          }
+        }
+      }
+    },
+    "5. Premium Badge" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "٥. شارة الاشتراك المميز"
+          }
+        }
+      }
+    },
+    "6. Coach Quota System" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "٦. نظام حصة المدرب"
+          }
+        }
+      }
+    },
+    "7. Settings with Premium" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "٧. الإعدادات مع الاشتراك المميز"
+          }
+        }
+      }
+    },
+    "9:30 AM, 2:15 PM" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "٩:٣٠ ص، ٢:١٥ م"
+          }
+        }
+      }
+    },
+    "09:30, 14:15" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "09:30، 14:15"
+          }
+        }
+      }
+    },
+    "12-hour format" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تنسيق 12 ساعة"
+          }
+        }
+      }
+    },
+    "24-hour format" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تنسيق ٢٤ ساعة"
+          }
+        }
+      }
+    },
+    "60%" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "٦٠٪"
+          }
+        }
+      }
+    },
+    "71%" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "٧١٪"
+          }
+        }
+      }
+    },
+    "72°F" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "٧٢°ف"
+          }
+        }
+      }
+    },
+    "A daily AI-powered diary and life assistant that helps you plan your day, organize your work hours, and improve your life with personalized insights and smart scheduling." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مذكرات يومية ومساعد للحياة مدعومان بالذكاء الاصطناعي، لمساعدتك على التخطيط ليومك وتنظيم ساعات عملك وتحسين حياتك من خلال رؤى مخصصة وجدولة ذكية."
+          }
+        }
+      }
+    },
+    "A short motto or goal…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "شعار أو هدف قصير…"
+          }
+        }
+      }
+    },
+    "About" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "حول"
+          }
+        }
+      }
+    },
+    "Access Premium Feature" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الوصول إلى الميزة المميزة"
+          }
+        }
+      }
+    },
+    "Account" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الحساب"
+          }
+        }
+      }
+    },
+    "Account Settings" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إعدادات الحساب"
+          }
+        }
+      }
+    },
+    "Achieved" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تم الإنجاز"
+          }
+        }
+      }
+    },
+    "ACHIEVED" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تم الإنجاز"
+          }
+        }
+      }
+    },
+    "Achievement goal" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "هدف الإنجاز"
+          }
+        }
+      }
+    },
+    "Achievement milestones" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مراحل الإنجاز"
+          }
+        }
+      }
+    },
+    "Achievement Timer" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مؤقت الإنجاز"
+          }
+        }
+      }
+    },
+    "Achievement you are working toward" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الإنجاز الذي تعمل على تحقيقه"
+          }
+        }
+      }
+    },
+    "Achievements" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الإنجازات"
+          }
+        }
+      }
+    },
+    "Active ✅" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "نشط ✅"
+          }
+        }
+      }
+    },
+    "Active Gear" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المعدات المستخدمة"
+          }
+        }
+      }
+    },
+    "Activity" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "النشاط"
+          }
+        }
+      }
+    },
+    "Activity Feed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "موجز النشاط"
+          }
+        }
+      }
+    },
+    "Activity Likes" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الإعجابات بالأنشطة"
+          }
+        }
+      }
+    },
+    "Activity Progress" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تقدم النشاط"
+          }
+        }
+      }
+    },
+    "Activity Rings" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "حلقات النشاط"
+          }
+        }
+      }
+    },
+    "Activity Type" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "نوع النشاط"
+          }
+        }
+      }
+    },
+    "Adaptive Training Plans" : {
+
+    },
+    "Add" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة"
+          }
+        }
+      }
+    },
+    "Add a %@ note" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة ملاحظة حول %@"
+          }
+        }
+      }
+    },
+    "Add a goal" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة هدف"
+          }
+        }
+      }
+    },
+    "Add a goal or choose another filter." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة هدف أو اختيار عامل تصفية آخر."
+          }
+        }
+      }
+    },
+    "Add a habit to build your routine." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة عادة لبناء روتينك."
+          }
+        }
+      }
+    },
+    "Add a meal with a time and notes for this day." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة وجبة مع تحديد الوقت والملاحظات لهذا اليوم."
+          }
+        }
+      }
+    },
+    "Add a note" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة ملاحظة"
+          }
+        }
+      }
+    },
+    "Add a note (optional)" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة ملاحظة (اختياري)"
+          }
+        }
+      }
+    },
+    "Add a race dream" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة حلم سباق"
+          }
+        }
+      }
+    },
+    "Add a strength level" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة مستوى قوة"
+          }
+        }
+      }
+    },
+    "Add a task to start planning this day." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة مهمة لبدء التخطيط لهذا اليوم"
+          }
+        }
+      }
+    },
+    "Add a workout note or result" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة ملاحظة أو نتيجة للتمرين"
+          }
+        }
+      }
+    },
+    "Add activities with start and finish times" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة أنشطة مع أوقات البدء والانتهاء"
+          }
+        }
+      }
+    },
+    "Add activity" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة نشاط"
+          }
+        }
+      }
+    },
+    "Add by voice" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الإضافة بالصوت"
+          }
+        }
+      }
+    },
+    "Add Goal" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة هدف"
+          }
+        }
+      }
+    },
+    "Add goals in the Goals tab on iPhone." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة الأهداف في علامة تبويب الأهداف على iPhone"
+          }
+        }
+      }
+    },
+    "Add habit" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة عادة"
+          }
+        }
+      }
+    },
+    "Add journeys, check-ins, and destination activities with their confirmed times." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة الرحلات وإجراءات تسجيل الوصول وأنشطة الوجهة مع أوقاتها المؤكدة"
+          }
+        }
+      }
+    },
+    "Add Level" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة مستوى"
+          }
+        }
+      }
+    },
+    "Add Meal" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة وجبة"
+          }
+        }
+      }
+    },
+    "Add note" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة ملاحظة"
+          }
+        }
+      }
+    },
+    "Add one step per line. AI Projects will turn them into a progress checklist." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة خطوة واحدة في كل سطر، وستحولها مشاريع الذكاء الاصطناعي إلى قائمة تحقق للتقدم"
+          }
+        }
+      }
+    },
+    "Add plan item" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة عنصر إلى الخطة"
+          }
+        }
+      }
+    },
+    "Add PlanView.swift to your target to enable this feature" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "أضف PlanView.swift إلى الهدف لتمكين هذه الميزة"
+          }
+        }
+      }
+    },
+    "Add ProfileView.swift to your target to enable this feature" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "أضف ProfileView.swift إلى الهدف لتمكين هذه الميزة"
+          }
+        }
+      }
+    },
+    "Add Race" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة سباق"
+          }
+        }
+      }
+    },
+    "Add Session" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة جلسة"
+          }
+        }
+      }
+    },
+    "Add SharedNavigationViews.swift to your target to enable full features" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "أضف SharedNavigationViews.swift إلى الهدف لتمكين جميع الميزات"
+          }
+        }
+      }
+    },
+    "Add task" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة مهمة"
+          }
+        }
+      }
+    },
+    "Add Task" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة مهمة"
+          }
+        }
+      }
+    },
+    "Add This Plan to Schedule" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة هذه الخطة إلى الجدول"
+          }
+        }
+      }
+    },
+    "Add to %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة إلى %@‏"
+          }
+        }
+      }
+    },
+    "Add to My Races" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة إلى سباقاتي"
+          }
+        }
+      }
+    },
+    "Add to plan" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة إلى الخطة"
+          }
+        }
+      }
+    },
+    "Add training log" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة سجل تدريب"
+          }
+        }
+      }
+    },
+    "Add widgets to home screen" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إضافة الأدوات إلى الشاشة الرئيسية"
+          }
+        }
+      }
+    },
+    "Add your first dream race and pin it here." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة أول سباق تحلم به وتثبيته هنا"
+          }
+        }
+      }
+    },
+    "Add your first goal, then update your progress here." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة أول هدف، ثم تحديث تقدمك هنا"
+          }
+        }
+      }
+    },
+    "Add your first item above." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة أول عنصر أعلاه"
+          }
+        }
+      }
+    },
+    "Add your latest activity details below." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إضافة تفاصيل أحدث نشاط أدناه"
+          }
+        }
+      }
+    },
+    "Added" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمت الإضافة"
+          }
+        }
+      }
+    },
+    "Advanced Training Analytics" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تحليلات التدريب المتقدمة"
+          }
+        }
+      }
+    },
+    "Affirmations" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التوكيدات الإيجابية"
+          }
+        }
+      }
+    },
+    "AI Assistant" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مساعد الذكاء الاصطناعي"
+          }
+        }
+      }
+    },
+    "AI Board" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "لوحة الذكاء الاصطناعي"
+          }
+        }
+      }
+    },
+    "AI Coach" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مدرب الذكاء الاصطناعي"
+          }
+        }
+      }
+    },
+    "AI Insights" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "رؤى الذكاء الاصطناعي"
+          }
+        }
+      }
+    },
+    "AI Plan ready" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "خطة الذكاء الاصطناعي جاهزة"
+          }
+        }
+      }
+    },
+    "AI planning chatbot" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "روبوت محادثة للتخطيط بالذكاء الاصطناعي"
+          }
+        }
+      }
+    },
+    "AI Project Focus" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تركيز مشروع الذكاء الاصطناعي"
+          }
+        }
+      }
+    },
+    "AI Projects" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مشاريع الذكاء الاصطناعي"
+          }
+        }
+      }
+    },
+    "AI Training Plans" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "خطط التدريب بالذكاء الاصطناعي"
+          }
+        }
+      }
+    },
+    "AI-powered planning" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التخطيط المدعوم بالذكاء الاصطناعي"
+          }
+        }
+      }
+    },
+    "Alerts" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التنبيهات"
+          }
+        }
+      }
+    },
+    "All analytics are completely anonymous" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "جميع التحليلات مجهولة الهوية تمامًا"
+          }
+        }
+      }
+    },
+    "All Features" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "جميع الميزات"
+          }
+        }
+      }
+    },
+    "All notes" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "جميع الملاحظات"
+          }
+        }
+      }
+    },
+    "All sports and tracking" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "جميع الرياضات والتتبع"
+          }
+        }
+      }
+    },
+    "Allow reminders" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "السماح بالتذكيرات"
+          }
+        }
+      }
+    },
+    "Already have an account? Sign In" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "هل لديك حساب بالفعل؟ تسجيل الدخول"
+          }
+        }
+      }
+    },
+    "Analyze and improve your athletic form" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تحليل أدائك الرياضي وتحسينه"
+          }
+        }
+      }
+    },
+    "Analyze your performance trends across seasons" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تحليل اتجاهات أدائك عبر المواسم"
+          }
+        }
+      }
+    },
+    "Anonymous analytics" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تحليلات مجهولة الهوية"
+          }
+        }
+      }
+    },
+    "App" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التطبيق"
+          }
+        }
+      }
+    },
+    "App Language" : {
+
+    },
+    "Appearance" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المظهر"
+          }
+        }
+      }
+    },
+    "Are you sure you want to sign out?" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "هل تريد بالتأكيد تسجيل الخروج؟"
+          }
+        }
+      }
+    },
+    "Ask me anything about planning, habits, focus, or wellbeing. I'm here to help you thrive." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك سؤالي عن أي شيء يتعلق بالتخطيط أو العادات أو التركيز أو العافية. أنا هنا لمساعدتك على الازدهار."
+          }
+        }
+      }
+    },
+    "Ask the AI chatbot for a plan with clear daily steps, then try again." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك طلب خطة بخطوات يومية واضحة من روبوت محادثة الذكاء الاصطناعي، ثم المحاولة مرة أخرى."
+          }
+        }
+      }
+    },
+    "Ask your coach anything..." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك سؤال مدربك عن أي شيء…"
+          }
+        }
+      }
+    },
+    "Assess your readiness for upcoming competitions" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تقييم مدى استعدادك للمنافسات القادمة"
+          }
+        }
+      }
+    },
+    "Assessment" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التقييم"
+          }
+        }
+      }
+    },
+    "Assistant" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المساعد"
+          }
+        }
+      }
+    },
+    "At start" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عند البدء"
+          }
+        }
+      }
+    },
+    "Authentication Required" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المصادقة مطلوبة"
+          }
+        }
+      }
+    },
+    "Auto-renews until cancelled. Manage or cancel anytime in Apple Settings." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يتجدد الاشتراك تلقائيًا حتى إلغائه. يمكنك إدارته أو إلغاؤه في أي وقت من إعدادات Apple."
+          }
+        }
+      }
+    },
+    "Automatically send crash reports to help fix bugs" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إرسال تقارير التعطل تلقائيًا للمساعدة في إصلاح الأخطاء"
+          }
+        }
+      }
+    },
+    "Avatar" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الصورة الرمزية"
+          }
+        }
+      }
+    },
+    "Back" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "رجوع"
+          }
+        }
+      }
+    },
+    "Backup & Sync" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "النسخ الاحتياطي والمزامنة"
+          }
+        }
+      }
+    },
+    "Balance your activities, personal time, and rest." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك الموازنة بين أنشطتك ووقتك الشخصي والراحة"
+          }
+        }
+      }
+    },
+    "Base" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الأساس"
+          }
+        }
+      }
+    },
+    "Based on the Pomodoro Technique" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "استنادًا إلى تقنية Pomodoro"
+          }
+        }
+      }
+    },
+    "Be my sports training planner. Ask which sports I practice, my level, goals, available days, equipment, injuries, and event dates. Create a training plan and tell me which metrics to track for every selected sport." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "كن مخططي للتدريب الرياضي. اسألني عن الرياضات التي أمارسها ومستواي وأهدافي والأيام المتاحة والمعدات والإصابات ومواعيد الفعاليات. أنشئ خطة تدريب وأخبرني بالمقاييس التي ينبغي تتبعها لكل رياضة محددة."
+          }
+        }
+      }
+    },
+    "Benefits" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المزايا"
+          }
+        }
+      }
+    },
+    "Biometric lock" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "القفل بالمقاييس الحيوية"
+          }
+        }
+      }
+    },
+    "Blur content when multitasking" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمويه المحتوى عند تعدد المهام"
+          }
+        }
+      }
+    },
+    "Blur sensitive content in app switcher, require authentication" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمويه المحتوى الحساس في مبدّل التطبيقات وطلب المصادقة"
+          }
+        }
+      }
+    },
+    "Body Metrics" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مقاييس الجسم"
+          }
+        }
+      }
+    },
+    "Break big goals into clear steps" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تقسيم الأهداف الكبيرة إلى خطوات واضحة"
+          }
+        }
+      }
+    },
+    "Breathing Exercises" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمارين التنفس"
+          }
+        }
+      }
+    },
+    "Build progress in every part of your life" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إحراز تقدم في كل جانب من جوانب حياتك"
+          }
+        }
+      }
+    },
+    "Build streaks and stay consistent" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "بناء سلاسل متواصلة والحفاظ على الاستمرارية"
+          }
+        }
+      }
+    },
+    "Build the next 7 days" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التخطيط للأيام السبعة المقبلة"
+          }
+        }
+      }
+    },
+    "Build your itinerary" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إنشاء خط سير الرحلة"
+          }
+        }
+      }
+    },
+    "Building your plan…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يجري إنشاء خطتك…"
+          }
+        }
+      }
+    },
+    "Calories" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "السعرات الحرارية"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إلغاء"
+          }
+        }
+      }
+    },
+    "Cancel Locally (Testing)" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إلغاء محليًا (للاختبار)"
+          }
+        }
+      }
+    },
+    "Cardio Stats" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إحصاءات تمارين القلب"
+          }
+        }
+      }
+    },
+    "Category" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الفئة"
+          }
+        }
+      }
+    },
+    "Challenges" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التحديات"
+          }
+        }
+      }
+    },
+    "Chart Data" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "بيانات المخطط"
+          }
+        }
+      }
+    },
+    "Charts" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المخططات"
+          }
+        }
+      }
+    },
+    "Chat" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الدردشة"
+          }
+        }
+      }
+    },
+    "Check today's plan and get moving." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "راجع خطة اليوم وابدأ التحرك"
+          }
+        }
+      }
+    },
+    "Check-in Streak" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "سلسلة تسجيل الحضور"
+          }
+        }
+      }
+    },
+    "Choose a color" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اختيار لون"
+          }
+        }
+      }
+    },
+    "Choose a day" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اختيار يوم"
+          }
+        }
+      }
+    },
+    "Choose a finish time after the start time." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يرجى اختيار وقت انتهاء بعد وقت البدء"
+          }
+        }
+      }
+    },
+    "Choose a workout" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اختيار تمرين"
+          }
+        }
+      }
+    },
+    "Choose an icon" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اختيار أيقونة"
+          }
+        }
+      }
+    },
+    "Choose the dates for your schedule." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك اختيار تواريخ جدولك"
+          }
+        }
+      }
+    },
+    "Choose up to 366 days and a finish time at least 15 minutes after the start time on the same day." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يرجى اختيار مدة لا تتجاوز ٣٦٦ يومًا، ووقت انتهاء بعد وقت البدء بـ ١٥ دقيقة على الأقل في اليوم نفسه"
+          }
+        }
+      }
+    },
+    "Choose your holiday arrival and departure dates. Each day has its own plan." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك اختيار تاريخي الوصول والمغادرة لإجازتك. لكل يوم خطته الخاصة"
+          }
+        }
+      }
+    },
+    "Choose your trip dates. Edit the itinerary to match confirmed departures and arrivals." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك اختيار تواريخ رحلتك وتعديل مسارها ليتوافق مع مواعيد المغادرة والوصول المؤكدة"
+          }
+        }
+      }
+    },
+    "Clear" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مسح"
+          }
+        }
+      }
+    },
+    "Clear Messages" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مسح الرسائل"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إغلاق"
+          }
+        }
+      }
+    },
+    "Closed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مغلق"
+          }
+        }
+      }
+    },
+    "Coach Messages Remaining" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "رسائل المدرب المتبقية"
+          }
+        }
+      }
+    },
+    "Coach Quota Testing" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اختبار حصة المدرب"
+          }
+        }
+      }
+    },
+    "Coming Soon" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "قريبًا"
+          }
+        }
+      }
+    },
+    "Community" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المجتمع"
+          }
+        }
+      }
+    },
+    "Community Chat" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "دردشة المجتمع"
+          }
+        }
+      }
+    },
+    "Community section" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "قسم المجتمع"
+          }
+        }
+      }
+    },
+    "Community Stories" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "قصص المجتمع"
+          }
+        }
+      }
+    },
+    "Compact mode" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الوضع المضغوط"
+          }
+        }
+      }
+    },
+    "Compact Mode" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الوضع المضغوط"
+          }
+        }
+      }
+    },
+    "Competition Readiness" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الاستعداد للمنافسة"
+          }
+        }
+      }
+    },
+    "Complete a quick assessment to personalize your training experience" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إكمال تقييم سريع لتخصيص تجربتك التدريبية"
+          }
+        }
+      }
+    },
+    "Completed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تم الإكمال"
+          }
+        }
+      }
+    },
+    "Completed milestones" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المراحل المكتملة"
+          }
+        }
+      }
+    },
+    "Completed: %@ hours" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الساعات المكتملة: %@‏"
+          }
+        }
+      }
+    },
+    "Confirm Password" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تأكيد كلمة المرور"
+          }
+        }
+      }
+    },
+    "Connect" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تواصل"
+          }
+        }
+      }
+    },
+    "Connect iPhone" : {
+
+    },
+    "Connect to your iPhone" : {
+
+    },
+    "Connected" : {
+
+    },
+    "Connected Apps" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التطبيقات المتصلة"
+          }
+        }
+      }
+    },
+    "Contact Information" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "معلومات الاتصال"
+          }
+        }
+      }
+    },
+    "Contact Us" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التواصل معنا"
+          }
+        }
+      }
+    },
+    "Continue" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "متابعة"
+          }
+        }
+      }
+    },
+    "Continue to next step" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المتابعة إلى الخطوة التالية"
+          }
+        }
+      }
+    },
+    "Could not save this meal. Please try again." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تعذر حفظ هذه الوجبة. يرجى المحاولة مرة أخرى."
+          }
+        }
+      }
+    },
+    "Crash reports" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تقارير التعطل"
+          }
+        }
+      }
+    },
+    "Create a full schedule or add your own activities." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إنشاء جدول كامل أو إضافة أنشطتك الخاصة"
+          }
+        }
+      }
+    },
+    "Create a new Race Vision Board" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إنشاء لوحة جديدة لرؤية السباقات"
+          }
+        }
+      }
+    },
+    "Create a new Race Vision Board?" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "هل تريد إنشاء لوحة جديدة لرؤية السباقات؟"
+          }
+        }
+      }
+    },
+    "Create a vacation schedule to see each day's activities here." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إنشاء جدول للإجازة لعرض أنشطة كل يوم هنا"
+          }
+        }
+      }
+    },
+    "Create Account" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إنشاء حساب"
+          }
+        }
+      }
+    },
+    "Create full schedule" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إنشاء جدول كامل"
+          }
+        }
+      }
+    },
+    "Create levels and mark each one when you reach its target." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إنشاء مستويات وتحديد كل مستوى عند بلوغ هدفه"
+          }
+        }
+      }
+    },
+    "Create New Board" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إنشاء لوحة جديدة"
+          }
+        }
+      }
+    },
+    "Create Project" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إنشاء مشروع"
+          }
+        }
+      }
+    },
+    "Create schedule" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إنشاء جدول"
+          }
+        }
+      }
+    },
+    "Create your first AI project to break big goals into clear steps." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إنشاء أول مشروع بالذكاء الاصطناعي لتقسيم الأهداف الكبيرة إلى خطوات واضحة"
+          }
+        }
+      }
+    },
+    "Creates one milestone per day in your chosen range." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إنشاء محطة واحدة يوميًا ضمن النطاق الذي اخترته"
+          }
+        }
+      }
+    },
+    "Creates one planning milestone per month. Add confirmed races separately." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إنشاء محطة تخطيط واحدة شهريًا. يمكنك إضافة السباقات المؤكدة بشكل منفصل"
+          }
+        }
+      }
+    },
+    "Creates one training session per day. Remove sessions to make room for recovery." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إنشاء جلسة تدريب واحدة يوميًا. يمكنك إزالة جلسات لإتاحة وقت للتعافي"
+          }
+        }
+      }
+    },
+    "Current Plan" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الخطة الحالية"
+          }
+        }
+      }
+    },
+    "Current position" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الموقع الحالي"
+          }
+        }
+      }
+    },
+    "Current Status" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الحالة الحالية"
+          }
+        }
+      }
+    },
+    "Current Theme" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "السمة الحالية"
+          }
+        }
+      }
+    },
+    "Current Year" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "العام الحالي"
+          }
+        }
+      }
+    },
+    "Cycling Metrics" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مقاييس ركوب الدراجات"
+          }
+        }
+      }
+    },
+    "Daily" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يوميًا"
+          }
+        }
+      }
+    },
+    "Daily check-in" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التسجيل اليومي"
+          }
+        }
+      }
+    },
+    "Daily Check-in" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التسجيل اليومي"
+          }
+        }
+      }
+    },
+    "Daily check-ins to understand emotional patterns" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تسجيلات يومية لفهم الأنماط العاطفية"
+          }
+        }
+      }
+    },
+    "Daily goal" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الهدف اليومي"
+          }
+        }
+      }
+    },
+    "Daily limit reached — Go Premium for unlimited" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تم بلوغ الحد اليومي — الترقية إلى الاشتراك المميز للاستخدام غير المحدود"
+          }
+        }
+      }
+    },
+    "Daily Notifications" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الإشعارات اليومية"
+          }
+        }
+      }
+    },
+    "Daily Quotes" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اقتباسات يومية"
+          }
+        }
+      }
+    },
+    "Daily reminders at 8:00, 13:00 and 20:00, plus reminders when timed tasks start." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تذكيرات يومية في ٨:٠٠ و١٣:٠٠ و٢٠:٠٠، بالإضافة إلى تذكيرات عند بدء المهام المحددة بوقت"
+          }
+        }
+      }
+    },
+    "Daily target" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الهدف اليومي"
+          }
+        }
+      }
+    },
+    "Daily time range" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "النطاق الزمني اليومي"
+          }
+        }
+      }
+    },
+    "Date" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التاريخ"
+          }
+        }
+      }
+    },
+    "Date & Time" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التاريخ والوقت"
+          }
+        }
+      }
+    },
+    "Date and time" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التاريخ والوقت"
+          }
+        }
+      }
+    },
+    "Date in tracking period" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التاريخ ضمن فترة التتبع"
+          }
+        }
+      }
+    },
+    "Day" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اليوم"
+          }
+        }
+      }
+    },
+    "days" : {
+
+    },
+    "Debug Information" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "معلومات تصحيح الأخطاء"
+          }
+        }
+      }
+    },
+    "Decrease" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تقليل"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "حذف"
+          }
+        }
+      }
+    },
+    "Delete habit" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "حذف العادة"
+          }
+        }
+      }
+    },
+    "Delete Project" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "حذف المشروع"
+          }
+        }
+      }
+    },
+    "Delete task" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "حذف المهمة"
+          }
+        }
+      }
+    },
+    "Delete voice note" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "حذف الملاحظة الصوتية"
+          }
+        }
+      }
+    },
+    "Description (optional)" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الوصف (اختياري)"
+          }
+        }
+      }
+    },
+    "Detailed analysis of your running performance" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تحليل مفصل لأدائك في الجري"
+          }
+        }
+      }
+    },
+    "Detailed metrics for your cycling activities" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مقاييس مفصلة لأنشطة ركوب الدراجات"
+          }
+        }
+      }
+    },
+    "Detailed Statistics View" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عرض الإحصاءات التفصيلية"
+          }
+        }
+      }
+    },
+    "Details" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التفاصيل"
+          }
+        }
+      }
+    },
+    "Discover athletes with similar goals" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اكتشاف رياضيين لديهم أهداف مشابهة"
+          }
+        }
+      }
+    },
+    "Display" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "العرض"
+          }
+        }
+      }
+    },
+    "Display text below icons" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عرض النص أسفل الأيقونات"
+          }
+        }
+      }
+    },
+    "Distance" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المسافة"
+          }
+        }
+      }
+    },
+    "Distance Tracker" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "متتبع المسافة"
+          }
+        }
+      }
+    },
+    "Don't have an account? Sign Up" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ليس لديك حساب؟ إنشاء حساب"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تم"
+          }
+        }
+      }
+    },
+    "Double tap to change check-in" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اضغط مرتين لتغيير حالة التسجيل"
+          }
+        }
+      }
+    },
+    "DREAM RACE" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "سباق الأحلام"
+          }
+        }
+      }
+    },
+    "Duration" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المدة"
+          }
+        }
+      }
+    },
+    "Duration: %lld minutes" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المدة بالدقائق: %lld"
+          }
+        }
+      }
+    },
+    "e.g. Football 8h" : {
+
+    },
+    "e.g. Long run" : {
+
+    },
+    "e.g. Morning run" : {
+
+    },
+    "Each monthly planning milestone uses this time range." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تستخدم كل محطة تخطيط شهرية هذا النطاق الزمني"
+          }
+        }
+      }
+    },
+    "Each selected day will be filled between these times, including breaks." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ستُملأ الفترة بين هذين الوقتين في كل يوم محدد، بما في ذلك فترات الاستراحة"
+          }
+        }
+      }
+    },
+    "Each selected plan item will be scheduled on the next day." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ستتم جدولة كل عنصر محدد في الخطة في اليوم التالي"
+          }
+        }
+      }
+    },
+    "Each session or milestone uses this time range." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تستخدم كل جلسة أو محطة هذا النطاق الزمني"
+          }
+        }
+      }
+    },
+    "Earlier" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "وقت أبكر"
+          }
+        }
+      }
+    },
+    "Edit" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تعديل"
+          }
+        }
+      }
+    },
+    "Edit Profile" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تعديل الملف الشخصي"
+          }
+        }
+      }
+    },
+    "Edit Project" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تعديل المشروع"
+          }
+        }
+      }
+    },
+    "Edit this meal and its notes" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تعديل هذه الوجبة وملاحظاتها"
+          }
+        }
+      }
+    },
+    "Elevation Gain" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الارتفاع المكتسب"
+          }
+        }
+      }
+    },
+    "Email" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "البريد الإلكتروني"
+          }
+        }
+      }
+    },
+    "Enable AI assistant" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمكين مساعد الذكاء الاصطناعي"
+          }
+        }
+      }
+    },
+    "Enable automatic backups" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمكين النسخ الاحتياطي التلقائي"
+          }
+        }
+      }
+    },
+    "Enable break reminders" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمكين تذكيرات الاستراحة"
+          }
+        }
+      }
+    },
+    "Enable habit tracking" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمكين تتبع العادات"
+          }
+        }
+      }
+    },
+    "Enable mood tracking" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمكين تتبع الحالة المزاجية"
+          }
+        }
+      }
+    },
+    "Enable notifications" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمكين الإشعارات"
+          }
+        }
+      }
+    },
+    "Enable privacy mode" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمكين وضع الخصوصية"
+          }
+        }
+      }
+    },
+    "Enable sound effects" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمكين المؤثرات الصوتية"
+          }
+        }
+      }
+    },
+    "Enable Step Counting" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمكين عدّ الخطوات"
+          }
+        }
+      }
+    },
+    "Enable weekly goals" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تمكين الأهداف الأسبوعية"
+          }
+        }
+      }
+    },
+    "End time" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "وقت الانتهاء"
+          }
+        }
+      }
+    },
+    "Energy Levels" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مستويات الطاقة"
+          }
+        }
+      }
+    },
+    "English" : {
+
+    },
+    "Enter your account email and we'll send you a reset link." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك إدخال البريد الإلكتروني لحسابك وسنرسل إليك رابطًا لإعادة التعيين."
+          }
+        }
+      }
+    },
+    "Entry Fee" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "رسوم التسجيل"
+          }
+        }
+      }
+    },
+    "Entry written" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تدوينة مكتوبة"
+          }
+        }
+      }
+    },
+    "Equipment" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المعدات"
+          }
+        }
+      }
+    },
+    "Evening review" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المراجعة المسائية"
+          }
+        }
+      }
+    },
+    "Evening Review" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المراجعة المسائية"
+          }
+        }
+      }
+    },
+    "Everything included" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "كل شيء مشمول"
+          }
+        }
+      }
+    },
+    "Example 1: Simple Button" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مثال ١: زر بسيط"
+          }
+        }
+      }
+    },
+    "Example 2: Premium Gate" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مثال ٢: بوابة الاشتراك المميز"
+          }
+        }
+      }
+    },
+    "Example 5: Premium Badge" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مثال ٥: شارة الاشتراك المميز"
+          }
+        }
+      }
+    },
+    "Example 6: Coach Quota System" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مثال ٦: نظام حصة المدرب"
+          }
+        }
+      }
+    },
+    "Excellent for running" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ممتاز للجري"
+          }
+        }
+      }
+    },
+    "Exercises, sets, reps, and notes" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التمارين والمجموعات والتكرارات والملاحظات"
+          }
+        }
+      }
+    },
+    "Explore" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "استكشاف"
+          }
+        }
+      }
+    },
+    "Explore each day of your holiday, with space for activities and downtime." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "استكشف كل يوم من إجازتك، مع مساحة للأنشطة ووقت للراحة"
+          }
+        }
+      }
+    },
+    "Features" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الميزات"
+          }
+        }
+      }
+    },
+    "Feeling %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الشعور: %@‏"
+          }
+        }
+      }
+    },
+    "Feeling %@ · %lld day streak 🔥" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الشعور: %1$@‏ · سلسلة الأيام: %2$lld 🔥"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Feeling %1$@ · %2$lld day streak 🔥"
+          }
+        }
+      }
+    },
+    "Find a team for your next training block" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "العثور على فريق لفترة تدريبك القادمة"
+          }
+        }
+      }
+    },
+    "Finish" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "إنهاء"
+          }
+        }
+      }
+    },
+    "Finish time" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "وقت الانتهاء"
+          }
+        }
+      }
+    },
+    "Finish time must be after start time." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يجب أن يكون وقت الانتهاء بعد وقت البدء"
+          }
+        }
+      }
+    },
+    "Finish workout?" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "هل تريد إنهاء التمرين؟"
+          }
+        }
+      }
+    },
+    "First day" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اليوم الأول"
+          }
+        }
+      }
+    },
+    "Fitness Assessment" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تقييم اللياقة البدنية"
+          }
+        }
+      }
+    },
+    "Flash Cards" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "بطاقات الاستذكار"
+          }
+        }
+      }
+    },
+    "Flexibility" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المرونة"
+          }
+        }
+      }
+    },
+    "Focus Alerts" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تنبيهات التركيز"
+          }
+        }
+      }
+    },
+    "Focus on one achievement" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "التركيز على إنجاز واحد"
+          }
+        }
+      }
+    },
+    "Focus session" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "جلسة تركيز"
+          }
+        }
+      }
+    },
+    "Follow" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "متابعة"
+          }
+        }
+      }
+    },
+    "Following" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "قيد المتابعة"
+          }
+        }
+      }
+    },
+    "Food, portions, preparation, or other notes" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الطعام أو الحصص أو التحضير أو ملاحظات أخرى"
+          }
+        }
+      }
+    },
+    "Forgot Password" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "نسيت كلمة المرور"
+          }
+        }
+      }
+    },
+    "Forgot password?" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "هل نسيت كلمة المرور؟"
+          }
+        }
+      }
+    },
+    "Form Analysis" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تحليل الأداء الحركي"
+          }
+        }
+      }
+    },
+    "Free" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مجاني"
+          }
+        }
+      }
+    },
+    "Free users get 5 messages per day. Try exceeding the limit to see the paywall." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يحصل مستخدمو الخطة المجانية على ٥ رسائل يوميًا. يمكنك محاولة تجاوز الحد لعرض بوابة الاشتراك."
+          }
+        }
+      }
+    },
+    "Frequently Asked Questions" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الأسئلة الشائعة"
+          }
+        }
+      }
+    },
+    "Friends & Following" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الأصدقاء والحسابات المتابَعة"
+          }
+        }
+      }
+    },
+    "Future date" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تاريخ مستقبلي"
+          }
+        }
+      }
+    },
+    "Future day" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يوم مستقبلي"
+          }
+        }
+      }
+    },
+    "General" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عام"
+          }
+        }
+      }
+    },
+    "Get personalized training advice" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الحصول على نصائح تدريب مخصصة"
+          }
+        }
+      }
+    },
+    "Get personalized training advice and answers to your fitness questions" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الحصول على نصائح تدريب مخصصة وإجابات عن أسئلتك حول اللياقة البدنية"
+          }
+        }
+      }
+    },
+    "Get reminded to take breaks every hour" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تلقي تذكير بأخذ استراحة كل ساعة"
+          }
+        }
+      }
+    },
+    "Get reminders for your tasks, a morning plan, a mood check-in and an evening review." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تلقي تذكيرات بمهامك وخطة صباحية وتسجيل للحالة المزاجية ومراجعة مسائية."
+          }
+        }
+      }
+    },
+    "Get started" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "البدء"
+          }
+        }
+      }
+    },
+    "Get Started" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "البدء"
+          }
+        }
+      }
+    },
+    "Get started with the app" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "بدء استخدام التطبيق"
+          }
+        }
+      }
+    },
+    "Go Premium" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الترقية إلى الاشتراك المميز"
+          }
+        }
+      }
+    },
+    "Go Premium for unlimited projects" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الترقية إلى الاشتراك المميز لإنشاء مشاريع غير محدودة"
+          }
+        }
+      }
+    },
+    "Go to schedule" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الانتقال إلى الجدول"
+          }
+        }
+      }
+    },
+    "Goal" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الهدف"
+          }
+        }
+      }
+    },
+    "Goal achieved" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تم تحقيق الهدف"
+          }
+        }
+      }
+    },
+    "Goal Ideas" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "أفكار للأهداف"
+          }
+        }
+      }
+    },
+    "Goal name" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اسم الهدف"
+          }
+        }
+      }
+    },
+    "Goal title" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "عنوان الهدف"
+          }
+        }
+      }
+    },
+    "Goal: %lld min" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الهدف: %lld د"
+          }
+        }
+      }
+    },
+    "Goals" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الأهداف"
+          }
+        }
+      }
+    },
+    "Good morning" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "صباح الخير"
+          }
+        }
+      }
+    },
+    "Group Challenges" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تحديات المجموعات"
+          }
+        }
+      }
+    },
+    "Groups" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "المجموعات"
+          }
+        }
+      }
+    },
+    "Guest" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "زائر"
+          }
+        }
+      }
+    },
+    "Guest Account" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "حساب ضيف"
+          }
+        }
+      }
+    },
+    "Habit name" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اسم العادة"
+          }
+        }
+      }
+    },
+    "Habit reminders" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تذكيرات العادات"
+          }
+        }
+      }
+    },
+    "Habit Reminders" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "تذكيرات العادات"
+          }
+        }
+      }
+    },
+    "Habit Streaks" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "سلاسل استمرارية العادات"
+          }
+        }
+      }
+    },
+    "Habit Tracker" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "متتبع العادات"
+          }
+        }
+      }
+    },
+    "Haptic Feedback" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الاستجابة اللمسية"
+          }
+        }
+      }
+    },
+    "Haptics" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الاستجابة اللمسية"
+          }
+        }
+      }
+    },
+    "HEALTH" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الصحة"
+          }
+        }
+      }
+    },
+    "Health & Wellness" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "الصحة والعافية"
+          }
+        }
+      }
+    },
+    "Health Trends" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "اتجاهات الصحة"
+          }
+        }
+      }
+    },
+    "Help Center" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مركز المساعدة"
+          }
+        }
+      }
+    },
+    "Help me build an achievement plan using timed focus sessions. Ask about the achievement, deadline, available time, and milestones. Then create tasks with a recommended timer duration for each session." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ساعدني في إعداد خطة إنجاز باستخدام جلسات تركيز محددة بوقت. اسألني عن الإنجاز والموعد النهائي والوقت المتاح والمراحل. ثم أنشئ مهام مع مدة مؤقت موصى بها لكل جلسة."
+          }
+        }
+      }
+    },
+    "Help me create a monthly plan. Ask about my main goals, milestones, habits, training schedule, and recovery days, then organize them week by week." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ساعدني في إنشاء خطة شهرية. اسألني عن أهدافي الرئيسية والمراحل والعادات وجدول التدريب وأيام التعافي، ثم نظمها أسبوعًا بعد أسبوع."
+          }
+        }
+      }
+    },
+    "Help me create a realistic weekly plan. Ask about my priorities, available time, training, rest, and important deadlines, then build a seven-day schedule." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ساعدني في إنشاء خطة أسبوعية واقعية. اسألني عن أولوياتي والوقت المتاح والتدريب والراحة والمواعيد النهائية المهمة، ثم أنشئ جدولًا لمدة سبعة أيام."
+          }
+        }
+      }
+    },
+    "Help me create a travel plan. Ask about destination, dates, budget, transport, accommodation, activities, packing, and how I want to keep training while traveling." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ساعدني في إنشاء خطة سفر. اسألني عن الوجهة والتواريخ والميزانية ووسائل النقل والإقامة والأنشطة وحزم الأمتعة وكيف أريد مواصلة التدريب أثناء السفر."
+          }
+        }
+      }
+    },
+    "Help me create a vacation plan with dates, activities, rest, fitness, packing, reservations, and a simple daily schedule. Ask for the missing details first." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ساعدني في إنشاء خطة إجازة تتضمن التواريخ والأنشطة والراحة واللياقة البدنية وحزم الأمتعة والحجوزات وجدولًا يوميًا بسيطًا. اسألني أولًا عن التفاصيل الناقصة."
+          }
+        }
+      }
+    },
+    "Help me create my race vision for this year. Ask about my target races, dates, distances, current fitness, personal records, and dream achievement. Then build a month-by-month roadmap." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ساعدني في إنشاء رؤيتي للسباقات لهذا العام. اسألني عن السباقات المستهدفة والتواريخ والمسافات ومستوى لياقتي الحالي وأرقامي الشخصية والإنجاز الذي أحلم به. ثم أنشئ خارطة طريق شهرًا بعد شهر."
+          }
+        }
+      }
+    },
+    "Help me plan my weekend. Balance training, recovery, personal tasks, family time, and something enjoyable. Ask me questions before creating the plan." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "ساعدني في التخطيط لعطلة نهاية الأسبوع. وازن بين التدريب والتعافي والمهام الشخصية ووقت العائلة ونشاط ممتع. اطرح عليّ أسئلة قبل إنشاء الخطة."
+          }
+        }
+      }
+    },
+    "Help us improve by sharing your feedback" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك مساعدتنا على التحسين من خلال مشاركة ملاحظاتك"
+          }
+        }
+      }
+    },
+    "Help us understand which features you use most" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "يمكنك مساعدتنا على فهم الميزات التي تستخدمها أكثر"
+          }
+        }
+      }
+    },
+    "Hey, Alex" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "مرحبًا، أليكس"
+          }
+        }
+      }
+    },
+    "Hide in app switcher" : {
+
+    },
+    "History" : {
+
+    },
+    "Home" : {
+
+    },
+    "Hourly Forecast" : {
+
+    },
+    "Hours" : {
+
+    },
+    "Hours per category this week" : {
+
+    },
+    "How are you feeling today?" : {
+
+    },
+    "How are you feeling today? Log your mood." : {
+
+    },
+    "How are you feeling?" : {
+
+    },
+    "How did it feel?" : {
+
+    },
+    "Hydration" : {
+
+    },
+    "Ideal temperature and low wind" : {
+
+    },
+    "Ideas and lessons shared by the community" : {
+
+    },
+    "If you see this, Xcode IS compiling new code!" : {
+
+    },
+    "In progress" : {
+
+    },
+    "In Progress" : {
+
+    },
+    "Increase" : {
+
+    },
+    "Injury Log" : {
+
+    },
+    "Injury Prevention" : {
+
+    },
+    "Inspiring words to start your morning" : {
+
+    },
+    "iPhone" : {
+
+    },
+    "John Athlete" : {
+
+    },
+    "Join" : {
+
+    },
+    "Join a goal and make progress together" : {
+
+    },
+    "Join Groups" : {
+
+    },
+    "Joined" : {
+
+    },
+    "kcal" : {
+
+    },
+    "Keep Going" : {
+
+    },
+    "Keep holidays organized" : {
+
+    },
+    "Keep your ideas, reminders, and planning notes here." : {
+
+    },
+    "Kilometers" : {
+
+    },
+    "km" : {
+
+    },
+    "Language" : {
+
+    },
+    "Language & Region" : {
+
+    },
+    "Last 7 Days" : {
+
+    },
+    "Last 14 days" : {
+
+    },
+    "Last day" : {
+
+    },
+    "Last Error:" : {
+
+    },
+    "Last Night" : {
+
+    },
+    "Last sync" : {
+
+    },
+    "Later" : {
+
+    },
+    "Latest" : {
+
+    },
+    "Latest RaceTrian News" : {
+
+    },
+    "Learn More" : {
+
+    },
+    "Learning Decks" : {
+
+    },
+    "Let the AI build your full daily schedule" : {
+
+    },
+    "Level name, e.g. Beginner" : {
+
+    },
+    "Life Goals" : {
+
+    },
+    "Listening… Speak your activity, then tap Stop." : {
+
+    },
+    "Location" : {
+
+    },
+    "Log Meal" : {
+
+    },
+    "Log out of your account" : {
+
+    },
+    "Log Water" : {
+
+    },
+    "Log Workout" : {
+
+    },
+    "long-press to add" : {
+
+    },
+    "Macro Tracker" : {
+
+    },
+    "Manage" : {
+
+    },
+    "Map the racing year" : {
+
+    },
+    "Mark Achieved" : {
+
+    },
+    "Mark Active" : {
+
+    },
+    "Mark activities complete in the schedule. Completed hours use their scheduled duration, not a running timer." : {
+
+    },
+    "Mark complete" : {
+
+    },
+    "Mark meal completed" : {
+
+    },
+    "Mark meal incomplete" : {
+
+    },
+    "Meal" : {
+
+    },
+    "Meal Details" : {
+
+    },
+    "Meal name, e.g. Breakfast" : {
+
+    },
+    "Meal Planning" : {
+
+    },
+    "Meal schedule" : {
+
+    },
+    "Message %lld" : {
+
+    },
+    "Message your coach…" : {
+
+    },
+    "Message your planning chatbot…" : {
+
+    },
+    "Messages Sent Today" : {
+
+    },
+    "Milestones" : {
+
+    },
+    "min" : {
+
+    },
+    "Minutes" : {
+
+    },
+    "Monitor your training load and recovery needs" : {
+
+    },
+    "Monthly calendar" : {
+
+    },
+    "Monthly Overview" : {
+
+    },
+    "Monthly Plan" : {
+
+    },
+    "Mood" : {
+
+    },
+    "Mood Breakdown" : {
+
+    },
+    "Mood check-in" : {
+
+    },
+    "Mood logged" : {
+
+    },
+    "Mood logged for today" : {
+
+    },
+    "Mood logged!" : {
+
+    },
+    "Mood Trend" : {
+
+    },
+    "Mood Trend · 14 days" : {
+
+    },
+    "Mood trends, habit streaks, themes & more" : {
+
+    },
+    "More" : {
+
+    },
+    "Morning briefing" : {
+
+    },
+    "Morning Briefing" : {
+
+    },
+    "Morning briefings, evening reviews, and gentle reminders" : {
+
+    },
+    "Morning plan" : {
+
+    },
+    "Most Written About" : {
+
+    },
+    "My Diary" : {
+
+    },
+    "My Equipment" : {
+
+    },
+    "MY RACE VISION" : {
+
+    },
+    "My Race Vision Board" : {
+
+    },
+    "My Routes" : {
+
+    },
+    "Name" : {
+
+    },
+    "Never" : {
+
+    },
+    "New" : {
+
+    },
+    "New Activity" : {
+
+    },
+    "New AI Project" : {
+
+    },
+    "New Board" : {
+
+    },
+    "New Deck" : {
+
+    },
+    "New habit" : {
+
+    },
+    "New Life Goal" : {
+
+    },
+    "New step…" : {
+
+    },
+    "New task" : {
+
+    },
+    "New Task" : {
+
+    },
+    "New tools and improvements added to your training experience." : {
+
+    },
+    "Next" : {
+
+    },
+    "Next day" : {
+
+    },
+    "Next milestones" : {
+
+    },
+    "Next period" : {
+
+    },
+    "Next week" : {
+
+    },
+    "Next year" : {
+
+    },
+    "No %@ Goals" : {
+
+    },
+    "No %@ notes yet" : {
+
+    },
+    "No activities" : {
+
+    },
+    "No activities yet" : {
+
+    },
+    "No data yet — start writing!" : {
+
+    },
+    "No entry" : {
+
+    },
+    "No favourites yet" : {
+
+    },
+    "No goals" : {
+
+    },
+    "No life goals yet" : {
+
+    },
+    "No matching projects" : {
+
+    },
+    "No meals planned" : {
+
+    },
+    "No mood logs yet. Start by checking in above!" : {
+
+    },
+    "No plans yet" : {
+
+    },
+    "No projects yet" : {
+
+    },
+    "No schedule items found" : {
+
+    },
+    "No scheduled activities in this period." : {
+
+    },
+    "No sessions yet" : {
+
+    },
+    "No tasks planned" : {
+
+    },
+    "No test messages sent yet" : {
+
+    },
+    "No workouts yet" : {
+
+    },
+    "Not Active ❌" : {
+
+    },
+    "Not completed" : {
+
+    },
+    "Not connected" : {
+
+    },
+    "Not tracked" : {
+
+    },
+    "Note title" : {
+
+    },
+    "Notes" : {
+
+    },
+    "Nothing coming up" : {
+
+    },
+    "Nothing scheduled yet. Add an activity or create a schedule." : {
+
+    },
+    "Notifications" : {
+
+    },
+    "Notifications are off" : {
+
+    },
+    "Notifications are off for RaceTrian. Turn them on in the Watch app on iPhone." : {
+
+    },
+    "Notifications are on" : {
+
+    },
+    "Nutrition" : {
+
+    },
+    "of focused, intentional time each day" : {
+
+    },
+    "Off" : {
+
+    },
+    "OK" : {
+
+    },
+    "On" : {
+
+    },
+    "One week free, then $18/week. Switch to yearly at any time." : {
+
+    },
+    "One week free, then $18/week. You can switch to yearly at any time." : {
+
+    },
+    "Open" : {
+
+    },
+    "Open AI Planner" : {
+
+    },
+    "Open RaceTrian on your iPhone, then tap Connect." : {
+
+    },
+    "Open Settings" : {
+
+    },
+    "Open this day's tasks" : {
+
+    },
+    "Options for %@" : {
+
+    },
+    "Organization" : {
+
+    },
+    "Organize race dates and preparation milestones by month." : {
+
+    },
+    "Pace Analysis" : {
+
+    },
+    "Partly Cloudy" : {
+
+    },
+    "Password" : {
+
+    },
+    "Past" : {
+
+    },
+    "Pause" : {
+
+    },
+    "Paywall Examples" : {
+
+    },
+    "Paywall Integration Files:" : {
+
+    },
+    "Paywall Testing" : {
+
+    },
+    "Performance" : {
+
+    },
+    "Performance Insights" : {
+
+    },
+    "Performance Predictor" : {
+
+    },
+    "Performance Tracking" : {
+
+    },
+    "Period containing" : {
+
+    },
+    "Personal" : {
+
+    },
+    "Personal Information" : {
+
+    },
+    "Personalized insights" : {
+
+    },
+    "Pick an avatar" : {
+
+    },
+    "Pin" : {
+
+    },
+    "Pin to Vision Board" : {
+
+    },
+    "Plan" : {
+
+    },
+    "Plan Board" : {
+
+    },
+    "Plan date" : {
+
+    },
+    "Plan my day for me" : {
+
+    },
+    "Plan rest and activity" : {
+
+    },
+    "Plan view" : {
+
+    },
+    "Plan View" : {
+
+    },
+    "Plan your day ... Improve your life ..." : {
+
+    },
+    "Plan your day, record training, and keep an eye on progress from your wrist." : {
+
+    },
+    "Plan your holiday" : {
+
+    },
+    "Plan your week and track progress toward your goals" : {
+
+    },
+    "Planned: %@ hours" : {
+
+    },
+    "Plans" : {
+
+    },
+    "Play voice note" : {
+
+    },
+    "Popular Routes" : {
+
+    },
+    "Predict future performance based on current training" : {
+
+    },
+    "Premium" : {
+
+    },
+    "Premium Active" : {
+
+    },
+    "Premium Feature" : {
+
+    },
+    "Premium Feature View" : {
+
+    },
+    "Premium Member" : {
+
+    },
+    "Premium Project" : {
+
+    },
+    "Premium Status" : {
+
+    },
+    "Premium Status: %@" : {
+
+    },
+    "Premium users have unlimited messages" : {
+
+    },
+    "Prepare trips and workouts" : {
+
+    },
+    "Preparing microphone…" : {
+
+    },
+    "Previous day" : {
+
+    },
+    "Previous period" : {
+
+    },
+    "Previous week" : {
+
+    },
+    "Previous year" : {
+
+    },
+    "Privacy" : {
+
+    },
+    "Privacy & Security" : {
+
+    },
+    "Privacy policy" : {
+
+    },
+    "PRO" : {
+
+    },
+    "Profile" : {
+
+    },
+    "Profile View" : {
+
+    },
+    "Progress" : {
+
+    },
+    "Progress Chart" : {
+
+    },
+    "Progress tracking" : {
+
+    },
+    "Project" : {
+
+    },
+    "Project title" : {
+
+    },
+    "Projects" : {
+
+    },
+    "Purchase Failed" : {
+
+    },
+    "QR Code" : {
+
+    },
+    "Quick Actions" : {
+
+    },
+    "QUICK ACTIONS" : {
+
+    },
+    "Quick Add" : {
+
+    },
+    "Quick log" : {
+
+    },
+    "Quick Log" : {
+
+    },
+    "QUICK LOG" : {
+
+    },
+    "Quick notes" : {
+
+    },
+    "Quick session" : {
+
+    },
+    "Quota Exceeded" : {
+
+    },
+    "RACE" : {
+
+    },
+    "Race Calendar" : {
+
+    },
+    "Race date" : {
+
+    },
+    "Race Date" : {
+
+    },
+    "Race Events" : {
+
+    },
+    "Race Information" : {
+
+    },
+    "Race name" : {
+
+    },
+    "Race Name" : {
+
+    },
+    "Race Type" : {
+
+    },
+    "Race-Day Readiness" : {
+
+    },
+    "RaceTrian" : {
+
+    },
+    "RACETRIAN" : {
+
+    },
+    "Rate App" : {
+
+    },
+    "Rate RaceTrian" : {
+
+    },
+    "Ready for your next workout" : {
+
+    },
+    "Ready to crush your goals today?" : {
+
+    },
+    "Ready to start planning your best day ever?" : {
+
+    },
+    "Recent" : {
+
+    },
+    "Recent Achievements" : {
+
+    },
+    "Recent Activity" : {
+
+    },
+    "RECENT ACTIVITY" : {
+
+    },
+    "Recent Records" : {
+
+    },
+    "Record a workout reminder or how your session felt. Notes stay on this device." : {
+
+    },
+    "Record Voice Note" : {
+
+    },
+    "Recording · %lld seconds" : {
+
+    },
+    "Recovery Score" : {
+
+    },
+    "Refresh Status" : {
+
+    },
+    "Refresh Steps" : {
+
+    },
+    "Reload Plans" : {
+
+    },
+    "Remind me" : {
+
+    },
+    "Reminders" : {
+
+    },
+    "Reminders are off" : {
+
+    },
+    "Replace schedule" : {
+
+    },
+    "Replace the saved schedule in this section?" : {
+
+    },
+    "Report Bug" : {
+
+    },
+    "Require Face ID to open" : {
+
+    },
+    "Research ideas\nCreate the first draft\nReview and publish" : {
+
+    },
+    "Reset" : {
+
+    },
+    "Reset Filters" : {
+
+    },
+    "Reset Today" : {
+
+    },
+    "Reset today's tasks, workouts, water, and mood?" : {
+
+    },
+    "Restore" : {
+
+    },
+    "Restore Purchases" : {
+
+    },
+    "Retry message" : {
+
+    },
+    "Review Schedule" : {
+
+    },
+    "Review session duration and mark each workout complete." : {
+
+    },
+    "Rewards" : {
+
+    },
+    "Route Planner" : {
+
+    },
+    "Routes" : {
+
+    },
+    "Running Analytics" : {
+
+    },
+    "San Francisco" : {
+
+    },
+    "Satisfying sounds for completed tasks and achievements" : {
+
+    },
+    "Save" : {
+
+    },
+    "Save Changes" : {
+
+    },
+    "Save Check-in" : {
+
+    },
+    "Save Entry" : {
+
+    },
+    "Save note" : {
+
+    },
+    "Save step" : {
+
+    },
+    "Save Workout" : {
+
+    },
+    "Save your training and sync it across devices" : {
+
+    },
+    "Saved" : {
+
+    },
+    "Saved Locations" : {
+
+    },
+    "Schedule" : {
+
+    },
+    "Schedule activity" : {
+
+    },
+    "Schedule begins" : {
+
+    },
+    "Schedule completion" : {
+
+    },
+    "Schedule could not be saved" : {
+
+    },
+    "Schedule dates" : {
+
+    },
+    "Schedule section" : {
+
+    },
+    "Schedule times" : {
+
+    },
+    "Schedule tracking" : {
+
+    },
+    "Score" : {
+
+    },
+    "Search" : {
+
+    },
+    "Search entries…" : {
+
+    },
+    "Search features..." : {
+
+    },
+    "Search notes…" : {
+
+    },
+    "Search projects" : {
+
+    },
+    "Search races..." : {
+
+    },
+    "Search settings" : {
+
+    },
+    "Search Settings" : {
+
+    },
+    "Seasonal Trends" : {
+
+    },
+    "Secure payment via Apple" : {
+
+    },
+    "See all" : {
+
+    },
+    "See your progress at a glance" : {
+
+    },
+    "Send Coach Message" : {
+
+    },
+    "Send message" : {
+
+    },
+    "Send Message" : {
+
+    },
+    "Send Reset Link" : {
+
+    },
+    "Send Test Message" : {
+
+    },
+    "Send Test Notification" : {
+
+    },
+    "Send to Plan Calendar" : {
+
+    },
+    "Sent" : {
+
+    },
+    "Session name" : {
+
+    },
+    "Session progress" : {
+
+    },
+    "Set a target date" : {
+
+    },
+    "Set Goal" : {
+
+    },
+    "Set this month's focus" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Share" : {
+
+    },
+    "Share a note" : {
+
+    },
+    "Share Activity" : {
+
+    },
+    "Share Note" : {
+
+    },
+    "Share useful notes, follow athletes, and stay accountable with training groups and challenges." : {
+
+    },
+    "Shared between Home and Plan." : {
+
+    },
+    "Shared Notes" : {
+
+    },
+    "Show daily quotes" : {
+
+    },
+    "Show icon labels" : {
+
+    },
+    "Show more content at once" : {
+
+    },
+    "Show Paywall" : {
+
+    },
+    "Sign In" : {
+
+    },
+    "Sign in to continue your training" : {
+
+    },
+    "Sign in to restore purchases" : {
+
+    },
+    "Sign Out" : {
+
+    },
+    "Sleep Quality" : {
+
+    },
+    "Sleep Tracker" : {
+
+    },
+    "Smart Insights" : {
+
+    },
+    "Smart suggestions, auto-scheduling, and personalized insights" : {
+
+    },
+    "Social" : {
+
+    },
+    "Social Feed" : {
+
+    },
+    "Sort projects" : {
+
+    },
+    "Speak the activity and its times, then review the text and dates before saving." : {
+
+    },
+    "Sports Tracking" : {
+
+    },
+    "Start" : {
+
+    },
+    "Start a Project" : {
+
+    },
+    "Start Assessment" : {
+
+    },
+    "Start Chat" : {
+
+    },
+    "Start Date" : {
+
+    },
+    "Start Free Trial" : {
+
+    },
+    "Start New Route" : {
+
+    },
+    "Start one from the Workout page." : {
+
+    },
+    "Start Premium" : {
+
+    },
+    "Start the timer when you begin working toward it." : {
+
+    },
+    "Start time" : {
+
+    },
+    "Start Time" : {
+
+    },
+    "Start writing…" : {
+
+    },
+    "Start your first entry" : {
+
+    },
+    "Starting now (%@)" : {
+
+    },
+    "Starts in %lld min at %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Starts in %1$lld min at %2$@"
+          }
+        }
+      }
+    },
+    "Starts with the full current month. Choose the days you want to plan." : {
+
+    },
+    "Starts with your current or next local weekend. Adjust the dates if needed." : {
+
+    },
+    "Statistics" : {
+
+    },
+    "Status" : {
+
+    },
+    "Stay on track" : {
+
+    },
+    "Steps" : {
+
+    },
+    "Steps & Activity" : {
+
+    },
+    "Steps Counter" : {
+
+    },
+    "Stop & Save" : {
+
+    },
+    "Stop & Save Note" : {
+
+    },
+    "Stop recording" : {
+
+    },
+    "Stop Route" : {
+
+    },
+    "Stop voice note" : {
+
+    },
+    "Streak" : {
+
+    },
+    "Streaks & Challenges" : {
+
+    },
+    "Strength Progress" : {
+
+    },
+    "Study Guides" : {
+
+    },
+    "Style" : {
+
+    },
+    "Subject" : {
+
+    },
+    "Submit Rating" : {
+
+    },
+    "Subscription" : {
+
+    },
+    "Sunrise/Sunset" : {
+
+    },
+    "Supplements" : {
+
+    },
+    "support@racetrian.com" : {
+
+    },
+    "Swimming" : {
+
+    },
+    "Swimming Tracking" : {
+
+    },
+    "Sync now" : {
+
+    },
+    "Sync your data securely to iCloud" : {
+
+    },
+    "Syncing…" : {
+
+    },
+    "Syncs with iPhone" : {
+
+    },
+    "Tagline" : {
+
+    },
+    "Tap + or plan it with AI on iPhone." : {
+
+    },
+    "Tap + to add your first task." : {
+
+    },
+    "Tap + to capture today's thoughts, feelings, and memories." : {
+
+    },
+    "Tap + to let AI craft your perfect day." : {
+
+    },
+    "Tap ✏️ to capture your first thought." : {
+
+    },
+    "Tap a bullet to mark done · Long-press a card to add" : {
+
+    },
+    "Tap a day to mark your habit complete. Future days unlock when they arrive." : {
+
+    },
+    "Tap a day to track your progress or remove a check-in. Goal check-ins also mark today." : {
+
+    },
+    "Tap Add Session to log your workout." : {
+
+    },
+    "Tap to log your mood" : {
+
+    },
+    "Tap to reveal message" : {
+
+    },
+    "Tap to see emoji" : {
+
+    },
+    "Tap to update" : {
+
+    },
+    "Target" : {
+
+    },
+    "Target, e.g. squat 40 kg for 5 reps" : {
+
+    },
+    "Task name" : {
+
+    },
+    "Task title…" : {
+
+    },
+    "Tasks" : {
+
+    },
+    "Tasks and AI Board activities will show here." : {
+
+    },
+    "Tasks done" : {
+
+    },
+    "Terms" : {
+
+    },
+    "Test Messages History" : {
+
+    },
+    "The app updates immediately and uses right-to-left layout for Arabic." : {
+
+    },
+    "The problem is somewhere else" : {
+
+    },
+    "Theme" : {
+
+    },
+    "This month's focus, day by day." : {
+
+    },
+    "This removes every race goal from the current board." : {
+
+    },
+    "This week" : {
+
+    },
+    "This Week" : {
+
+    },
+    "THIS WEEK" : {
+
+    },
+    "This week avg" : {
+
+    },
+    "Time" : {
+
+    },
+    "Time Breakdown" : {
+
+    },
+    "Time each session and tick off milestones." : {
+
+    },
+    "Time your goal sessions" : {
+
+    },
+    "Timer" : {
+
+    },
+    "Tips and insights to prevent training injuries" : {
+
+    },
+    "Title" : {
+
+    },
+    "to" : {
+
+    },
+    "today" : {
+
+    },
+    "Today" : {
+
+    },
+    "Today's focus" : {
+
+    },
+    "Today's Meals" : {
+
+    },
+    "Today's mood" : {
+
+    },
+    "Today's Nutrition" : {
+
+    },
+    "TODAY'S OVERVIEW" : {
+
+    },
+    "Today's Plan" : {
+
+    },
+    "Today's Progress" : {
+
+    },
+    "TODAY'S SCHEDULE" : {
+
+    },
+    "Toggle completion" : {
+
+    },
+    "Tomorrow" : {
+
+    },
+    "Tools" : {
+
+    },
+    "total" : {
+
+    },
+    "Track your swimming workouts and progress" : {
+
+    },
+    "Tracked" : {
+
+    },
+    "Tracking" : {
+
+    },
+    "Tracking period" : {
+
+    },
+    "Train & Track" : {
+
+    },
+    "Train better, together" : {
+
+    },
+    "Train smarter with Premium" : {
+
+    },
+    "Training" : {
+
+    },
+    "TRAINING" : {
+
+    },
+    "Training Articles" : {
+
+    },
+    "Training Conditions" : {
+
+    },
+    "Training Groups" : {
+
+    },
+    "Training Load" : {
+
+    },
+    "Training Log" : {
+
+    },
+    "Training Progress" : {
+
+    },
+    "Training sessions" : {
+
+    },
+    "Training Zones" : {
+
+    },
+    "Travel itinerary" : {
+
+    },
+    "Travel Plan" : {
+
+    },
+    "TRIAN" : {
+
+    },
+    "Try Again" : {
+
+    },
+    "Try another search or reset your filters to see your projects." : {
+
+    },
+    "Try asking…" : {
+
+    },
+    "Turn On Notifications" : {
+
+    },
+    "Turn on notifications for RaceTrian in Settings to get plan reminders." : {
+
+    },
+    "Type" : {
+
+    },
+    "Understand how weather affects your performance" : {
+
+    },
+    "Unit, e.g. km or sessions" : {
+
+    },
+    "Unlimited" : {
+
+    },
+    "Unlimited AI Coach" : {
+
+    },
+    "Unlimited AI Coach + advanced tracking" : {
+
+    },
+    "Unlimited coaching, sharper planning, and race-ready tracking in one focused training hub." : {
+
+    },
+    "Unlock All\nProjects" : {
+
+    },
+    "Unlock all features" : {
+
+    },
+    "Unlock Premium" : {
+
+    },
+    "Unlock unlimited steps with Premium" : {
+
+    },
+    "Unlock with Premium" : {
+
+    },
+    "Unpin" : {
+
+    },
+    "Until %@" : {
+
+    },
+    "Upcoming" : {
+
+    },
+    "Upcoming Events" : {
+
+    },
+    "Update Check-in" : {
+
+    },
+    "Update schedule" : {
+
+    },
+    "Upgrade" : {
+
+    },
+    "Upgrade Now" : {
+
+    },
+    "Upgrade to Premium" : {
+
+    },
+    "Use these buttons to test different paywall scenarios" : {
+
+    },
+    "Uses a built-in template. You can edit every activity and time afterward." : {
+
+    },
+    "Vacation day planner" : {
+
+    },
+    "Vacation Plan" : {
+
+    },
+    "Video Tutorials" : {
+
+    },
+    "View detailed performance metrics" : {
+
+    },
+    "View detailed statistics" : {
+
+    },
+    "View Integration Examples" : {
+
+    },
+    "Voice Notes" : {
+
+    },
+    "Voice Schedule" : {
+
+    },
+    "Water" : {
+
+    },
+    "Water Intake" : {
+
+    },
+    "We couldn’t load purchase options." : {
+
+    },
+    "Weather" : {
+
+    },
+    "Weather Forecast" : {
+
+    },
+    "Weather Impact" : {
+
+    },
+    "Week" : {
+
+    },
+    "Week overview" : {
+
+    },
+    "Week Start" : {
+
+    },
+    "Weekend agenda" : {
+
+    },
+    "Weekend containing or after" : {
+
+    },
+    "Weekend Plan" : {
+
+    },
+    "Weekly Activity" : {
+
+    },
+    "WEEKLY GOALS" : {
+
+    },
+    "Weekly Plan" : {
+
+    },
+    "Weekly Progress" : {
+
+    },
+    "Weekly Report" : {
+
+    },
+    "Weekly schedule" : {
+
+    },
+    "Weekly Summary" : {
+
+    },
+    "Weekly training" : {
+
+    },
+    "Welcome Back" : {
+
+    },
+    "Welcome Back!" : {
+
+    },
+    "Welcome to RaceTrian 👋" : {
+
+    },
+    "Welcome to the full experience." : {
+
+    },
+    "Wellness Score" : {
+
+    },
+    "What would you like to achieve?" : {
+
+    },
+    "What would you like to share?" : {
+
+    },
+    "What would you like to work on?" : {
+
+    },
+    "What's New" : {
+
+    },
+    "What's on your mind?" : {
+
+    },
+    "Workout" : {
+
+    },
+    "Workout in progress" : {
+
+    },
+    "Workout Intensity" : {
+
+    },
+    "Workout Logger" : {
+
+    },
+    "Workout Plans" : {
+
+    },
+    "Workout Timer" : {
+
+    },
+    "Workouts" : {
+
+    },
+    "Write the full activity" : {
+
+    },
+    "Writing Streak" : {
+
+    },
+    "Year race calendar" : {
+
+    },
+    "Year Race Vision" : {
+
+    },
+    "Yoga & Stretching" : {
+
+    },
+    "YOU CAN\nDO IT!" : {
+
+    },
+    "You have access to all features!" : {
+
+    },
+    "You'll have" : {
+
+    },
+    "You're all set!" : {
+
+    },
+    "You're Premium!" : {
+
+    },
+    "Your activities for the next seven days." : {
+
+    },
+    "Your board is already empty and ready for new race goals." : {
+
+    },
+    "Your daily training schedule and activities" : {
+
+    },
+    "Your data is stored on your device and protected by iOS security." : {
+
+    },
+    "Your day is open" : {
+
+    },
+    "Your day,\noptimized." : {
+
+    },
+    "Your departures, arrivals, and stops in chronological order." : {
+
+    },
+    "Your departures, arrivals, and stops in chronological order. Times use your device's time zone." : {
+
+    },
+    "Your existing activities in this section will be replaced." : {
+
+    },
+    "Your focus (optional)" : {
+
+    },
+    "Your goals" : {
+
+    },
+    "Your levels" : {
+
+    },
+    "Your name" : {
+
+    },
+    "Your new entries will appear here." : {
+
+    },
+    "Your notes" : {
+
+    },
+    "Your personal data is never shared" : {
+
+    },
+    "Your plan is ready to build" : {
+
+    },
+    "Your Progress" : {
+
+    },
+    "Your vision board is ready" : {
+
+    },
+    "العربية" : {
+
+    }
+  },
+  "version" : "1.3"
+}

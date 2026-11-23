@@ -54,7 +54,7 @@ struct DiaryInsightsView: View {
                 Spacer()
                 
                 Text("\(store.streakDays)")
-                    .font(.system(size: 42, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(42), weight: .bold, design: .rounded))
                     .foregroundStyle(Theme.primary)
             }
         }
@@ -242,7 +242,7 @@ struct StatBox: View {
                 .foregroundStyle(color)
             
             Text(value)
-                .font(.system(size: 28, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
                 .foregroundStyle(Theme.textPrimary)
             
             Text(label)

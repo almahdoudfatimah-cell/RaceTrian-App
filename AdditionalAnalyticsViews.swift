@@ -183,7 +183,7 @@ struct CompetitionReadinessView: View {
                         
                         VStack {
                             Text("\(Int(readinessScore * 100))%")
-                                .font(.system(size: 44, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(44), weight: .bold, design: .rounded))
                                 .foregroundStyle(Theme.primary)
                             Text("Ready")
                                 .font(.subheadline)
@@ -286,7 +286,7 @@ struct PerformancePredictorView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Text(predictedTime(for: selectedDistance))
-                                .font(.system(size: 36, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(36), weight: .bold, design: .rounded))
                                 .foregroundStyle(Theme.primary)
                             
                             Text("Based on recent training")
@@ -297,7 +297,7 @@ struct PerformancePredictorView: View {
                         Spacer()
                         
                         Image(systemName: "trophy.fill")
-                            .font(.system(size: 60))
+                            .font(.system(size: Theme.fontSize(60)))
                             .foregroundStyle(Theme.accent.gradient)
                     }
                 }
@@ -719,7 +719,7 @@ struct StatCard: View {
             }
             
             Text(value)
-                .font(.system(size: 28, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
                 .foregroundStyle(Theme.textPrimary)
             
             HStack {

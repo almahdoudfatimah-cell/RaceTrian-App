@@ -51,9 +51,6 @@ final class WatchNotificationManager: NSObject {
         self.store = store
         Task {
             await refreshAuthorization()
-            if isEnabled && !isAuthorized && !isDenied {
-                await requestAuthorization()
-            }
             scheduleReschedule()
         }
     }
@@ -68,6 +65,19 @@ final class WatchNotificationManager: NSObject {
         let status = await center.notificationSettings().authorizationStatus
         isAuthorized = status == .authorized || status == .provisional
         isDenied = status == .denied
+    }
+
+    /// Called after a person creates a scheduled item, so permission is requested in context
+    /// and the new reminder is added immediately.
+    func scheduleAfterUserAction() {
+        Task {
+            await refreshAuthorization()
+            if isEnabled && !isAuthorized && !isDenied {
+                await requestAuthorization()
+            } else {
+                await reschedule()
+            }
+        }
     }
 
     /// Debounced so a burst of store changes (e.g. a full iPhone sync) reschedules once.

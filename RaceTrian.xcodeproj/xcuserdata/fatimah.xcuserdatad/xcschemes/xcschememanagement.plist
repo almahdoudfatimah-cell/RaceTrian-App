@@ -21,7 +21,7 @@
 			<key>isShown</key>
 			<true/>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Copy of Ai Planner.xcscheme_^#shared#^_</key>
 		<dict>
@@ -31,7 +31,7 @@
 		<key>RaceTrian.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 		<key>RaceTrianTests.xcscheme_^#shared#^_</key>
 		<dict>
@@ -42,6 +42,29 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>4C6C2DFE303C4FD500DE3B64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4C6C2E0A303C4FD900DE3B64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4C6C2E14303C4FD900DE3B64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4C705EFF2FAA819E006071CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

@@ -68,7 +68,7 @@ struct CoachView: View {
     private var quotaBanner: some View {
         HStack(spacing: 10) {
             Image(systemName: "crown.fill")
-                .font(.system(size: 14, weight: .bold))
+                .font(.system(size: Theme.fontSize(14), weight: .bold))
                 .foregroundStyle(Theme.accent)
             Text(premium.coachRemainingToday > 0
                  ? "\(premium.coachRemainingToday) free messages left today"
@@ -128,7 +128,7 @@ struct CoachView: View {
                 HStack(alignment: .bottom, spacing: 14) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("AI Coach")
-                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
                     }
                     Spacer()
@@ -136,7 +136,7 @@ struct CoachView: View {
                     HStack(spacing: 5) {
                         Circle().fill(Theme.mint).frame(width: 8, height: 8)
                         Text("Chat")
-                            .font(.system(size: 12, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                             .foregroundStyle(.white.opacity(0.9))
                     }
                     .padding(.horizontal, 10)
@@ -150,9 +150,9 @@ struct CoachView: View {
             HStack(alignment: .top, spacing: 10) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Welcome to RaceTrian 👋")
-                        .font(.system(size: 15, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                     Text("Ask me anything about planning, habits, focus, or wellbeing. I'm here to help you thrive.")
-                        .font(.system(size: 14, design: .rounded))
+                        .font(.system(size: Theme.fontSize(14), design: .rounded))
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -179,20 +179,20 @@ struct CoachView: View {
                     ZStack {
                         Circle().fill(Color.white.opacity(0.22)).frame(width: 40, height: 40)
                         Image(systemName: "calendar.badge.plus")
-                            .font(.system(size: 18, weight: .bold))
+                            .font(.system(size: Theme.fontSize(18), weight: .bold))
                             .foregroundStyle(.white)
                     }
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Plan my day for me")
-                            .font(.system(size: 15, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
                         Text("Let the AI build your full daily schedule")
-                            .font(.system(size: 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.white.opacity(0.8))
                     }
                     Spacer()
                     Image(systemName: "arrow.right")
-                        .font(.system(size: 14, weight: .bold))
+                        .font(.system(size: Theme.fontSize(14), weight: .bold))
                         .foregroundStyle(.white.opacity(0.8))
                 }
                 .padding(14)
@@ -202,7 +202,7 @@ struct CoachView: View {
             .buttonStyle(.plain)
 
             Text("Try asking…")
-                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
                 ForEach(CoachPrompts.suggestions) { prompt in
@@ -255,7 +255,7 @@ struct CoachView: View {
     private var inputBar: some View {
         HStack(spacing: 10) {
             TextField("Message your coach…", text: $inputText, axis: .vertical)
-                .font(.system(size: 15, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), design: .rounded))
                 .lineLimit(1...4)
                 .focused($inputFocused)
                 .padding(.horizontal, 14)
@@ -279,7 +279,7 @@ struct CoachView: View {
                               : AnyShapeStyle(Theme.heroGradient))
                         .frame(width: 42, height: 42)
                     Image(systemName: "arrow.up")
-                        .font(.system(size: 16, weight: .bold))
+                        .font(.system(size: Theme.fontSize(16), weight: .bold))
                         .foregroundStyle(.white)
                 }
             }

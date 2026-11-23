@@ -1,13 +1,18 @@
 import SwiftUI
+import Observation
 import WatchConnectivity
 
 @MainActor
+@Observable
 final class WatchPhoneSyncManager: NSObject {
     static let shared = WatchPhoneSyncManager()
 
-    private let session: WCSession? = WCSession.isSupported() ? .default : nil
-    private weak var store: WatchAppStore?
-    private weak var access: WatchAccessStore?
+    /// Whether the paired iPhone can be reached right now, shown by the Connect iPhone buttons.
+    private(set) var isPhoneReachable = false
+
+    @ObservationIgnored private let session: WCSession? = WCSession.isSupported() ? .default : nil
+    @ObservationIgnored private weak var store: WatchAppStore?
+    @ObservationIgnored private weak var access: WatchAccessStore?
 
     private override init() {
         super.init()
@@ -19,6 +24,20 @@ final class WatchPhoneSyncManager: NSObject {
         guard let session else { return }
         session.delegate = self
         session.activate()
+    }
+
+    /// Starts the iPhone session if it isn't running yet, loads the last data the iPhone sent,
+    /// and asks for a fresh snapshot when the iPhone is reachable.
+    func connect() {
+        guard let session else { return }
+        guard session.activationState == .activated else {
+            session.delegate = self
+            session.activate()
+            return
+        }
+        isPhoneReachable = session.isReachable
+        apply(session.receivedApplicationContext)
+        requestSnapshot()
     }
 
     func requestSnapshot() {
@@ -120,8 +139,20 @@ extension WatchPhoneSyncManager: WCSessionDelegate {
         error: Error?
     ) {
         guard activationState == .activated, error == nil else { return }
+        let isReachable = session.isReachable
         Task { @MainActor in
+            self.isPhoneReachable = isReachable
             self.requestSnapshot()
+        }
+    }
+
+    nonisolated func sessionReachabilityDidChange(_ session: WCSession) {
+        let isReachable = session.isReachable
+        Task { @MainActor in
+            self.isPhoneReachable = isReachable
+            if isReachable {
+                self.requestSnapshot()
+            }
         }
     }
 

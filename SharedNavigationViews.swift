@@ -18,15 +18,15 @@ public struct SettingsView: View {
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "person.circle.fill")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.fontSize(24)))
                             .foregroundStyle(Theme.primary)
                             .frame(width: 32)
                         
                         VStack(alignment: .leading, spacing: 2) {
                             Text("Profile")
-                                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                             Text("Manage your account")
-                                .font(.system(size: 13, design: .rounded))
+                                .font(.system(size: Theme.fontSize(13), design: .rounded))
                                 .foregroundStyle(.secondary)
                         }
                     }
@@ -40,7 +40,7 @@ public struct SettingsView: View {
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "paintbrush.fill")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.blue)
                             .frame(width: 32)
                         Text("Appearance")
@@ -52,7 +52,7 @@ public struct SettingsView: View {
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "lock.shield.fill")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.green)
                             .frame(width: 32)
                         Text("Privacy")
@@ -66,7 +66,7 @@ public struct SettingsView: View {
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "questionmark.circle.fill")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.purple)
                             .frame(width: 32)
                         Text("Help Center")
@@ -78,7 +78,7 @@ public struct SettingsView: View {
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "star.fill")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(Color(red: 1.0, green: 0.8, blue: 0.0))
                             .frame(width: 32)
                         Text("Rate App")
@@ -92,7 +92,7 @@ public struct SettingsView: View {
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "rectangle.portrait.and.arrow.right")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.red)
                             .frame(width: 32)
                         Text("Sign Out")
@@ -106,10 +106,10 @@ public struct SettingsView: View {
                     Spacer()
                     VStack(spacing: 4) {
                         Text("RaceTrian")
-                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                             .foregroundStyle(.secondary)
                         Text("Version 1.0.0")
-                            .font(.system(size: 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.tertiary)
                     }
                     Spacer()
@@ -320,7 +320,7 @@ struct RateAppView: View {
     var body: some View {
         VStack(spacing: 30) {
             Image(systemName: "star.fill")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(Color(red: 1.0, green: 0.8, blue: 0.0))
             
             Text("Rate Our App")
@@ -336,7 +336,7 @@ struct RateAppView: View {
                         rating = index
                     } label: {
                         Image(systemName: index <= rating ? "star.fill" : "star")
-                            .font(.system(size: 32))
+                            .font(.system(size: Theme.fontSize(32)))
                             .foregroundStyle(Color(red: 1.0, green: 0.8, blue: 0.0))
                     }
                 }

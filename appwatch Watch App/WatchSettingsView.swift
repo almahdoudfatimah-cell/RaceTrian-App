@@ -50,6 +50,18 @@ struct WatchSettingsView: View {
 
                 WatchSettingsSection(title: "iPhone") {
                     Button {
+                        WatchPhoneSyncManager.shared.connect()
+                    } label: {
+                        WatchSettingsRow(title: "Connect iPhone", icon: "iphone", color: WatchTheme.primary) {
+                            Text(WatchPhoneSyncManager.shared.isPhoneReachable ? "Connected" : "Not connected")
+                                .font(WatchSettingsFont.value)
+                                .foregroundStyle(WatchPhoneSyncManager.shared.isPhoneReachable ? WatchTheme.secondary : WatchTheme.muted)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.7)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    Button {
                         WatchPhoneSyncManager.shared.requestSnapshot()
                     } label: {
                         WatchSettingsRow(title: "Sync now", icon: "arrow.triangle.2.circlepath", color: WatchTheme.secondary)

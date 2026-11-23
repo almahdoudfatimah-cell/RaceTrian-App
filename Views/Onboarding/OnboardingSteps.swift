@@ -4,11 +4,11 @@ import SwiftUI
 
 struct WelcomeStep: View {
     var body: some View {
-        VStack(spacing: 28) {
+        VStack(spacing: isIPad ? 22 : 28) {
             Spacer()
 
             VStack(spacing: 12) {
-                RaceTrianLogo(size: 48, stacked: true)
+                RaceTrianLogo(size: isIPad ? 56 : 48, stacked: true)
                     .frame(maxWidth: .infinity, alignment: .center)
 
                 Text("Plan your day ... Improve your life ...")
@@ -22,26 +22,140 @@ struct WelcomeStep: View {
                     .font(.system(.footnote, design: .rounded))
                     .foregroundStyle(.secondary)
                     .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal, 28)
             }
 
-            Spacer()
+            if isIPad {
+                // iPad: highlight pills fill the space and features follow
+                // directly, with the group sitting just above the button.
+                highlightPills
 
-            VStack(spacing: 14) {
-                FeatureRow(icon: "sparkles", color: Theme.primary,
-                           title: "AI that plans your day",
-                           subtitle: "Smart suggestions tailored to you")
-                FeatureRow(icon: "chart.line.uptrend.xyaxis", color: Theme.accent,
-                           title: "Track what matters",
-                           subtitle: "Habits, mood, and progress at a glance")
-                FeatureRow(icon: "heart.fill", color: Theme.rose,
-                           title: "Designed to feel good",
-                           subtitle: "Beautiful, calm, and made for you")
+                previewCards
+
+                // Six features: original three on the left, three more on the right
+                HStack(alignment: .top, spacing: 24) {
+                    VStack(alignment: .leading, spacing: 16) {
+                        featureRows
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack(alignment: .leading, spacing: 16) {
+                        moreFeatureRows
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding(.horizontal, 24)
+                .iPadReadableWidth(760)
+
+                Spacer()
+            } else {
+                Spacer()
+
+                VStack(alignment: .leading, spacing: 14) {
+                    featureRows
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 12)
             }
-            .padding(.horizontal, 24)
-            .padding(.bottom, 12)
         }
         .padding(.horizontal, 4)
+    }
+
+    private var isIPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+
+    /// iPad-only row of three summary cards.
+    private var previewCards: some View {
+        HStack(spacing: 16) {
+            PreviewCard(icon: "calendar.badge.clock", title: "Plan",
+                        text: "Organize your day and week", color: Theme.primary)
+            PreviewCard(icon: "chart.bar.fill", title: "Track",
+                        text: "Habits, mood and training", color: Theme.secondary)
+            PreviewCard(icon: "arrow.up.right.circle.fill", title: "Grow",
+                        text: "Insights that keep you improving", color: Theme.rose)
+        }
+        .padding(.horizontal, 24)
+        .iPadReadableWidth(760)
+    }
+
+    private var highlightPills: some View {
+        HStack(spacing: 12) {
+            HighlightPill(icon: "calendar", text: "Day planner", color: Theme.primary)
+            HighlightPill(icon: "checkmark.circle", text: "Habit tracker", color: Theme.secondary)
+            HighlightPill(icon: "face.smiling", text: "Mood journal", color: Color(red: 0.80, green: 0.52, blue: 0.00))
+            HighlightPill(icon: "sparkles", text: "AI coach", color: Theme.rose)
+        }
+        .padding(.vertical, 8)
+    }
+
+    @ViewBuilder
+    private var featureRows: some View {
+        FeatureRow(icon: "sparkles", color: Theme.primary,
+                   title: "AI that plans your day",
+                   subtitle: "Smart suggestions tailored to you")
+        FeatureRow(icon: "chart.line.uptrend.xyaxis", color: Theme.accent,
+                   title: "Track what matters",
+                   subtitle: "Habits, mood, and progress at a glance")
+        FeatureRow(icon: "heart.fill", color: Theme.rose,
+                   title: "Designed to feel good",
+                   subtitle: "Beautiful, calm, and made for you")
+    }
+
+    /// Extra features shown in the right-hand column on iPad.
+    @ViewBuilder
+    private var moreFeatureRows: some View {
+        FeatureRow(icon: "calendar.badge.clock", color: Theme.secondary,
+                   title: "Plan your whole week",
+                   subtitle: "Day and week views in one place")
+        FeatureRow(icon: "flag.checkered", color: Theme.primary,
+                   title: "Goals and projects",
+                   subtitle: "Break big goals into daily steps")
+        FeatureRow(icon: "applewatch", color: Color(red: 0.80, green: 0.52, blue: 0.00),
+                   title: "On your wrist too",
+                   subtitle: "Check your plan from Apple Watch")
+    }
+}
+
+private struct PreviewCard: View {
+    let icon: String
+    let title: String
+    let text: String
+    let color: Color
+
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.system(size: 28, weight: .semibold))
+                .foregroundStyle(color)
+            Text(title)
+                .font(.system(.headline, design: .rounded, weight: .bold))
+            Text(text)
+                .font(.system(.caption, design: .rounded))
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 18)
+        .padding(.horizontal, 12)
+        .background(color.opacity(0.10), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+    }
+}
+
+private struct HighlightPill: View {
+    let icon: String
+    let text: String
+    let color: Color
+
+    var body: some View {
+        Label(text, systemImage: icon)
+            .font(.system(.footnote, design: .rounded, weight: .semibold))
+            .foregroundStyle(color)
+            .lineLimit(1)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 8)
+            .background(color.opacity(0.14), in: Capsule())
     }
 }
 
@@ -58,14 +172,14 @@ private struct FeatureRow: View {
                     .fill(color.opacity(0.18))
                     .frame(width: 46, height: 46)
                 Image(systemName: icon)
-                    .font(.system(size: 20, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(20), weight: .semibold))
                     .foregroundStyle(color)
             }
             VStack(alignment: .leading, spacing: 2) {
                 Text(title).font(.system(.subheadline, design: .rounded, weight: .semibold))
                 Text(subtitle).font(.system(.caption, design: .rounded)).foregroundStyle(.secondary)
             }
-            Spacer()
+            Spacer(minLength: 0)
         }
     }
 }
@@ -90,7 +204,7 @@ struct NameStep: View {
                     Circle()
                         .fill(Theme.heroGradient.opacity(0.18))
                         .frame(width: 130, height: 130)
-                    Text(avatar).font(.system(size: 76))
+                    Text(avatar).font(.system(size: Theme.fontSize(76)))
                 }
                 .padding(.top, 6)
 
@@ -122,7 +236,7 @@ struct NameStep: View {
                                 }
                             } label: {
                                 Text(emoji)
-                                    .font(.system(size: 30))
+                                    .font(.system(size: Theme.fontSize(30)))
                                     .frame(width: 50, height: 50)
                                     .background(
                                         Circle().fill(avatar == emoji ? Theme.primary.opacity(0.2) : Color.white.opacity(0.5))
@@ -188,10 +302,10 @@ private struct AreaTile: View {
         Button(action: onTap) {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Text(area.emoji).font(.system(size: 30))
+                    Text(area.emoji).font(.system(size: Theme.fontSize(30)))
                     Spacer()
                     Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                        .font(.system(size: 22))
+                        .font(.system(size: Theme.fontSize(22)))
                         .foregroundStyle(isSelected ? area.tint : Color.secondary.opacity(0.4))
                 }
                 Text(area.rawValue)
@@ -251,7 +365,7 @@ private struct FocusRow: View {
                         .fill(isSelected ? AnyShapeStyle(Theme.heroGradient) : AnyShapeStyle(Theme.primary.opacity(0.15)))
                         .frame(width: 52, height: 52)
                     Image(systemName: style.icon)
-                        .font(.system(size: 22, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(22), weight: .semibold))
                         .foregroundStyle(isSelected ? .white : Theme.primary)
                 }
 
@@ -264,7 +378,7 @@ private struct FocusRow: View {
                 }
                 Spacer()
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                    .font(.system(size: 22))
+                    .font(.system(size: Theme.fontSize(22)))
                     .foregroundStyle(isSelected ? Theme.primary : Color.secondary.opacity(0.4))
             }
             .padding(14)
@@ -301,7 +415,7 @@ struct ScheduleStep: View {
                     .font(.system(.subheadline, design: .rounded))
                     .foregroundStyle(.secondary)
                 Text("\(awakeHours) hours")
-                    .font(.system(size: 44, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(44), weight: .bold, design: .rounded))
                     .foregroundStyle(Theme.heroGradient)
                 Text("of focused, intentional time each day")
                     .font(.system(.caption, design: .rounded))
@@ -327,7 +441,7 @@ private struct TimeCard: View {
 
     var body: some View {
         HStack(spacing: 14) {
-            Text(emoji).font(.system(size: 32))
+            Text(emoji).font(.system(size: Theme.fontSize(32)))
             VStack(alignment: .leading, spacing: 2) {
                 Text(label)
                     .font(.system(.subheadline, design: .rounded, weight: .semibold))
@@ -371,7 +485,7 @@ struct StepHeader: View {
 
             Text(title)
                 .multilineTextAlignment(.center)
-                .font(.system(size: 28, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
 
             Text(subtitle)
                 .multilineTextAlignment(.center)
@@ -397,7 +511,7 @@ struct NotificationStep: View {
             Spacer()
             
             Image(systemName: "bell.badge.fill")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.heroGradient)
             
             VStack(spacing: 16) {
@@ -436,7 +550,7 @@ struct MoodTrackingStep: View {
             HStack(spacing: 12) {
                 ForEach(["😊", "😌", "😐", "😔", "😢"], id: \.self) { emoji in
                     Text(emoji)
-                        .font(.system(size: 44))
+                        .font(.system(size: Theme.fontSize(44)))
                 }
             }
             
@@ -472,7 +586,7 @@ struct HabitTrackingStep: View {
             Spacer()
             
             Image(systemName: "checkmark.circle.fill")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.accent)
             
             Toggle(isOn: $enabled) {
@@ -507,7 +621,7 @@ struct AIAssistantStep: View {
             Spacer()
             
             Image(systemName: "sparkles")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.heroGradient)
             
             Toggle(isOn: $enabled) {
@@ -623,7 +737,7 @@ struct TimeFormatStep: View {
                 } label: {
                     HStack {
                         Image(systemName: use24Hour ? "circle" : "checkmark.circle.fill")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.fontSize(24)))
                             .foregroundStyle(use24Hour ? .secondary : Theme.primary)
                         
                         VStack(alignment: .leading, spacing: 4) {
@@ -645,7 +759,7 @@ struct TimeFormatStep: View {
                 } label: {
                     HStack {
                         Image(systemName: use24Hour ? "checkmark.circle.fill" : "circle")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.fontSize(24)))
                             .foregroundStyle(use24Hour ? Theme.primary : .secondary)
                         
                         VStack(alignment: .leading, spacing: 4) {
@@ -685,7 +799,7 @@ struct QuotesStep: View {
             
             VStack(spacing: 12) {
                 Image(systemName: "quote.bubble.fill")
-                    .font(.system(size: 80))
+                    .font(.system(size: Theme.fontSize(80)))
                     .foregroundStyle(Theme.rose)
                 
                 Text("\"The journey of a thousand miles begins with one step\"")
@@ -728,7 +842,7 @@ struct PrivacyStep: View {
             Spacer()
             
             Image(systemName: "lock.shield.fill")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.primary)
             
             VStack(spacing: 16) {
@@ -743,7 +857,7 @@ struct PrivacyStep: View {
                 }
                 .toggleStyle(SwitchToggleStyle(tint: Theme.primary))
                 
-                Text("Your data is always encrypted and stored locally on your device.")
+                Text("Your data is stored on your device and protected by iOS security.")
                     .font(.system(.caption2, design: .rounded))
                     .foregroundStyle(.tertiary)
                     .multilineTextAlignment(.center)
@@ -765,11 +879,11 @@ struct FinalStep: View {
             
             VStack(spacing: 16) {
                 Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 80))
+                    .font(.system(size: Theme.fontSize(80)))
                     .foregroundStyle(Theme.heroGradient)
                 
                 Text("You're all set!")
-                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(32), weight: .bold, design: .rounded))
                 
                 Text("Ready to start planning your best day ever?")
                     .font(.system(.subheadline, design: .rounded))
@@ -832,7 +946,7 @@ struct LanguageStep: View {
                         } label: {
                             HStack {
                                 Text(flagForLanguage(language))
-                                    .font(.system(size: 32))
+                                    .font(.system(size: Theme.fontSize(32)))
                                 
                                 Text(language)
                                     .font(.system(.headline, design: .rounded, weight: .semibold))
@@ -840,7 +954,7 @@ struct LanguageStep: View {
                                 Spacer()
                                 
                                 Image(systemName: selected == language ? "checkmark.circle.fill" : "circle")
-                                    .font(.system(size: 22))
+                                    .font(.system(size: Theme.fontSize(22)))
                                     .foregroundStyle(selected == language ? Theme.primary : .secondary)
                             }
                             .padding()
@@ -888,7 +1002,7 @@ struct BackupStep: View {
             Spacer()
             
             Image(systemName: "icloud.and.arrow.up.fill")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.heroGradient)
             
             VStack(spacing: 16) {
@@ -904,7 +1018,7 @@ struct BackupStep: View {
                 .toggleStyle(SwitchToggleStyle(tint: Theme.primary))
                 
                 VStack(spacing: 8) {
-                    FeatureItem(icon: "checkmark.shield.fill", text: "End-to-end encrypted")
+                    FeatureItem(icon: "checkmark.shield.fill", text: "Secure HTTPS connections")
                     FeatureItem(icon: "arrow.triangle.2.circlepath", text: "Automatic sync across devices")
                     FeatureItem(icon: "externaldrive.fill.badge.timemachine", text: "Full backup history")
                 }
@@ -924,7 +1038,7 @@ private struct FeatureItem: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
-                .font(.system(size: 16))
+                .font(.system(size: Theme.fontSize(16)))
                 .foregroundStyle(Theme.accent)
             Text(text)
                 .font(.system(.caption, design: .rounded))
@@ -948,7 +1062,7 @@ struct SoundEffectsStep: View {
             Spacer()
             
             Image(systemName: "speaker.wave.3.fill")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.accent)
             
             VStack(spacing: 20) {
@@ -970,7 +1084,7 @@ struct SoundEffectsStep: View {
                                 // Play sound preview
                             } label: {
                                 Text(emoji)
-                                    .font(.system(size: 36))
+                                    .font(.system(size: Theme.fontSize(36)))
                                     .frame(width: 60, height: 60)
                                     .background(
                                         Circle()
@@ -1007,11 +1121,11 @@ struct DarkModeStep: View {
             
             HStack(spacing: 16) {
                 Image(systemName: "sun.max.fill")
-                    .font(.system(size: 40))
+                    .font(.system(size: Theme.fontSize(40)))
                     .foregroundStyle(.orange)
                 
                 Image(systemName: "moon.fill")
-                    .font(.system(size: 40))
+                    .font(.system(size: Theme.fontSize(40)))
                     .foregroundStyle(.indigo)
             }
             
@@ -1024,7 +1138,7 @@ struct DarkModeStep: View {
                     } label: {
                         HStack {
                             Image(systemName: iconForOption(option))
-                                .font(.system(size: 24))
+                                .font(.system(size: Theme.fontSize(24)))
                                 .foregroundStyle(selected == option ? Theme.primary : .secondary)
                             
                             VStack(alignment: .leading, spacing: 4) {
@@ -1038,7 +1152,7 @@ struct DarkModeStep: View {
                             Spacer()
                             
                             Image(systemName: selected == option ? "checkmark.circle.fill" : "circle")
-                                .font(.system(size: 22))
+                                .font(.system(size: Theme.fontSize(22)))
                                 .foregroundStyle(selected == option ? Theme.primary : .secondary)
                         }
                         .padding()
@@ -1091,7 +1205,7 @@ struct WeeklyGoalsStep: View {
             Spacer()
             
             Image(systemName: "target")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.heroGradient)
             
             VStack(spacing: 20) {
@@ -1131,7 +1245,7 @@ private struct GoalPreview: View {
     var body: some View {
         HStack {
             Image(systemName: icon)
-                .font(.system(size: 20))
+                .font(.system(size: Theme.fontSize(20)))
                 .foregroundStyle(color)
                 .frame(width: 40)
             
@@ -1166,7 +1280,7 @@ struct WorkHoursStep: View {
             Spacer()
             
             Image(systemName: "briefcase.fill")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.primary)
             
             VStack(spacing: 16) {
@@ -1245,7 +1359,7 @@ struct BreakRemindersStep: View {
             Spacer()
             
             Image(systemName: "cup.and.saucer.fill")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.accent)
             
             VStack(spacing: 20) {
@@ -1286,7 +1400,7 @@ private struct BreakTypeCard: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
-                .font(.system(size: 20))
+                .font(.system(size: Theme.fontSize(20)))
                 .foregroundStyle(color)
                 .frame(width: 40)
             
@@ -1322,12 +1436,12 @@ struct FocusSessionStep: View {
             Spacer()
             
             Image(systemName: "timer")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.heroGradient)
             
             VStack(spacing: 16) {
                 Text("\(duration) minutes")
-                    .font(.system(size: 48, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(48), weight: .bold, design: .rounded))
                     .foregroundStyle(Theme.primary)
                 
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12) {
@@ -1460,7 +1574,7 @@ struct DataSharingStep: View {
             Spacer()
             
             Image(systemName: "chart.bar.doc.horizontal.fill")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.accent)
             
             VStack(spacing: 16) {
@@ -1489,7 +1603,7 @@ struct DataSharingStep: View {
                 VStack(spacing: 8) {
                     HStack(spacing: 8) {
                         Image(systemName: "lock.shield.fill")
-                            .font(.system(size: 14))
+                            .font(.system(size: Theme.fontSize(14)))
                             .foregroundStyle(Theme.accent)
                         Text("Your personal data is never shared")
                             .font(.system(.caption2, design: .rounded))
@@ -1497,7 +1611,7 @@ struct DataSharingStep: View {
                     }
                     HStack(spacing: 8) {
                         Image(systemName: "eye.slash.fill")
-                            .font(.system(size: 14))
+                            .font(.system(size: Theme.fontSize(14)))
                             .foregroundStyle(Theme.accent)
                         Text("All analytics are completely anonymous")
                             .font(.system(.caption2, design: .rounded))

@@ -82,7 +82,7 @@ struct CoachView: View {
     private var welcomeCard: some View {
         VStack(spacing: 12) {
             Image(systemName: "sparkles")
-                .font(.system(size: 48))
+                .font(.system(size: Theme.fontSize(48)))
                 .foregroundStyle(Theme.primary)
             
             Text("Your AI Coach")
@@ -128,7 +128,7 @@ struct CoachView: View {
                 sendMessage()
             } label: {
                 Image(systemName: "arrow.up.circle.fill")
-                    .font(.system(size: 32))
+                    .font(.system(size: Theme.fontSize(32)))
                     .foregroundStyle(inputText.isEmpty ? Color.secondary : Theme.primary)
             }
             .disabled(inputText.isEmpty || viewModel.isThinking)

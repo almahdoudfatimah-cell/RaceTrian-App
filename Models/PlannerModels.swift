@@ -198,7 +198,11 @@ enum SampleData {
         LifeGoal(title: "Run a half marathon", emoji: "🏃", progress: 0.62, streak: 14, color: Theme.rose),
         LifeGoal(title: "Learn Spanish", emoji: "🇪🇸", progress: 0.41, streak: 22, color: Theme.accent),
         LifeGoal(title: "Save $10k", emoji: "💰", progress: 0.78, streak: 9, color: Theme.mint),
-        LifeGoal(title: "Read 24 books", emoji: "📚", progress: 0.5, streak: 33, color: Theme.secondary)
+        LifeGoal(title: "Read 24 books", emoji: "📚", progress: 0.5, streak: 33, color: Theme.secondary),
+        LifeGoal(title: "Build a strong morning routine", emoji: "🌅", progress: 0.36, streak: 12, color: Theme.primary),
+        LifeGoal(title: "Improve strength and mobility", emoji: "💪", progress: 0.47, streak: 18, color: Theme.rose),
+        LifeGoal(title: "Travel to three new places", emoji: "✈️", progress: 0.25, streak: 4, color: Theme.accent),
+        LifeGoal(title: "Practice mindfulness daily", emoji: "🧘", progress: 0.69, streak: 27, color: Theme.mint)
     ]
 
     static let metrics: [DailyMetric] = [

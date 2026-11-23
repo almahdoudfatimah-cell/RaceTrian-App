@@ -261,6 +261,11 @@ struct WatchBoardDetailView: View {
         .sheet(isPresented: $showingAdd) {
             AddWatchBoardActivityView(store: store, board: board)
         }
+        .onAppear {
+            if store.createStarterScheduleIfNeeded(for: board) {
+                WatchNotificationManager.shared.scheduleAfterUserAction()
+            }
+        }
     }
 
     @ViewBuilder
@@ -578,11 +583,12 @@ private struct AddWatchBoardActivityView: View {
 
                     Button {
                         store.addBoardActivity(title: title, start: start, durationMinutes: durationMinutes, on: board)
+                        WatchNotificationManager.shared.scheduleAfterUserAction()
                         dismiss()
                     } label: {
                         Text("Add")
                             .font(.system(size: 14, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white)
+                            .foregroundStyle(WatchTheme.ink)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 4)
                     }

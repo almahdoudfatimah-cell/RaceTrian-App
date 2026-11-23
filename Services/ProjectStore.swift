@@ -8,6 +8,7 @@ final class ProjectStore: ObservableObject {
     @Published var projects: [AIProject] = []
 
     private let defaultsKey = "aiProjectStore.v2"
+    private let expandedSamplesKey = "aiProjectStore.expandedSamples.v1"
 
     /// Free users may own this many projects before hitting the paywall.
     static let freeProjectLimit = 1
@@ -16,6 +17,13 @@ final class ProjectStore: ObservableObject {
         load()
         if UserDefaults.standard.data(forKey: defaultsKey) == nil {
             projects = SampleProjects.all
+            save()
+        }
+
+        if !UserDefaults.standard.bool(forKey: expandedSamplesKey) {
+            let existingTitles = Set(projects.map(\.title))
+            projects.append(contentsOf: SampleProjects.all.filter { !existingTitles.contains($0.title) })
+            UserDefaults.standard.set(true, forKey: expandedSamplesKey)
             save()
         }
     }

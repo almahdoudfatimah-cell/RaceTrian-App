@@ -17,7 +17,7 @@ struct AIPlannerSheet: View {
         NavigationStack {
             VStack(spacing: 20) {
                 Image(systemName: "brain.head.profile")
-                    .font(.system(size: 60))
+                    .font(.system(size: Theme.fontSize(60)))
                     .foregroundStyle(.blue.gradient)
                 
                 Text("AI Training Planner")
@@ -114,7 +114,7 @@ struct AuthView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 Image(systemName: "figure.run")
-                    .font(.system(size: 80))
+                    .font(.system(size: Theme.fontSize(80)))
                     .foregroundStyle(.blue.gradient)
                 
                 Text("RaceTrian")

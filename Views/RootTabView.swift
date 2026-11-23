@@ -16,14 +16,14 @@ fileprivate struct TodayView: View {
                     Spacer()
                     
                     Image(systemName: "calendar.circle.fill")
-                        .font(.system(size: 80))
+                        .font(.system(size: Theme.fontSize(80)))
                         .foregroundStyle(Theme.primary)
                     
                     Text("Today")
-                        .font(.system(size: 32, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(32), weight: .bold, design: .rounded))
                     
                     Text("Your daily training schedule and activities")
-                        .font(.system(size: 17, design: .rounded))
+                        .font(.system(size: Theme.fontSize(17), design: .rounded))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 32)
@@ -47,14 +47,14 @@ fileprivate struct UserAssessmentViewStub: View {
                     Spacer()
                     
                     Image(systemName: "list.clipboard.fill")
-                        .font(.system(size: 80))
+                        .font(.system(size: Theme.fontSize(80)))
                         .foregroundStyle(Theme.primary)
                     
                     Text("Fitness Assessment")
-                        .font(.system(size: 32, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(32), weight: .bold, design: .rounded))
                     
                     Text("Complete a quick assessment to personalize your training experience")
-                        .font(.system(size: 17, design: .rounded))
+                        .font(.system(size: Theme.fontSize(17), design: .rounded))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 32)
@@ -63,7 +63,7 @@ fileprivate struct UserAssessmentViewStub: View {
                         // TODO: Start assessment
                     } label: {
                         Text("Start Assessment")
-                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -92,14 +92,14 @@ fileprivate struct AIAssistantView: View {
                     Spacer()
                     
                     Image(systemName: "sparkles.rectangle.stack")
-                        .font(.system(size: 80))
+                        .font(.system(size: Theme.fontSize(80)))
                         .foregroundStyle(Theme.primary)
                     
                     Text("AI Assistant")
-                        .font(.system(size: 32, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(32), weight: .bold, design: .rounded))
                     
                     Text("Get personalized training advice and answers to your fitness questions")
-                        .font(.system(size: 17, design: .rounded))
+                        .font(.system(size: Theme.fontSize(17), design: .rounded))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 32)
@@ -108,7 +108,7 @@ fileprivate struct AIAssistantView: View {
                         // TODO: Start chat
                     } label: {
                         Text("Start Chat")
-                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -143,15 +143,15 @@ fileprivate struct AccountView: View {
                                 .frame(width: 100, height: 100)
                             
                             Image(systemName: "person.fill")
-                                .font(.system(size: 50))
+                                .font(.system(size: Theme.fontSize(50)))
                                 .foregroundStyle(Theme.primary)
                         }
                         
                         Text("John Athlete")
-                            .font(.system(size: 28, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
                         
                         Text("Premium Member")
-                            .font(.system(size: 16, design: .rounded))
+                            .font(.system(size: Theme.fontSize(16), design: .rounded))
                             .foregroundStyle(.secondary)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 6)
@@ -209,7 +209,7 @@ fileprivate struct AccountView: View {
                         // QR code or share profile
                     } label: {
                         Label("QR Code", systemImage: "qrcode")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.blue)
                             .labelStyle(.iconOnly)
                     }
@@ -221,7 +221,7 @@ fileprivate struct AccountView: View {
                         // Share profile
                     } label: {
                         Label("Share", systemImage: "square.and.arrow.up")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.green)
                             .labelStyle(.iconOnly)
                     }
@@ -231,7 +231,7 @@ fileprivate struct AccountView: View {
                         // Settings
                     } label: {
                         Label("Settings", systemImage: "gear")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.gray)
                             .labelStyle(.iconOnly)
                     }
@@ -241,7 +241,7 @@ fileprivate struct AccountView: View {
                         // Edit
                     } label: {
                         Label("Edit", systemImage: "pencil.circle.fill")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.fontSize(24)))
                             .foregroundStyle(Theme.primary)
                             .labelStyle(.iconOnly)
                     }
@@ -260,9 +260,9 @@ fileprivate struct MainDashboardView: View {
                     // Welcome Header
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Welcome Back!")
-                            .font(.system(size: 32, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(32), weight: .bold, design: .rounded))
                         Text("Ready to crush your goals today?")
-                            .font(.system(size: 17, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -272,7 +272,7 @@ fileprivate struct MainDashboardView: View {
                     // Quick Stats
                     VStack(alignment: .leading, spacing: 16) {
                         Text("TODAY'S OVERVIEW")
-                            .font(.system(size: 13, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                             .foregroundStyle(.secondary)
                         
                         HStack(spacing: 12) {
@@ -289,7 +289,7 @@ fileprivate struct MainDashboardView: View {
                     // Quick Actions
                     VStack(alignment: .leading, spacing: 16) {
                         Text("QUICK ACTIONS")
-                            .font(.system(size: 13, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                             .foregroundStyle(.secondary)
                         
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
@@ -307,7 +307,7 @@ fileprivate struct MainDashboardView: View {
                     // Recent Activity
                     VStack(alignment: .leading, spacing: 16) {
                         Text("RECENT ACTIVITY")
-                            .font(.system(size: 13, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                             .foregroundStyle(.secondary)
                         
                         DashboardActivityRow(icon: "figure.run", title: "Morning Run", time: "Today, 7:00 AM", value: "5.2 km", color: .orange)
@@ -322,7 +322,7 @@ fileprivate struct MainDashboardView: View {
                     // Goals Progress
                     VStack(alignment: .leading, spacing: 16) {
                         Text("WEEKLY GOALS")
-                            .font(.system(size: 13, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                             .foregroundStyle(.secondary)
                         
                         GoalProgressRow(title: "Running", current: "32.4 km", goal: "50 km", progress: 0.65, color: .orange)
@@ -385,12 +385,12 @@ struct AccountStatCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 24))
+                .font(.system(size: Theme.fontSize(24)))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 22, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
             Text(label)
-                .font(.system(size: 12, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -407,7 +407,7 @@ struct AccountInfoSection<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
-                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
             
             VStack(spacing: 0) {
@@ -428,17 +428,17 @@ struct AccountRow: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
-                .font(.system(size: 18))
+                .font(.system(size: Theme.fontSize(18)))
                 .foregroundStyle(color)
                 .frame(width: 28)
             
             Text(title)
-                .font(.system(size: 16, weight: .medium, design: .rounded))
+                .font(.system(size: Theme.fontSize(16), weight: .medium, design: .rounded))
             
             Spacer()
             
             Text(value)
-                .font(.system(size: 15, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .padding()
@@ -455,18 +455,18 @@ struct AccountActionRow: View {
         Button(action: {}) {
             HStack(spacing: 12) {
                 Image(systemName: icon)
-                    .font(.system(size: 18))
+                    .font(.system(size: Theme.fontSize(18)))
                     .foregroundStyle(color)
                     .frame(width: 28)
                 
                 Text(title)
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .medium, design: .rounded))
                     .foregroundStyle(.primary)
                 
                 Spacer()
                 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(14), weight: .semibold))
                     .foregroundStyle(.tertiary)
             }
             .padding()
@@ -486,12 +486,12 @@ struct DashboardStatCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 20))
+                .font(.system(size: Theme.fontSize(20)))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
             Text(label)
-                .font(.system(size: 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -515,12 +515,12 @@ struct DashboardQuickActionCard: View {
                         .frame(width: 60, height: 60)
                     
                     Image(systemName: icon)
-                        .font(.system(size: 26))
+                        .font(.system(size: Theme.fontSize(26)))
                         .foregroundStyle(color)
                 }
                 
                 Text(title)
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                     .foregroundStyle(.primary)
             }
             .frame(maxWidth: .infinity)
@@ -546,22 +546,22 @@ struct DashboardActivityRow: View {
                     .frame(width: 44, height: 44)
                 
                 Image(systemName: icon)
-                    .font(.system(size: 18))
+                    .font(.system(size: Theme.fontSize(18)))
                     .foregroundStyle(color)
             }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                 Text(time)
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
             Spacer()
             
             Text(value)
-                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                 .foregroundStyle(color)
         }
         .padding()
@@ -581,10 +581,10 @@ struct GoalProgressRow: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text(title)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                 Spacer()
                 Text("\(current) / \(goal)")
-                    .font(.system(size: 14, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(14), weight: .medium, design: .rounded))
                     .foregroundStyle(color)
             }
             
@@ -609,6 +609,18 @@ struct GoalProgressRow: View {
 
 struct RootTabView: View {
     @State private var selectedTab = 0
+
+    private let tabItems: [(title: String, icon: String)] = [
+        ("Home", "house.fill"),
+        ("Plan", "calendar.badge.clock"),
+        ("Goals", "flag.checkered"),
+        ("Projects", "folder.fill"),
+        ("More", "ellipsis.circle.fill")
+    ]
+
+    private var isIPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -642,6 +654,12 @@ struct RootTabView: View {
                 }
                 .tag(4)
         }
+        .toolbar(isIPad ? .hidden : .visible, for: .tabBar)
+        .safeAreaInset(edge: .top, spacing: 0) {
+            if isIPad {
+                iPadTabBar
+            }
+        }
         .tint(Theme.primary)
         .onReceive(NotificationCenter.default.publisher(for: .switchTab)) { notification in
             if let tab = notification.object as? Int ?? notification.userInfo?["tab"] as? Int,
@@ -649,6 +667,38 @@ struct RootTabView: View {
                 selectedTab = tab
             }
         }
+    }
+
+    private var iPadTabBar: some View {
+        HStack(spacing: 8) {
+            ForEach(Array(tabItems.enumerated()), id: \.offset) { index, item in
+                Button {
+                    selectedTab = index
+                } label: {
+                    Label(item.title, systemImage: item.icon)
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        .labelStyle(.titleAndIcon)
+                        .foregroundStyle(selectedTab == index ? Theme.primary : Theme.textPrimary)
+                        .frame(maxWidth: .infinity, minHeight: 52)
+                        .background(
+                            selectedTab == index ? Theme.primary.opacity(0.13) : Color.clear,
+                            in: Capsule()
+                        )
+                }
+                .buttonStyle(.plain)
+                .accessibilityAddTraits(selectedTab == index ? .isSelected : [])
+            }
+        }
+        .padding(6)
+        .frame(maxWidth: 920)
+        .background(.ultraThinMaterial, in: Capsule())
+        .overlay {
+            Capsule().strokeBorder(Color.white.opacity(0.35), lineWidth: 1)
+        }
+        .shadow(color: .black.opacity(0.10), radius: 12, y: 5)
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 6)
     }
 }
 
@@ -661,7 +711,7 @@ struct ProgressTrackingView: View {
                     // Progress Summary
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Your Progress")
-                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                         
                         HStack(spacing: 12) {
                             ProgressStatCard(icon: "chart.line.uptrend.xyaxis", value: "+12%", label: "This Month", color: .green)
@@ -676,7 +726,7 @@ struct ProgressTrackingView: View {
                     // Activity Progress
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Activity Progress")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
                         ProgressRow(activity: "Running", current: "42.5 km", goal: "50 km", progress: 0.85, color: .orange)
                         ProgressRow(activity: "Cycling", current: "120 km", goal: "150 km", progress: 0.80, color: .blue)
@@ -690,7 +740,7 @@ struct ProgressTrackingView: View {
                     // Monthly Chart
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Monthly Overview")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
                         // Placeholder for chart
                         ZStack {
@@ -700,10 +750,10 @@ struct ProgressTrackingView: View {
                             
                             VStack(spacing: 8) {
                                 Image(systemName: "chart.bar.fill")
-                                    .font(.system(size: 40))
+                                    .font(.system(size: Theme.fontSize(40)))
                                     .foregroundStyle(.purple)
                                 Text("Progress Chart")
-                                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                                     .foregroundStyle(.secondary)
                             }
                         }
@@ -730,12 +780,12 @@ struct ProgressStatCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 20))
+                .font(.system(size: Theme.fontSize(20)))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
             Text(label)
-                .font(.system(size: 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -756,10 +806,10 @@ struct ProgressRow: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text(activity)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                 Spacer()
                 Text("\(current) / \(goal)")
-                    .font(.system(size: 14, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(14), weight: .medium, design: .rounded))
                     .foregroundStyle(color)
             }
             
@@ -1058,12 +1108,12 @@ struct FeatureListRowSimple: View {
                         .frame(width: 40, height: 40)
                     
                     Image(systemName: icon)
-                        .font(.system(size: 18, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(18), weight: .semibold))
                         .foregroundStyle(.white)
                 }
                 
                 Text(title)
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .medium, design: .rounded))
             }
         }
     }
@@ -1077,7 +1127,7 @@ struct ComingSoonViewSimple: View {
     var body: some View {
         VStack(spacing: 16) {
             Image(systemName: icon)
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(color)
             Text(title)
                 .font(.title)
@@ -1109,7 +1159,7 @@ struct NutritionHubView: View {
     private var nutritionSummary: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Today's Nutrition")
-                .font(.system(size: 22, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
             
             HStack(spacing: 12) {
                 NutritionStatCard(title: "Calories", value: "1,820", goal: "2,000", color: .orange)
@@ -1125,7 +1175,7 @@ struct NutritionHubView: View {
     private var quickActions: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Quick Log")
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
             
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                 NutritionQuickButton(icon: "camera.fill", title: "Scan Meal", color: .blue)
@@ -1142,7 +1192,7 @@ struct NutritionHubView: View {
     private var mealHistory: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Today's Meals")
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
             
             MealRow(meal: "Breakfast", calories: "420", time: "8:00 AM", icon: "sunrise.fill")
             MealRow(meal: "Lunch", calories: "650", time: "1:00 PM", icon: "sun.max.fill")
@@ -1164,13 +1214,13 @@ struct NutritionStatCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Text(title)
-                .font(.system(size: 12, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), design: .rounded))
                 .foregroundStyle(.secondary)
             Text(value)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
                 .foregroundStyle(color)
             Text("/ \(goal)")
-                .font(.system(size: 10, design: .rounded))
+                .font(.system(size: Theme.fontSize(10), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -1189,10 +1239,10 @@ struct NutritionQuickButton: View {
         Button(action: {}) {
             VStack(spacing: 8) {
                 Image(systemName: icon)
-                    .font(.system(size: 24))
+                    .font(.system(size: Theme.fontSize(24)))
                     .foregroundStyle(color)
                 Text(title)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                     .foregroundStyle(.primary)
             }
             .frame(maxWidth: .infinity)
@@ -1212,22 +1262,22 @@ struct MealRow: View {
     var body: some View {
         HStack {
             Image(systemName: icon)
-                .font(.system(size: 20))
+                .font(.system(size: Theme.fontSize(20)))
                 .foregroundStyle(.orange)
                 .frame(width: 30)
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(meal)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                 Text(time)
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
             Spacer()
             
             Text("\(calories) cal")
-                .font(.system(size: 15, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                 .foregroundStyle(.orange)
         }
         .padding(.vertical, 8)
@@ -1255,7 +1305,7 @@ struct SocialHubView: View {
     private var activityFeedHeader: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Activity Feed")
-                .font(.system(size: 22, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
             
             HStack(spacing: 12) {
                 SocialStatCard(icon: "person.2.fill", value: "127", label: "Friends", color: .blue)
@@ -1271,7 +1321,7 @@ struct SocialHubView: View {
     private var socialQuickActions: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Connect")
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
             
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                 SocialQuickButton(icon: "person.badge.plus", title: "Find Friends", color: .blue)
@@ -1288,7 +1338,7 @@ struct SocialHubView: View {
     private var recentActivity: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Recent Activity")
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
             
             ActivityItem(name: "Sarah M.", action: "completed a 10K run", time: "2h ago", icon: "figure.run", color: .orange)
             ActivityItem(name: "Mike T.", action: "achieved a new PR", time: "5h ago", icon: "trophy.fill", color: .yellow)
@@ -1310,12 +1360,12 @@ struct SocialStatCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 20))
+                .font(.system(size: Theme.fontSize(20)))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
             Text(label)
-                .font(.system(size: 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -1334,10 +1384,10 @@ struct SocialQuickButton: View {
         Button(action: {}) {
             VStack(spacing: 8) {
                 Image(systemName: icon)
-                    .font(.system(size: 24))
+                    .font(.system(size: Theme.fontSize(24)))
                     .foregroundStyle(color)
                 Text(title)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                     .foregroundStyle(.primary)
             }
             .frame(maxWidth: .infinity)
@@ -1362,20 +1412,20 @@ struct ActivityItem: View {
                     .fill(color.opacity(0.2))
                     .frame(width: 40, height: 40)
                 Image(systemName: icon)
-                    .font(.system(size: 16))
+                    .font(.system(size: Theme.fontSize(16)))
                     .foregroundStyle(color)
             }
             
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 4) {
                     Text(name)
-                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                     Text(action)
-                        .font(.system(size: 15, design: .rounded))
+                        .font(.system(size: Theme.fontSize(15), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 Text(time)
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
@@ -1406,7 +1456,7 @@ struct EquipmentHubView: View {
     private var equipmentSummary: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("My Equipment")
-                .font(.system(size: 22, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
             
             HStack(spacing: 12) {
                 EquipmentStatCard(icon: "shoeprints.fill", value: "342", label: "Shoes KM", color: .brown)
@@ -1422,7 +1472,7 @@ struct EquipmentHubView: View {
     private var activeGear: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Active Gear")
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
             
             EquipmentItem(name: "Nike Pegasus 40", type: "Running Shoes", usage: "342 km", status: "Good", color: .orange)
             EquipmentItem(name: "Trek Domane", type: "Road Bike", usage: "1,245 km", status: "Excellent", color: .blue)
@@ -1437,7 +1487,7 @@ struct EquipmentHubView: View {
     private var manageActions: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Manage")
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
             
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                 EquipmentActionButton(icon: "plus.circle.fill", title: "Add Gear", color: .green)
@@ -1461,12 +1511,12 @@ struct EquipmentStatCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 20))
+                .font(.system(size: Theme.fontSize(20)))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
             Text(label)
-                .font(.system(size: 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -1490,24 +1540,24 @@ struct EquipmentItem: View {
                     .fill(color.opacity(0.2))
                     .frame(width: 50, height: 50)
                 Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(color)
             }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(name)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                 Text(type)
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
                 HStack(spacing: 8) {
                     Text(usage)
-                        .font(.system(size: 12, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), design: .rounded))
                         .foregroundStyle(.secondary)
                     Text("•")
                         .foregroundStyle(.secondary)
                     Text(status)
-                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), weight: .medium, design: .rounded))
                         .foregroundStyle(color)
                 }
             }
@@ -1527,10 +1577,10 @@ struct EquipmentActionButton: View {
         Button(action: {}) {
             VStack(spacing: 8) {
                 Image(systemName: icon)
-                    .font(.system(size: 24))
+                    .font(.system(size: Theme.fontSize(24)))
                     .foregroundStyle(color)
                 Text(title)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                     .foregroundStyle(.primary)
             }
             .frame(maxWidth: .infinity)
@@ -1550,7 +1600,7 @@ struct StatsHubView: View {
                     // This Week Summary
                     VStack(alignment: .leading, spacing: 16) {
                         Text("This Week")
-                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                         
                         HStack(spacing: 12) {
                             StatsCard(icon: "flame.fill", value: "2,840", label: "Calories", color: .orange)
@@ -1565,7 +1615,7 @@ struct StatsHubView: View {
                     // Performance Metrics
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Performance")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
                         PerformanceRow(icon: "figure.run", title: "Running", value: "32.4 km", trend: "+12%", trendUp: true, color: .orange)
                         PerformanceRow(icon: "bicycle", title: "Cycling", value: "85.2 km", trend: "+8%", trendUp: true, color: .blue)
@@ -1579,7 +1629,7 @@ struct StatsHubView: View {
                     // Personal Records
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Recent Records")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
                         RecordRow(title: "Fastest 5K", value: "24:32", date: "2 days ago", icon: "bolt.fill", color: .yellow)
                         RecordRow(title: "Longest Run", value: "21.1 km", date: "1 week ago", icon: "figure.run", color: .orange)
@@ -1607,12 +1657,12 @@ struct StatsCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 20))
+                .font(.system(size: Theme.fontSize(20)))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
             Text(label)
-                .font(.system(size: 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -1633,23 +1683,23 @@ struct PerformanceRow: View {
     var body: some View {
         HStack {
             Image(systemName: icon)
-                .font(.system(size: 18))
+                .font(.system(size: Theme.fontSize(18)))
                 .foregroundStyle(color)
                 .frame(width: 30)
             
             Text(title)
-                .font(.system(size: 16, weight: .medium, design: .rounded))
+                .font(.system(size: Theme.fontSize(16), weight: .medium, design: .rounded))
             
             Spacer()
             
             Text(value)
-                .font(.system(size: 15, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
             
             HStack(spacing: 2) {
                 Image(systemName: trendUp ? "arrow.up.right" : "arrow.down.right")
-                    .font(.system(size: 10, weight: .bold))
+                    .font(.system(size: Theme.fontSize(10), weight: .bold))
                 Text(trend)
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
             }
             .foregroundStyle(trendUp ? .green : .red)
             .padding(.horizontal, 8)
@@ -1675,22 +1725,22 @@ struct RecordRow: View {
                     .fill(color.opacity(0.2))
                     .frame(width: 40, height: 40)
                 Image(systemName: icon)
-                    .font(.system(size: 16))
+                    .font(.system(size: Theme.fontSize(16)))
                     .foregroundStyle(color)
             }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                 Text(date)
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
             Spacer()
             
             Text(value)
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 .foregroundStyle(color)
         }
         .padding(.vertical, 8)
@@ -1706,7 +1756,7 @@ struct AchievementsHubView: View {
                     // Achievement Summary
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Your Progress")
-                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                         
                         HStack(spacing: 12) {
                             AchievementStatCard(icon: "trophy.fill", value: "47", label: "Badges", color: .yellow)
@@ -1721,7 +1771,7 @@ struct AchievementsHubView: View {
                     // Recent Achievements
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Recent Achievements")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
                         AchievementCard(
                             icon: "figure.run",
@@ -1755,7 +1805,7 @@ struct AchievementsHubView: View {
                     // In Progress
                     VStack(alignment: .leading, spacing: 12) {
                         Text("In Progress")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
                         ProgressAchievement(
                             icon: "bicycle",
@@ -1798,12 +1848,12 @@ struct AchievementStatCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 20))
+                .font(.system(size: Theme.fontSize(20)))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
             Text(label)
-                .font(.system(size: 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -1828,18 +1878,18 @@ struct AchievementCard: View {
                     .fill(color.opacity(0.2))
                     .frame(width: 60, height: 60)
                 Image(systemName: icon)
-                    .font(.system(size: 28))
+                    .font(.system(size: Theme.fontSize(28)))
                     .foregroundStyle(color)
             }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                 Text(description)
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
                 Text(points)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                     .foregroundStyle(color)
             }
             
@@ -1847,7 +1897,7 @@ struct AchievementCard: View {
             
             if unlocked {
                 Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 24))
+                    .font(.system(size: Theme.fontSize(24)))
                     .foregroundStyle(.green)
             }
         }
@@ -1874,22 +1924,22 @@ struct ProgressAchievement: View {
                         .fill(color.opacity(0.2))
                         .frame(width: 50, height: 50)
                     Image(systemName: icon)
-                        .font(.system(size: 22))
+                        .font(.system(size: Theme.fontSize(22)))
                         .foregroundStyle(color)
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(title)
-                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                     Text(description)
-                        .font(.system(size: 13, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 
                 Spacer()
                 
                 Text(current)
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                     .foregroundStyle(color)
             }
             
@@ -1923,18 +1973,18 @@ struct WeatherHubView: View {
                         HStack {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("San Francisco")
-                                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(24), weight: .bold, design: .rounded))
                                 Text("Partly Cloudy")
-                                    .font(.system(size: 16, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(16), design: .rounded))
                                     .foregroundStyle(.secondary)
                             }
                             Spacer()
                             VStack {
                                 Image(systemName: "cloud.sun.fill")
-                                    .font(.system(size: 50))
+                                    .font(.system(size: Theme.fontSize(50)))
                                     .foregroundStyle(.orange, .cyan)
                                 Text("72°F")
-                                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(32), weight: .bold, design: .rounded))
                             }
                         }
                         
@@ -1951,17 +2001,17 @@ struct WeatherHubView: View {
                     // Training Recommendation
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Training Conditions")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
                         HStack {
                             Image(systemName: "checkmark.circle.fill")
-                                .font(.system(size: 24))
+                                .font(.system(size: Theme.fontSize(24)))
                                 .foregroundStyle(.green)
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Excellent for running")
-                                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                                 Text("Ideal temperature and low wind")
-                                    .font(.system(size: 13, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                                     .foregroundStyle(.secondary)
                             }
                             Spacer()
@@ -1977,9 +2027,9 @@ struct WeatherHubView: View {
                     // Hourly Forecast
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Hourly Forecast")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
-                        ScrollView(.horizontal, showsIndicators: false) {
+                        HorizontalScroll {
                             HStack(spacing: 12) {
                                 HourlyWeather(time: "Now", temp: "72°", icon: "sun.max.fill", color: .orange)
                                 HourlyWeather(time: "2 PM", temp: "74°", icon: "cloud.sun.fill", color: .orange)
@@ -2012,12 +2062,12 @@ struct WeatherStatCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 18))
+                .font(.system(size: Theme.fontSize(18)))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
             Text(label)
-                .font(.system(size: 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -2036,13 +2086,13 @@ struct HourlyWeather: View {
     var body: some View {
         VStack(spacing: 8) {
             Text(time)
-                .font(.system(size: 12, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), design: .rounded))
                 .foregroundStyle(.secondary)
             Image(systemName: icon)
-                .font(.system(size: 24))
+                .font(.system(size: Theme.fontSize(24)))
                 .foregroundStyle(color)
             Text(temp)
-                .font(.system(size: 15, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
         }
         .frame(width: 70)
         .padding(.vertical, 12)
@@ -2060,7 +2110,7 @@ struct RoutesHubView: View {
                     // Routes Summary
                     VStack(alignment: .leading, spacing: 16) {
                         Text("My Routes")
-                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                         
                         HStack(spacing: 12) {
                             RouteStatCard(icon: "map.fill", value: "24", label: "Saved", color: .blue)
@@ -2075,7 +2125,7 @@ struct RoutesHubView: View {
                     // Quick Actions
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Explore")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                             RouteActionButton(icon: "plus.circle.fill", title: "New Route", color: .green)
@@ -2091,7 +2141,7 @@ struct RoutesHubView: View {
                     // Popular Routes
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Popular Routes")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
                         RouteCard(name: "Golden Gate Loop", distance: "8.4 km", elevation: "245 m", type: "Running", color: .orange)
                         RouteCard(name: "Bay Trail", distance: "12.6 km", elevation: "45 m", type: "Cycling", color: .blue)
@@ -2119,12 +2169,12 @@ struct RouteStatCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 20))
+                .font(.system(size: Theme.fontSize(20)))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
             Text(label)
-                .font(.system(size: 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -2143,10 +2193,10 @@ struct RouteActionButton: View {
         Button(action: {}) {
             VStack(spacing: 8) {
                 Image(systemName: icon)
-                    .font(.system(size: 24))
+                    .font(.system(size: Theme.fontSize(24)))
                     .foregroundStyle(color)
                 Text(title)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                     .foregroundStyle(.primary)
             }
             .frame(maxWidth: .infinity)
@@ -2171,23 +2221,23 @@ struct RouteCard: View {
                     .fill(color.opacity(0.2))
                     .frame(width: 60, height: 60)
                 Image(systemName: "map.fill")
-                    .font(.system(size: 24))
+                    .font(.system(size: Theme.fontSize(24)))
                     .foregroundStyle(color)
             }
             
             VStack(alignment: .leading, spacing: 6) {
                 Text(name)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                 HStack(spacing: 12) {
                     Label(distance, systemImage: "arrow.left.and.right")
-                        .font(.system(size: 12, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), design: .rounded))
                         .foregroundStyle(.secondary)
                     Label(elevation, systemImage: "arrow.up.right")
-                        .font(.system(size: 12, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 Text(type)
-                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .medium, design: .rounded))
                     .foregroundStyle(color)
             }
             
@@ -2211,7 +2261,7 @@ struct CommunityHubView: View {
                     // Community Stats
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Community")
-                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                         
                         HStack(spacing: 12) {
                             CommunityStatCard(icon: "person.3.fill", value: "12.5K", label: "Members", color: .blue)
@@ -2226,7 +2276,7 @@ struct CommunityHubView: View {
                     // Join Groups
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Join Groups")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
                         GroupCard(name: "Morning Runners", members: "2,340", category: "Running", color: .orange)
                         GroupCard(name: "Cycling Enthusiasts", members: "1,892", category: "Cycling", color: .blue)
@@ -2239,7 +2289,7 @@ struct CommunityHubView: View {
                     // Upcoming Events
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Upcoming Events")
-                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         
                         EventCard(name: "5K Charity Run", date: "Sep 3, 2026", participants: "145", color: .green)
                         EventCard(name: "Group Cycling Tour", date: "Sep 10, 2026", participants: "67", color: .blue)
@@ -2267,12 +2317,12 @@ struct CommunityStatCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 20))
+                .font(.system(size: Theme.fontSize(20)))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
             Text(label)
-                .font(.system(size: 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -2295,21 +2345,21 @@ struct GroupCard: View {
                     .fill(color.opacity(0.2))
                     .frame(width: 50, height: 50)
                 Image(systemName: "person.3.fill")
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(color)
             }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(name)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                 HStack(spacing: 8) {
                     Text("\(members) members")
-                        .font(.system(size: 13, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), design: .rounded))
                         .foregroundStyle(.secondary)
                     Text("•")
                         .foregroundStyle(.secondary)
                     Text(category)
-                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), weight: .medium, design: .rounded))
                         .foregroundStyle(color)
                 }
             }
@@ -2318,7 +2368,7 @@ struct GroupCard: View {
             
             Button(action: {}) {
                 Text("Join")
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                     .foregroundStyle(.white)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
@@ -2345,21 +2395,21 @@ struct EventCard: View {
                     .fill(color.opacity(0.2))
                     .frame(width: 50, height: 50)
                 Image(systemName: "calendar.badge.clock")
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(color)
             }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(name)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                 Text(date)
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
                 HStack(spacing: 4) {
                     Image(systemName: "person.2.fill")
-                        .font(.system(size: 10))
+                        .font(.system(size: Theme.fontSize(10)))
                     Text("\(participants) going")
-                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), weight: .medium, design: .rounded))
                 }
                 .foregroundStyle(color)
             }

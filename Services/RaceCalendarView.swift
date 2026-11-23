@@ -53,7 +53,7 @@ struct RaceCalendarView: View {
             .padding()
             
             // Category Filter
-            ScrollView(.horizontal, showsIndicators: false) {
+            HorizontalScroll {
                 HStack(spacing: 12) {
                     ForEach(RaceCategory.allCases) { category in
                         CategoryChip(
@@ -106,10 +106,10 @@ struct CategoryChip: View {
         Button(action: action) {
             HStack(spacing: 6) {
                 Image(systemName: category.icon)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(14), weight: .semibold))
                 
                 Text(category.rawValue)
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
@@ -142,7 +142,7 @@ struct DiscoverableRaceCard: View {
                     .frame(height: 140)
                     .overlay {
                         Image(systemName: race.category.icon)
-                            .font(.system(size: 50, weight: .light))
+                            .font(.system(size: Theme.fontSize(50), weight: .light))
                             .foregroundStyle(.white.opacity(0.3))
                     }
                 
@@ -150,9 +150,9 @@ struct DiscoverableRaceCard: View {
                 if race.isRegistrationOpen {
                     HStack(spacing: 4) {
                         Image(systemName: "ticket.fill")
-                            .font(.system(size: 10))
+                            .font(.system(size: Theme.fontSize(10)))
                         Text("Open")
-                            .font(.system(size: 11, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(11), weight: .semibold, design: .rounded))
                     }
                     .padding(.horizontal, 10)
                     .padding(.vertical, 6)
@@ -163,9 +163,9 @@ struct DiscoverableRaceCard: View {
                 } else {
                     HStack(spacing: 4) {
                         Image(systemName: "lock.fill")
-                            .font(.system(size: 10))
+                            .font(.system(size: Theme.fontSize(10)))
                         Text("Closed")
-                            .font(.system(size: 11, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(11), weight: .semibold, design: .rounded))
                     }
                     .padding(.horizontal, 10)
                     .padding(.vertical, 6)
@@ -182,11 +182,11 @@ struct DiscoverableRaceCard: View {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(race.name)
-                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                             .foregroundStyle(.primary)
                         
                         Text(race.category.rawValue)
-                            .font(.system(size: 13, weight: .medium, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), weight: .medium, design: .rounded))
                             .foregroundStyle(race.category.color)
                     }
                     
@@ -196,9 +196,9 @@ struct DiscoverableRaceCard: View {
                     if let price = race.registrationFee {
                         VStack(alignment: .trailing, spacing: 2) {
                             Text(price)
-                                .font(.system(size: 16, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                             Text("Entry Fee")
-                                .font(.system(size: 10, design: .rounded))
+                                .font(.system(size: Theme.fontSize(10), design: .rounded))
                                 .foregroundStyle(.secondary)
                         }
                     }
@@ -208,40 +208,40 @@ struct DiscoverableRaceCard: View {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack(spacing: 8) {
                         Image(systemName: "calendar")
-                            .font(.system(size: 13))
+                            .font(.system(size: Theme.fontSize(13)))
                             .foregroundStyle(race.category.color)
                             .frame(width: 20)
                         
                         Text(race.date, style: .date)
-                            .font(.system(size: 14, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), design: .rounded))
                     }
                     
                     HStack(spacing: 8) {
                         Image(systemName: "mappin.circle.fill")
-                            .font(.system(size: 13))
+                            .font(.system(size: Theme.fontSize(13)))
                             .foregroundStyle(race.category.color)
                             .frame(width: 20)
                         
                         Text(race.location)
-                            .font(.system(size: 14, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), design: .rounded))
                             .lineLimit(1)
                     }
                     
                     HStack(spacing: 8) {
                         Image(systemName: "figure.run")
-                            .font(.system(size: 13))
+                            .font(.system(size: Theme.fontSize(13)))
                             .foregroundStyle(race.category.color)
                             .frame(width: 20)
                         
                         Text(race.distances.joined(separator: ", "))
-                            .font(.system(size: 14, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), design: .rounded))
                     }
                 }
                 
                 // Description
                 if let description = race.description {
                     Text(description)
-                        .font(.system(size: 13, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), design: .rounded))
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
                         .padding(.top, 4)
@@ -255,7 +255,7 @@ struct DiscoverableRaceCard: View {
                         HStack {
                             Image(systemName: isRegistered ? "checkmark.circle.fill" : "plus.circle.fill")
                             Text(isRegistered ? "Added" : "Add to My Races")
-                                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                         }
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
@@ -268,7 +268,7 @@ struct DiscoverableRaceCard: View {
                         // Open race website
                     } label: {
                         Image(systemName: "arrow.up.right.square.fill")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(race.category.color)
                             .frame(width: 44, height: 44)
                             .background(Color(uiColor: .tertiarySystemGroupedBackground))

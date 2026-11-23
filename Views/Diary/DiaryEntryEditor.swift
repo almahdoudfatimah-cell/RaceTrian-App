@@ -54,14 +54,14 @@ struct DiaryEntryEditor: View {
         HStack {
             DatePicker("", selection: $date, displayedComponents: [.date])
                 .labelsHidden()
-                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .medium, design: .rounded))
             Spacer()
             weatherPicker
             Button {
                 withAnimation { isFavorite.toggle() }
             } label: {
                 Image(systemName: isFavorite ? "heart.fill" : "heart")
-                    .font(.system(size: 18))
+                    .font(.system(size: Theme.fontSize(18)))
                     .foregroundStyle(isFavorite ? Theme.primary : .secondary)
             }
         }
@@ -82,9 +82,9 @@ struct DiaryEntryEditor: View {
         } label: {
             HStack(spacing: 4) {
                 Image(systemName: weather?.icon ?? "cloud.sun")
-                    .font(.system(size: 14))
+                    .font(.system(size: Theme.fontSize(14)))
                 Text(weather?.rawValue ?? "Weather")
-                    .font(.system(size: 13, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .medium, design: .rounded))
             }
             .foregroundStyle(.secondary)
             .padding(.horizontal, 10)
@@ -97,10 +97,10 @@ struct DiaryEntryEditor: View {
     private var titleField: some View {
         VStack(alignment: .leading, spacing: 6) {
             Label("Title", systemImage: "pencil")
-                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
             TextField("What's today about?", text: $title)
-                .font(.system(size: 22, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                 .submitLabel(.next)
         }
         .padding(16)
@@ -111,7 +111,7 @@ struct DiaryEntryEditor: View {
     private var moodSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             Label("How are you feeling?", systemImage: "face.smiling")
-                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
 
             HStack(spacing: 8) {
@@ -131,9 +131,9 @@ struct DiaryEntryEditor: View {
         } label: {
             VStack(spacing: 4) {
                 Text(m.emoji)
-                    .font(.system(size: selected ? 26 : 20))
+                    .font(.system(size: Theme.fontSize(selected ? 26 : 20)))
                 Text(m.rawValue)
-                    .font(.system(size: 9, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(9), weight: .semibold, design: .rounded))
                     .foregroundStyle(selected ? m.color : .secondary)
             }
             .frame(maxWidth: .infinity)
@@ -151,10 +151,10 @@ struct DiaryEntryEditor: View {
     private var bodySection: some View {
         VStack(alignment: .leading, spacing: 6) {
             Label("Your thoughts", systemImage: "text.alignleft")
-                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
             TextEditor(text: $bodyText)
-                .font(.system(size: 15, weight: .regular, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), weight: .regular, design: .rounded))
                 .frame(minHeight: 200)
                 .scrollContentBackground(.hidden)
         }
@@ -166,7 +166,7 @@ struct DiaryEntryEditor: View {
     private var tagsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             Label("Tags", systemImage: "tag")
-                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))], spacing: 10) {
                 ForEach(DiaryTag.allCases, id: \.self) { tag in
@@ -187,9 +187,9 @@ struct DiaryEntryEditor: View {
         } label: {
             HStack(spacing: 6) {
                 Image(systemName: tag.icon)
-                    .font(.system(size: 11, weight: .bold))
+                    .font(.system(size: Theme.fontSize(11), weight: .bold))
                 Text(tag.rawValue)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
             }
             .foregroundStyle(on ? tag.color : .secondary)
             .frame(maxWidth: .infinity)
@@ -208,7 +208,7 @@ struct DiaryEntryEditor: View {
         }
         ToolbarItem(placement: .confirmationAction) {
             Button("Save") { save() }
-                .font(.system(size: 15, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                 .foregroundStyle(Theme.primary)
                 .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
         }

@@ -8,12 +8,12 @@ struct PromptChip: View {
         Button(action: onTap) {
             HStack(spacing: 8) {
                 Text(prompt.emoji)
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .frame(width: 34, height: 34)
                     .background(Circle().fill(prompt.tint.opacity(0.15)))
 
                 Text(prompt.label)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                     .foregroundStyle(.primary)
                     .lineLimit(2)
                     .frame(maxWidth: .infinity, alignment: .leading)

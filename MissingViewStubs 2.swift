@@ -418,7 +418,7 @@ struct RateAppView: View {
     var body: some View {
         VStack(spacing: 30) {
             Image(systemName: "star.fill")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(Color(red: 1.0, green: 0.8, blue: 0.0))
             
             Text("Rate Our App")
@@ -434,7 +434,7 @@ struct RateAppView: View {
                         rating = index
                     } label: {
                         Image(systemName: index <= rating ? "star.fill" : "star")
-                            .font(.system(size: 32))
+                            .font(.system(size: Theme.fontSize(32)))
                             .foregroundStyle(Color(red: 1.0, green: 0.8, blue: 0.0))
                     }
                 }
@@ -501,7 +501,7 @@ struct AIAssistantView: View {
                     sendMessage()
                 } label: {
                     Image(systemName: "arrow.up.circle.fill")
-                        .font(.system(size: 32))
+                        .font(.system(size: Theme.fontSize(32)))
                         .foregroundStyle(inputText.isEmpty ? .gray : Theme.primary)
                 }
                 .disabled(inputText.isEmpty)
@@ -574,7 +574,7 @@ struct MessageBubble: View {
             
             VStack(alignment: message.isUser ? .trailing : .leading, spacing: 4) {
                 Text(message.text)
-                    .font(.system(size: 16, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), design: .rounded))
                     .foregroundStyle(message.isUser ? .white : .primary)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 10)
@@ -607,23 +607,23 @@ struct EmptyStateView: View {
                     .frame(width: 120, height: 120)
                 
                 Image(systemName: icon)
-                    .font(.system(size: 50))
+                    .font(.system(size: Theme.fontSize(50)))
                     .foregroundStyle(color.gradient)
             }
             
             VStack(spacing: 8) {
                 Text(title)
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(24), weight: .bold, design: .rounded))
                 
                 Text(subtitle)
-                    .font(.system(size: 16, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), design: .rounded))
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
             }
             
             Text("Coming Soon")
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                 .foregroundStyle(.white)
                 .padding(.horizontal, 24)
                 .padding(.vertical, 10)

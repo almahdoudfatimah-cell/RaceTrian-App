@@ -18,24 +18,24 @@ struct EditProfileSheet: View {
                 // Header
                 HStack {
                     Text("Edit Profile")
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                     Spacer()
                     Button { dismiss() } label: {
                         Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.fontSize(24)))
                             .foregroundStyle(.secondary)
                     }
                 }
 
                 // Avatar picker
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Avatar").font(.system(size: 13, weight: .semibold, design: .rounded)).foregroundStyle(.secondary)
-                    ScrollView(.horizontal, showsIndicators: false) {
+                    Text("Avatar").font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded)).foregroundStyle(.secondary)
+                    HorizontalScroll {
                         HStack(spacing: 10) {
                             ForEach(avatarOptions, id: \.self) { emoji in
                                 Button { selectedEmoji = emoji } label: {
                                     Text(emoji)
-                                        .font(.system(size: 28))
+                                        .font(.system(size: Theme.fontSize(28)))
                                         .frame(width: 52, height: 52)
                                         .background(
                                             Circle().fill(selectedEmoji == emoji
@@ -56,18 +56,18 @@ struct EditProfileSheet: View {
 
                 // Name field
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Name").font(.system(size: 13, weight: .semibold, design: .rounded)).foregroundStyle(.secondary)
+                    Text("Name").font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded)).foregroundStyle(.secondary)
                     TextField("Your name", text: $name)
-                        .font(.system(size: 16, design: .rounded))
+                        .font(.system(size: Theme.fontSize(16), design: .rounded))
                         .padding(12)
                         .glassCard(cornerRadius: 14)
                 }
 
                 // Tagline field
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Tagline").font(.system(size: 13, weight: .semibold, design: .rounded)).foregroundStyle(.secondary)
+                    Text("Tagline").font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded)).foregroundStyle(.secondary)
                     TextField("A short motto or goal…", text: $tagline)
-                        .font(.system(size: 16, design: .rounded))
+                        .font(.system(size: Theme.fontSize(16), design: .rounded))
                         .padding(12)
                         .glassCard(cornerRadius: 14)
                 }
@@ -81,7 +81,7 @@ struct EditProfileSheet: View {
                     dismiss()
                 } label: {
                     Text("Save Changes")
-                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)

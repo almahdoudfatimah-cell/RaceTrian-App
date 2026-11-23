@@ -160,7 +160,7 @@ public struct TrainingLoadView: View {
     public var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "chart.bar.fill")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(Theme.primary)
             
             Text("Training Load")
@@ -182,7 +182,7 @@ public struct SwimmingTrackingView: View {
     public var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "figure.pool.swim")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.cyan)
             
             Text("Swimming Tracking")
@@ -204,7 +204,7 @@ public struct SeasonalTrendsView: View {
     public var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "calendar")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.orange)
             
             Text("Seasonal Trends")
@@ -226,7 +226,7 @@ public struct PerformancePredictorView: View {
     public var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "chart.line.uptrend.xyaxis")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.green)
             
             Text("Performance Predictor")
@@ -248,7 +248,7 @@ public struct InjuryPreventionView: View {
     public var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "heart.text.square.fill")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.red)
             
             Text("Injury Prevention")
@@ -270,7 +270,7 @@ public struct WeatherImpactView: View {
     public var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "cloud.sun.fill")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.blue)
             
             Text("Weather Impact")
@@ -292,7 +292,7 @@ public struct CompetitionReadinessView: View {
     public var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "trophy.fill")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.yellow)
             
             Text("Competition Readiness")
@@ -314,7 +314,7 @@ public struct CyclingMetricsView: View {
     public var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "bicycle")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.green)
             
             Text("Cycling Metrics")
@@ -336,7 +336,7 @@ public struct RunningAnalyticsView: View {
     public var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "figure.run")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(Theme.primary)
             
             Text("Running Analytics")
@@ -358,7 +358,7 @@ public struct FormAnalysisView: View {
     public var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "waveform.path.ecg")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.purple)
             
             Text("Form Analysis")

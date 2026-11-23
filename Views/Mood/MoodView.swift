@@ -41,14 +41,14 @@ struct MoodView: View {
         HStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Check-in Streak")
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                     .foregroundStyle(.secondary)
                 HStack(alignment: .firstTextBaseline, spacing: 4) {
                     Text("\(store.streak)")
-                        .font(.system(size: 36, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(36), weight: .bold, design: .rounded))
                         .foregroundStyle(Theme.primary)
                     Text("days")
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                         .foregroundStyle(Theme.primary.opacity(0.7))
                 }
             }
@@ -56,13 +56,13 @@ struct MoodView: View {
             if let avg = store.averageThisWeek {
                 VStack(alignment: .trailing, spacing: 4) {
                     Text("This week avg")
-                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                         .foregroundStyle(.secondary)
                     HStack(spacing: 6) {
                         Text(avgEmoji(avg))
-                            .font(.system(size: 28))
+                            .font(.system(size: Theme.fontSize(28)))
                         Text(String(format: "%.1f", avg))
-                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                             .foregroundStyle(Theme.primary)
                     }
                 }
@@ -87,15 +87,15 @@ struct MoodView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(store.todayLog == nil ? "How are you feeling?" : "Today's mood")
-                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                     Text(store.todayLog == nil ? "Tap to log your mood" : "Tap to update")
-                        .font(.system(size: 13, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
                 if store.todayLog != nil {
                     Text("✓ Logged")
-                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), weight: .bold, design: .rounded))
                         .foregroundStyle(Theme.primary)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 5)
@@ -118,10 +118,10 @@ struct MoodView: View {
             if selectedMood != nil {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Add a note (optional)")
-                        .font(.system(size: 12, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                         .foregroundStyle(.secondary)
                     TextField("What's on your mind?", text: $noteText, axis: .vertical)
-                        .font(.system(size: 14, design: .rounded))
+                        .font(.system(size: Theme.fontSize(14), design: .rounded))
                         .lineLimit(3, reservesSpace: true)
                         .padding(12)
                         .background(
@@ -156,13 +156,13 @@ struct MoodView: View {
     private var weekStrip: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Last 7 Days")
-                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
             HStack(spacing: 0) {
                 ForEach(Array(zip(weekDayLabels(), store.last7Days).enumerated()), id: \.offset) { idx, pair in
                     let (label, log) = pair
                     VStack(spacing: 6) {
                         Text(label)
-                            .font(.system(size: 11, weight: .medium, design: .rounded))
+                            .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                             .foregroundStyle(.secondary)
                         ZStack {
                             Circle()
@@ -170,7 +170,7 @@ struct MoodView: View {
                                 .frame(width: 40, height: 40)
                             if let log = log {
                                 Text(log.mood.emoji)
-                                    .font(.system(size: 22))
+                                    .font(.system(size: Theme.fontSize(22)))
                             } else {
                                 Circle()
                                     .stroke(Color.primary.opacity(0.12), style: StrokeStyle(lineWidth: 1.5, dash: [3]))
@@ -179,12 +179,12 @@ struct MoodView: View {
                         }
                         if let log = log {
                             Text(log.mood.label)
-                                .font(.system(size: 9, weight: .semibold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(9), weight: .semibold, design: .rounded))
                                 .foregroundStyle(log.mood.color)
                                 .lineLimit(1)
                         } else {
                             Text("—")
-                                .font(.system(size: 9, design: .rounded))
+                                .font(.system(size: Theme.fontSize(9), design: .rounded))
                                 .foregroundStyle(.tertiary)
                         }
                     }
@@ -200,10 +200,10 @@ struct MoodView: View {
     private var historySection: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("History")
-                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
             if store.logs.isEmpty {
                 Text("No mood logs yet. Start by checking in above!")
-                    .font(.system(size: 14, design: .rounded))
+                    .font(.system(size: Theme.fontSize(14), design: .rounded))
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.vertical, 20)
@@ -225,11 +225,11 @@ struct MoodView: View {
             Color.clear
             VStack(spacing: 12) {
                 Text("🎉")
-                    .font(.system(size: 64))
+                    .font(.system(size: Theme.fontSize(64)))
                     .scaleEffect(showConfetti ? 1 : 0.1)
                     .animation(.spring(response: 0.4, dampingFraction: 0.6), value: showConfetti)
                 Text("Mood logged!")
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
                     .foregroundStyle(Theme.primary)
             }
             .padding(36)
@@ -278,11 +278,11 @@ private struct MoodEmojiButton: View {
         Button(action: action) {
             VStack(spacing: 4) {
                 Text(level.emoji)
-                    .font(.system(size: isSelected ? 34 : 26))
+                    .font(.system(size: Theme.fontSize(isSelected ? 34 : 26)))
                     .scaleEffect(isSelected ? 1.15 : 1.0)
                     .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isSelected)
                 Text(level.label)
-                    .font(.system(size: 9, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(9), weight: .semibold, design: .rounded))
                     .foregroundStyle(isSelected ? level.color : .secondary)
             }
             .frame(maxWidth: .infinity)
@@ -317,21 +317,21 @@ private struct MoodHistoryRow: View {
     var body: some View {
         HStack(spacing: 14) {
             Text(log.mood.emoji)
-                .font(.system(size: 28))
+                .font(.system(size: Theme.fontSize(28)))
                 .frame(width: 44, height: 44)
                 .background(log.mood.color.opacity(0.12), in: Circle())
 
             VStack(alignment: .leading, spacing: 3) {
                 HStack(spacing: 8) {
                     Text(log.mood.label)
-                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                     Text(dateString)
-                        .font(.system(size: 12, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 if !log.note.isEmpty {
                     Text(log.note)
-                        .font(.system(size: 13, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), design: .rounded))
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                 }
@@ -339,7 +339,7 @@ private struct MoodHistoryRow: View {
             Spacer()
             Button(action: onDelete) {
                 Image(systemName: "trash")
-                    .font(.system(size: 13))
+                    .font(.system(size: Theme.fontSize(13)))
                     .foregroundStyle(.secondary.opacity(0.5))
             }
             .buttonStyle(.plain)

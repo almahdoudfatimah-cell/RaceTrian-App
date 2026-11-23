@@ -22,10 +22,10 @@ struct ProfileHeroCard: View {
                     avatarView
                     VStack(alignment: .leading, spacing: isIPad ? 6 : 4) {
                         Text(store.name)
-                            .font(.system(size: isIPad ? 26 : 22, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
                         Text(store.tagline)
-                            .font(.system(size: isIPad ? 17 : 13, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), design: .rounded))
                             .foregroundStyle(.white.opacity(0.85))
                             .lineLimit(2)
                     }
@@ -48,7 +48,7 @@ struct ProfileHeroCard: View {
             // Edit button
             Button(action: onEdit) {
                 Image(systemName: "pencil")
-                    .font(.system(size: isIPad ? 16 : 13, weight: .bold))
+                    .font(.system(size: Theme.fontSize(13), weight: .bold))
                     .foregroundStyle(.white)
                     .frame(width: isIPad ? 36 : 30, height: isIPad ? 36 : 30)
                     .background(Circle().fill(Color.white.opacity(0.25)))
@@ -68,7 +68,7 @@ struct ProfileHeroCard: View {
 
     private var avatarView: some View {
         Text(store.avatarEmoji)
-            .font(.system(size: isIPad ? 44 : 38))
+            .font(.system(size: Theme.fontSize(38)))
             .frame(width: isIPad ? 72 : 66, height: isIPad ? 72 : 66)
             .background(Circle().fill(Color.white.opacity(0.2)))
     }
@@ -92,10 +92,10 @@ struct ProfileHeroCard: View {
     private func statItem(value: String, label: String) -> some View {
         VStack(spacing: isIPad ? 5 : 3) {
             Text(value)
-                .font(.system(size: isIPad ? 22 : 18, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
             Text(label)
-                .font(.system(size: isIPad ? 14 : 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.white.opacity(0.75))
         }
         .frame(maxWidth: .infinity)

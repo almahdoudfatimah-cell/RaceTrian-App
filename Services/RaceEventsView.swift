@@ -117,23 +117,23 @@ struct RaceCard: View {
                         .frame(width: 50, height: 50)
                     
                     Image(systemName: race.type.icon)
-                        .font(.system(size: 22, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(22), weight: .semibold))
                         .foregroundStyle(.white)
                 }
                 
                 // Title & Date
                 VStack(alignment: .leading, spacing: 4) {
                     Text(race.name)
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                     
                     HStack(spacing: 8) {
                         Label(race.distance, systemImage: "location.fill")
-                            .font(.system(size: 13, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), design: .rounded))
                             .foregroundStyle(.secondary)
                         
                         if isPast {
                             Image(systemName: "checkmark.circle.fill")
-                                .font(.system(size: 13))
+                                .font(.system(size: Theme.fontSize(13)))
                                 .foregroundStyle(.green)
                         }
                     }
@@ -145,14 +145,14 @@ struct RaceCard: View {
                 VStack(alignment: .trailing, spacing: 4) {
                     if isPast {
                         Text(race.date, style: .date)
-                            .font(.system(size: 12, weight: .medium, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), weight: .medium, design: .rounded))
                             .foregroundStyle(.secondary)
                     } else {
                         Text("\(race.daysUntil)")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
                             .foregroundStyle(race.type.color)
                         Text("days")
-                            .font(.system(size: 11, design: .rounded))
+                            .font(.system(size: Theme.fontSize(11), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                 }
@@ -163,7 +163,7 @@ struct RaceCard: View {
             
             HStack(spacing: 16) {
                 Label(race.location, systemImage: "mappin.circle.fill")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
                 
@@ -172,9 +172,9 @@ struct RaceCard: View {
                 if let finishTime = race.finishTime, isPast {
                     HStack(spacing: 4) {
                         Image(systemName: "timer")
-                            .font(.system(size: 12))
+                            .font(.system(size: Theme.fontSize(12)))
                         Text(finishTime)
-                            .font(.system(size: 13, weight: .medium, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), weight: .medium, design: .rounded))
                     }
                     .foregroundStyle(.blue)
                 }
@@ -186,11 +186,11 @@ struct RaceCard: View {
                 
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Goals")
-                        .font(.system(size: 12, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                         .foregroundStyle(.secondary)
                     
                     Text(race.goals)
-                        .font(.system(size: 13, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), design: .rounded))
                         .foregroundStyle(.primary)
                 }
             }

@@ -99,16 +99,16 @@ private struct StatCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 24))
+                .font(.system(size: Theme.fontSize(24)))
                 .foregroundStyle(color)
             
             Text(value)
-                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                 .minimumScaleFactor(0.7)
                 .lineLimit(1)
             
             Text(title)
-                .font(.system(size: 12, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -132,24 +132,24 @@ struct ActivityCard: View {
                     .frame(width: 50, height: 50)
                 
                 Image(systemName: activity.type.icon)
-                    .font(.system(size: 22, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(22), weight: .semibold))
                     .foregroundStyle(.white)
             }
             
             // Content
             VStack(alignment: .leading, spacing: 4) {
                 Text(activity.type.rawValue)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                 
                 HStack(spacing: 12) {
                     if activity.distance > 0 {
                         Label(activity.formattedDistance, systemImage: "location.fill")
-                            .font(.system(size: 13, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                     
                     Label(activity.formattedDuration, systemImage: "clock.fill")
-                        .font(.system(size: 13, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
             }
@@ -159,15 +159,15 @@ struct ActivityCard: View {
             // Date
             VStack(alignment: .trailing, spacing: 4) {
                 Text(activity.date, style: .date)
-                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .medium, design: .rounded))
                     .foregroundStyle(.secondary)
                 
                 if activity.calories > 0 {
                     HStack(spacing: 4) {
                         Image(systemName: "flame.fill")
-                            .font(.system(size: 10))
+                            .font(.system(size: Theme.fontSize(10)))
                         Text("\(activity.calories)")
-                            .font(.system(size: 12, weight: .medium, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), weight: .medium, design: .rounded))
                     }
                     .foregroundStyle(.orange)
                 }

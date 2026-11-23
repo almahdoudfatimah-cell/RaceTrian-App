@@ -65,7 +65,7 @@ struct DiaryView: View {
                     withAnimation(.spring(response: 0.3)) { selectedTab = tab }
                 } label: {
                     Text(tab.rawValue)
-                        .font(.system(size: 14, weight: selectedTab == tab ? .bold : .medium, design: .rounded))
+                        .font(.system(size: Theme.fontSize(14), weight: selectedTab == tab ? .bold : .medium, design: .rounded))
                         .foregroundStyle(selectedTab == tab ? .white : .secondary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
@@ -104,11 +104,11 @@ struct DiaryView: View {
     private var emptyState: some View {
         VStack(spacing: 20) {
             Text("📖")
-                .font(.system(size: 64))
+                .font(.system(size: Theme.fontSize(64)))
             Text(selectedTab == .favorites ? "No favourites yet" : "Start your first entry")
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
             Text("Tap + to capture today's thoughts, feelings, and memories.")
-                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .medium, design: .rounded))
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
         }
@@ -122,7 +122,7 @@ struct DiaryView: View {
             showNewEntry = true
         } label: {
             Image(systemName: "plus")
-                .font(.system(size: 22, weight: .bold))
+                .font(.system(size: Theme.fontSize(22), weight: .bold))
                 .foregroundStyle(.white)
                 .frame(width: 60, height: 60)
                 .background(Theme.heroGradient)

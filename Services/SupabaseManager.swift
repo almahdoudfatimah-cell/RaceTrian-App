@@ -190,12 +190,12 @@ private struct MoreRow: View {
                     .fill(color)
                     .frame(width: 34, height: 34)
                 Image(systemName: icon)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold))
                     .foregroundStyle(.white)
             }
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.system(size: Theme.fontSize(15), weight: .medium))
                     .foregroundStyle(.primary)
                 Text(subtitle)
                     .font(.caption)

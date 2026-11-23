@@ -46,7 +46,7 @@ struct NoteEditorView: View {
                                 .overlay(alignment: .topTrailing) {
                                     Button { withAnimation { attachedImage = nil } } label: {
                                         Image(systemName: "xmark.circle.fill")
-                                            .font(.system(size: 22))
+                                            .font(.system(size: Theme.fontSize(22)))
                                             .foregroundStyle(.white)
                                             .shadow(radius: 4)
                                     }
@@ -66,7 +66,7 @@ struct NoteEditorView: View {
 
                             // Title
                             TextField("Title", text: $title)
-                                .font(.system(size: 24, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(24), weight: .bold, design: .rounded))
                                 .foregroundStyle(.primary)
 
                             Divider().opacity(0.3)
@@ -75,12 +75,12 @@ struct NoteEditorView: View {
                             ZStack(alignment: .topLeading) {
                                 if noteBody.isEmpty {
                                     Text("Start writing…")
-                                        .font(.system(size: 16, design: .rounded))
+                                        .font(.system(size: Theme.fontSize(16), design: .rounded))
                                         .foregroundStyle(.secondary)
                                         .padding(.top, 2)
                                 }
                                 TextEditor(text: $noteBody)
-                                    .font(.system(size: 16, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(16), design: .rounded))
                                     .scrollDisabled(true)
                                     .focused($bodyFocused)
                                     .frame(minHeight: 300)
@@ -102,7 +102,7 @@ struct NoteEditorView: View {
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Button("Cancel") { dismiss() }
-                .font(.system(size: 15, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         ToolbarItemGroup(placement: .topBarTrailing) {
@@ -124,7 +124,7 @@ struct NoteEditorView: View {
 
             Button(action: save) {
                 Text("Save")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                     .padding(.horizontal, 14)
                     .padding(.vertical, 6)
@@ -147,9 +147,9 @@ struct NoteEditorView: View {
             HStack(spacing: 5) {
                 Text(selectedCategory.emoji)
                 Text(selectedCategory.rawValue)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                 Image(systemName: "chevron.down")
-                    .font(.system(size: 10, weight: .bold))
+                    .font(.system(size: Theme.fontSize(10), weight: .bold))
             }
             .foregroundStyle(selectedCategory.tint)
             .padding(.horizontal, 12)

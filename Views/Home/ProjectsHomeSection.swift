@@ -10,13 +10,13 @@ struct ProjectsHomeSection: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("AI Projects")
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
                 Spacer()
                 Button {
                     NotificationCenter.default.post(name: .switchTab, object: 3)
                 } label: {
                     Text("See all")
-                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                         .foregroundStyle(Theme.primary)
                 }
                 .buttonStyle(.plain)
@@ -25,9 +25,9 @@ struct ProjectsHomeSection: View {
             if store.projects.isEmpty {
                 emptyCard
             } else {
-                ScrollView(.horizontal, showsIndicators: false) {
+                HorizontalScroll {
                     HStack(spacing: 12) {
-                        ForEach(Array(store.active.prefix(4).enumerated()), id: \.element.id) { index, project in
+                        ForEach(Array(store.active.prefix(8).enumerated()), id: \.element.id) { index, project in
                             let locked = !premium.isActive && index >= freeLimit
                             if locked {
                                 lockedMiniCard(project: project)
@@ -66,10 +66,10 @@ struct ProjectsHomeSection: View {
                     .overlay(
                         VStack(spacing: 6) {
                             Image(systemName: "lock.fill")
-                                .font(.system(size: 20, weight: .bold))
+                                .font(.system(size: Theme.fontSize(20), weight: .bold))
                                 .foregroundStyle(Theme.primary)
                             Text("Premium")
-                                .font(.system(size: 11, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(11), weight: .bold, design: .rounded))
                                 .foregroundStyle(Theme.primary)
                         }
                     )
@@ -84,13 +84,13 @@ struct ProjectsHomeSection: View {
         Button { showingPaywall = true } label: {
             VStack(spacing: 10) {
                 Image(systemName: "crown.fill")
-                    .font(.system(size: 26))
+                    .font(.system(size: Theme.fontSize(26)))
                     .foregroundStyle(Theme.heroGradient)
                 Text("Unlock All\nProjects")
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                     .multilineTextAlignment(.center)
                 Text("Go Premium")
-                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(11), weight: .semibold, design: .rounded))
                     .foregroundStyle(.white)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 5)
@@ -107,12 +107,12 @@ struct ProjectsHomeSection: View {
             NotificationCenter.default.post(name: .switchTab, object: 3)
         } label: {
             HStack(spacing: 14) {
-                Text("🎯").font(.system(size: 30))
+                Text("🎯").font(.system(size: Theme.fontSize(30)))
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Start a Project")
-                        .font(.system(size: 15, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                     Text("Break big goals into clear steps")
-                        .font(.system(size: 12, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
@@ -132,15 +132,15 @@ struct ProjectMiniCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text(project.emoji).font(.system(size: 26))
+                Text(project.emoji).font(.system(size: Theme.fontSize(26)))
                 Spacer()
                 Text("\(Int(project.progress * 100))%")
-                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .bold, design: .rounded))
                     .foregroundStyle(project.category.tint)
             }
 
             Text(project.title)
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                 .lineLimit(2)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -162,7 +162,7 @@ struct ProjectMiniCard: View {
             .frame(height: 6)
 
             Text("\(project.completedMilestones)/\(project.milestones.count) steps")
-                .font(.system(size: 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .padding(14)

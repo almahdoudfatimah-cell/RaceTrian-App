@@ -10,11 +10,11 @@ struct NoteCard: View {
             VStack(alignment: .leading, spacing: 10) {
                 cardHeader
                 Text(note.title)
-                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
                     .foregroundStyle(.primary)
                     .lineLimit(2)
                 Text(note.body)
-                    .font(.system(size: 12, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), design: .rounded))
                     .foregroundStyle(.secondary)
                     .lineLimit(4)
                     .fixedSize(horizontal: false, vertical: true)
@@ -41,7 +41,7 @@ struct NoteCard: View {
     private var cardHeader: some View {
         HStack {
             Text(note.category.emoji)
-                .font(.system(size: 18))
+                .font(.system(size: Theme.fontSize(18)))
                 .frame(width: 32, height: 32)
                 .background(Circle().fill(note.color.color.opacity(0.18)))
 
@@ -49,7 +49,7 @@ struct NoteCard: View {
 
             if note.isPinned {
                 Image(systemName: "pin.fill")
-                    .font(.system(size: 11))
+                    .font(.system(size: Theme.fontSize(11)))
                     .foregroundStyle(note.color.color)
                     .rotationEffect(.degrees(45))
             }
@@ -63,12 +63,12 @@ struct NoteCard: View {
     private var cardFooter: some View {
         HStack {
             Text(relativeDate(note.updatedAt))
-                .font(.system(size: 10, weight: .medium, design: .rounded))
+                .font(.system(size: Theme.fontSize(10), weight: .medium, design: .rounded))
                 .foregroundStyle(note.color.color.opacity(0.7))
             Spacer()
             if !note.tags.isEmpty {
                 Text("#\(note.tags[0])")
-                    .font(.system(size: 10, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(10), weight: .semibold, design: .rounded))
                     .foregroundStyle(note.color.color)
             }
         }

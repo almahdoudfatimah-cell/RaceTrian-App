@@ -6,5 +6,5 @@ struct Theme {
     static let secondaryColor = Color.gray
     static let cornerRadius: CGFloat = 8.0
     static let padding: CGFloat = 16.0
-    static let font = Font.system(size: 16, weight: .regular)
+    static let font = Font.system(size: Theme.fontSize(16), weight: .regular)
 }

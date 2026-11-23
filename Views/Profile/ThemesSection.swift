@@ -27,10 +27,10 @@ struct ThemesSection: View {
             if !premium.isActive {
                 HStack(spacing: isIPad ? 8 : 6) {
                     Image(systemName: "crown.fill")
-                        .font(.system(size: isIPad ? 13 : 11, weight: .bold))
+                        .font(.system(size: Theme.fontSize(11), weight: .bold))
                         .foregroundStyle(Theme.accent)
                     Text("4 premium themes unlock with Premium")
-                        .font(.system(size: isIPad ? 13 : 11, design: .rounded))
+                        .font(.system(size: Theme.fontSize(11), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 .padding(.top, isIPad ? 4 : 2)
@@ -66,7 +66,7 @@ private struct ThemeTile: View {
 
                     if isPremiumLocked {
                         Image(systemName: "crown.fill")
-                            .font(.system(size: isIPad ? 13 : 11, weight: .bold))
+                            .font(.system(size: Theme.fontSize(11), weight: .bold))
                             .foregroundStyle(.white)
                             .padding(isIPad ? 6 : 5)
                             .background(Color.black.opacity(0.3), in: Circle())
@@ -75,7 +75,7 @@ private struct ThemeTile: View {
 
                     if isSelected {
                         Image(systemName: "checkmark.circle.fill")
-                            .font(.system(size: isIPad ? 20 : 18, weight: .bold))
+                            .font(.system(size: Theme.fontSize(18), weight: .bold))
                             .foregroundStyle(.white)
                             .shadow(radius: 4)
                             .padding(isIPad ? 6 : 5)
@@ -83,7 +83,7 @@ private struct ThemeTile: View {
                 }
 
                 Text("\(theme.emoji) \(theme.rawValue)")
-                    .font(.system(size: isIPad ? 13 : 11, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(11), weight: .semibold, design: .rounded))
                     .foregroundStyle(isSelected ? Theme.primary : .secondary)
                     .lineLimit(1)
             }

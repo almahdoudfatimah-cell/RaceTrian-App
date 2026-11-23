@@ -21,10 +21,10 @@ struct ProjectCard: View {
             emojiBadge
             VStack(alignment: .leading, spacing: 3) {
                 Text(project.title)
-                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                     .lineLimit(1)
                 Text(project.description)
-                    .font(.system(size: 12, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), design: .rounded))
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
             }
@@ -39,13 +39,13 @@ struct ProjectCard: View {
                 .fill(project.category.tint.opacity(0.18))
                 .frame(width: 46, height: 46)
             Text(project.emoji)
-                .font(.system(size: 22))
+                .font(.system(size: Theme.fontSize(22)))
         }
     }
 
     private var statusBadge: some View {
         Label(project.status.rawValue, systemImage: project.status.icon)
-            .font(.system(size: 10, weight: .semibold, design: .rounded))
+            .font(.system(size: Theme.fontSize(10), weight: .semibold, design: .rounded))
             .foregroundStyle(project.status.tint)
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
@@ -57,11 +57,11 @@ struct ProjectCard: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text("\(project.completedMilestones) of \(project.milestones.count) steps")
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text("\(Int(project.progress * 100))%")
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                     .foregroundStyle(project.category.tint)
             }
             GeometryReader { geo in
@@ -93,10 +93,10 @@ struct ProjectCard: View {
             ForEach(shown) { milestone in
                 HStack(spacing: 8) {
                     Image(systemName: milestone.isDone ? "checkmark.circle.fill" : "circle")
-                        .font(.system(size: 13))
+                        .font(.system(size: Theme.fontSize(13)))
                         .foregroundStyle(milestone.isDone ? project.category.tint : Color.secondary.opacity(0.5))
                     Text(milestone.title)
-                        .font(.system(size: 13, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), design: .rounded))
                         .foregroundStyle(milestone.isDone ? Color.secondary : Color.primary)
                         .strikethrough(milestone.isDone)
                         .lineLimit(1)
@@ -105,7 +105,7 @@ struct ProjectCard: View {
             }
             if project.milestones.count > 3 {
                 Text("+\(project.milestones.count - 3) more steps")
-                    .font(.system(size: 11, design: .rounded))
+                    .font(.system(size: Theme.fontSize(11), design: .rounded))
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 2)

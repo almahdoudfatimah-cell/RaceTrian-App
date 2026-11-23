@@ -3,6 +3,9 @@
 import SwiftUI
 
 enum WatchTheme {
+    /// Matches the iOS Theme API; the Watch keeps its original sizes.
+    static func fontSize(_ size: CGFloat) -> CGFloat { size }
+
     // Yellow-Orange-Green palette — energetic, warm, nature-inspired
     static let primary   = Color(red: 1.00, green: 0.40, blue: 0.00)    // Vivid orange
     static let secondary = Color(red: 0.25, green: 0.75, blue: 0.35)    // Fresh green
@@ -10,7 +13,8 @@ enum WatchTheme {
     static let mint      = Color(red: 0.60, green: 0.90, blue: 0.55)    // Lime green
     static let rose      = Color(red: 1.00, green: 0.45, blue: 0.10)    // Deep orange
     static let blush     = Color(red: 1.00, green: 0.96, blue: 0.80)    // Pale yellow cream
-    static let paper     = Color(red: 1.00, green: 0.98, blue: 0.88)    // Warm paper
+    /// Watch pages draw `paper`, so it uses the iPhone's `Theme.pageBackground` cream.
+    static let paper     = Color(red: 0.99, green: 0.98, blue: 0.95)
 
     // Sticky-note colors — yellow, amber, lime, peach tones
     static let stickyPink   = Color(red: 1.00, green: 0.95, blue: 0.65) // Bright yellow
@@ -55,23 +59,23 @@ enum WatchTheme {
         endPoint: .bottomTrailing
     )
     
-    // Surface Colors - watchOS compatible
-    static let surface = Color(red: 0.11, green: 0.11, blue: 0.12)
+    // Surface colors match the iOS Theme exactly.
+    static let surface = Color(red: 0.96, green: 0.95, blue: 0.92)
     static let cardSurface = surface
-    static let background = Color.black
+    static let background = paper
     
     // Additional Colors
     static let success = Color.green
     static let warning = Color.orange
     static let error = Color.red
     
-    // Text colors
-    static let textPrimary   = Color.primary
-    static let textSecondary = Color.secondary
-    static let textTertiary  = Color.gray
+    // Match iOS text styling while keeping the requested black primary text.
+    static let textPrimary = Color.black
+    static let textSecondary = Color(red: 0.22, green: 0.21, blue: 0.20)
+    static let textTertiary = textSecondary.opacity(0.78)
     
-    static let ink = Color.primary
-    static let muted = Color.secondary
+    static let ink = textPrimary
+    static let muted = textSecondary
 
     // Watch app fonts
     static let titleFont = Font.system(.title3)
@@ -80,7 +84,7 @@ enum WatchTheme {
     static let captionFont = Font.system(.caption)
 
     // Page background
-    static let pageBackground = Color.black
+    static let pageBackground = paper
 }
 
 // Typealias so Watch code can use "Theme"

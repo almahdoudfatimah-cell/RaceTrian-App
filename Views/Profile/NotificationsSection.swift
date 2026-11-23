@@ -94,15 +94,15 @@ struct NotificationsSection: View {
     private func sectionHeader(title: String, subtitle: String, icon: String) -> some View {
         HStack(spacing: isIPad ? 14 : 10) {
             Image(systemName: icon)
-                .font(.system(size: isIPad ? 18 : 14, weight: .semibold))
+                .font(.system(size: Theme.fontSize(14), weight: .semibold))
                 .foregroundStyle(Theme.primary)
                 .frame(width: isIPad ? 42 : 30, height: isIPad ? 42 : 30)
                 .background(Circle().fill(Theme.primary.opacity(0.12)))
             VStack(alignment: .leading, spacing: isIPad ? 3 : 1) {
                 Text(title)
-                    .font(.system(size: isIPad ? 24 : 16, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                 Text(subtitle)
-                    .font(.system(size: isIPad ? 18 : 12, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             Spacer()
@@ -114,16 +114,16 @@ struct NotificationsSection: View {
                                  isOn: Binding<Bool>) -> some View {
         HStack(spacing: isIPad ? 16 : 12) {
             Image(systemName: icon)
-                .font(.system(size: isIPad ? 18 : 14, weight: .semibold))
+                .font(.system(size: Theme.fontSize(14), weight: .semibold))
                 .foregroundStyle(iconColor)
                 .frame(width: isIPad ? 42 : 30, height: isIPad ? 42 : 30)
                 .background(Circle().fill(iconColor.opacity(0.12)))
 
             VStack(alignment: .leading, spacing: isIPad ? 4 : 2) {
                 Text(title)
-                    .font(.system(size: isIPad ? 18 : 14, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                 Text(subtitle)
-                    .font(.system(size: isIPad ? 16 : 12, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
@@ -139,7 +139,7 @@ struct NotificationsSection: View {
     private func timePickerRow(label: String, options: [Int], selected: Binding<Int>) -> some View {
         HStack {
             Text(label)
-                .font(.system(size: isIPad ? 16 : 12, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), design: .rounded))
                 .foregroundStyle(.secondary)
                 .padding(.leading, isIPad ? 48 : 42)
             Spacer()
@@ -150,7 +150,7 @@ struct NotificationsSection: View {
             }
             .pickerStyle(.menu)
             .tint(Theme.primary)
-            .font(.system(size: isIPad ? 17 : 13, design: .rounded))
+            .font(.system(size: Theme.fontSize(13), design: .rounded))
         }
         .padding(.bottom, isIPad ? 10 : 6)
     }

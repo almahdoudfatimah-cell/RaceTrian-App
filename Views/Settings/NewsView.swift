@@ -108,7 +108,7 @@ private struct NewsPage: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("\(pageIndex + 1) of \(totalPages)")
-                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
 
             ZStack {
@@ -116,12 +116,12 @@ private struct NewsPage: View {
                     .fill(Theme.primary.opacity(0.15))
                     .frame(width: 110, height: 110)
                 Image(systemName: item.icon)
-                    .font(.system(size: 44, weight: .bold))
+                    .font(.system(size: Theme.fontSize(44), weight: .bold))
                     .foregroundStyle(Theme.primary)
             }
 
             Text(item.tag.uppercased())
-                .font(.system(size: 11, weight: .heavy, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), weight: .heavy, design: .rounded))
                 .foregroundStyle(Theme.primary)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 4)

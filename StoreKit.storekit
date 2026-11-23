@@ -21,6 +21,10 @@
     "_askToBuyEnabled" : false,
     "_billingGracePeriodEnabled" : false,
     "_billingIssuesEnabled" : false,
+    "_compatibilityTimeRate" : {
+      "3" : 6,
+      "5" : 1004
+    },
     "_developerTeamID" : "38TW2AKHTL",
     "_disableDialogs" : false,
     "_failTransactionsEnabled" : false,
@@ -31,7 +35,7 @@
     "_storeKitErrors" : [
 
     ],
-    "_timeRate" : 0
+    "_timeRate" : 1005
   },
   "subscriptionBundleGroups" : [
 
@@ -105,7 +109,7 @@
           ],
           "displayPrice" : "117.99",
           "familyShareable" : false,
-          "groupNumber" : 3,
+          "groupNumber" : 2,
           "internalID" : "6797187612",
           "introductoryOffers" : [
 

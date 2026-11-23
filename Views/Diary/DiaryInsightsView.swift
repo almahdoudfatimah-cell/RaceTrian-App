@@ -36,13 +36,13 @@ struct DiaryInsightsView: View {
     private func statCard(value: String, label: String, icon: String, color: Color) -> some View {
         VStack(spacing: 6) {
             Image(systemName: icon)
-                .font(.system(size: 20, weight: .bold))
+                .font(.system(size: Theme.fontSize(20), weight: .bold))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 22, weight: .heavy, design: .rounded))
+                .font(.system(size: Theme.fontSize(22), weight: .heavy, design: .rounded))
                 .foregroundStyle(.primary)
             Text(label)
-                .font(.system(size: 11, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -56,11 +56,11 @@ struct DiaryInsightsView: View {
         let points = store.moodScores(last: 14)
         return VStack(alignment: .leading, spacing: 12) {
             Label("Mood Trend · 14 days", systemImage: "chart.line.uptrend.xyaxis")
-                .font(.system(size: 14, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
 
             if points.isEmpty {
                 Text("No data yet — start writing!")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 40)
@@ -100,7 +100,7 @@ struct DiaryInsightsView: View {
         let counts = moodCounts()
         return VStack(alignment: .leading, spacing: 14) {
             Label("Mood Breakdown", systemImage: "face.smiling")
-                .font(.system(size: 14, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
 
             VStack(spacing: 10) {
                 ForEach(DiaryMood.allCases, id: \.self) { mood in
@@ -119,7 +119,7 @@ struct DiaryInsightsView: View {
     private func moodBar(mood: DiaryMood, count: Int, ratio: Double) -> some View {
         HStack(spacing: 10) {
             Text(mood.emoji)
-                .font(.system(size: 18))
+                .font(.system(size: Theme.fontSize(18)))
                 .frame(width: 28)
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
@@ -133,7 +133,7 @@ struct DiaryInsightsView: View {
             }
             .frame(height: 24)
             Text("\(count)")
-                .font(.system(size: 13, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                 .foregroundStyle(.secondary)
                 .frame(width: 24, alignment: .trailing)
         }
@@ -152,18 +152,18 @@ struct DiaryInsightsView: View {
         let tagCounts = tagFrequencies()
         return VStack(alignment: .leading, spacing: 14) {
             Label("Most Written About", systemImage: "tag.fill")
-                .font(.system(size: 14, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
 
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))], spacing: 10) {
                 ForEach(tagCounts.prefix(6), id: \.0) { tag, count in
                     HStack(spacing: 6) {
                         Image(systemName: tag.icon)
-                            .font(.system(size: 12, weight: .bold))
+                            .font(.system(size: Theme.fontSize(12), weight: .bold))
                         Text(tag.rawValue)
-                            .font(.system(size: 13, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                         Spacer()
                         Text("\(count)")
-                            .font(.system(size: 13, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                             .foregroundStyle(tag.color)
                     }
                     .foregroundStyle(tag.color)
@@ -190,7 +190,7 @@ struct DiaryInsightsView: View {
     private var calendarHeatmap: some View {
         VStack(alignment: .leading, spacing: 14) {
             Label("Writing Streak", systemImage: "calendar")
-                .font(.system(size: 14, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
 
             let cal = Calendar.current
             let today = Date()
@@ -213,7 +213,7 @@ struct DiaryInsightsView: View {
                         )
                         .overlay(
                             Text("\(cal.component(.day, from: day))")
-                                .font(.system(size: 10, weight: .semibold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(10), weight: .semibold, design: .rounded))
                                 .foregroundStyle(hasEntry ? .white : .secondary)
                         )
                 }
@@ -221,11 +221,11 @@ struct DiaryInsightsView: View {
             HStack(spacing: 6) {
                 RoundedRectangle(cornerRadius: 4).fill(Color(.systemFill)).frame(width: 16, height: 16)
                 Text("No entry")
-                    .font(.system(size: 11, design: .rounded)).foregroundStyle(.secondary)
+                    .font(.system(size: Theme.fontSize(11), design: .rounded)).foregroundStyle(.secondary)
                 Spacer()
                 RoundedRectangle(cornerRadius: 4).fill(Theme.primary.opacity(0.8)).frame(width: 16, height: 16)
                 Text("Entry written")
-                    .font(.system(size: 11, design: .rounded)).foregroundStyle(.secondary)
+                    .font(.system(size: Theme.fontSize(11), design: .rounded)).foregroundStyle(.secondary)
             }
         }
         .padding(18)

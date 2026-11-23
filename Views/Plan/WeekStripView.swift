@@ -14,16 +14,16 @@ struct WeekStripView: View {
             HStack {
                 Button { withAnimation(.spring(response: 0.35)) { weekOffset -= 1 } } label: {
                     Image(systemName: "chevron.left")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(14), weight: .semibold))
                         .foregroundStyle(Theme.primary)
                 }
                 Spacer()
                 Text(monthLabel)
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                 Spacer()
                 Button { withAnimation(.spring(response: 0.35)) { weekOffset += 1 } } label: {
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(14), weight: .semibold))
                         .foregroundStyle(Theme.primary)
                 }
             }
@@ -37,10 +37,10 @@ struct WeekStripView: View {
                     Button { withAnimation(.spring(response: 0.3)) { selected = day } } label: {
                         VStack(spacing: 5) {
                             Text(dayLetters[idx % 7])
-                                .font(.system(size: 11, weight: .medium, design: .rounded))
+                                .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                                 .foregroundStyle(isSelected ? .white : .secondary)
                             Text("\(cal.component(.day, from: day))")
-                                .font(.system(size: 15, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                                 .foregroundStyle(isSelected ? .white : isToday ? Theme.primary : .primary)
                         }
                         .frame(maxWidth: .infinity)

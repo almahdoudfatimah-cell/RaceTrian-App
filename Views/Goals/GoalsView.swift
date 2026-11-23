@@ -22,8 +22,9 @@ struct GoalsView: View {
                         LifeGoalsSection()
                         Color.clear.frame(height: 24)
                     }
-                    .padding(.horizontal, 18)
+                    .padding(.horizontal, Theme.pagePadding(18))
                     .padding(.top, 8)
+                    .iPadReadableWidth()
                 }
             }
             .navigationTitle("Tracking")
@@ -80,7 +81,7 @@ struct GoalsView: View {
             ForEach(Period.allCases, id: \.self) { p in
                 Button { withAnimation(.spring(response: 0.3)) { selectedPeriod = p } } label: {
                     Text(p.rawValue)
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                         .foregroundStyle(selectedPeriod == p ? .white : .secondary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
@@ -166,7 +167,7 @@ struct QuickActionsGrid: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Quick Actions")
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 .foregroundStyle(.primary)
 
             LazyVGrid(columns: columns, spacing: 12) {
@@ -190,10 +191,10 @@ struct QuickActionCard: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: action.icon)
-                .font(.system(size: 28))
+                .font(.system(size: Theme.fontSize(28)))
                 .foregroundStyle(action.color)
             Text(action.rawValue)
-                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                 .foregroundStyle(.primary)
         }
         .frame(maxWidth: .infinity)
@@ -224,19 +225,19 @@ struct TrackingQuickActionDetailView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     Image(systemName: action.icon)
-                        .font(.system(size: 48, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(48), weight: .semibold))
                         .foregroundStyle(action.color)
                         .frame(width: 92, height: 92)
                         .background(action.color.opacity(0.14), in: Circle())
 
                     Text("Add your latest activity details below.")
-                        .font(.system(size: 15, design: .rounded))
+                        .font(.system(size: Theme.fontSize(15), design: .rounded))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
 
                     VStack(alignment: .leading, spacing: 14) {
                         Text(action.valuePrompt)
-                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
                             .foregroundStyle(.primary)
 
                         TextField(action.valuePrompt, text: $value)
@@ -246,7 +247,7 @@ struct TrackingQuickActionDetailView: View {
                             .foregroundStyle(.primary)
 
                         Text("Notes")
-                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
                             .foregroundStyle(.primary)
 
                         TextField("How did it feel?", text: $notes, axis: .vertical)
@@ -261,7 +262,7 @@ struct TrackingQuickActionDetailView: View {
                     } label: {
                         Label(didSave ? "Saved" : "Save Entry",
                               systemImage: didSave ? "checkmark.circle.fill" : "square.and.arrow.down.fill")
-                            .font(.system(size: 16, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
@@ -289,13 +290,13 @@ struct TrainingProgressCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "figure.strengthtraining.traditional")
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(Theme.primary)
                 Text("Training Progress")
-                    .font(.system(size: 17, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 Spacer()
                 Text("This Week")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
@@ -315,13 +316,13 @@ struct NutritionTrackerCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "fork.knife")
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(.green)
                 Text("Nutrition")
-                    .font(.system(size: 17, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 Spacer()
                 Text("Today")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
@@ -341,13 +342,13 @@ struct SleepQualityCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "bed.double.fill")
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(.purple)
                 Text("Sleep Quality")
-                    .font(.system(size: 17, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 Spacer()
                 Text("Last Night")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
@@ -367,13 +368,13 @@ struct StepsActivityCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "figure.walk")
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(.green)
                 Text("Steps & Activity")
-                    .font(.system(size: 17, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 Spacer()
                 Text("Today")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
@@ -393,13 +394,13 @@ struct BodyMetricsCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "scalemass.fill")
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(.pink)
                 Text("Body Metrics")
-                    .font(.system(size: 17, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 Spacer()
                 Text("Latest")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
@@ -419,13 +420,13 @@ struct WorkoutIntensityCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "bolt.heart.fill")
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(.orange)
                 Text("Workout Intensity")
-                    .font(.system(size: 17, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 Spacer()
                 Text("This Week")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
@@ -445,13 +446,13 @@ struct RecoveryScoreCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "sparkles")
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(.cyan)
                 Text("Recovery Score")
-                    .font(.system(size: 17, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 Spacer()
                 Text("Today")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
@@ -474,10 +475,10 @@ struct StatBubble: View {
     var body: some View {
         VStack(spacing: 4) {
             Text(value)
-                .font(.system(size: 18, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                 .foregroundStyle(color)
             Text(label)
-                .font(.system(size: 11, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)

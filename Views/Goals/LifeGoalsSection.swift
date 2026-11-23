@@ -63,7 +63,7 @@ struct LifeGoalsSection: View {
         HStack {
             VStack(alignment: .leading, spacing: 3) {
                 Text("Life Goals")
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
                     .foregroundStyle(.primary)
                 Text("Build progress in every part of your life")
                     .font(.caption)
@@ -77,7 +77,7 @@ struct LifeGoalsSection: View {
                 goalDraft = GoalDraft(title: "", emoji: "🎯", color: Theme.primary)
             } label: {
                 Label("Add", systemImage: "plus")
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                     .padding(.horizontal, 13)
                     .padding(.vertical, 9)
@@ -98,10 +98,10 @@ struct LifeGoalsSection: View {
     private var quickGoalIdeas: some View {
         VStack(alignment: .leading, spacing: 9) {
             Text("Goal Ideas")
-                .font(.system(size: 14, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
                 .foregroundStyle(.primary)
 
-            ScrollView(.horizontal, showsIndicators: false) {
+            HorizontalScroll {
                 HStack(spacing: 8) {
                     GoalIdeaButton(emoji: "🧘", title: "Mindfulness") {
                         addIdea(title: "Meditate 10 minutes daily", emoji: "🧘", color: .purple)
@@ -134,7 +134,7 @@ struct LifeGoalsSection: View {
                     }
                 } label: {
                     Text(filter.rawValue)
-                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), weight: .bold, design: .rounded))
                         .foregroundStyle(selectedFilter == filter ? Color.white : Color.primary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 9)
@@ -183,7 +183,7 @@ private struct GoalSummaryCard: View {
             Image(systemName: icon)
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 .foregroundStyle(.primary)
             Text(label)
                 .font(.caption2.weight(.semibold))
@@ -225,16 +225,16 @@ private struct GoalDetailRow: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 10) {
                 Text(goal.emoji)
-                    .font(.system(size: 28))
+                    .font(.system(size: Theme.fontSize(28)))
                     .frame(width: 44, height: 44)
                     .background(Circle().fill(goal.color.opacity(0.12)))
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text(goal.title)
-                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                         .foregroundStyle(.primary)
                     Label("\(goal.streak) day streak", systemImage: "flame.fill")
-                        .font(.system(size: 12, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), design: .rounded))
                         .foregroundStyle(Theme.accent)
                 }
                 Spacer()
@@ -247,7 +247,7 @@ private struct GoalDetailRow: View {
                         .stroke(goal.color, style: StrokeStyle(lineWidth: 6, lineCap: .round))
                         .rotationEffect(.degrees(-90))
                     Text("\(Int(goal.progress * 100))%")
-                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(11), weight: .bold, design: .rounded))
                         .foregroundStyle(goal.color)
                 }
                 .frame(width: 52, height: 52)
@@ -345,7 +345,7 @@ private struct NewLifeGoalSheet: View {
                                     emoji = item
                                 } label: {
                                     Text(item)
-                                        .font(.system(size: 28))
+                                        .font(.system(size: Theme.fontSize(28)))
                                         .frame(maxWidth: .infinity)
                                         .padding(.vertical, 10)
                                         .background(emoji == item ? Theme.primary.opacity(0.2) : Color.black.opacity(0.05), in: RoundedRectangle(cornerRadius: 14))

@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct AppwatchApp: App {
+    @State private var store = WatchAppStore()
+    @State private var access = WatchAccessStore()
+
     var body: some Scene {
         WindowGroup {
-            ContentView(store: WatchAppStore(), access: WatchAccessStore())
+            WatchEntryRootView(store: store, access: access)
+                .task {
+                    WatchPhoneSyncManager.shared.activate(store: store, access: access)
+                    WatchNotificationManager.shared.activate(store: store)
+                }
         }
     }
 }

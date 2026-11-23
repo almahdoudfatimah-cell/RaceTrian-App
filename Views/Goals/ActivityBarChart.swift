@@ -27,7 +27,7 @@ struct ActivityBarChart: View {
             .chartXAxis {
                 AxisMarks(values: .automatic) {
                     AxisValueLabel()
-                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                        .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                 }
             }
             .chartYAxis {
@@ -35,7 +35,7 @@ struct ActivityBarChart: View {
                     AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5, dash: [4]))
                         .foregroundStyle(Color.primary.opacity(0.1))
                     AxisValueLabel()
-                        .font(.system(size: 10, design: .rounded))
+                        .font(.system(size: Theme.fontSize(10), design: .rounded))
                 }
             }
             .frame(height: 180)
@@ -49,9 +49,9 @@ struct ActivityBarChart: View {
     private var sectionHeader: some View {
         VStack(alignment: .leading, spacing: 2) {
             Text("Weekly Activity")
-                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
             Text("Hours per category this week")
-                .font(.system(size: 12, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), design: .rounded))
                 .foregroundStyle(.secondary)
         }
     }
@@ -62,7 +62,7 @@ struct ActivityBarChart: View {
                 HStack(spacing: 5) {
                     Circle().fill(color).frame(width: 8, height: 8)
                     Text(label)
-                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                        .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                         .foregroundStyle(.secondary)
                 }
             }

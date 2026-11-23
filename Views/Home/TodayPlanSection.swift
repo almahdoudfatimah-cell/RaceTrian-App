@@ -26,12 +26,12 @@ struct TodayPlanSection: View {
     private var sectionHeader: some View {
         HStack {
             Text("Today's Plan")
-                .font(.system(size: isIPad ? 24 : 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
                 .foregroundStyle(.primary)
             Spacer()
             Button { onAdd() } label: {
                 Label("Add", systemImage: "plus")
-                    .font(.system(size: isIPad ? 16 : 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                     .foregroundStyle(Theme.primary)
             }
         }
@@ -57,7 +57,7 @@ private struct TaskRow: View {
                     if task.isDone {
                         Circle().fill(task.category.tint).frame(width: isIPad ? 34 : 26, height: isIPad ? 34 : 26)
                         Image(systemName: "checkmark")
-                            .font(.system(size: isIPad ? 17 : 12, weight: .bold))
+                            .font(.system(size: Theme.fontSize(12), weight: .bold))
                             .foregroundStyle(.white)
                     }
                 }
@@ -68,15 +68,15 @@ private struct TaskRow: View {
 
             VStack(alignment: .leading, spacing: isIPad ? 6 : 4) {
                 Text(task.title)
-                    .font(.system(size: isIPad ? 18 : 15, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                     .strikethrough(task.isDone)
                     .foregroundStyle(task.isDone ? .secondary : .primary)
                 HStack(spacing: isIPad ? 12 : 8) {
                     Label(task.time, systemImage: "clock")
-                        .font(.system(size: isIPad ? 14 : 11, weight: .medium, design: .rounded))
+                        .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                         .foregroundStyle(.secondary)
                     Text(task.category.rawValue)
-                        .font(.system(size: isIPad ? 12 : 10, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(10), weight: .bold, design: .rounded))
                         .foregroundStyle(task.category.tint)
                         .padding(.horizontal, isIPad ? 10 : 7)
                         .padding(.vertical, isIPad ? 4 : 2)
@@ -89,7 +89,7 @@ private struct TaskRow: View {
                     .fill(task.category.tint.opacity(0.18))
                     .frame(width: isIPad ? 44 : 36, height: isIPad ? 44 : 36)
                 Image(systemName: task.category.icon)
-                    .font(.system(size: isIPad ? 19 : 15, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(15), weight: .semibold))
                     .foregroundStyle(task.category.tint)
             }
         }
@@ -115,9 +115,9 @@ private struct EmptyPlanView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 9))
                 .accessibilityHidden(true)
             Text("No plans yet")
-                .font(.system(size: isIPad ? 19 : 15, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
             Text("Tap + to let AI craft your perfect day.")
-                .font(.system(size: isIPad ? 16 : 13, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .padding(isIPad ? 36 : 28)

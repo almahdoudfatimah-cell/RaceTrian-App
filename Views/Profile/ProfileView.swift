@@ -14,7 +14,7 @@ struct ProfileView: View {
                 VStack(alignment: .leading, spacing: 28) {
                     // Header with title
                     Text("More")
-                        .font(.system(size: 34, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(34), weight: .bold, design: .rounded))
                         .padding(.horizontal, 20)
                         .padding(.top, 8)
                     
@@ -23,7 +23,7 @@ struct ProfileView: View {
                         HStack(spacing: 16) {
                             // Avatar
                             Text(store.avatarEmoji)
-                                .font(.system(size: 50))
+                                .font(.system(size: Theme.fontSize(50)))
                                 .frame(width: 80, height: 80)
                                 .background(
                                     LinearGradient(colors: [Theme.primary, Theme.accent], startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -37,19 +37,19 @@ struct ProfileView: View {
                             
                             VStack(alignment: .leading, spacing: 6) {
                                 Text(store.name)
-                                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(24), weight: .bold, design: .rounded))
                                 
                                 Text(store.tagline)
-                                    .font(.system(size: 14, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(14), design: .rounded))
                                     .foregroundStyle(.secondary)
                                     .lineLimit(2)
                                 
                                 // Premium Badge
                                 HStack(spacing: 6) {
                                     Image(systemName: "crown.fill")
-                                        .font(.system(size: 12))
+                                        .font(.system(size: Theme.fontSize(12)))
                                     Text("Premium Member")
-                                        .font(.system(size: 12, weight: .semibold, design: .rounded))
+                                        .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                                 }
                                 .foregroundStyle(Color(red: 1.0, green: 0.8, blue: 0.0))
                                 .padding(.horizontal, 12)
@@ -990,9 +990,9 @@ struct ProfileView: View {
                     } label: {
                         HStack {
                             Image(systemName: "rectangle.portrait.and.arrow.right")
-                                .font(.system(size: 18, weight: .semibold))
+                                .font(.system(size: Theme.fontSize(18), weight: .semibold))
                             Text("Sign Out")
-                                .font(.system(size: 17, weight: .semibold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(17), weight: .semibold, design: .rounded))
                         }
                         .foregroundStyle(.red)
                         .frame(maxWidth: .infinity)
@@ -1014,9 +1014,9 @@ struct ProfileView: View {
                     } label: {
                         HStack {
                             Image(systemName: "arrow.counterclockwise.circle")
-                                .font(.system(size: 18, weight: .semibold))
+                                .font(.system(size: Theme.fontSize(18), weight: .semibold))
                             Text("Reset to Onboarding (Debug)")
-                                .font(.system(size: 17, weight: .semibold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(17), weight: .semibold, design: .rounded))
                         }
                         .foregroundStyle(.orange)
                         .frame(maxWidth: .infinity)
@@ -1031,6 +1031,7 @@ struct ProfileView: View {
                     Color.clear.frame(height: 40)
                 }
                 .padding(.bottom, 20)
+                .iPadReadableWidth()
             }
             .background(Theme.pageBackground)
             .navigationBarTitleDisplayMode(.inline)
@@ -1040,7 +1041,7 @@ struct ProfileView: View {
                         quickDestination = .alerts
                     } label: {
                         Label("Notifications", systemImage: "bell.fill")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.toolbarIconSize(20)))
                             .foregroundStyle(.blue)
                             .labelStyle(.iconOnly)
                     }
@@ -1058,7 +1059,7 @@ struct ProfileView: View {
                         quickDestination = .search
                     } label: {
                         Label("Search", systemImage: "magnifyingglass")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.toolbarIconSize(20)))
                             .foregroundStyle(.secondary)
                             .labelStyle(.iconOnly)
                     }
@@ -1068,7 +1069,7 @@ struct ProfileView: View {
                         quickDestination = .theme
                     } label: {
                         Label("Settings", systemImage: "gear")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.toolbarIconSize(20)))
                             .foregroundStyle(.gray)
                             .labelStyle(.iconOnly)
                     }
@@ -1078,7 +1079,7 @@ struct ProfileView: View {
                         ProfileSettingsView()
                     } label: {
                         Label("Edit Profile", systemImage: "pencil.circle.fill")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.toolbarIconSize(24)))
                             .foregroundStyle(Theme.primary)
                             .labelStyle(.iconOnly)
                     }
@@ -1112,7 +1113,7 @@ struct ProfileView: View {
     ) -> some View {
         VStack(spacing: 7) {
             Image(systemName: icon)
-                .font(.system(size: 17, weight: .semibold))
+                .font(.system(size: Theme.fontSize(17), weight: .semibold))
                 .foregroundStyle(.white)
                 .frame(width: 34, height: 34)
                 .background(
@@ -1127,12 +1128,12 @@ struct ProfileView: View {
             
             VStack(spacing: 1) {
                 Text(title)
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                     .foregroundStyle(.black)
                     .lineLimit(1)
                 
                 Text(detail)
-                    .font(.system(size: 9, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(9), weight: .medium, design: .rounded))
                     .foregroundStyle(.black.opacity(0.68))
                     .lineLimit(1)
             }
@@ -1232,14 +1233,14 @@ struct SectionHeader: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
-                .font(.system(size: 20, weight: .semibold))
+                .font(.system(size: Theme.fontSize(20), weight: .semibold))
                 .foregroundStyle(Theme.primary)
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                 Text(subtitle)
-                    .font(.system(size: 14, design: .rounded))
+                    .font(.system(size: Theme.fontSize(14), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
@@ -1259,7 +1260,7 @@ struct CategorySection<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
-                .font(.system(size: 15, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 20)
             
@@ -1310,18 +1311,18 @@ struct NavigationMenuRow: View {
                     .frame(width: 50, height: 50)
                 
                 Image(systemName: icon)
-                    .font(.system(size: 22, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(22), weight: .semibold))
                     .foregroundStyle(.white)
             }
             
             // Text content
             VStack(alignment: .leading, spacing: 3) {
                 Text(title)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                     .foregroundStyle(.black)
                 
                 Text(subtitle)
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.black.opacity(0.68))
             }
             
@@ -1329,7 +1330,7 @@ struct NavigationMenuRow: View {
             
             // Chevron
             Image(systemName: "chevron.right")
-                .font(.system(size: 14, weight: .semibold))
+                .font(.system(size: Theme.fontSize(14), weight: .semibold))
                 .foregroundStyle(.black.opacity(0.55))
         }
         .padding(.horizontal, 16)
@@ -1372,15 +1373,15 @@ struct DisplaySettingsSection: View {
                 // Compact Mode Toggle
                 HStack {
                     Image(systemName: "rectangle.compress.vertical")
-                        .font(.system(size: isIPad ? 16 : 14))
+                        .font(.system(size: Theme.fontSize(14)))
                         .foregroundStyle(Theme.primary)
                         .frame(width: isIPad ? 32 : 28)
                     
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Compact mode")
-                            .font(.system(size: isIPad ? 16 : 14, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                         Text("Show more content at once")
-                            .font(.system(size: isIPad ? 14 : 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                     
@@ -1395,15 +1396,15 @@ struct DisplaySettingsSection: View {
                 // Icon Labels Toggle
                 HStack {
                     Image(systemName: "character.cursor.ibeam")
-                        .font(.system(size: isIPad ? 16 : 14))
+                        .font(.system(size: Theme.fontSize(14)))
                         .foregroundStyle(Theme.primary)
                         .frame(width: isIPad ? 32 : 28)
                     
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Show icon labels")
-                            .font(.system(size: isIPad ? 16 : 14, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                         Text("Display text below icons")
-                            .font(.system(size: isIPad ? 14 : 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                     
@@ -1442,10 +1443,10 @@ struct DataInsightsSection: View {
             } label: {
                 HStack {
                     Text("View detailed statistics")
-                        .font(.system(size: isIPad ? 16 : 14, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                     Spacer()
                     Image(systemName: "arrow.right")
-                        .font(.system(size: isIPad ? 14 : 12, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(12), weight: .semibold))
                 }
                 .foregroundStyle(Theme.primary)
                 .padding(.top, isIPad ? 8 : 6)
@@ -1475,18 +1476,18 @@ private struct StatRow: View {
     var body: some View {
         HStack(spacing: isIPad ? 14 : 12) {
             Image(systemName: icon)
-                .font(.system(size: isIPad ? 18 : 16))
+                .font(.system(size: Theme.fontSize(16)))
                 .foregroundStyle(color)
                 .frame(width: isIPad ? 32 : 28)
             
             Text(title)
-                .font(.system(size: isIPad ? 16 : 14, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), design: .rounded))
                 .foregroundStyle(.secondary)
             
             Spacer()
             
             Text(value)
-                .font(.system(size: isIPad ? 18 : 16, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                 .foregroundStyle(color)
         }
     }
@@ -1553,23 +1554,23 @@ private struct ExportButton: View {
         Button(action: action) {
             HStack(spacing: isIPad ? 14 : 12) {
                 Image(systemName: icon)
-                    .font(.system(size: isIPad ? 18 : 16))
+                    .font(.system(size: Theme.fontSize(16)))
                     .foregroundStyle(color)
                     .frame(width: isIPad ? 32 : 28)
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
-                        .font(.system(size: isIPad ? 16 : 14, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                         .foregroundStyle(.primary)
                     Text(subtitle)
-                        .font(.system(size: isIPad ? 14 : 12, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 
                 Spacer()
                 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: isIPad ? 14 : 12, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(12), weight: .semibold))
                     .foregroundStyle(.tertiary)
             }
         }
@@ -1593,15 +1594,15 @@ struct RemindersSection: View {
             VStack(spacing: isIPad ? 14 : 12) {
                 HStack {
                     Image(systemName: "sunrise")
-                        .font(.system(size: isIPad ? 16 : 14))
+                        .font(.system(size: Theme.fontSize(14)))
                         .foregroundStyle(Theme.accent)
                         .frame(width: isIPad ? 32 : 28)
                     
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Morning briefing")
-                            .font(.system(size: isIPad ? 16 : 14, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                         Text("\(store.morningNotifHour):00")
-                            .font(.system(size: isIPad ? 14 : 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                     
@@ -1615,15 +1616,15 @@ struct RemindersSection: View {
                 
                 HStack {
                     Image(systemName: "moon.stars")
-                        .font(.system(size: isIPad ? 16 : 14))
+                        .font(.system(size: Theme.fontSize(14)))
                         .foregroundStyle(Theme.primary)
                         .frame(width: isIPad ? 32 : 28)
                     
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Evening review")
-                            .font(.system(size: isIPad ? 16 : 14, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                         Text("\(store.eveningNotifHour):00")
-                            .font(.system(size: isIPad ? 14 : 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                     
@@ -1637,12 +1638,12 @@ struct RemindersSection: View {
                 
                 HStack {
                     Image(systemName: "checkmark.circle")
-                        .font(.system(size: isIPad ? 16 : 14))
+                        .font(.system(size: Theme.fontSize(14)))
                         .foregroundStyle(Theme.rose)
                         .frame(width: isIPad ? 32 : 28)
                     
                     Text("Habit reminders")
-                        .font(.system(size: isIPad ? 16 : 14, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                     
                     Spacer()
                     
@@ -1673,15 +1674,15 @@ struct PrivacySecuritySection: View {
             VStack(spacing: isIPad ? 14 : 12) {
                 HStack {
                     Image(systemName: "faceid")
-                        .font(.system(size: isIPad ? 16 : 14))
+                        .font(.system(size: Theme.fontSize(14)))
                         .foregroundStyle(Theme.primary)
                         .frame(width: isIPad ? 32 : 28)
                     
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Biometric lock")
-                            .font(.system(size: isIPad ? 16 : 14, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                         Text("Require Face ID to open")
-                            .font(.system(size: isIPad ? 14 : 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                     
@@ -1695,15 +1696,15 @@ struct PrivacySecuritySection: View {
                 
                 HStack {
                     Image(systemName: "eye.slash")
-                        .font(.system(size: isIPad ? 16 : 14))
+                        .font(.system(size: Theme.fontSize(14)))
                         .foregroundStyle(Theme.primary)
                         .frame(width: isIPad ? 32 : 28)
                     
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Hide in app switcher")
-                            .font(.system(size: isIPad ? 16 : 14, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                         Text("Blur content when multitasking")
-                            .font(.system(size: isIPad ? 14 : 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                     
@@ -1720,17 +1721,17 @@ struct PrivacySecuritySection: View {
                 } label: {
                     HStack {
                         Image(systemName: "hand.raised")
-                            .font(.system(size: isIPad ? 16 : 14))
+                            .font(.system(size: Theme.fontSize(14)))
                             .foregroundStyle(Theme.primary)
                             .frame(width: isIPad ? 32 : 28)
                         
                         Text("Privacy policy")
-                            .font(.system(size: isIPad ? 16 : 14, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                         
                         Spacer()
                         
                         Image(systemName: "chevron.right")
-                            .font(.system(size: isIPad ? 14 : 12, weight: .semibold))
+                            .font(.system(size: Theme.fontSize(12), weight: .semibold))
                             .foregroundStyle(.tertiary)
                     }
                 }
@@ -1807,18 +1808,18 @@ private struct HelpButton: View {
         Button(action: action) {
             HStack(spacing: isIPad ? 14 : 12) {
                 Image(systemName: icon)
-                    .font(.system(size: isIPad ? 18 : 16))
+                    .font(.system(size: Theme.fontSize(16)))
                     .foregroundStyle(color)
                     .frame(width: isIPad ? 32 : 28)
                 
                 Text(title)
-                    .font(.system(size: isIPad ? 16 : 14, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                     .foregroundStyle(.primary)
                 
                 Spacer()
                 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: isIPad ? 14 : 12, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(12), weight: .semibold))
                     .foregroundStyle(.tertiary)
             }
         }
@@ -1855,24 +1856,24 @@ struct AccountSection: View {
             } label: {
                 HStack(spacing: isIPad ? 16 : 12) {
                     Image(systemName: "rectangle.portrait.and.arrow.right")
-                        .font(.system(size: isIPad ? 18 : 14, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(14), weight: .semibold))
                         .foregroundStyle(.red)
                         .frame(width: isIPad ? 42 : 30, height: isIPad ? 42 : 30)
                         .background(Circle().fill(Color.red.opacity(0.12)))
                     
                     VStack(alignment: .leading, spacing: isIPad ? 4 : 2) {
                         Text("Sign Out")
-                            .font(.system(size: isIPad ? 18 : 14, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                             .foregroundStyle(.primary)
                         Text("Log out of your account")
-                            .font(.system(size: isIPad ? 16 : 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                     
                     Spacer()
                     
                     Image(systemName: "chevron.right")
-                        .font(.system(size: isIPad ? 16 : 12, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(12), weight: .semibold))
                         .foregroundStyle(.tertiary)
                 }
                 .padding(.vertical, isIPad ? 14 : 10)
@@ -1950,17 +1951,17 @@ struct FlashCardsView: View {
                                 if !isFlipped {
                                     // Front: Emoji
                                     Text(motivationalCards[currentIndex].front)
-                                        .font(.system(size: 120))
+                                        .font(.system(size: Theme.fontSize(120)))
                                         .transition(.scale.combined(with: .opacity))
                                 } else {
                                     // Back: Motivation text
                                     VStack(spacing: 16) {
                                         Image(systemName: "sparkles")
-                                            .font(.system(size: 40))
+                                            .font(.system(size: Theme.fontSize(40)))
                                             .foregroundStyle(motivationalCards[currentIndex].color)
                                         
                                         Text(motivationalCards[currentIndex].back)
-                                            .font(.system(size: 24, weight: .semibold, design: .rounded))
+                                            .font(.system(size: Theme.fontSize(24), weight: .semibold, design: .rounded))
                                             .multilineTextAlignment(.center)
                                             .foregroundStyle(.primary)
                                             .lineSpacing(6)
@@ -2004,7 +2005,7 @@ struct FlashCardsView: View {
                 
                 // Tap to flip hint
                 Text(isFlipped ? "Tap to see emoji" : "Tap to reveal message")
-                    .font(.system(size: 15, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .medium, design: .rounded))
                     .foregroundStyle(.secondary)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
@@ -2026,7 +2027,7 @@ struct FlashCardsView: View {
                         }
                     } label: {
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .semibold))
+                            .font(.system(size: Theme.fontSize(20), weight: .semibold))
                             .foregroundStyle(.white)
                             .frame(width: 60, height: 60)
                             .background(motivationalCards[currentIndex].color)
@@ -2042,7 +2043,7 @@ struct FlashCardsView: View {
                         }
                     } label: {
                         Image(systemName: "chevron.right")
-                            .font(.system(size: 20, weight: .semibold))
+                            .font(.system(size: Theme.fontSize(20), weight: .semibold))
                             .foregroundStyle(.white)
                             .frame(width: 60, height: 60)
                             .background(motivationalCards[currentIndex].color)
@@ -2142,11 +2143,11 @@ struct DailyQuotesView: View {
                 ForEach(quotes.indices, id: \.self) { index in
                     VStack(spacing: 12) {
                         Image(systemName: "quote.bubble.fill")
-                            .font(.system(size: 40))
+                            .font(.system(size: Theme.fontSize(40)))
                             .foregroundStyle(Color(red: 0.9, green: 0.3, blue: 0.5))
                         
                         Text(quotes[index])
-                            .font(.system(size: 18, weight: .medium, design: .rounded))
+                            .font(.system(size: Theme.fontSize(18), weight: .medium, design: .rounded))
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 32)
                     }
@@ -2176,11 +2177,11 @@ struct AffirmationsView: View {
                 ForEach(affirmations.indices, id: \.self) { index in
                     HStack {
                         Image(systemName: "sparkles")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.fontSize(24)))
                             .foregroundStyle(Color(red: 0.6, green: 0.4, blue: 0.9))
                         
                         Text(affirmations[index])
-                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                         
                         Spacer()
                     }
@@ -2236,7 +2237,7 @@ struct ProfileSettingsView: View {
                     Text("Avatar")
                     Spacer()
                     Text(store.avatarEmoji)
-                        .font(.system(size: 28))
+                        .font(.system(size: Theme.fontSize(28)))
                 }
             }
             
@@ -2324,7 +2325,7 @@ struct HelpCenterView: View {
         ("How do I track my workouts?", "Go to Training Log and tap the + button..."),
         ("Can I export my data?", "Yes! Go to Settings > Export Data..."),
         ("How do I change my theme?", "Visit Settings > Appearance..."),
-        ("Is my data private?", "Yes, all data is encrypted and stored locally...")
+        ("Is my data private?", "Your data is stored on your device and sent only over secure HTTPS connections. Coach messages are processed by our AI provider to generate replies.")
     ]
     
     var body: some View {
@@ -2382,11 +2383,11 @@ struct RateAppView: View {
     var body: some View {
         VStack(spacing: 30) {
             Image(systemName: "star.fill")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Color(red: 1.0, green: 0.8, blue: 0.0))
             
             Text("Rate RaceTrian")
-                .font(.system(size: 28, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
             
             Text("Help us improve by sharing your feedback")
                 .font(.system(.body, design: .rounded))
@@ -2399,7 +2400,7 @@ struct RateAppView: View {
                         rating = star
                     } label: {
                         Image(systemName: star <= rating ? "star.fill" : "star")
-                            .font(.system(size: 40))
+                            .font(.system(size: Theme.fontSize(40)))
                             .foregroundStyle(Color(red: 1.0, green: 0.8, blue: 0.0))
                     }
                 }
@@ -2682,14 +2683,25 @@ struct BackupSyncView: View {
 }
 
 struct LanguageRegionView: View {
+    @AppStorage("appLanguage") private var appLanguage = "en"
+
     var body: some View {
-        EmptyStateView(
-            icon: "globe",
-            title: "Language & Region",
-            subtitle: "App language and measurement units",
-            color: Color(red: 0.5, green: 0.5, blue: 0.9)
-        )
+        Form {
+            Section {
+                Picker("App Language", selection: $appLanguage) {
+                    Label("English", systemImage: "character.book.closed").tag("en")
+                    Label("العربية", systemImage: "character.book.closed.fill").tag("ar")
+                }
+                .pickerStyle(.inline)
+            } header: {
+                Text("Language")
+            } footer: {
+                Text("The app updates immediately and uses right-to-left layout for Arabic.")
+            }
+        }
         .navigationTitle("Language & Region")
+        .navigationBarTitleDisplayMode(.inline)
+        .appPageTheme()
     }
 }
 
@@ -2747,7 +2759,7 @@ struct WhatsNewView: View {
                 LazyVStack(spacing: 16) {
                     VStack(spacing: 10) {
                         Image(systemName: "megaphone.fill")
-                            .font(.system(size: 34, weight: .bold))
+                            .font(.system(size: Theme.fontSize(34), weight: .bold))
                             .foregroundStyle(.white)
                             .frame(width: 72, height: 72)
                             .background(Color.blue.gradient, in: RoundedRectangle(cornerRadius: 22))
@@ -2767,7 +2779,7 @@ struct WhatsNewView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack(alignment: .top, spacing: 12) {
                                 Image(systemName: update.icon)
-                                    .font(.system(size: 22, weight: .bold))
+                                    .font(.system(size: Theme.fontSize(22), weight: .bold))
                                     .foregroundStyle(.white)
                                     .frame(width: 46, height: 46)
                                     .background(update.color.gradient, in: RoundedRectangle(cornerRadius: 14))
@@ -3038,7 +3050,7 @@ struct VirtualCoachView: View {
             }
             
             // Quick Actions
-            ScrollView(.horizontal, showsIndicators: false) {
+            HorizontalScroll {
                 HStack(spacing: 12) {
                     QuickActionButton(icon: "figure.run", title: "Running Tips") {
                         sendQuickMessage("Give me running tips")
@@ -3075,7 +3087,7 @@ struct VirtualCoachView: View {
                     sendMessage()
                 } label: {
                     Image(systemName: userMessage.isEmpty ? "mic.fill" : "arrow.up.circle.fill")
-                        .font(.system(size: 32))
+                        .font(.system(size: Theme.fontSize(32)))
                         .foregroundStyle(userMessage.isEmpty ? .secondary : Color(red: 0.3, green: 0.7, blue: 0.5))
                 }
                 .disabled(userMessage.isEmpty)
@@ -3151,9 +3163,9 @@ struct QuickActionButton: View {
         Button(action: action) {
             VStack(spacing: 6) {
                 Image(systemName: icon)
-                    .font(.system(size: 20, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(20), weight: .semibold))
                 Text(title)
-                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .medium, design: .rounded))
             }
             .foregroundStyle(Color(red: 0.3, green: 0.7, blue: 0.5))
             .frame(width: 80, height: 70)

@@ -82,14 +82,14 @@ struct ProjectDetailView: View {
                 Circle().fill(.white.opacity(0.05)).frame(width: 80).offset(x: 140, y: 30)
 
                 HStack(spacing: 16) {
-                    Text(project.emoji).font(.system(size: 52))
+                    Text(project.emoji).font(.system(size: Theme.fontSize(52)))
                     VStack(alignment: .leading, spacing: 4) {
                         Text(project.title)
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
                         if let days = project.daysUntilTarget {
                             Label("\(days) days left", systemImage: "calendar")
-                                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                                 .foregroundStyle(.white.opacity(0.85))
                         }
                     }
@@ -102,7 +102,7 @@ struct ProjectDetailView: View {
             HStack(spacing: 14) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Progress")
-                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(11), weight: .semibold, design: .rounded))
                         .foregroundStyle(.secondary)
                     GeometryReader { geo in
                         ZStack(alignment: .leading) {
@@ -115,7 +115,7 @@ struct ProjectDetailView: View {
                     }.frame(height: 8)
                 }
                 Text("\(Int(project.progress * 100))%")
-                    .font(.system(size: 22, weight: .heavy, design: .rounded))
+                    .font(.system(size: Theme.fontSize(22), weight: .heavy, design: .rounded))
                     .foregroundStyle(project.category.tint)
             }
             .padding(16)
@@ -128,7 +128,7 @@ struct ProjectDetailView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Steps")
-                    .font(.system(size: 17, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 Spacer()
                 // Free users capped at freeMilestoneLimit milestones per project
                 let canAdd = premium.isActive || project.milestones.count < freeMilestoneLimit
@@ -141,7 +141,7 @@ struct ProjectDetailView: View {
                     }
                 } label: {
                     Label(canAdd ? "Add" : "Upgrade", systemImage: canAdd ? "plus" : "crown.fill")
-                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                         .foregroundStyle(canAdd ? Theme.primary : Theme.accent)
                 }
                 .buttonStyle(.plain)
@@ -170,14 +170,14 @@ struct ProjectDetailView: View {
         Button { showPaywall = true } label: {
             HStack(spacing: 10) {
                 Image(systemName: "crown.fill")
-                    .font(.system(size: 13))
+                    .font(.system(size: Theme.fontSize(13)))
                     .foregroundStyle(Theme.accent)
                 Text("Unlock unlimited steps with Premium")
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
                 Spacer()
                 Image(systemName: "lock.fill")
-                    .font(.system(size: 12))
+                    .font(.system(size: Theme.fontSize(12)))
                     .foregroundStyle(Color.secondary.opacity(0.5))
             }
             .padding(12)
@@ -192,16 +192,16 @@ struct ProjectDetailView: View {
 
     private var addMilestoneRow: some View {
         HStack(spacing: 10) {
-            Image(systemName: "circle").foregroundStyle(.secondary).font(.system(size: 16))
+            Image(systemName: "circle").foregroundStyle(.secondary).font(.system(size: Theme.fontSize(16)))
             TextField("New step…", text: $newMilestone)
-                .font(.system(size: 15, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), design: .rounded))
                 .focused($milestoneFieldFocused)
                 .onSubmit { commitNewMilestone() }
                 .task { milestoneFieldFocused = true }
             Button { commitNewMilestone() } label: {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundStyle(Theme.primary)
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
             }
             .buttonStyle(.plain)
             .disabled(newMilestone.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -237,7 +237,7 @@ struct ProjectDetailView: View {
     private var infoSection: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Details")
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
 
             VStack(spacing: 0) {
                 infoRow(label: "Category", value: project.category.rawValue, icon: project.category.icon, tint: project.category.tint)
@@ -257,15 +257,15 @@ struct ProjectDetailView: View {
     private func infoRow(label: String, value: String, icon: String, tint: Color) -> some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
-                .font(.system(size: 14, weight: .semibold))
+                .font(.system(size: Theme.fontSize(14), weight: .semibold))
                 .foregroundStyle(tint)
                 .frame(width: 24)
             Text(label)
-                .font(.system(size: 14, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), design: .rounded))
                 .foregroundStyle(.secondary)
             Spacer()
             Text(value)
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
@@ -280,11 +280,11 @@ struct MilestoneRow: View {
         Button(action: onToggle) {
             HStack(spacing: 10) {
                 Image(systemName: milestone.isDone ? "checkmark.circle.fill" : "circle")
-                    .font(.system(size: 18))
+                    .font(.system(size: Theme.fontSize(18)))
                     .foregroundStyle(milestone.isDone ? Theme.primary : Color.secondary.opacity(0.4))
                     .animation(.spring(response: 0.3), value: milestone.isDone)
                 Text(milestone.title)
-                    .font(.system(size: 15, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), design: .rounded))
                     .foregroundStyle(milestone.isDone ? Color.secondary : Color.primary)
                     .strikethrough(milestone.isDone, color: .secondary)
                     .animation(.easeInOut(duration: 0.2), value: milestone.isDone)

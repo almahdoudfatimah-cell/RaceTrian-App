@@ -268,7 +268,7 @@ final class PremiumStore: ObservableObject {
         #if !canImport(RevenueCat)
         // Start a single task to listen for transaction updates for the lifetime of the app
         if updatesTask == nil {
-            updatesTask = Task.detached(priority: .background) { [weak self] in
+            updatesTask = Task(priority: .background) { [weak self] in
                 for await update in StoreKit.Transaction.updates {
                     guard let self else { continue }
                     await self.handle(transactionResult: update)

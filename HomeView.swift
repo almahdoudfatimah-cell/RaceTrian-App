@@ -140,7 +140,7 @@ struct HomeView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink(destination: Text("Account View")) {
                         Label("Account", systemImage: "person.circle.fill")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.fontSize(24)))
                             .foregroundStyle(Theme.primary)
                             .labelStyle(.iconOnly)
                     }
@@ -152,7 +152,7 @@ struct HomeView: View {
                         // Search functionality
                     } label: {
                         Label("Search", systemImage: "magnifyingglass")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.secondary)
                             .labelStyle(.iconOnly)
                     }
@@ -162,7 +162,7 @@ struct HomeView: View {
                         // Notifications
                     } label: {
                         Label("Notifications", systemImage: "bell.fill")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.blue)
                             .labelStyle(.iconOnly)
                     }
@@ -178,7 +178,7 @@ struct HomeView: View {
                         showingAddSheet = true
                     } label: {
                         Label("Add", systemImage: "plus.circle.fill")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.fontSize(24)))
                             .foregroundStyle(Theme.primary)
                             .labelStyle(.iconOnly)
                     }
@@ -207,18 +207,18 @@ fileprivate struct HomeRowContent: View {
                     .frame(width: 40, height: 40)
                 
                 Image(systemName: icon)
-                    .font(.system(size: 20, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(20), weight: .semibold))
                     .foregroundStyle(.white)
             }
             
             // Text content
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(17), weight: .semibold))
                     .foregroundStyle(.primary)
                 
                 Text(subtitle)
-                    .font(.system(size: 14))
+                    .font(.system(size: Theme.fontSize(14)))
                     .foregroundStyle(.secondary)
             }
         }

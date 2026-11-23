@@ -5,19 +5,19 @@ struct GoalsCarousel: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Life Goals")
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
                 Spacer()
                 Button {
                     NotificationCenter.default.post(name: .switchTab, object: 2)
                 } label: {
                     Text("See all")
-                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                         .foregroundStyle(Theme.primary)
                 }
                 .buttonStyle(.plain)
             }
 
-            ScrollView(.horizontal, showsIndicators: false) {
+            HorizontalScroll {
                 HStack(spacing: 12) {
                     ForEach(LifeGoalStore.shared.goals) { goal in
                         Button {
@@ -41,10 +41,10 @@ private struct GoalCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text(goal.emoji)
-                    .font(.system(size: 28))
+                    .font(.system(size: Theme.fontSize(28)))
                 Spacer()
                 Label("\(goal.streak)", systemImage: "flame.fill")
-                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(11), weight: .bold, design: .rounded))
                     .foregroundStyle(Theme.accent)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
@@ -52,7 +52,7 @@ private struct GoalCard: View {
             }
 
             Text(goal.title)
-                .font(.system(size: 15, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                 .lineLimit(2)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -69,7 +69,7 @@ private struct GoalCard: View {
                 .frame(height: 8)
 
                 Text("\(Int(goal.progress * 100))% complete")
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                     .foregroundStyle(.secondary)
             }
         }

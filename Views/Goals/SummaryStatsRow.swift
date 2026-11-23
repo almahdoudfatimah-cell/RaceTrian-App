@@ -12,12 +12,12 @@ struct SummaryStatsRow: View {
         HStack(spacing: 12) {
             ForEach(stats, id: \.1) { emoji, value, label, color in
                 VStack(spacing: 6) {
-                    Text(emoji).font(.system(size: 22))
+                    Text(emoji).font(.system(size: Theme.fontSize(22)))
                     Text(value)
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                         .foregroundStyle(color)
                     Text(label)
-                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                        .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 .frame(maxWidth: .infinity)

@@ -45,15 +45,15 @@ struct AddTaskSheet: View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
                 Text("New Task")
-                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                 Text(dateLabel)
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             Spacer()
             Button { dismiss() } label: {
                 Image(systemName: "xmark.circle.fill")
-                    .font(.system(size: 24))
+                    .font(.system(size: Theme.fontSize(24)))
                     .foregroundStyle(.secondary)
             }
         }
@@ -61,7 +61,7 @@ struct AddTaskSheet: View {
 
     private var titleField: some View {
         TextField("Task title…", text: $title)
-            .font(.system(size: 16, design: .rounded))
+            .font(.system(size: Theme.fontSize(16), design: .rounded))
             .padding(14)
             .glassCard(cornerRadius: 16)
     }
@@ -69,7 +69,7 @@ struct AddTaskSheet: View {
     private var categoryPicker: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Category")
-                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
             HStack(spacing: 8) {
                 ForEach(TaskCategory.allCases, id: \.self) { cat in
@@ -77,10 +77,10 @@ struct AddTaskSheet: View {
                     Button { withAnimation { selectedCategory = cat } } label: {
                         VStack(spacing: 4) {
                             Image(systemName: cat.icon)
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.system(size: Theme.fontSize(14), weight: .semibold))
                                 .foregroundStyle(sel ? .white : cat.tint)
                             Text(cat.rawValue)
-                                .font(.system(size: 9, weight: .semibold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(9), weight: .semibold, design: .rounded))
                                 .foregroundStyle(sel ? .white : .secondary)
                         }
                         .frame(maxWidth: .infinity)
@@ -99,15 +99,15 @@ struct AddTaskSheet: View {
     private var timePicker: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Start Time")
-                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
-            ScrollView(.horizontal, showsIndicators: false) {
+            HorizontalScroll {
                 HStack(spacing: 8) {
                     ForEach(hours, id: \.self) { h in
                         let sel = h == selectedHour
                         Button { withAnimation { selectedHour = h } } label: {
                             Text(hourLabel(h))
-                                .font(.system(size: 12, weight: sel ? .bold : .medium, design: .rounded))
+                                .font(.system(size: Theme.fontSize(12), weight: sel ? .bold : .medium, design: .rounded))
                                 .foregroundStyle(sel ? .white : .primary)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 8)
@@ -126,7 +126,7 @@ struct AddTaskSheet: View {
     private var durationPicker: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Duration")
-                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
             HStack(spacing: 10) {
                 ForEach([1,2,3,4,6], id: \.self) { slots in
@@ -134,7 +134,7 @@ struct AddTaskSheet: View {
                     let label = slots == 1 ? "30m" : slots == 2 ? "1h" : slots == 3 ? "1.5h" : slots == 4 ? "2h" : "3h"
                     Button { withAnimation { durationSlots = slots } } label: {
                         Text(label)
-                            .font(.system(size: 13, weight: sel ? .bold : .medium, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), weight: sel ? .bold : .medium, design: .rounded))
                             .foregroundStyle(sel ? .white : .primary)
                             .padding(.horizontal, 14)
                             .padding(.vertical, 9)
@@ -166,7 +166,7 @@ struct AddTaskSheet: View {
             dismiss()
         } label: {
             Text("Add Task")
-                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)

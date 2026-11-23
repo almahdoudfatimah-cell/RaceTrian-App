@@ -32,17 +32,17 @@ struct DiaryEntryCard: View {
             moodBadge
             VStack(alignment: .leading, spacing: 2) {
                 Text(entry.title)
-                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                     .lineLimit(1)
                 Text(entry.date, style: .date)
-                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .medium, design: .rounded))
                     .foregroundStyle(.secondary)
             }
             Spacer()
             HStack(spacing: 8) {
                 if let w = entry.weather {
                     Image(systemName: w.icon)
-                        .font(.system(size: 14))
+                        .font(.system(size: Theme.fontSize(14)))
                         .foregroundStyle(.secondary)
                 }
                 Button {
@@ -51,7 +51,7 @@ struct DiaryEntryCard: View {
                     }
                 } label: {
                     Image(systemName: entry.isFavorite ? "heart.fill" : "heart")
-                        .font(.system(size: 16))
+                        .font(.system(size: Theme.fontSize(16)))
                         .foregroundStyle(entry.isFavorite ? Theme.primary : .secondary)
                 }
             }
@@ -61,7 +61,7 @@ struct DiaryEntryCard: View {
     // MARK: - Mood Badge
     private var moodBadge: some View {
         Text(entry.mood.emoji)
-            .font(.system(size: 28))
+            .font(.system(size: Theme.fontSize(28)))
             .frame(width: 48, height: 48)
             .background(entry.mood.color.opacity(0.15), in: RoundedRectangle(cornerRadius: 12))
     }
@@ -69,7 +69,7 @@ struct DiaryEntryCard: View {
     // MARK: - Body Preview
     private var bodyPreview: some View {
         Text(entry.body)
-            .font(.system(size: 14, weight: .regular, design: .rounded))
+            .font(.system(size: Theme.fontSize(14), weight: .regular, design: .rounded))
             .foregroundStyle(.secondary)
             .lineLimit(3)
     }
@@ -82,7 +82,7 @@ struct DiaryEntryCard: View {
             }
             Spacer()
             Text("\(entry.wordCount) words")
-                .font(.system(size: 11, weight: .medium, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                 .foregroundStyle(.tertiary)
         }
     }
@@ -90,9 +90,9 @@ struct DiaryEntryCard: View {
     private func tagChip(_ tag: DiaryTag) -> some View {
         HStack(spacing: 4) {
             Image(systemName: tag.icon)
-                .font(.system(size: 9, weight: .bold))
+                .font(.system(size: Theme.fontSize(9), weight: .bold))
             Text(tag.rawValue)
-                .font(.system(size: 11, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), weight: .semibold, design: .rounded))
         }
         .foregroundStyle(tag.color)
         .padding(.horizontal, 8)

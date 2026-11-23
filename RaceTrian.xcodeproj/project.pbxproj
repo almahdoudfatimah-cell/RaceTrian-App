@@ -116,7 +116,6 @@
 		4C72F2473080755300834E84 /* AddProjectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C72F2463080755300834E84 /* AddProjectSheet.swift */; };
 		4C72F24930807D7700834E84 /* CompatibilityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C72F24830807D7700834E84 /* CompatibilityModels.swift */; };
 		4C72F24B3081CA8B00834E84 /* HomePlanBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C72F24A3081CA8B00834E84 /* HomePlanBoard.swift */; };
-		4C7653A630A1A2FA00B46130 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7653A530A1A2FA00B46130 /* LaunchScreen.storyboard */; platformFilters = (ios, ); };
 		4C7ACCA730ADA09D00E3015E /* LifeGoalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7ACCA630ADA09D00E3015E /* LifeGoalStore.swift */; };
 		4C830D7330A6B344004D804E /* LocalScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C830D7230A6B344004D804E /* LocalScheduleView.swift */; };
 		4C830D7530A6B49A004D804E /* OfflineScheduleForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C830D7430A6B49A004D804E /* OfflineScheduleForm.swift */; };
@@ -132,6 +131,11 @@
 		4C9B136030723F8400B2E75C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B135B30723EFA00B2E75C /* AuthManager.swift */; };
 		4C9B136130723F8400B2E75C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B135B30723EFA00B2E75C /* AuthManager.swift */; };
 		4CA0D79A3079EFD200E40F2C /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5BF77D3077CEDB005184AF /* TodayView.swift */; };
+		4CA2F63530B35B42001DEA09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA2F63430B35B42001DEA09 /* LaunchScreen.storyboard */; };
+		4CA2F63930B35B8C001DEA09 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4CA2F63730B35B8C001DEA09 /* Localizable.xcstrings */; };
+		4CA2F63B30B35B8C001DEA09 /* Appwatch Watch App-InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4CA2F63630B35B8C001DEA09 /* Appwatch Watch App-InfoPlist.xcstrings */; };
+		4CA2F63C30B35B8C001DEA09 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4CA2F63730B35B8C001DEA09 /* Localizable.xcstrings */; };
+		4CA2F63D30B35B8C001DEA09 /* RaceTrian-InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4CA2F63830B35B8C001DEA09 /* RaceTrian-InfoPlist.xcstrings */; };
 		4CA3B68F30A9EA9200704C5F /* PhoneWatchSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA3B68E30A9EA9200704C5F /* PhoneWatchSyncManager.swift */; };
 		4CCF864D308016EA002B4CCC /* Theme_Watch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF864B307F4988002B4CCC /* Theme_Watch.swift */; };
 		4CCF865030801737002B4CCC /* AppwatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF864A307F4983002B4CCC /* AppwatchApp.swift */; };
@@ -340,7 +344,6 @@
 		4C7329CB30A17206006AD8E0 /* RaceTrianInfo 2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RaceTrianInfo 2.plist"; sourceTree = "<group>"; };
 		4C7329CC30A17212006AD8E0 /* RaceTrianAssets.xcassetsAppIcon.appiconsetContents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RaceTrianAssets.xcassetsAppIcon.appiconsetContents.json; sourceTree = "<group>"; };
 		4C76532830A181C400B46130 /* Info 4.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info 4.plist"; sourceTree = "<group>"; };
-		4C7653A530A1A2FA00B46130 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C7ACCA630ADA09D00E3015E /* LifeGoalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoalStore.swift; sourceTree = "<group>"; };
 		4C830D7230A6B344004D804E /* LocalScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalScheduleView.swift; sourceTree = "<group>"; };
 		4C830D7430A6B49A004D804E /* OfflineScheduleForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineScheduleForm.swift; sourceTree = "<group>"; };
@@ -357,6 +360,10 @@
 		4C9B135B30723EFA00B2E75C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		4C9B13653072436700B2E75C /* CoachModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachModels.swift; sourceTree = "<group>"; };
 		4C9B137030727BC000B2E75C /* find_duplicates.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = find_duplicates.sh; sourceTree = "<group>"; };
+		4CA2F63330B35B42001DEA09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4CA2F63630B35B8C001DEA09 /* Appwatch Watch App-InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = "Appwatch Watch App-InfoPlist.xcstrings"; sourceTree = "<group>"; };
+		4CA2F63730B35B8C001DEA09 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		4CA2F63830B35B8C001DEA09 /* RaceTrian-InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = "RaceTrian-InfoPlist.xcstrings"; sourceTree = "<group>"; };
 		4CA3B68E30A9EA9200704C5F /* PhoneWatchSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneWatchSyncManager.swift; sourceTree = "<group>"; };
 		4CCF8602307F23AE002B4CCC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		4CCF8609307F3BE7002B4CCC /* OBSERVEDOBJECT_FIXED.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = OBSERVEDOBJECT_FIXED.md; sourceTree = "<group>"; };
@@ -780,8 +787,11 @@
 		4C705EF72FAA819E006071CB = {
 			isa = PBXGroup;
 			children = (
+				4CA2F63630B35B8C001DEA09 /* Appwatch Watch App-InfoPlist.xcstrings */,
+				4CA2F63730B35B8C001DEA09 /* Localizable.xcstrings */,
+				4CA2F63830B35B8C001DEA09 /* RaceTrian-InfoPlist.xcstrings */,
 				4C8B1D3830A2F7AD00DDEE7D /* watchOS App Icon.xcassets */,
-				4C7653A530A1A2FA00B46130 /* LaunchScreen.storyboard */,
+				4CA2F63430B35B42001DEA09 /* LaunchScreen.storyboard */,
 				4C5F28513071049800E2ADBB /* StoreKit.storekit */,
 				4C97110E30830DAC00FCDBCD /* StoreKit.storekit */,
 				4C5F27BF306CE3ED00E2ADBB /* StoreKitTestCertificate.cer */,
@@ -1038,6 +1048,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 4C705EF72FAA819E006071CB;
 			minimizedProjectReferenceProxies = 1;
@@ -1065,6 +1076,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C8B1D3930A2F7AD00DDEE7D /* watchOS App Icon.xcassets in Resources */,
+				4CA2F63930B35B8C001DEA09 /* Localizable.xcstrings in Resources */,
+				4CA2F63B30B35B8C001DEA09 /* Appwatch Watch App-InfoPlist.xcstrings in Resources */,
 				4C5F28553071049800E2ADBB /* StoreKit.storekit in Resources */,
 				4C5F27C3306CE3ED00E2ADBB /* StoreKitTestCertificate.cer in Resources */,
 			);
@@ -1091,7 +1104,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C7653A630A1A2FA00B46130 /* LaunchScreen.storyboard in Resources */,
+				4CA2F63D30B35B8C001DEA09 /* RaceTrian-InfoPlist.xcstrings in Resources */,
+				4CA2F63C30B35B8C001DEA09 /* Localizable.xcstrings in Resources */,
+				4CA2F63530B35B42001DEA09 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1303,6 +1318,17 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		4CA2F63430B35B42001DEA09 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CA2F63330B35B42001DEA09 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		4C6C2E21303C4FD900DE3B64 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1319,6 +1345,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Appwatch;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.RaceTrian.RaceTrian;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -1359,6 +1386,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Appwatch;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.RaceTrian.RaceTrian;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -1642,6 +1670,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = RaceTrian;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your workout route on the map and measure distance while you track a route.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Record your voice to enter schedule activities and save workout voice notes.";
@@ -1690,6 +1719,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = RaceTrian;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your workout route on the map and measure distance while you track a route.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Record your voice to enter schedule activities and save workout voice notes.";

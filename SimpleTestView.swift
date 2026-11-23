@@ -28,7 +28,7 @@ struct SimpleTestView: View {
                 
                 VStack(spacing: 20) {
                     Text("TAB \(selectedTab)")
-                        .font(.system(size: 60, weight: .black))
+                        .font(.system(size: Theme.fontSize(60), weight: .black))
                         .foregroundColor(.white)
                     
                     Text("Tap buttons below")
@@ -77,9 +77,9 @@ struct ToolbarButton: View {
         Button(action: action) {
             VStack(spacing: 6) {
                 Image(systemName: icon)
-                    .font(.system(size: 26, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(26), weight: .semibold))
                 Text(title)
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.system(size: Theme.fontSize(11), weight: .medium))
             }
             .foregroundColor(isSelected ? .blue : .gray)
             .frame(maxWidth: .infinity)

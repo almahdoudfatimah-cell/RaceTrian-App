@@ -32,23 +32,23 @@ struct PremiumCard: View {
                     .fill(.white.opacity(0.22))
                     .frame(width: isIPad ? 64 : 56, height: isIPad ? 64 : 56)
                 Image(systemName: "crown.fill")
-                    .font(.system(size: isIPad ? 30 : 26, weight: .bold))
+                    .font(.system(size: Theme.fontSize(26), weight: .bold))
                     .foregroundStyle(.white)
             }
 
             VStack(alignment: .leading, spacing: isIPad ? 6 : 4) {
                 Text("Go Premium")
-                    .font(.system(size: isIPad ? 20 : 17, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                 Text("Unlimited AI Coach + advanced tracking")
-                    .font(.system(size: isIPad ? 16 : 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.white.opacity(0.85))
             }
 
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.system(size: isIPad ? 18 : 16, weight: .bold))
+                .font(.system(size: Theme.fontSize(16), weight: .bold))
                 .foregroundStyle(.white.opacity(0.85))
         }
         .padding(isIPad ? 20 : 16)
@@ -65,20 +65,20 @@ struct PremiumCard: View {
                     .fill(Theme.primary.opacity(0.18))
                     .frame(width: isIPad ? 64 : 56, height: isIPad ? 64 : 56)
                 Image(systemName: "crown.fill")
-                    .font(.system(size: isIPad ? 30 : 26, weight: .bold))
+                    .font(.system(size: Theme.fontSize(26), weight: .bold))
                     .foregroundStyle(Theme.primary)
             }
 
             VStack(alignment: .leading, spacing: isIPad ? 6 : 4) {
                 HStack(spacing: isIPad ? 8 : 6) {
                     Text("Premium")
-                        .font(.system(size: isIPad ? 20 : 17, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                     Text("✓")
-                        .font(.system(size: isIPad ? 20 : 17, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                         .foregroundStyle(Theme.mint)
                 }
                 Text("\(premium.currentPlan?.title ?? "Active") • Thanks for supporting us 💜")
-                    .font(.system(size: isIPad ? 16 : 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
             }
             .foregroundStyle(.secondary)
 

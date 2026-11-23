@@ -41,19 +41,19 @@ struct HomeHeroCard: View {
         HStack(alignment: .center, spacing: 16) {
             VStack(alignment: .leading, spacing: 8) {
                 Label("AI Plan ready", systemImage: "sparkles")
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                     .padding(.horizontal, 10)
                     .padding(.vertical, 6)
                     .background(Capsule().fill(Color.white.opacity(0.22)))
                     .foregroundStyle(.white)
 
                 Text("Your day,\noptimized.")
-                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                     .lineSpacing(2)
 
                 Text("\(doneCount) of \(totalCount) tasks complete")
-                    .font(.system(size: 13, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .medium, design: .rounded))
                     .foregroundStyle(.white.opacity(0.85))
             }
             Spacer()
@@ -73,10 +73,10 @@ struct HomeHeroCard: View {
                 .animation(.easeOut(duration: 0.8), value: completion)
             VStack(spacing: 0) {
                 Text("\(Int(completion * 100))%")
-                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(22), weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                 Text("today")
-                    .font(.system(size: 10, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(10), weight: .medium, design: .rounded))
                     .foregroundStyle(.white.opacity(0.85))
             }
         }

@@ -40,8 +40,9 @@ struct HomeView: View {
                         ProjectsHomeSection()
                         Color.clear.frame(height: isIPad ? 40 : 32)
                     }
-                    .padding(.horizontal, isIPad ? 24 : 18)
+                    .padding(.horizontal, Theme.pagePadding(18))
                     .padding(.top, isIPad ? 12 : 8)
+                    .iPadReadableWidth()
                 }
             }
             .navigationTitle("Today")
@@ -50,7 +51,7 @@ struct HomeView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { showingNotifications = true } label: {
                         Image(systemName: "bell.badge.fill")
-                            .font(.system(size: isIPad ? 28 : 17))
+                            .font(.system(size: Theme.toolbarIconSize(17)))
                             .foregroundStyle(Theme.primary)
                     }
                 }
@@ -82,10 +83,10 @@ private struct GreetingTitle: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(greeting())
-                .font(.system(size: isIPad ? 36 : 13, weight: .medium, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), weight: .medium, design: .rounded))
                 .foregroundStyle(.secondary)
             Text("Hey, Alex")
-                .font(.system(size: isIPad ? 42 : 18, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
         }
     }
     private func greeting() -> String {
@@ -133,7 +134,7 @@ private struct HomeFeatureGrid: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Features")
-                .font(.system(size: 18, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
             LazyVGrid(columns: columns, spacing: 12) {
                 ForEach(shortcuts) { shortcut in
                     switch shortcut.target {
@@ -166,11 +167,11 @@ private struct HomeFeatureGrid: View {
                     .fill(shortcut.color.opacity(0.18))
                     .frame(width: 52, height: 52)
                 Image(systemName: shortcut.icon)
-                    .font(.system(size: 22, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(22), weight: .semibold))
                     .foregroundStyle(shortcut.color)
             }
             Text(shortcut.id)
-                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                 .foregroundStyle(.primary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)

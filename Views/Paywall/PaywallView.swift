@@ -155,8 +155,9 @@ struct PaywallView: View {
                             accountActions
                             smallPrint
                         }
-                        .padding(.horizontal, 22)
+                        .padding(.horizontal, Theme.pagePadding(22))
                         .padding(.bottom, 28)
+                        .iPadReadableWidth()
                     }
                 }
             }
@@ -164,6 +165,8 @@ struct PaywallView: View {
         .overlay {
             if showSuccess { successOverlay }
         }
+        .appPageTheme()
+        .presentationSizing(.page)
         .interactiveDismissDisabled(premium.isPurchasing)
         .alert("Purchase Failed", isPresented: Binding(
             get: { premium.purchaseError != nil },
@@ -299,7 +302,7 @@ struct PaywallView: View {
         HStack {
             Button { close() } label: {
                 Image(systemName: "xmark")
-                    .font(.system(size: 14, weight: .bold))
+                    .font(.system(size: Theme.fontSize(14), weight: .bold))
                     .foregroundStyle(.secondary)
                     .frame(width: 44, height: 44)
                     .background(.ultraThinMaterial, in: Circle())
@@ -332,8 +335,9 @@ struct PaywallView: View {
                     .padding(.leading, 8)
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, Theme.pagePadding(20))
         .padding(.top, 14)
+        .iPadReadableWidth()
         .padding(.bottom, 4)
     }
 
@@ -347,9 +351,9 @@ struct PaywallView: View {
                     .shadow(color: Theme.primary.opacity(0.32), radius: 18, x: 0, y: 12)
                 VStack(spacing: 4) {
                     Image(systemName: "figure.run.circle.fill")
-                        .font(.system(size: 42, weight: .bold))
+                        .font(.system(size: Theme.fontSize(42), weight: .bold))
                     Text("PRO")
-                        .font(.system(size: 14, weight: .heavy, design: .rounded))
+                        .font(.system(size: Theme.fontSize(14), weight: .heavy, design: .rounded))
                 }
                 .foregroundStyle(.white)
             }
@@ -528,7 +532,7 @@ struct PaywallView: View {
                 ZStack {
                     Circle().fill(Theme.heroGradient).frame(width: 90, height: 90)
                     Image(systemName: "checkmark")
-                        .font(.system(size: 44, weight: .bold))
+                        .font(.system(size: Theme.fontSize(44), weight: .bold))
                         .foregroundStyle(.white)
                 }
                 Text("You're Premium!")
@@ -583,7 +587,7 @@ private struct PaywallFeatureRow: View {
                     .fill(color.opacity(0.18))
                     .frame(width: 46, height: 46)
                 Image(systemName: icon)
-                    .font(.system(size: 20, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(20), weight: .semibold))
                     .foregroundStyle(color)
             }
             VStack(alignment: .leading, spacing: 2) {

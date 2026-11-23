@@ -44,7 +44,7 @@ struct MoreTabView: View {
                     .frame(width: 80, height: 80)
                 
                 Image(systemName: "person.fill")
-                    .font(.system(size: 36, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(36), weight: .semibold))
                     .foregroundStyle(.white)
             }
             
@@ -101,7 +101,7 @@ struct MoreTabView: View {
                         .frame(width: 36, height: 36)
                     
                     Image(systemName: icon)
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(16), weight: .semibold))
                         .foregroundStyle(color)
                 }
                 
@@ -112,7 +112,7 @@ struct MoreTabView: View {
                 Spacer()
                 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(14), weight: .semibold))
                     .foregroundStyle(Theme.textTertiary)
             }
             .padding(.horizontal, 16)

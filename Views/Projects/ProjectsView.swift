@@ -69,8 +69,9 @@ struct ProjectsView: View {
                         }
                         Color.clear.frame(height: 32)
                     }
-                    .padding(.horizontal, 18)
+                    .padding(.horizontal, Theme.pagePadding(18))
                     .padding(.top, 12)
+                    .iPadReadableWidth()
                 }
             }
             .navigationTitle("AI Projects")
@@ -104,7 +105,9 @@ struct ProjectsView: View {
                     Image(systemName: "plus")
                     Text("Add")
                 }
-                    .font(.headline)
+                    .font(UIDevice.current.userInterfaceIdiom == .pad
+                          ? .system(size: 19, weight: .semibold, design: .rounded)
+                          : .headline)
                     .frame(minHeight: 44)
                     .foregroundStyle(Theme.primary)
             }
@@ -115,7 +118,7 @@ struct ProjectsView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Label("AI Project Focus", systemImage: "sparkles")
-                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                     .foregroundStyle(.primary)
                 Spacer()
                 Text("Today")
@@ -124,7 +127,7 @@ struct ProjectsView: View {
             }
 
             Text(focusMessage)
-                .font(.system(size: 14, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), design: .rounded))
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
@@ -197,7 +200,7 @@ struct ProjectsView: View {
             Image(systemName: icon)
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 .foregroundStyle(.primary)
             Text(label)
                 .font(.caption2.weight(.semibold))
@@ -256,19 +259,19 @@ struct ProjectsView: View {
                         .fill(Theme.heroGradient)
                         .frame(width: 46, height: 46)
                     Image(systemName: "lock.fill")
-                        .font(.system(size: 18, weight: .bold))
+                        .font(.system(size: Theme.fontSize(18), weight: .bold))
                         .foregroundStyle(.white)
                 }
                 VStack(alignment: .leading, spacing: 3) {
                     Text("\(lockedProjects.count) project\(lockedProjects.count == 1 ? "" : "s") locked")
-                        .font(.system(size: 15, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                     Text("Go Premium for unlimited projects")
-                        .font(.system(size: 12, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
                 Text("Upgrade")
-                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                     .padding(.horizontal, 14)
                     .padding(.vertical, 7)
@@ -294,10 +297,10 @@ struct ProjectsView: View {
                     .overlay(
                         HStack(spacing: 10) {
                             Image(systemName: "crown.fill")
-                                .font(.system(size: 15, weight: .bold))
+                                .font(.system(size: Theme.fontSize(15), weight: .bold))
                                 .foregroundStyle(Theme.accent)
                             Text("Premium Project")
-                                .font(.system(size: 14, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
                             Spacer()
                             Image(systemName: "lock.fill")
                                 .foregroundStyle(.secondary)
@@ -334,16 +337,16 @@ struct ProjectsView: View {
 
     private func statPill(value: String, label: String, icon: String) -> some View {
         VStack(spacing: 2) {
-            Image(systemName: icon).font(.system(size: 14)).foregroundStyle(.white.opacity(0.8))
-            Text(value).font(.system(size: 22, weight: .heavy, design: .rounded)).foregroundStyle(.white)
-            Text(label).font(.system(size: 11, design: .rounded)).foregroundStyle(.white.opacity(0.75))
+            Image(systemName: icon).font(.system(size: Theme.fontSize(14))).foregroundStyle(.white.opacity(0.8))
+            Text(value).font(.system(size: Theme.fontSize(22), weight: .heavy, design: .rounded)).foregroundStyle(.white)
+            Text(label).font(.system(size: Theme.fontSize(11), design: .rounded)).foregroundStyle(.white.opacity(0.75))
         }
         .frame(maxWidth: .infinity)
     }
 
     // MARK: - Filter Row
     private var filterRow: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
+        HorizontalScroll {
             HStack(spacing: 8) {
                 filterChip(label: "All", icon: "square.grid.2x2.fill",
                            isActive: filterCategory == nil && filterStatus == nil) {
@@ -372,7 +375,7 @@ struct ProjectsView: View {
                              isActive: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Label(label, systemImage: icon)
-                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                 .foregroundStyle(isActive ? .white : tint)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 7)
@@ -392,14 +395,14 @@ struct ProjectsView: View {
     private var emptyState: some View {
         VStack(spacing: 16) {
             Text("🎯")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .padding(.top, 40)
             Text(store.projects.isEmpty ? "No projects yet" : "No matching projects")
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
             Text(store.projects.isEmpty
                  ? "Create your first AI project to break big goals into clear steps."
                  : "Try another search or reset your filters to see your projects.")
-                .font(.system(size: 14, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), design: .rounded))
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 24)
@@ -409,7 +412,7 @@ struct ProjectsView: View {
             }
             Button { showAdd = true } label: {
                 Label("Create Project", systemImage: "plus")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)

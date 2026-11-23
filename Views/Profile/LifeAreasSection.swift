@@ -48,7 +48,7 @@ private struct LifeAreaChip: View {
         Button(action: onTap) {
             VStack(spacing: isIPad ? 8 : 5) {
                 Text(area.emoji)
-                    .font(.system(size: isIPad ? 30 : 22))
+                    .font(.system(size: Theme.fontSize(22)))
                     .frame(width: isIPad ? 56 : 44, height: isIPad ? 56 : 44)
                     .background(
                         Circle().fill(isSelected ? area.tint.opacity(0.2) : Color.primary.opacity(0.06))
@@ -57,7 +57,7 @@ private struct LifeAreaChip: View {
                         Circle().strokeBorder(isSelected ? area.tint : Color.clear, lineWidth: isIPad ? 2.5 : 2)
                     )
                 Text(area.rawValue)
-                    .font(.system(size: isIPad ? 13 : 10, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(10), weight: .semibold, design: .rounded))
                     .foregroundStyle(isSelected ? area.tint : .secondary)
                     .lineLimit(1)
             }
@@ -83,15 +83,15 @@ private struct SectionHeaderView: View {
     var body: some View {
         HStack(spacing: isIPad ? 14 : 10) {
             Image(systemName: icon)
-                .font(.system(size: isIPad ? 18 : 14, weight: .semibold))
+                .font(.system(size: Theme.fontSize(14), weight: .semibold))
                 .foregroundStyle(Theme.primary)
                 .frame(width: isIPad ? 42 : 30, height: isIPad ? 42 : 30)
                 .background(Circle().fill(Theme.primary.opacity(0.12)))
             VStack(alignment: .leading, spacing: isIPad ? 3 : 1) {
                 Text(title)
-                    .font(.system(size: isIPad ? 24 : 16, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                 Text(subtitle)
-                    .font(.system(size: isIPad ? 18 : 12, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             Spacer()

@@ -7,6 +7,7 @@ final class LifeGoalStore {
     static let shared = LifeGoalStore()
 
     private static let key = "lifeGoals.v1"
+    private static let expandedSamplesKey = "lifeGoals.expandedSamples.v1"
 
     var goals: [LifeGoal] {
         didSet { save() }
@@ -19,6 +20,12 @@ final class LifeGoalStore {
         } else {
             // First launch: start with the sample goals the Goals tab has always shown.
             goals = SampleData.goals
+        }
+
+        if !UserDefaults.standard.bool(forKey: Self.expandedSamplesKey) {
+            let existingTitles = Set(goals.map(\.title))
+            goals.append(contentsOf: SampleData.goals.filter { !existingTitles.contains($0.title) })
+            UserDefaults.standard.set(true, forKey: Self.expandedSamplesKey)
         }
     }
 

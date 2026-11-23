@@ -22,7 +22,7 @@ struct MessageBubble: View {
 
     private var bubble: some View {
         ChatMessageContent(content: message.content, rendersTables: message.role == .assistant)
-            .font(.system(size: 15, design: .rounded))
+            .font(.system(size: Theme.fontSize(15), design: .rounded))
             .foregroundStyle(message.role == .user ? .white : .primary)
             .padding(.horizontal, 14)
             .padding(.vertical, 12)
@@ -53,7 +53,7 @@ struct MessageBubble: View {
 
     private var timeLabel: some View {
         Text(message.timestamp, style: .time)
-            .font(.system(size: 10, design: .rounded))
+            .font(.system(size: Theme.fontSize(10), design: .rounded))
             .foregroundStyle(.secondary)
             .padding(.horizontal, 4)
     }
@@ -65,7 +65,7 @@ struct MessageBubble: View {
                 .frame(width: 30, height: 30)
                 .shadow(color: Theme.primary.opacity(0.3), radius: 6, x: 0, y: 3)
             Text("✦")
-                .font(.system(size: 13, weight: .bold))
+                .font(.system(size: Theme.fontSize(13), weight: .bold))
                 .foregroundStyle(.white)
         }
     }
@@ -137,7 +137,7 @@ struct ThinkingBubble: View {
                 Circle().fill(Theme.heroGradient).frame(width: 30, height: 30)
                     .shadow(color: Theme.primary.opacity(0.3), radius: 6, x: 0, y: 3)
                 Text("✦")
-                    .font(.system(size: 13, weight: .bold))
+                    .font(.system(size: Theme.fontSize(13), weight: .bold))
                     .foregroundStyle(.white)
             }
             HStack(spacing: 5) {
@@ -179,14 +179,14 @@ struct ErrorBanner: View {
             Image(systemName: "exclamationmark.triangle.fill")
                 .foregroundStyle(Theme.rose)
             Text(message)
-                .font(.system(size: 13, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), design: .rounded))
                 .foregroundStyle(.primary)
                 .lineLimit(2)
             Spacer()
             Button(action: onDismiss) {
                 Image(systemName: "xmark")
                     .foregroundStyle(.secondary)
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.system(size: Theme.fontSize(12), weight: .bold))
             }
         }
         .padding(12)

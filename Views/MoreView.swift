@@ -110,7 +110,7 @@ private struct MoreRow<Destination: View>: View {
                         .fill(tint.opacity(0.18))
                         .frame(width: 32, height: 32)
                     Image(systemName: systemImage)
-                        .font(.system(size: 15, weight: .bold))
+                        .font(.system(size: Theme.fontSize(15), weight: .bold))
                         .foregroundStyle(tint)
                 }
                 Text(title)

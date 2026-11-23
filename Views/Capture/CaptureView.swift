@@ -82,7 +82,7 @@ struct CaptureView: View {
         VStack(spacing: 10) {
             Spacer(minLength: 40)
             Image(systemName: "tray")
-                .font(.system(size: 44))
+                .font(.system(size: Theme.fontSize(44)))
                 .foregroundStyle(Theme.primary.opacity(0.5))
             Text("Your inbox is empty")
                 .font(.system(.headline, design: .rounded, weight: .bold))
@@ -110,7 +110,7 @@ private struct CaptureRow: View {
         HStack(alignment: .top, spacing: 12) {
             Button { store.markProcessed(item) } label: {
                 Image(systemName: item.isProcessed ? "checkmark.circle.fill" : "circle")
-                    .font(.system(size: 22, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(22), weight: .semibold))
                     .foregroundStyle(item.isProcessed ? Theme.primary : .secondary)
             }
             .buttonStyle(.plain)

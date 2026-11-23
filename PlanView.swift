@@ -20,7 +20,7 @@ struct PlanView: View {
                         HStack(spacing: 12) {
                             Button(action: { selectedWeek = max(0, selectedWeek - 1) }) {
                                 Image(systemName: "chevron.left")
-                                    .font(.system(size: 16, weight: .semibold))
+                                    .font(.system(size: Theme.fontSize(16), weight: .semibold))
                                     .foregroundStyle(Theme.primary)
                                     .frame(width: 44, height: 44)
                             }
@@ -28,18 +28,18 @@ struct PlanView: View {
                             
                             VStack(spacing: 4) {
                                 Text("Week \(selectedWeek + 1)")
-                                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                                     .foregroundStyle(.primary)
                                 
                                 Text("Oct 8 - Oct 14")
-                                    .font(.system(size: 13, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                                     .foregroundStyle(.secondary)
                             }
                             .frame(maxWidth: .infinity)
                             
                             Button(action: { selectedWeek += 1 }) {
                                 Image(systemName: "chevron.right")
-                                    .font(.system(size: 16, weight: .semibold))
+                                    .font(.system(size: Theme.fontSize(16), weight: .semibold))
                                     .foregroundStyle(Theme.primary)
                                     .frame(width: 44, height: 44)
                             }
@@ -53,7 +53,7 @@ struct PlanView: View {
                     // This Week's Activities
                     VStack(alignment: .leading, spacing: 12) {
                         Text("THIS WEEK")
-                            .font(.system(size: 13, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                             .foregroundStyle(.secondary)
                             .padding(.horizontal, 20)
                         
@@ -103,7 +103,7 @@ struct PlanView: View {
                     // Upcoming Activities
                     VStack(alignment: .leading, spacing: 12) {
                         Text("UPCOMING")
-                            .font(.system(size: 13, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                             .foregroundStyle(.secondary)
                             .padding(.horizontal, 20)
                         
@@ -174,7 +174,7 @@ struct PlanView: View {
                         }
                     } label: {
                         Label("View Options", systemImage: "slider.horizontal.3")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.secondary)
                             .labelStyle(.iconOnly)
                     }
@@ -186,7 +186,7 @@ struct PlanView: View {
                         // Toggle calendar view
                     } label: {
                         Label("Calendar", systemImage: "calendar")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.purple)
                             .labelStyle(.iconOnly)
                     }
@@ -196,7 +196,7 @@ struct PlanView: View {
                         // Share functionality
                     } label: {
                         Label("Share", systemImage: "square.and.arrow.up")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.blue)
                             .labelStyle(.iconOnly)
                     }
@@ -206,7 +206,7 @@ struct PlanView: View {
                         // Add new activity
                     } label: {
                         Label("Add Activity", systemImage: "plus.circle.fill")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.fontSize(24)))
                             .foregroundStyle(Theme.primary)
                             .labelStyle(.iconOnly)
                     }
@@ -229,7 +229,7 @@ struct PlanActivityRow: View {
         HStack(spacing: 14) {
             // Day label
             Text(day)
-                .font(.system(size: 13, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                 .foregroundStyle(.secondary)
                 .frame(width: 60, alignment: .leading)
             
@@ -240,19 +240,19 @@ struct PlanActivityRow: View {
                     .frame(width: 40, height: 40)
                 
                 Image(systemName: completed ? "checkmark.circle.fill" : icon)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold))
                     .foregroundStyle(completed ? .green : color)
             }
             
             // Activity details
             VStack(alignment: .leading, spacing: 3) {
                 Text(activity)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                     .foregroundStyle(.primary)
                     .strikethrough(completed, color: .secondary)
                 
                 Text(duration)
-                    .font(.system(size: 13, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             
@@ -261,11 +261,11 @@ struct PlanActivityRow: View {
             // Status indicator
             if completed {
                 Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 18))
+                    .font(.system(size: Theme.fontSize(18)))
                     .foregroundStyle(.green)
             } else {
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(12), weight: .semibold))
                     .foregroundStyle(.tertiary)
             }
         }
@@ -279,13 +279,13 @@ struct WeeklyGoalsCard: View {
         VStack(spacing: 16) {
             HStack {
                 Text("Weekly Goals")
-                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                     .foregroundStyle(.primary)
                 
                 Spacer()
                 
                 Image(systemName: "target")
-                    .font(.system(size: 20))
+                    .font(.system(size: Theme.fontSize(20)))
                     .foregroundStyle(Theme.primary)
             }
             
@@ -340,18 +340,18 @@ struct GoalProgressRow: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Image(systemName: icon)
-                    .font(.system(size: 14))
+                    .font(.system(size: Theme.fontSize(14)))
                     .foregroundStyle(color)
                     .frame(width: 20)
                 
                 Text(title)
-                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                     .foregroundStyle(.primary)
                 
                 Spacer()
                 
                 Text("\(Int(current))/\(Int(goal)) \(unit)")
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                     .foregroundStyle(.secondary)
             }
             

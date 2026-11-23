@@ -32,7 +32,7 @@ struct NotesView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { showNewNote = true } label: {
                         Image(systemName: "square.and.pencil")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.system(size: Theme.fontSize(18), weight: .semibold))
                             .foregroundStyle(Theme.primary)
                     }
                 }
@@ -50,7 +50,7 @@ struct NotesView: View {
 
     // MARK: - Category strip
     private var categoryStrip: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
+        HorizontalScroll {
             HStack(spacing: 8) {
                 ForEach(NoteCategory.allCases, id: \.self) { cat in
                     CategoryPill(
@@ -92,7 +92,7 @@ struct NotesView: View {
 
     private func sectionLabel(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 13, weight: .semibold, design: .rounded))
+            .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
             .foregroundStyle(.secondary)
             .padding(.top, 10)
             .padding(.bottom, 6)
@@ -116,12 +116,12 @@ private struct CategoryPill: View {
     var body: some View {
         Button(action: onTap) {
             HStack(spacing: 5) {
-                Text(category.emoji).font(.system(size: 13))
+                Text(category.emoji).font(.system(size: Theme.fontSize(13)))
                 Text(category.rawValue)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                 if count > 0 && category != .all {
                     Text("\(count)")
-                        .font(.system(size: 10, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(10), weight: .bold, design: .rounded))
                         .padding(.horizontal, 5)
                         .padding(.vertical, 2)
                         .background(Capsule().fill(isSelected ? Color.white.opacity(0.3) : category.tint.opacity(0.2)))
@@ -143,11 +143,11 @@ private struct EmptyNotesView: View {
     let category: NoteCategory
     var body: some View {
         VStack(spacing: 14) {
-            Text(category.emoji).font(.system(size: 48))
+            Text(category.emoji).font(.system(size: Theme.fontSize(48)))
             Text("No \(category == .all ? "" : category.rawValue) notes yet")
-                .font(.system(size: 18, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
             Text("Tap ✏️ to capture your first thought.")
-                .font(.system(size: 14, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), design: .rounded))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)

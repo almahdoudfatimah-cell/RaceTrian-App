@@ -20,9 +20,9 @@ struct MoodLineChart: View {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Mood Trend")
-                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                     Text("Last 14 days")
-                        .font(.system(size: 12, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
@@ -63,7 +63,7 @@ struct MoodLineChart: View {
             .chartXAxis {
                 AxisMarks(values: .stride(by: .day, count: 4)) {
                     AxisValueLabel(format: .dateTime.day().month(.abbreviated))
-                        .font(.system(size: 10, design: .rounded))
+                        .font(.system(size: Theme.fontSize(10), design: .rounded))
                 }
             }
             .chartYAxis {
@@ -71,7 +71,7 @@ struct MoodLineChart: View {
                     AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5, dash: [4]))
                         .foregroundStyle(Color.primary.opacity(0.08))
                     AxisValueLabel()
-                        .font(.system(size: 10, design: .rounded))
+                        .font(.system(size: Theme.fontSize(10), design: .rounded))
                 }
             }
             .chartYScale(domain: 1...5)
@@ -87,7 +87,7 @@ struct MoodLineChart: View {
         return HStack(spacing: 6) {
             Text(emoji)
             Text(String(format: "%.1f / 5", avg))
-                .font(.system(size: 14, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
                 .foregroundStyle(Theme.primary)
         }
         .padding(.horizontal, 12)

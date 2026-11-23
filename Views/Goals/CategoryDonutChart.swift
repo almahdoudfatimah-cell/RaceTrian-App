@@ -8,7 +8,7 @@ struct CategoryDonutChart: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Time Breakdown")
-                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
 
             HStack(spacing: 20) {
                 donutChart
@@ -33,9 +33,9 @@ struct CategoryDonutChart: View {
         .chartBackground { _ in
             VStack(spacing: 2) {
                 Text(String(format: "%.0fh", total))
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
                 Text("total")
-                    .font(.system(size: 11, design: .rounded))
+                    .font(.system(size: Theme.fontSize(11), design: .rounded))
                     .foregroundStyle(.secondary)
             }
         }
@@ -49,10 +49,10 @@ struct CategoryDonutChart: View {
                         .fill(item.category.tint)
                         .frame(width: 10, height: 10)
                     Text(item.category.rawValue)
-                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), weight: .medium, design: .rounded))
                     Spacer()
                     Text(String(format: "%.0fh", item.hours))
-                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(12), weight: .bold, design: .rounded))
                         .foregroundStyle(item.category.tint)
                 }
             }

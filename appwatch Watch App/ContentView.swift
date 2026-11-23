@@ -110,9 +110,20 @@ final class WatchAppStore {
     func addTask(title: String, hour: Int) {
         let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
-        let date = Calendar.current.date(bySettingHour: hour, minute: 0, second: 0, of: Date()) ?? Date()
-        tasks.append(WatchTask(id: UUID(), title: trimmed, scheduledDate: date, isCompleted: false))
-        WatchPhoneSyncManager.shared.addTask(title: trimmed, scheduledDate: date)
+        let now = Date()
+        let selectedTime = Calendar.current.date(
+            bySettingHour: hour,
+            minute: 0,
+            second: 0,
+            of: now
+        ) ?? now
+        let scheduledDate = selectedTime > now
+            ? selectedTime
+            : Calendar.current.date(byAdding: .day, value: 1, to: selectedTime) ?? selectedTime
+
+        tasks.append(WatchTask(id: UUID(), title: trimmed, scheduledDate: scheduledDate, isCompleted: false))
+        WatchPhoneSyncManager.shared.addTask(title: trimmed, scheduledDate: scheduledDate)
+        WatchNotificationManager.shared.scheduleAfterUserAction()
     }
 
     func addWorkout(kind: WorkoutKind, durationMinutes: Int) {
@@ -154,6 +165,78 @@ final class WatchAppStore {
         )
         boards[board.rawValue, default: []].append(activity)
         WatchPhoneSyncManager.shared.addBoardActivity(activity, boardKey: board.rawValue)
+    }
+
+    /// Creates a useful starter schedule the first time a board is opened on Apple Watch.
+    @discardableResult
+    func createStarterScheduleIfNeeded(for board: WatchBoard) -> Bool {
+        guard activities(on: board).isEmpty else { return false }
+
+        let templates: [(title: String, day: Int, hour: Int, duration: Int)] = switch board {
+        case .weekly:
+            [
+                ("Set weekly priorities", 0, 1, 20), ("Easy training session", 1, 2, 45),
+                ("Midweek progress check", 3, 2, 20), ("Long training session", 5, 3, 60),
+                ("Weekly review and recovery", 6, 2, 30)
+            ]
+        case .monthly:
+            [
+                ("Set monthly goals", 0, 1, 30), ("Week 1 progress review", 7, 2, 20),
+                ("Mid-month check-in", 14, 2, 20), ("Monthly review", 28, 2, 30)
+            ]
+        case .weekend:
+            [
+                ("Weekend training", 0, 1, 60), ("Personal time", 0, 4, 60),
+                ("Recovery and reset", 1, 2, 30)
+            ]
+        case .vacation:
+            [
+                ("Review today's vacation plan", 0, 1, 15), ("Main vacation activity", 0, 3, 90),
+                ("Rest and recharge", 0, 6, 45)
+            ]
+        case .travel:
+            [
+                ("Check travel documents", 0, 1, 15), ("Departure preparation", 0, 2, 30),
+                ("Arrival and check-in", 0, 5, 30)
+            ]
+        case .training:
+            [
+                ("Warm-up", 0, 1, 15), ("Training session", 0, 2, 45),
+                ("Cool-down and log results", 0, 3, 15)
+            ]
+        case .achievement:
+            [
+                ("Define the next milestone", 0, 1, 20), ("Focused achievement session", 1, 2, 45),
+                ("Review progress", 2, 2, 20)
+            ]
+        case .raceVision:
+            [
+                ("Choose target race", 0, 1, 30), ("Build training roadmap", 7, 2, 45),
+                ("Review race readiness", 30, 2, 30)
+            ]
+        }
+
+        let now = Date()
+        let newActivities = templates.map { template in
+            let start = Calendar.current.date(
+                byAdding: .hour,
+                value: template.hour,
+                to: Calendar.current.date(byAdding: .day, value: template.day, to: now) ?? now
+            ) ?? now.addingTimeInterval(3600)
+            return SyncedBoardActivity(
+                id: UUID(),
+                activity: template.title,
+                start: start,
+                finish: start.addingTimeInterval(TimeInterval(template.duration * 60)),
+                completedAt: nil
+            )
+        }
+
+        boards[board.rawValue] = newActivities
+        for activity in newActivities {
+            WatchPhoneSyncManager.shared.addBoardActivity(activity, boardKey: board.rawValue)
+        }
+        return true
     }
 
     func toggleBoardActivity(id: UUID, on board: WatchBoard) {
@@ -393,6 +476,11 @@ struct WatchTodayView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
+                // Shown until the first iPhone sync so a new watch can link up from the first page.
+                if store.lastSyncedAt == nil {
+                    WatchConnectPhoneCard()
+                }
+
                 WatchHomeHeroCard(
                     doneCount: store.completedTodayCount,
                     totalCount: store.todayTasks.count
@@ -417,8 +505,11 @@ struct WatchTodayView: View {
             .padding(.horizontal, 4)
             .padding(.bottom, 8)
         }
+        .background(WatchTheme.paper)
         .containerBackground(WatchTheme.paper, for: .tabView)
         .containerBackground(WatchTheme.paper, for: .navigation)
+        .toolbarColorScheme(.light, for: .navigationBar)
+        .tint(WatchTheme.ink)
         .navigationTitle("Today")
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -427,9 +518,11 @@ struct WatchTodayView: View {
                 } label: {
                     Image(systemName: "bell.fill")
                         .font(.system(size: 14, weight: .bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(WatchTheme.ink)
+                        .frame(width: 28, height: 28)
+                        .background(WatchTheme.accent, in: Circle())
                 }
-                .tint(WatchTheme.primary)
+                .buttonStyle(.plain)
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
@@ -437,14 +530,45 @@ struct WatchTodayView: View {
                 } label: {
                     Image(systemName: "plus")
                         .font(.system(size: 15, weight: .bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(WatchTheme.primary)
+                        .frame(width: 28, height: 28)
+                        .background(WatchTheme.cardSurface, in: Circle())
                 }
-                .tint(WatchTheme.primary)
+                .buttonStyle(.plain)
             }
         }
         .sheet(isPresented: $showingAddTask) {
             AddWatchTaskView(store: store)
         }
+    }
+}
+
+/// Cream card with an orange Connect iPhone button that asks the paired iPhone for its data.
+struct WatchConnectPhoneCard: View {
+    private var sync: WatchPhoneSyncManager { .shared }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Connect to your iPhone")
+                .font(WatchTheme.headlineFont)
+                .foregroundStyle(WatchTheme.ink)
+            Text("Open RaceTrian on your iPhone, then tap Connect.")
+                .font(WatchTheme.captionFont)
+                .foregroundStyle(WatchTheme.muted)
+                .fixedSize(horizontal: false, vertical: true)
+            Button {
+                sync.connect()
+            } label: {
+                Label(sync.isPhoneReachable ? "Syncing…" : "Connect", systemImage: "iphone")
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity, minHeight: 34)
+                    .background(WatchTheme.heroGradient, in: Capsule())
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(10)
+        .watchGlassCard(cornerRadius: 14)
     }
 }
 
@@ -465,16 +589,16 @@ struct WatchHomeHeroCard: View {
                     .font(.system(size: 9, weight: .semibold, design: .rounded))
                     .padding(.horizontal, 7)
                     .padding(.vertical, 3)
-                    .background(Capsule().fill(Color.white.opacity(0.22)))
-                    .foregroundStyle(.white)
+                    .background(Capsule().fill(WatchTheme.cardSurface.opacity(0.72)))
+                    .foregroundStyle(WatchTheme.ink)
 
                 Text("Your day,\noptimized.")
                     .font(.system(size: 15, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(WatchTheme.ink)
 
                 Text("\(doneCount) of \(totalCount) tasks")
                     .font(.system(size: 10, weight: .medium, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.85))
+                    .foregroundStyle(WatchTheme.ink.opacity(0.75))
             }
             Spacer(minLength: 0)
             progressRing
@@ -501,15 +625,15 @@ struct WatchHomeHeroCard: View {
     private var progressRing: some View {
         ZStack {
             Circle()
-                .stroke(Color.white.opacity(0.25), lineWidth: 5)
+                .stroke(WatchTheme.ink.opacity(0.18), lineWidth: 5)
             Circle()
                 .trim(from: 0, to: completion)
-                .stroke(Color.white, style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                .stroke(WatchTheme.ink, style: StrokeStyle(lineWidth: 5, lineCap: .round))
                 .rotationEffect(.degrees(-90))
                 .animation(.easeOut(duration: 0.8), value: completion)
             Text("\(Int(completion * 100))%")
                 .font(.system(size: 11, weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
+                .foregroundStyle(WatchTheme.ink)
         }
         .frame(width: 46, height: 46)
     }
@@ -931,7 +1055,7 @@ struct AddWatchTaskView: View {
                     } label: {
                         Text("Add Task")
                             .font(.system(size: 14, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white)
+                            .foregroundStyle(WatchTheme.ink)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 4)
                     }

@@ -44,7 +44,7 @@ struct HabitsView: View {
     private var emptyState: some View {
         VStack(spacing: 14) {
             Image(systemName: "checklist")
-                .font(.system(size: 50))
+                .font(.system(size: Theme.fontSize(50)))
                 .foregroundStyle(Theme.primary.opacity(0.5))
             Text("Track your first habit")
                 .font(.system(.title3, design: .rounded, weight: .bold))
@@ -79,10 +79,10 @@ private struct HabitRow: View {
                         .fill(habit.isCompletedToday ? Theme.heroGradient : LinearGradient(colors: [.gray.opacity(0.2)], startPoint: .top, endPoint: .bottom))
                         .frame(width: 44, height: 44)
                     Text(habit.emoji)
-                        .font(.system(size: 20))
+                        .font(.system(size: Theme.fontSize(20)))
                     if habit.isCompletedToday {
                         Image(systemName: "checkmark.circle.fill")
-                            .font(.system(size: 18, weight: .bold))
+                            .font(.system(size: Theme.fontSize(18), weight: .bold))
                             .foregroundStyle(.white)
                             .background(Theme.primary, in: Circle())
                             .offset(x: 16, y: 16)
@@ -161,9 +161,9 @@ private struct AddHabitSheet: View {
                             } label: {
                                 HStack(spacing: 8) {
                                     Text(preset.emoji)
-                                        .font(.system(size: 18))
+                                        .font(.system(size: Theme.fontSize(18)))
                                     Text(preset.name)
-                                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                                        .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                                         .foregroundStyle(.primary)
                                     Spacer(minLength: 0)
                                 }
@@ -186,7 +186,7 @@ private struct AddHabitSheet: View {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5)) {
                         ForEach(emojis, id: \.self) { e in
                             Text(e)
-                                .font(.system(size: 26))
+                                .font(.system(size: Theme.fontSize(26)))
                                 .frame(width: 44, height: 44)
                                 .background(emoji == e ? Theme.primary.opacity(0.18) : Color.gray.opacity(0.08), in: Circle())
                                 .onTapGesture { emoji = e }

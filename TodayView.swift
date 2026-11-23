@@ -26,14 +26,14 @@ public struct TodayView: View {
                                 TodayPlaceholderProfileView()
                             } label: {
                                 Image(systemName: "person.circle.fill")
-                                    .font(.system(size: 28))
+                                    .font(.system(size: Theme.fontSize(28)))
                                     .foregroundStyle(Theme.primary)
                             }
                             
                             Spacer()
                             
                             Text("Today")
-                                .font(.system(size: 24, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(24), weight: .bold, design: .rounded))
                             
                             Spacer()
                             
@@ -42,7 +42,7 @@ public struct TodayView: View {
                                     TodayPlaceholderPlanView()
                                 } label: {
                                     Image(systemName: "calendar.badge.clock")
-                                        .font(.system(size: 22))
+                                        .font(.system(size: Theme.fontSize(22)))
                                         .foregroundStyle(.blue)
                                 }
                                 
@@ -50,7 +50,7 @@ public struct TodayView: View {
                                     TodayPlaceholderFeaturesView()
                                 } label: {
                                     Image(systemName: "ellipsis.circle")
-                                        .font(.system(size: 22))
+                                        .font(.system(size: Theme.fontSize(22)))
                                         .foregroundStyle(.secondary)
                                 }
                                 
@@ -58,7 +58,7 @@ public struct TodayView: View {
                                     showingAddActivity = true
                                 } label: {
                                     Image(systemName: "plus.circle.fill")
-                                        .font(.system(size: 28))
+                                        .font(.system(size: Theme.fontSize(28)))
                                         .foregroundStyle(Theme.primary)
                                 }
                             }
@@ -96,7 +96,7 @@ public struct TodayView: View {
                         // Today's Schedule with Liquid Glass
                         VStack(alignment: .leading, spacing: 12) {
                             Text("TODAY'S SCHEDULE")
-                                .font(.system(size: 13, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                                 .foregroundStyle(.secondary)
                                 .padding(.horizontal, 20)
                             
@@ -146,7 +146,7 @@ public struct TodayView: View {
                         // Quick Actions with Glass Buttons
                         VStack(alignment: .leading, spacing: 12) {
                             Text("QUICK ACTIONS")
-                                .font(.system(size: 13, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                                 .foregroundStyle(.secondary)
                                 .padding(.horizontal, 20)
                             
@@ -177,7 +177,7 @@ public struct TodayView: View {
                         // Weekly Progress with Liquid Glass
                         VStack(alignment: .leading, spacing: 12) {
                             Text("THIS WEEK")
-                                .font(.system(size: 13, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(13), weight: .bold, design: .rounded))
                                 .foregroundStyle(.secondary)
                                 .padding(.horizontal, 20)
                             
@@ -197,9 +197,9 @@ public struct TodayView: View {
                     } label: {
                         VStack(spacing: 6) {
                             Image(systemName: "person.circle.fill")
-                                .font(.system(size: 24))
+                                .font(.system(size: Theme.fontSize(24)))
                             Text("Profile")
-                                .font(.system(size: 11, weight: .medium, design: .rounded))
+                                .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                         }
                         .foregroundStyle(Theme.primary)
                         .frame(maxWidth: .infinity)
@@ -211,9 +211,9 @@ public struct TodayView: View {
                     } label: {
                         VStack(spacing: 6) {
                             Image(systemName: "calendar.badge.clock")
-                                .font(.system(size: 24))
+                                .font(.system(size: Theme.fontSize(24)))
                             Text("Plan")
-                                .font(.system(size: 11, weight: .medium, design: .rounded))
+                                .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                         }
                         .foregroundStyle(.blue)
                         .frame(maxWidth: .infinity)
@@ -225,9 +225,9 @@ public struct TodayView: View {
                     } label: {
                         VStack(spacing: 6) {
                             Image(systemName: "plus.circle.fill")
-                                .font(.system(size: 32))
+                                .font(.system(size: Theme.fontSize(32)))
                             Text("Add")
-                                .font(.system(size: 11, weight: .medium, design: .rounded))
+                                .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                         }
                         .foregroundStyle(Theme.primary)
                         .frame(maxWidth: .infinity)
@@ -239,9 +239,9 @@ public struct TodayView: View {
                     } label: {
                         VStack(spacing: 6) {
                             Image(systemName: "ellipsis.circle")
-                                .font(.system(size: 24))
+                                .font(.system(size: Theme.fontSize(24)))
                             Text("More")
-                                .font(.system(size: 11, weight: .medium, design: .rounded))
+                                .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                         }
                         .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity)
@@ -257,7 +257,7 @@ public struct TodayView: View {
                         TodayPlaceholderProfileView()
                     } label: {
                         Label("Profile", systemImage: "person.circle.fill")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.fontSize(24)))
                             .foregroundStyle(Theme.primary)
                             .labelStyle(.iconOnly)
                     }
@@ -269,7 +269,7 @@ public struct TodayView: View {
                         // Search functionality
                     } label: {
                         Label("Search", systemImage: "magnifyingglass")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.secondary)
                             .labelStyle(.iconOnly)
                     }
@@ -279,7 +279,7 @@ public struct TodayView: View {
                         // Notifications
                     } label: {
                         Label("Notifications", systemImage: "bell.fill")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.blue)
                             .labelStyle(.iconOnly)
                     }
@@ -295,7 +295,7 @@ public struct TodayView: View {
                         TodayPlaceholderPlanView()
                     } label: {
                         Label("Plan", systemImage: "calendar.badge.clock")
-                            .font(.system(size: 20))
+                            .font(.system(size: Theme.fontSize(20)))
                             .foregroundStyle(.purple)
                             .labelStyle(.iconOnly)
                     }
@@ -305,7 +305,7 @@ public struct TodayView: View {
                         showingAddActivity = true
                     } label: {
                         Label("Add", systemImage: "plus.circle.fill")
-                            .font(.system(size: 24))
+                            .font(.system(size: Theme.fontSize(24)))
                             .foregroundStyle(Theme.primary)
                             .labelStyle(.iconOnly)
                     }
@@ -373,15 +373,15 @@ public struct TodayView: View {
         var body: some View {
             VStack(spacing: 10) {
                 Image(systemName: icon)
-                    .font(.system(size: 28, weight: .semibold))
+                    .font(.system(size: Theme.fontSize(28), weight: .semibold))
                     .foregroundStyle(color.gradient)
                 
                 Text(value)
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(24), weight: .bold, design: .rounded))
                     .foregroundStyle(.primary)
                 
                 Text(label)
-                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .medium, design: .rounded))
                     .foregroundStyle(.secondary)
             }
             .frame(maxWidth: .infinity)
@@ -403,7 +403,7 @@ public struct TodayView: View {
             HStack(spacing: 14) {
                 // Time
                 Text(time)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                     .foregroundStyle(.secondary)
                     .frame(width: 50, alignment: .leading)
                 
@@ -414,19 +414,19 @@ public struct TodayView: View {
                         .frame(width: 40, height: 40)
                     
                     Image(systemName: completed ? "checkmark" : icon)
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(16), weight: .semibold))
                         .foregroundStyle(completed ? .green : color)
                 }
                 
                 // Activity details
                 VStack(alignment: .leading, spacing: 3) {
                     Text(activity)
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                         .foregroundStyle(.primary)
                         .strikethrough(completed, color: .secondary)
                     
                     Text(duration)
-                        .font(.system(size: 13, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 
@@ -435,7 +435,7 @@ public struct TodayView: View {
                 // Chevron
                 if !completed {
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 12, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(12), weight: .semibold))
                         .foregroundStyle(.tertiary)
                 }
             }
@@ -455,11 +455,11 @@ public struct TodayView: View {
             }) {
                 VStack(spacing: 10) {
                     Image(systemName: icon)
-                        .font(.system(size: 26, weight: .semibold))
+                        .font(.system(size: Theme.fontSize(26), weight: .semibold))
                         .foregroundStyle(color.gradient)
                     
                     Text(title)
-                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), weight: .semibold, design: .rounded))
                         .foregroundStyle(.primary)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
@@ -490,18 +490,18 @@ public struct TodayView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Weekly Progress")
-                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                             .foregroundStyle(.primary)
                         
                         Text("5 of 7 days completed")
-                            .font(.system(size: 14, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                     
                     Spacer()
                     
                     Text("71%")
-                        .font(.system(size: 28, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
                         .foregroundStyle(Theme.primary)
                 }
                 
@@ -515,7 +515,7 @@ public struct TodayView: View {
                                 .frame(maxHeight: 80, alignment: .bottom)
                             
                             Text(weekData[index].0)
-                                .font(.system(size: 11, weight: .medium, design: .rounded))
+                                .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                                 .foregroundStyle(weekData[index].2 ? Theme.primary : .secondary)
                         }
                         .frame(maxWidth: .infinity)
@@ -535,7 +535,7 @@ public struct TodayView: View {
         var body: some View {
             VStack(spacing: 20) {
                 Image(systemName: "person.circle.fill")
-                    .font(.system(size: 60))
+                    .font(.system(size: Theme.fontSize(60)))
                     .foregroundStyle(Theme.primary)
                 
                 Text("Profile View")
@@ -555,7 +555,7 @@ public struct TodayView: View {
         var body: some View {
             VStack(spacing: 20) {
                 Image(systemName: "calendar.badge.clock")
-                    .font(.system(size: 60))
+                    .font(.system(size: Theme.fontSize(60)))
                     .foregroundStyle(.blue)
                 
                 Text("Plan View")

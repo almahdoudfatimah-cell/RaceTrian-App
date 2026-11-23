@@ -30,8 +30,9 @@ public struct PlanView: View {
                     .pickerStyle(.segmented)
                     dateNavigation
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, Theme.pagePadding(16))
                 .padding(.top, 8)
+                .iPadReadableWidth()
 
                 planContent
             }
@@ -42,6 +43,7 @@ public struct PlanView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Today") { selectedDate = Date() }
+                        .iPadToolbarText()
                 }
             }
             .safeAreaInset(edge: .bottom, spacing: 0) {
@@ -52,7 +54,9 @@ public struct PlanView: View {
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
-                .padding()
+                .padding(.vertical)
+                .padding(.horizontal, Theme.pagePadding(16))
+                .iPadReadableWidth()
                 .background(.regularMaterial)
             }
             .sheet(isPresented: $showAddTask) {
@@ -89,7 +93,9 @@ public struct PlanView: View {
                 HabitsTrackerSticker(days: weekDays)
                 PlannerNotesSection()
             }
-            .padding()
+            .padding(.vertical)
+            .padding(.horizontal, Theme.pagePadding(16))
+            .iPadReadableWidth()
         }
     }
 
@@ -133,7 +139,8 @@ private struct PlannerWeekOverview: View {
             }
             ProgressView(value: Double(completed), total: Double(max(1, tasks.count)))
             Text("\(completed) of \(tasks.count) tasks completed").font(.subheadline)
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 155), spacing: 12)], spacing: 12) {
+            // Wider minimum on iPad so day cards have room for the larger text (3 columns)
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 220 : 155), spacing: 12)], spacing: 12) {
                 ForEach(days, id: \.self) { day in
                     PlannerDayCard(date: day, tasks: store.tasks(for: day)) { onOpenDay(day) }
                 }

@@ -53,7 +53,7 @@ struct WeekdayStickyCard: View {
                 Spacer().frame(height: 22)
                 if tasks.isEmpty {
                     Text("long-press to add")
-                        .font(.system(size: 11, design: .rounded).italic())
+                        .font(.system(size: Theme.fontSize(11), design: .rounded).italic())
                         .foregroundStyle(.black.opacity(0.45))
                 } else {
                     ForEach(tasks.prefix(4)) { t in
@@ -61,7 +61,7 @@ struct WeekdayStickyCard: View {
                     }
                     if tasks.count > 4 {
                         Text("+\(tasks.count - 4) more")
-                            .font(.system(size: 10, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(10), weight: .bold, design: .rounded))
                             .foregroundStyle(.black.opacity(0.55))
                             .padding(.top, 2)
                     }
@@ -78,7 +78,7 @@ struct WeekdayStickyCard: View {
             .overlay(alignment: .topTrailing) {
                 if isToday {
                     Text("\(dayNumber)")
-                        .font(.system(size: 11, weight: .heavy, design: .rounded))
+                        .font(.system(size: Theme.fontSize(11), weight: .heavy, design: .rounded))
                         .foregroundStyle(.white)
                         .padding(6)
                         .background(Circle().fill(Color.black.opacity(0.7)))
@@ -98,7 +98,7 @@ struct WeekdayStickyCard: View {
                     .fill(style.tape)
                     .frame(width: 92, height: 22)
                 Text(name)
-                    .font(.system(size: 9, weight: .heavy, design: .rounded))
+                    .font(.system(size: Theme.fontSize(9), weight: .heavy, design: .rounded))
                     .tracking(0.6)
                     .foregroundStyle(.black.opacity(0.85))
             }
@@ -128,7 +128,7 @@ struct WeekdayStickyCard: View {
                 .padding(.top, 3)
 
                 Text(t.title)
-                    .font(.system(size: 11.5, weight: .medium, design: .rounded))
+                    .font(.system(size: Theme.fontSize(11.5), weight: .medium, design: .rounded))
                     .foregroundStyle(.black.opacity(t.isDone ? 0.45 : 0.85))
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
@@ -164,7 +164,7 @@ struct InlineAddTaskSheet: View {
                 ZStack {
                     Rectangle().fill(style.tape).frame(width: 90, height: 20)
                     Text(dayName.uppercased())
-                        .font(.system(size: 9, weight: .heavy, design: .rounded))
+                        .font(.system(size: Theme.fontSize(9), weight: .heavy, design: .rounded))
                         .tracking(0.6)
                         .foregroundStyle(.black.opacity(0.85))
                 }
@@ -176,7 +176,7 @@ struct InlineAddTaskSheet: View {
             .padding(.horizontal, 4)
 
             TextField("e.g. Football 8h", text: $text, axis: .vertical)
-                .font(.system(size: 15, weight: .medium, design: .rounded))
+                .font(.system(size: Theme.fontSize(15), weight: .medium, design: .rounded))
                 .focused($focused)
                 .padding(14)
                 .background(
@@ -352,7 +352,7 @@ private struct PlannerHabitRow: View {
                 }
                 .accessibilityLabel("Options for \(habit.name)")
             }
-            ScrollView(.horizontal, showsIndicators: false) {
+            HorizontalScroll {
                 HStack(spacing: 4) {
                     ForEach(days, id: \.self) { day in
                         let completed = store.isComplete(habit, on: day)
@@ -397,7 +397,7 @@ struct WeekStickyOverview: View {
         VStack(alignment: .leading, spacing: 18) {
             HStack {
                 Text("THIS WEEK")
-                    .font(.system(size: 11, weight: .heavy, design: .rounded))
+                    .font(.system(size: Theme.fontSize(11), weight: .heavy, design: .rounded))
                     .tracking(1)
                     .foregroundStyle(.white)
                     .padding(.horizontal, 12)
@@ -408,7 +408,7 @@ struct WeekStickyOverview: View {
             .padding(.horizontal, 4)
 
             Text("Tap a bullet to mark done · Long-press a card to add")
-                .font(.system(size: 11, weight: .medium, design: .rounded))
+                .font(.system(size: Theme.fontSize(11), weight: .medium, design: .rounded))
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 4)
 
@@ -437,7 +437,7 @@ struct WeekStickyOverview: View {
                 pill("THIS WEEK", bg: Theme.accent, fg: .white)
                 Spacer()
                 Text("YOU CAN\nDO IT!")
-                    .font(.system(size: 11, weight: .heavy, design: .rounded))
+                    .font(.system(size: Theme.fontSize(11), weight: .heavy, design: .rounded))
                     .multilineTextAlignment(.center)
                     .foregroundStyle(Theme.secondary)
                     .lineSpacing(-2)
@@ -466,7 +466,7 @@ struct WeekStickyOverview: View {
     @ViewBuilder
     private func pill(_ text: String, bg: Color, fg: Color, bordered: Bool = false) -> some View {
         Text(text)
-            .font(.system(size: 10, weight: .heavy, design: .rounded))
+            .font(.system(size: Theme.fontSize(10), weight: .heavy, design: .rounded))
             .tracking(0.5)
             .foregroundStyle(fg)
             .padding(.horizontal, 12)

@@ -41,7 +41,7 @@ private struct PlaceholderHero: View {
     var body: some View {
         VStack(spacing: 14) {
             Image(systemName: icon)
-                .font(.system(size: 34, weight: .bold))
+                .font(.system(size: Theme.fontSize(34), weight: .bold))
                 .foregroundStyle(.white)
                 .frame(width: 76, height: 76)
                 .background(Theme.heroGradient, in: RoundedRectangle(cornerRadius: 22))

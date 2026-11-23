@@ -4,7 +4,7 @@ struct HabitStreakSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Habit Streaks")
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
 
             VStack(spacing: 10) {
                 ForEach(TrackingData.habits) { habit in
@@ -22,25 +22,25 @@ private struct HabitRow: View {
         VStack(spacing: 12) {
             HStack(spacing: 10) {
                 Text(habit.emoji)
-                    .font(.system(size: 24))
+                    .font(.system(size: Theme.fontSize(24)))
                 VStack(alignment: .leading, spacing: 2) {
                     Text(habit.name)
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                     HStack(spacing: 4) {
                         Image(systemName: "flame.fill")
                             .foregroundStyle(Theme.accent)
-                            .font(.system(size: 11))
+                            .font(.system(size: Theme.fontSize(11)))
                         Text("\(habit.streak) day streak")
-                            .font(.system(size: 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.secondary)
                         Text("· best \(habit.best)")
-                            .font(.system(size: 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                 }
                 Spacer()
                 Text("\(habit.streak)")
-                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(26), weight: .bold, design: .rounded))
                     .foregroundStyle(habit.color)
             }
 

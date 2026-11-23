@@ -16,11 +16,23 @@ struct RaceTrianApp: App {
         // Set app-wide accent color
         let accentColor = Color(red: 1.00, green: 0.82, blue: 0.00)
         UIView.appearance().tintColor = UIColor(accentColor)
+
+        // Segmented pickers are UIKit-backed and ignore Dynamic Type; enlarge them on iPad
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let segmentFont = UIFont.systemFont(ofSize: 20, weight: .semibold)
+            UISegmentedControl.appearance().setTitleTextAttributes([.font: segmentFont], for: .normal)
+            UISegmentedControl.appearance().setTitleTextAttributes([.font: segmentFont], for: .selected)
+
+            let tabFont = UIFont.systemFont(ofSize: 20, weight: .semibold)
+            UITabBarItem.appearance().setTitleTextAttributes([.font: tabFont], for: .normal)
+            UITabBarItem.appearance().setTitleTextAttributes([.font: tabFont], for: .selected)
+        }
     }
 
     var body: some Scene {
         WindowGroup {
             RootView()
+                .iPadTextSize()
                 .appPageTheme()
                 .tint(Color(red: 1.00, green: 0.82, blue: 0.00))
                 .alert("Authentication Required", isPresented: Binding(
@@ -77,6 +89,7 @@ private enum PaywallAuthenticationError: Error {
 @MainActor
 struct RootView: View {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedAssessment = false
+    @AppStorage("appLanguage") private var appLanguage = "en"
     @State private var entryStep: EntryStep = .onboarding
 
     var body: some View {
@@ -114,6 +127,9 @@ struct RootView: View {
                 }
             }
         }
+        .environment(\.locale, Locale(identifier: appLanguage))
+        .environment(\.layoutDirection, appLanguage == "ar" ? .rightToLeft : .leftToRight)
+        .id(appLanguage)
         .onReceive(NotificationCenter.default.publisher(for: .showSignIn)) { _ in
             entryStep = .signIn
         }
@@ -247,7 +263,7 @@ struct SplashView: View {
             advanceSlideOrClose()
         } label: {
             Text(currentIndex == slides.count - 1 ? "Get Started" : "Next")
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .bold, design: .rounded))
                 .foregroundColor(currentIndex == slides.count - 1 ? Color.accentColor : .white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 56)
@@ -305,14 +321,14 @@ private struct SlidePageView: View {
                     .shadow(color: .black.opacity(0.10), radius: 10, y: 5)
 
                 Image(systemName: slide.icon)
-                    .font(.system(size: 32, weight: .bold))
+                    .font(.system(size: Theme.fontSize(32), weight: .bold))
                     .foregroundStyle(Theme.primary)
                     .offset(x: -5)
             }
             .padding(.bottom, 32)
 
             Text(slide.title)
-                .font(.system(size: 38, weight: .heavy, design: .rounded))
+                .font(.system(size: Theme.fontSize(38), weight: .heavy, design: .rounded))
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
@@ -320,7 +336,7 @@ private struct SlidePageView: View {
                 .padding(.bottom, 10)
 
             Text(slide.subtitle)
-                .font(.system(size: 17, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), weight: .semibold, design: .rounded))
                 .foregroundStyle(.white.opacity(0.92))
                 .multilineTextAlignment(.center)
                 .lineLimit(3)
@@ -329,7 +345,7 @@ private struct SlidePageView: View {
                 .padding(.bottom, 14)
 
             Text(slide.body)
-                .font(.system(size: 14, weight: .regular, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .regular, design: .rounded))
                 .foregroundStyle(.white.opacity(0.72))
                 .multilineTextAlignment(.center)
                 .lineSpacing(5)

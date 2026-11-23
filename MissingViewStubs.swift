@@ -321,7 +321,7 @@ struct UserAssessmentView: View {
                                 }
                             } label: {
                                 Text("Back")
-                                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                    .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                                     .foregroundStyle(.secondary)
                                     .frame(maxWidth: .infinity)
                                     .padding()
@@ -340,7 +340,7 @@ struct UserAssessmentView: View {
                             }
                         } label: {
                             Text(currentStep < 4 ? "Next" : "Get Results")
-                                .font(.system(size: 16, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -390,14 +390,14 @@ struct UserAssessmentView: View {
             Spacer()
             
             Image(systemName: "figure.run.circle.fill")
-                .font(.system(size: 80))
+                .font(.system(size: Theme.fontSize(80)))
                 .foregroundStyle(Theme.primary)
             
             Text("Let's Get Started!")
-                .font(.system(size: 32, weight: .bold, design: .rounded))
+                .font(.system(size: Theme.fontSize(32), weight: .bold, design: .rounded))
             
             Text("Answer a few quick questions so we can personalize your training experience")
-                .font(.system(size: 17, design: .rounded))
+                .font(.system(size: Theme.fontSize(17), design: .rounded))
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
@@ -411,10 +411,10 @@ struct UserAssessmentView: View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("What's your fitness level?")
-                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
                 
                 Text("Be honest - we'll adjust your plan accordingly")
-                    .font(.system(size: 16, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             .padding(.horizontal)
@@ -461,10 +461,10 @@ struct UserAssessmentView: View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("What are your goals?")
-                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
                 
                 Text("Select all that apply")
-                    .font(.system(size: 16, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             .padding(.horizontal)
@@ -496,10 +496,10 @@ struct UserAssessmentView: View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("What activities do you enjoy?")
-                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
                 
                 Text("Choose your favorites")
-                    .font(.system(size: 16, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             .padding(.horizontal)
@@ -531,10 +531,10 @@ struct UserAssessmentView: View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("How often can you train?")
-                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
                 
                 Text("Be realistic - consistency beats intensity")
-                    .font(.system(size: 16, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             .padding(.horizontal)
@@ -542,15 +542,15 @@ struct UserAssessmentView: View {
             VStack(spacing: 20) {
                 HStack {
                     Image(systemName: "calendar")
-                        .font(.system(size: 24))
+                        .font(.system(size: Theme.fontSize(24)))
                         .foregroundStyle(Theme.primary)
                         .frame(width: 40)
                     
                     VStack(alignment: .leading, spacing: 4) {
                         Text("\(weeklyWorkouts) workouts per week")
-                            .font(.system(size: 18, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(18), weight: .semibold, design: .rounded))
                         Text(scheduleRecommendation)
-                            .font(.system(size: 14, design: .rounded))
+                            .font(.system(size: Theme.fontSize(14), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                     
@@ -566,11 +566,11 @@ struct UserAssessmentView: View {
                     
                     HStack {
                         Text("1 day")
-                            .font(.system(size: 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.secondary)
                         Spacer()
                         Text("7 days")
-                            .font(.system(size: 12, design: .rounded))
+                            .font(.system(size: Theme.fontSize(12), design: .rounded))
                             .foregroundStyle(.secondary)
                     }
                 }
@@ -591,14 +591,14 @@ struct UserAssessmentView: View {
                 // Success Header
                 VStack(spacing: 16) {
                     Image(systemName: "checkmark.circle.fill")
-                        .font(.system(size: 60))
+                        .font(.system(size: Theme.fontSize(60)))
                         .foregroundStyle(.green)
                     
                     Text("Your Plan is Ready!")
-                        .font(.system(size: 28, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(28), weight: .bold, design: .rounded))
                     
                     Text("Based on your assessment, here's what we recommend")
-                        .font(.system(size: 16, design: .rounded))
+                        .font(.system(size: Theme.fontSize(16), design: .rounded))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                 }
@@ -643,9 +643,9 @@ struct UserAssessmentView: View {
                     } label: {
                         HStack {
                             Image(systemName: "play.circle.fill")
-                                .font(.system(size: 20))
+                                .font(.system(size: Theme.fontSize(20)))
                             Text("Start Training")
-                                .font(.system(size: 18, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                         }
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
@@ -663,7 +663,7 @@ struct UserAssessmentView: View {
                         }
                     } label: {
                         Text("Retake Assessment")
-                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(16), weight: .semibold, design: .rounded))
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -752,17 +752,17 @@ struct FitnessLevelOption: View {
         Button(action: action) {
             HStack(spacing: 16) {
                 Image(systemName: icon)
-                    .font(.system(size: 32))
+                    .font(.system(size: Theme.fontSize(32)))
                     .foregroundStyle(isSelected ? .white : color)
                     .frame(width: 60)
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(title)
-                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .font(.system(size: Theme.fontSize(18), weight: .bold, design: .rounded))
                         .foregroundStyle(isSelected ? .white : .primary)
                     
                     Text(description)
-                        .font(.system(size: 14, design: .rounded))
+                        .font(.system(size: Theme.fontSize(14), design: .rounded))
                         .foregroundStyle(isSelected ? .white.opacity(0.9) : .secondary)
                         .lineLimit(2)
                 }
@@ -771,7 +771,7 @@ struct FitnessLevelOption: View {
                 
                 if isSelected {
                     Image(systemName: "checkmark.circle.fill")
-                        .font(.system(size: 24))
+                        .font(.system(size: Theme.fontSize(24)))
                         .foregroundStyle(.white)
                 }
             }
@@ -798,11 +798,11 @@ struct GoalCard: View {
         Button(action: action) {
             VStack(spacing: 12) {
                 Image(systemName: icon)
-                    .font(.system(size: 32))
+                    .font(.system(size: Theme.fontSize(32)))
                     .foregroundStyle(isSelected ? .white : color)
                 
                 Text(title)
-                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                     .foregroundStyle(isSelected ? .white : .primary)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
@@ -831,11 +831,11 @@ struct SportCard: View {
         Button(action: action) {
             VStack(spacing: 12) {
                 Image(systemName: icon)
-                    .font(.system(size: 32))
+                    .font(.system(size: Theme.fontSize(32)))
                     .foregroundStyle(isSelected ? .white : color)
                 
                 Text(title)
-                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                     .foregroundStyle(isSelected ? .white : .primary)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
@@ -863,23 +863,23 @@ struct ResultCard: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
                 Image(systemName: icon)
-                    .font(.system(size: 24))
+                    .font(.system(size: Theme.fontSize(24)))
                     .foregroundStyle(color)
                     .frame(width: 40)
                 
                 Text(title)
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(20), weight: .bold, design: .rounded))
             }
             
             VStack(alignment: .leading, spacing: 8) {
                 ForEach(items, id: \.self) { item in
                     HStack(spacing: 8) {
                         Image(systemName: "checkmark.circle.fill")
-                            .font(.system(size: 16))
+                            .font(.system(size: Theme.fontSize(16)))
                             .foregroundStyle(color)
                         
                         Text(item)
-                            .font(.system(size: 16, design: .rounded))
+                            .font(.system(size: Theme.fontSize(16), design: .rounded))
                     }
                 }
             }
@@ -933,7 +933,7 @@ struct AIAssistantView: View {
                     sendMessage()
                 } label: {
                     Image(systemName: "arrow.up.circle.fill")
-                        .font(.system(size: 32))
+                        .font(.system(size: Theme.fontSize(32)))
                         .foregroundStyle(inputText.isEmpty ? .gray : Theme.primary)
                 }
                 .disabled(inputText.isEmpty)
@@ -1027,23 +1027,23 @@ struct EmptyStateView: View {
                     .frame(width: 120, height: 120)
                 
                 Image(systemName: icon)
-                    .font(.system(size: 50))
+                    .font(.system(size: Theme.fontSize(50)))
                     .foregroundStyle(color.gradient)
             }
             
             VStack(spacing: 8) {
                 Text(title)
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(24), weight: .bold, design: .rounded))
                 
                 Text(subtitle)
-                    .font(.system(size: 16, design: .rounded))
+                    .font(.system(size: Theme.fontSize(16), design: .rounded))
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
             }
             
             Text("Coming Soon")
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                .font(.system(size: Theme.fontSize(14), weight: .semibold, design: .rounded))
                 .foregroundStyle(.white)
                 .padding(.horizontal, 24)
                 .padding(.vertical, 10)

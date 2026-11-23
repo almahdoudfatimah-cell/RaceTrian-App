@@ -1,6 +1,34 @@
 import SwiftUI
 
 enum Theme {
+    /// Shared horizontal page padding so every tab's content edges line up on iPad.
+    static func pagePadding(_ phone: CGFloat) -> CGFloat {
+        #if os(iOS)
+        return UIDevice.current.userInterfaceIdiom == .pad ? 20 : phone
+        #else
+        return phone
+        #endif
+    }
+
+    /// Shared toolbar icon size so navigation-bar buttons match across tabs on iPad.
+    static func toolbarIconSize(_ phone: CGFloat) -> CGFloat {
+        #if os(iOS)
+        return UIDevice.current.userInterfaceIdiom == .pad ? 26 : phone
+        #else
+        return phone
+        #endif
+    }
+
+    /// Scales fixed font sizes up on iPad so text matches the larger screen.
+    /// Tiny captions get a 17pt floor so they stay readable next to body text.
+    static func fontSize(_ size: CGFloat) -> CGFloat {
+        #if os(iOS)
+        return UIDevice.current.userInterfaceIdiom == .pad ? max(size * 1.5, 17) : size
+        #else
+        return size
+        #endif
+    }
+
     // Yellow-Orange-Green palette — energetic, warm, nature-inspired
     static let primary   = Color(red: 1.00, green: 0.40, blue: 0.00)    // Vivid orange
     static let secondary = Color(red: 0.25, green: 0.75, blue: 0.35)    // Fresh green
@@ -119,7 +147,7 @@ struct StickerTag: View {
     var color: Color = Theme.primary
     var body: some View {
         Text(text)
-            .font(.system(size: 11, weight: .bold, design: .rounded))
+            .font(.system(size: Theme.fontSize(11), weight: .bold, design: .rounded))
             .foregroundColor(.white)
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
@@ -271,16 +299,16 @@ struct RaceTrianLogo: View {
         VStack(alignment: .leading, spacing: -size * 0.18) {
             if stacked {
                 Text("RACE")
-                    .font(.system(size: size, weight: .heavy, design: .rounded))
+                    .font(.system(size: Theme.fontSize(size), weight: .heavy, design: .rounded))
                     .foregroundStyle(Theme.primary)
                     .shadow(color: Theme.primary.opacity(0.35), radius: 0, x: 2, y: 2)
                 Text("TRIAN")
-                    .font(.system(size: size, weight: .heavy, design: .rounded))
+                    .font(.system(size: Theme.fontSize(size), weight: .heavy, design: .rounded))
                     .foregroundStyle(Theme.primary)
                     .shadow(color: Theme.primary.opacity(0.35), radius: 0, x: 2, y: 2)
             } else {
                 Text("RACETRIAN")
-                    .font(.system(size: size, weight: .heavy, design: .rounded))
+                    .font(.system(size: Theme.fontSize(size), weight: .heavy, design: .rounded))
                     .foregroundStyle(Theme.primary)
                     .shadow(color: Theme.primary.opacity(0.35), radius: 0, x: 2, y: 2)
             }
@@ -345,12 +373,40 @@ struct RaceTrianNotebookMark: View {
     }
 }
 
+/// Horizontal scroller that opts out of the iPad page margins set by
+/// `appPageTheme()`, so chip and carousel rows keep their own padding.
+struct HorizontalScroll<Content: View>: View {
+    @ViewBuilder var content: Content
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            content
+        }
+        .contentMargins(.horizontal, 0, for: .scrollContent)
+    }
+}
+
 // Shared page treatment for all destinations and presented forms.
 private struct AppPageTheme: ViewModifier {
+    @State private var pageWidth: CGFloat = 0
+
+    /// On iPad, equal small left/right margins keep scrolling content in a
+    /// centered column of at most 960pt on every page. Narrow sheets stay full width.
+    private var iPadSideMargin: CGFloat {
+        #if os(iOS)
+        guard UIDevice.current.userInterfaceIdiom == .pad else { return 0 }
+        return max(0, (pageWidth - 960) / 2)
+        #else
+        return 0
+        #endif
+    }
+
     func body(content: Content) -> some View {
         content
             .tint(Theme.primary)
             #if !os(watchOS)
+            .contentMargins(.horizontal, iPadSideMargin, for: .scrollContent)
+            .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { pageWidth = $0 }
             .scrollContentBackground(.hidden)
             .background { PaperBackground() }
             .toolbarBackground(Theme.pageBackground, for: .navigationBar)
@@ -364,6 +420,48 @@ extension View {
     func appPageTheme() -> some View {
         modifier(AppPageTheme())
     }
+
+    /// On iPad, caps page content to a readable width and centers it so
+    /// cards don't stretch edge-to-edge. No effect on iPhone.
+    /// On iPad, raises the minimum Dynamic Type size so text-style fonts
+    /// (.body, .title3, ...) read at iPad scale. Larger user settings still apply.
+    @ViewBuilder
+    func iPadTextSize() -> some View {
+        #if os(iOS)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            self.dynamicTypeSize(.accessibility1 ... .accessibility5)
+        } else {
+            self
+        }
+        #else
+        self
+        #endif
+    }
+
+    /// Matches toolbar text buttons across tabs on iPad. No change on iPhone.
+    @ViewBuilder
+    func iPadToolbarText() -> some View {
+        #if os(iOS)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            self.font(.system(size: 22, weight: .semibold, design: .rounded))
+        } else {
+            self
+        }
+        #else
+        self
+        #endif
+    }
+
+    func iPadReadableWidth(_ maxWidth: CGFloat = 960) -> some View {
+        #if os(iOS)
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        return self
+            .frame(maxWidth: isPad ? maxWidth : .infinity)
+            .frame(maxWidth: .infinity, alignment: .center)
+        #else
+        return self
+        #endif
+    }
 }
 // MARK: - Placeholder Views
 // These are temporary placeholder views for features that haven't been implemented yet
@@ -372,7 +470,7 @@ struct TrainingLoadView: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "chart.bar.fill")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(Theme.primary)
             
             Text("Training Load")
@@ -392,7 +490,7 @@ struct SwimmingTrackingView: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "figure.pool.swim")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.cyan)
             
             Text("Swimming Tracking")
@@ -412,7 +510,7 @@ struct SeasonalTrendsView: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "calendar")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.orange)
             
             Text("Seasonal Trends")
@@ -432,7 +530,7 @@ struct PerformancePredictorView: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "chart.line.uptrend.xyaxis")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.green)
             
             Text("Performance Predictor")
@@ -452,7 +550,7 @@ struct InjuryPreventionView: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "heart.text.square.fill")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.red)
             
             Text("Injury Prevention")
@@ -472,7 +570,7 @@ struct WeatherImpactView: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "cloud.sun.fill")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.blue)
             
             Text("Weather Impact")
@@ -492,7 +590,7 @@ struct CompetitionReadinessView: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "trophy.fill")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.yellow)
             
             Text("Competition Readiness")
@@ -512,7 +610,7 @@ struct CyclingMetricsView: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "bicycle")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.green)
             
             Text("Cycling Metrics")
@@ -532,7 +630,7 @@ struct RunningAnalyticsView: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "figure.run")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(Theme.primary)
             
             Text("Running Analytics")
@@ -552,7 +650,7 @@ struct FormAnalysisView: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "waveform.path.ecg")
-                .font(.system(size: 60))
+                .font(.system(size: Theme.fontSize(60)))
                 .foregroundStyle(.purple)
             
             Text("Form Analysis")

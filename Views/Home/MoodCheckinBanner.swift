@@ -18,12 +18,12 @@ struct MoodCheckinBanner: View {
     private var loggedView: some View {
         HStack(spacing: 14) {
             Text(store.todayLog?.mood.emoji ?? tapped?.emoji ?? "🙂")
-                .font(.system(size: 32))
+                .font(.system(size: Theme.fontSize(32)))
             VStack(alignment: .leading, spacing: 2) {
                 Text("Mood logged for today")
-                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(14), weight: .bold, design: .rounded))
                 Text("Feeling \(store.todayLog?.mood.label.lowercased() ?? "good") · \(store.streak) day streak 🔥")
-                    .font(.system(size: 12, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), design: .rounded))
                     .foregroundStyle(.secondary)
             }
             Spacer()
@@ -31,7 +31,7 @@ struct MoodCheckinBanner: View {
                 NotificationCenter.default.post(name: .switchTab, object: 2)
             } label: {
                 Text("Edit")
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(12), weight: .semibold, design: .rounded))
                     .foregroundStyle(Theme.primary)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
@@ -48,10 +48,10 @@ struct MoodCheckinBanner: View {
         VStack(spacing: 12) {
             HStack {
                 Text("How are you feeling today?")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                 Spacer()
                 Text("Daily check-in")
-                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    .font(.system(size: Theme.fontSize(11), weight: .semibold, design: .rounded))
                     .foregroundStyle(Theme.primary)
                     .padding(.horizontal, 9)
                     .padding(.vertical, 4)
@@ -71,11 +71,11 @@ struct MoodCheckinBanner: View {
                     } label: {
                         VStack(spacing: 3) {
                             Text(level.emoji)
-                                .font(.system(size: tapped == level ? 30 : 24))
+                                .font(.system(size: Theme.fontSize(tapped == level ? 30 : 24)))
                                 .scaleEffect(tapped == level ? 1.2 : 1.0)
                                 .animation(.spring(response: 0.3, dampingFraction: 0.6), value: tapped)
                             Text(level.label)
-                                .font(.system(size: 9, weight: .semibold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(9), weight: .semibold, design: .rounded))
                                 .foregroundStyle(.secondary)
                         }
                         .frame(maxWidth: .infinity)

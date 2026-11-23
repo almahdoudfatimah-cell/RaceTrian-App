@@ -17,7 +17,7 @@ struct NewProfileView: View {
                 Section {
                     HStack {
                         Image(systemName: "person.circle.fill")
-                            .font(.system(size: 60))
+                            .font(.system(size: Theme.fontSize(60)))
                             .foregroundStyle(.blue.gradient)
                         
                         VStack(alignment: .leading) {

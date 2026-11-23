@@ -91,7 +91,7 @@ struct AddProjectSheet: View {
                         emoji = item
                     } label: {
                         Text(item)
-                            .font(.system(size: 28))
+                            .font(.system(size: Theme.fontSize(28)))
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 9)
                             .background(emoji == item ? Theme.primary.opacity(0.18) : Color.black.opacity(0.05), in: RoundedRectangle(cornerRadius: 13))

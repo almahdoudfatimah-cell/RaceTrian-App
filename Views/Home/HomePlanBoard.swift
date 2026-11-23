@@ -439,7 +439,7 @@ private struct PlanChatbotView: View {
                         showingScheduleSheet = true
                     } label: {
                         Label("Add This Plan to Schedule", systemImage: "calendar.badge.plus")
-                            .font(.system(size: 15, weight: .bold, design: .rounded))
+                            .font(.system(size: Theme.fontSize(15), weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 12)
@@ -608,7 +608,7 @@ private struct AIPlanScheduleSheet: View {
                                 Toggle(isOn: $item.isIncluded) {
                                     VStack(alignment: .leading, spacing: 3) {
                                         Text(item.title)
-                                            .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                            .font(.system(size: Theme.fontSize(15), weight: .semibold, design: .rounded))
                                             .foregroundStyle(.primary)
                                         if let index = items.firstIndex(where: { $0.id == item.id }) {
                                             Text(scheduledDate(for: index), format: .dateTime.weekday(.abbreviated).month(.abbreviated).day())
@@ -633,7 +633,7 @@ private struct AIPlanScheduleSheet: View {
                             addToSchedule()
                         } label: {
                             Label("Send to Plan Calendar", systemImage: "calendar.badge.plus")
-                                .font(.system(size: 16, weight: .bold, design: .rounded))
+                                .font(.system(size: Theme.fontSize(16), weight: .bold, design: .rounded))
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 13)

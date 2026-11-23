@@ -152,6 +152,66 @@ enum SampleProjects {
                 Milestone(title: "Complete 26 weeks", isDone: false),
                 Milestone(title: "Print & frame best 12 shots", isDone: false)
             ]
+        ),
+        AIProject(
+            title: "Create a Financial Freedom Plan",
+            description: "Build a clear savings, investing, and debt-payoff system for the next twelve months.",
+            emoji: "💸",
+            category: .finance,
+            status: .active,
+            milestones: [
+                Milestone(title: "Review the last three months of spending", isDone: true),
+                Milestone(title: "Create a realistic monthly budget", isDone: true),
+                Milestone(title: "Build a three-month emergency fund", isDone: false),
+                Milestone(title: "Automate monthly investments", isDone: false),
+                Milestone(title: "Complete a quarterly money review", isDone: false)
+            ],
+            targetDate: Calendar.current.date(byAdding: .month, value: 12, to: Date())
+        ),
+        AIProject(
+            title: "Build Strength and Mobility",
+            description: "Follow a balanced program that improves strength, posture, and everyday mobility.",
+            emoji: "💪",
+            category: .health,
+            status: .active,
+            milestones: [
+                Milestone(title: "Complete a mobility assessment", isDone: true),
+                Milestone(title: "Finish four weeks of strength sessions", isDone: true),
+                Milestone(title: "Hold a two-minute plank", isDone: false),
+                Milestone(title: "Complete ten full push-ups", isDone: false),
+                Milestone(title: "Retake the mobility assessment", isDone: false)
+            ],
+            targetDate: Calendar.current.date(byAdding: .month, value: 3, to: Date())
+        ),
+        AIProject(
+            title: "Launch My Portfolio Website",
+            description: "Design and publish a polished portfolio that showcases skills, projects, and experience.",
+            emoji: "💻",
+            category: .career,
+            status: .active,
+            milestones: [
+                Milestone(title: "Choose the best portfolio projects", isDone: true),
+                Milestone(title: "Write project case studies", isDone: false),
+                Milestone(title: "Design the site structure", isDone: false),
+                Milestone(title: "Build and test the website", isDone: false),
+                Milestone(title: "Publish and share the launch", isDone: false)
+            ],
+            targetDate: Calendar.current.date(byAdding: .month, value: 2, to: Date())
+        ),
+        AIProject(
+            title: "Create a Mindful Daily Routine",
+            description: "Use small repeatable habits to improve focus, recovery, and emotional balance.",
+            emoji: "🧘",
+            category: .personal,
+            status: .active,
+            milestones: [
+                Milestone(title: "Set morning and evening anchors", isDone: true),
+                Milestone(title: "Meditate for ten days", isDone: true),
+                Milestone(title: "Add a weekly digital reset", isDone: false),
+                Milestone(title: "Track mood for one month", isDone: false),
+                Milestone(title: "Review and refine the routine", isDone: false)
+            ],
+            targetDate: Calendar.current.date(byAdding: .month, value: 2, to: Date())
         )
     ]
 }

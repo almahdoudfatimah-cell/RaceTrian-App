@@ -36,16 +36,16 @@ struct DayScheduleSection: View {
                               options: [Int], selected: Binding<Int>) -> some View {
         VStack(spacing: isIPad ? 14 : 10) {
             Image(systemName: icon)
-                .font(.system(size: isIPad ? 28 : 22))
+                .font(.system(size: Theme.fontSize(22)))
                 .foregroundStyle(color)
             Text(label)
-                .font(.system(size: isIPad ? 16 : 12, weight: .medium, design: .rounded))
+                .font(.system(size: Theme.fontSize(12), weight: .medium, design: .rounded))
                 .foregroundStyle(.secondary)
 
             Picker(label, selection: selected) {
                 ForEach(options, id: \.self) { h in
                     Text(DaySchedule.label(h)).tag(h)
-                        .font(.system(size: isIPad ? 17 : 13, design: .rounded))
+                        .font(.system(size: Theme.fontSize(13), design: .rounded))
                 }
             }
             .pickerStyle(.wheel)

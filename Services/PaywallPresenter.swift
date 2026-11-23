@@ -64,7 +64,7 @@ struct PremiumGateView: View {
                     .frame(width: 100, height: 100)
                 
                 Image(systemName: icon)
-                    .font(.system(size: 44, weight: .bold))
+                    .font(.system(size: Theme.fontSize(44), weight: .bold))
                     .foregroundStyle(Theme.primary)
             }
             
@@ -117,7 +117,7 @@ struct PremiumBadge: View {
                 .frame(width: size + 6, height: size + 6)
             
             Image(systemName: "crown.fill")
-                .font(.system(size: size, weight: .bold))
+                .font(.system(size: Theme.fontSize(size), weight: .bold))
                 .foregroundStyle(color)
         }
     }
@@ -138,7 +138,7 @@ struct FeatureLockOverlay: View {
                 
                 VStack(spacing: 16) {
                     Image(systemName: "lock.fill")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.system(size: Theme.fontSize(48), weight: .bold))
                         .foregroundStyle(Theme.primary)
                     
                     Text("Premium Feature")

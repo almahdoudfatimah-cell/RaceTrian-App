@@ -190,7 +190,9 @@ struct WatchEntryRootView: View {
                     WatchPaywallView(
                         access: access,
                         showSignIn: { entryScreen = .signIn },
-                        showCreateAccount: { entryScreen = .createAccount }
+                        showCreateAccount: { entryScreen = .createAccount },
+                        // Like the iPhone: after paying, continue to Create Account.
+                        onUnlocked: { entryScreen = .createAccount }
                     )
                 case .signIn:
                     WatchAuthenticationView(
@@ -241,8 +243,8 @@ enum WatchDisplayPlan: String, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .freeTrial: "Free Trial"
-        case .weekly: "Weekly"
-        case .yearly: "Yearly"
+        case .weekly: "Perminium Weekly"
+        case .yearly: "Perminium Yearly"
         }
     }
 
@@ -291,8 +293,21 @@ struct WatchPaywallView: View {
     let access: WatchAccessStore
     let showSignIn: () -> Void
     let showCreateAccount: () -> Void
+    /// Called once a purchase or restore unlocks Premium. When nil, the paywall dismisses itself.
+    var onUnlocked: (() -> Void)? = nil
 
+    @Environment(\.dismiss) private var dismiss
     @State private var selectedPlan: WatchDisplayPlan = .freeTrial
+
+    /// Leaves the paywall after it unlocks, so the user isn't left on a screen they already paid for.
+    private func finishIfUnlocked() {
+        guard access.isPremium else { return }
+        if let onUnlocked {
+            onUnlocked()
+        } else {
+            dismiss()
+        }
+    }
 
     var body: some View {
         ZStack {
@@ -302,20 +317,25 @@ struct WatchPaywallView: View {
             ScrollView {
                 VStack(spacing: 12) {
                 WatchBrandHeader(
-                    title: "RaceTrian Premium",
-                    subtitle: "Your plan, progress, and workouts on your wrist."
+                    title: "Train smarter with Premium",
+                    subtitle: "Unlimited coaching, sharper planning, and race-ready tracking."
                 )
 
+                Text("One week free, then $18/week. Switch to yearly at any time.")
+                    .font(.system(size: 10, weight: .medium, design: .rounded))
+                    .foregroundStyle(WatchTheme.muted)
+                    .multilineTextAlignment(.center)
+
                 VStack(alignment: .leading, spacing: 7) {
-                    WatchFeatureRow(title: "Weekly & Monthly Plans", icon: "calendar.badge.clock")
-                    WatchFeatureRow(title: "Weekend, Vacation & Travel", icon: "airplane")
-                    WatchFeatureRow(title: "Train & Track", icon: "figure.run")
-                    WatchFeatureRow(title: "Achievement Timer", icon: "stopwatch.fill")
-                    WatchFeatureRow(title: "Year Race Vision", icon: "flag.checkered")
-                    WatchFeatureRow(title: "Life Goals", icon: "target")
+                    WatchFeatureRow(title: "Unlimited AI Coach", icon: "infinity")
+                    WatchFeatureRow(title: "Adaptive Training Plans", icon: "calendar.badge.clock")
+                    WatchFeatureRow(title: "Performance Insights", icon: "chart.line.uptrend.xyaxis")
+                    WatchFeatureRow(title: "Race-Day Readiness", icon: "flag.checkered")
                     WatchFeatureRow(title: "Syncs with iPhone", icon: "iphone.and.arrow.forward")
                 }
+                .padding(9)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .background(WatchTheme.cardSurface, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
 
                 VStack(spacing: 6) {
                     ForEach(WatchDisplayPlan.allCases) { plan in
@@ -349,11 +369,14 @@ struct WatchPaywallView: View {
 
                 Button {
                     access.selectedProductID = selectedPlan.productID
-                    Task { await access.purchaseSelectedProduct() }
+                    Task {
+                        await access.purchaseSelectedProduct()
+                        finishIfUnlocked()
+                    }
                 } label: {
                     if access.isBusy {
                         ProgressView()
-                            .tint(.white)
+                            .tint(WatchTheme.ink)
                     } else {
                         Text(selectedPlan == .freeTrial ? "Start Free Trial" : "Continue")
                     }
@@ -373,7 +396,10 @@ struct WatchPaywallView: View {
                 }
 
                 Button("Restore Purchases") {
-                    Task { await access.restorePurchases() }
+                    Task {
+                        await access.restorePurchases()
+                        finishIfUnlocked()
+                    }
                 }
                 .buttonStyle(WatchLinkButtonStyle())
                 .disabled(access.isBusy)
@@ -414,7 +440,7 @@ private struct WatchPlanCard: View {
                     if let badge = plan.badge {
                         Text(badge)
                             .font(.system(size: 9, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white)
+                            .foregroundStyle(WatchTheme.ink)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
                             .background(WatchTheme.secondary, in: Capsule())
@@ -698,7 +724,7 @@ private struct WatchPrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.system(size: 13, weight: .bold, design: .rounded))
-            .foregroundStyle(.white)
+            .foregroundStyle(WatchTheme.ink)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 10)
             .background(
